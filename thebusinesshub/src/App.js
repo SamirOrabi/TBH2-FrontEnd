@@ -1,10 +1,16 @@
 // Libraries
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import SignInForm from '../src/components/forms/SignInForm'
+import Navb from '../src/components/layout/Navb';
+import Login from '../src/components/pages/Login';
+import Home from './components/pages/Home';
+import Space from './components/pages/Space';
+import Booking from './components/pages/Booking';
+import Contact from './components/pages/Contact';
+
 // Styling
 import './App.css';
-import SignInUp from './components/forms/SignInUp';
+// import SignInUp from './components/forms/SignInUp';
 // Components
 
 export default class App extends Component {
@@ -12,7 +18,9 @@ export default class App extends Component {
     return (
       <Router>
         <div className="App">
-          <SignInUp />
+          <Navb />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
         </div>
       </Router>
     );

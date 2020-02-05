@@ -1,0 +1,27 @@
+.bg{
+    background-image: url(../../Images/bg.png);
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    width:100%;
+    position: relative !important;
+    overflow-y: hidden;
+
+}
+
+
+.featuerslisticon i {
+    background: white;
+    color: black;
+    margin-left: 7px !important;
+    /* padding: 5px !important; */
+    
+  }
+.featuerslisticon {
+    position: relative;
+    bottom: 70px;
+    right: 50px;
+    /* text-align: right; */
+    
+ 
+}

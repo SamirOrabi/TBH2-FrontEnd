@@ -6,7 +6,12 @@ import {
   EmailErrors,
   PasswordErrors,
   ConfirmPasswordErrors,
-  PhonenumberErrors
+  NameErrorsIcon,
+  PasswordErrorsIcon,
+  EmailErrorsIcon,
+  ConfirmPasswordErrorsIcon,
+  PhonenumberErrors,
+  PhoneErrorsIcon
 } from '../layout/FormErrors';
 
 export default class SignUp extends Component {
@@ -79,7 +84,7 @@ export default class SignUp extends Component {
           this.state.password !== this.state.confirmpassword;
         confirmpasswordValidationErrors.confirmpassword = confirmpasswordValid
           ? ' Passwords do not match'
-          : ''
+          : '';
         break;
       case 'phonenumber':
         phonenumberValid = value.length > 8;
@@ -129,7 +134,7 @@ export default class SignUp extends Component {
       <Container>
         <Form className="SignUpForm " onSubmit={this.handleSubmit}>
           <h1>SIGN UP</h1>
-          <Form.Group>
+          <Form.Group className="formgroupfloat">
             <Form.Control
               noValidate
               required
@@ -137,11 +142,15 @@ export default class SignUp extends Component {
               onChange={this.handleUserInput}
               value={this.state.name}
               name="name"
+              className="floatcontrol"
               placeholder="USERNAME"
             />
-            <NameErrors nameErrors={this.state.nameErrors} />
-          </Form.Group>
-          <Form.Group>
+            <div className="icontringale">
+              <NameErrorsIcon nameErrors={this.state.nameErrors} />
+            </div>{' '}
+          </Form.Group>{' '}
+          <NameErrors nameErrors={this.state.nameErrors} />
+          <Form.Group className="formgroupmargin">
             <Form.Control
               noValidate
               required
@@ -151,11 +160,14 @@ export default class SignUp extends Component {
               name="phonenumber"
               placeholder="PHONE NUMBER"
             />
-            <PhonenumberErrors
-              phonenumberErrors={this.state.phonenumberErrors}
-            />
+            <div className="icontringale">
+              <PhoneErrorsIcon
+                phonenumberErrors={this.state.phonenumberErrors}
+              />
+            </div>{' '}
           </Form.Group>{' '}
-          <Form.Group>
+          <PhonenumberErrors phonenumberErrors={this.state.phonenumberErrors} />
+          <Form.Group className="formgroupmargin">
             <Form.Control
               noValidate
               required
@@ -165,9 +177,12 @@ export default class SignUp extends Component {
               name="email"
               placeholder="E-MAIL"
             />{' '}
-            <EmailErrors emailErrors={this.state.emailErrors} />
-          </Form.Group>
-          <Form.Group>
+            <div className="icontringale">
+              <EmailErrorsIcon emailErrors={this.state.emailErrors} />
+            </div>{' '}
+          </Form.Group>{' '}
+          <EmailErrors emailErrors={this.state.emailErrors} />
+          <Form.Group className="formgroupmargin">
             <Form.Control
               noValidate
               required
@@ -177,9 +192,13 @@ export default class SignUp extends Component {
               name="password"
               placeholder="PASSWORD"
             />{' '}
-            <PasswordErrors passwordErrors={this.state.passwordErrors} />
-          </Form.Group>
-          <Form.Group>
+            <div className="icontringale">
+              {' '}
+              <PasswordErrorsIcon passwordErrors={this.state.passwordErrors} />
+            </div>{' '}
+          </Form.Group>{' '}
+          <PasswordErrors passwordErrors={this.state.passwordErrors} />
+          <Form.Group className="formgroupmargin">
             <Form.Control
               noValidate
               required
@@ -189,10 +208,15 @@ export default class SignUp extends Component {
               name="confirmpassword"
               placeholder="CONFIRM PASSWORD"
             />{' '}
-            <ConfirmPasswordErrors
-              confirmpasswordErrors={this.state.confirmpasswordErrors}
-            />
-          </Form.Group>
+            <div className="icontringale">
+              <ConfirmPasswordErrorsIcon
+                confirmpasswordErrors={this.state.confirmpasswordErrors}
+              />
+            </div>{' '}
+          </Form.Group>{' '}
+          <ConfirmPasswordErrors
+            confirmpasswordErrors={this.state.confirmpasswordErrors}
+          />
           <div className="signupButton">
             <button>Sign Up</button>
           </div>
