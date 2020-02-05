@@ -18,7 +18,7 @@ export default class SignInUp extends Component {
     return (
       <div className="signupinbackground">
         {' '}
-        <Container>
+        <Container style={{ display: 'flex', justifyContent: 'center' }}>
           <div class="FormsContainer" id="FormsContainer">
             <div class="form-container sign-up-container">
               {' '}
@@ -40,7 +40,7 @@ export default class SignInUp extends Component {
                       <div className="ORdiv">
                         <p>OR</p>
                       </div>
-                      <p>CREATE A NEW ACCOUNT</p>
+                      <p style={{ marginTop: '30px' }}>CREATE A NEW ACCOUNT</p>
                       <button id="signUp" onClick={this.handleSignIn}>
                         SIGN UP
                       </button>
@@ -62,7 +62,9 @@ export default class SignInUp extends Component {
                       <div className="ORdiv">
                         <p>OR</p>
                       </div>
-                      <p>SIGN IN WITH YOUR ACCOUNT</p>
+                      <p style={{ marginTop: '30px' }}>
+                        SIGN IN WITH YOUR ACCOUNT
+                      </p>
                       <button id="SignIn" onClick={this.handleSignUp}>
                         SIGN IN
                       </button>

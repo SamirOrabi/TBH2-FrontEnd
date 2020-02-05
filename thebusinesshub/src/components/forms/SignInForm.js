@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Container, Form, Col, Row, Button } from 'react-bootstrap';
 import '../stylesheets/forms.css';
-import { NameErrors, PasswordErrors } from '../layout/FormErrors';
+import {
+  NameErrors,
+  PasswordErrors,
+  PasswordErrorsIcon,
+  NameErrorsIcon
+} from '../layout/FormErrors';
 export default class SignInForm extends Component {
   componentDidMount() {}
   constructor(props) {
@@ -85,11 +90,14 @@ export default class SignInForm extends Component {
               value={this.state.name}
               name="name"
               placeholder="USERNAME"
-              className="contactForm my-4"
-            />{' '}
-            <NameErrors nameErrors={this.state.nameErrors} />
+            />
+            <div className="icontringale">
+              <NameErrorsIcon nameErrors={this.state.nameErrors} />
+            </div>
           </Form.Group>
-          <Form.Group>
+          <NameErrors nameErrors={this.state.nameErrors} />
+          <Form.Group className="formgroupmargin">
+            
             <Form.Control
               required
               type="password"
@@ -97,15 +105,16 @@ export default class SignInForm extends Component {
               value={this.state.password}
               name="password"
               placeholder="PASSWORD"
-              className="contactForm my-4"
-            />{' '}
-            <PasswordErrors passwordErrors={this.state.passwordErrors} />
+            />
+            <div className="icontringale">
+              <PasswordErrorsIcon passwordErrors={this.state.passwordErrors} />
+            </div>
           </Form.Group>
+          <PasswordErrors passwordErrors={this.state.passwordErrors} />
           <p className="signinForget text-center">Forgot Password?</p>
           <Col sm={12} className="text-center">
-            {' '}
             <Button className="my-4 signInBtn">SIGN IN</Button>
-          </Col>{' '}
+          </Col>
         </Form>
       </Container>
     );
