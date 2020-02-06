@@ -1,0 +1,316 @@
+/*******************************************sign in****************************************/
+.signIn {
+  padding: 17% 8%;
+}
+.signIn h3 {
+  color: #ed1c24;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  padding-bottom: 15px;
+}
+
+/* .signIncol {
+  border-right: solid 1px #b7b3b3;
+} */
+/* .signIn input {
+  border: solid 1px #ed1c24 !important;
+  border-radius: unset !important;
+  font-weight: unset !important;
+  font-size: 13px !important;
+  color: #7e7e7e !important;
+  padding: 25px;
+} */
+.signinForget {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 12px;
+  align-items: center;
+  color: #7e7e7e !important;
+}
+/* .signIn button {
+  background: #ed1c24;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 25px;
+  transition: transform 80ms ease-in;
+  border: 1px solid #ed1c24;
+} */
+.signIn button:active {
+  transform: scale(0.95);
+}
+.signIn button:hover {
+  background: #ed1c24;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 25px;
+  transition: transform 80ms ease-in;
+  border: 1px solid #ed1c24;
+}
+.signIn button:focus {
+  outline: none;
+}
+
+.signInBtn {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/*********************************************sign up********************************************/
+.SignUpForm h1 {
+  color: #ed1c24;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  padding-bottom: 15px;
+}
+
+.SignUpForm {
+  padding: 35px !important;
+}
+.FormsContainer {
+  background-color: #ffffff;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  position: relative;
+  width: 1000px;
+  overflow: hidden;
+  /* margin: 5% 0 !important; */
+  height: 516px;
+  margin: 130px 0 30px !important;
+}
+.form-group {
+  width: 100% !important;
+  padding-left: 2%;
+  margin-bottom: 0 !important;
+  border-left: 5px solid #ed1c24;
+  position: relative;
+}
+
+.formgroupmargin {
+  margin-top: 15px;
+}
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+.form-control {
+  padding: 25px 15px;
+  margin: 8px 0;
+  border-radius: 0 !important;
+  width: 100%;
+  border-color: #ed1c24 !important;
+}
+.sign-in-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.sign-up-container {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+
+  z-index: 1;
+}
+
+.SignUpForm .signupButton {
+  text-align: center !important;
+  margin-top: 5%;
+}
+
+.FormsContainer button {
+  background: #ed1c24;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 25px;
+  transition: transform 80ms ease-in;
+  border: 1px solid #ed1c24;
+}
+.FormsContainer button:active {
+  transform: scale(0.95);
+  background-color: #ed1c24 !important;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 25px;
+  transition: transform 80ms ease-in;
+  border: 1px solid #ed1c24;
+  outline: none !important;
+}
+
+.FormsContainer button:focus {
+  outline: none !important;
+  background: #ed1c24 !important;
+  box-shadow: unset !important;
+}
+
+/***********overlay********/
+
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+
+.FormsContainer.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+.overlay {
+  background: #fff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+.FormsContainer.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.FormsContainer.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show 0.6s;
+}
+
+@keyframes show {
+  0%,
+  49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+.FormsContainer.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+.overlay-left {
+  transform: translateX(-20%);
+  border-right: 1.2px solid #b7b3b3;
+  border-left: 25px solid #ed1c24;
+}
+
+.FormsContainer.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+  border-left: 1px solid #b7b3b3;
+  border-right: 25px solid #ed1c24;
+}
+
+.FormsContainer.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
+
+.overlaytexts {
+  /* left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute; */
+  padding-top: 110px;
+}
+
+.overlay-panel {
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.overlaytexts h1 {
+  color: #ed1c24;
+  font-size: 30px;
+  font-family: Arial;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.overlaytexts p {
+  color: #ed1c24;
+  font-size: 17px;
+  line-height: 23px;
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 33px !important;
+}
+
+.ORdiv {
+  width: 46px;
+  text-align: center;
+  margin: auto;
+  border: solid 3px #ed1c24;
+  height: 43px;
+}
+.ORdiv p {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px !important;
+
+  text-transform: uppercase;
+
+  color: #ed1c24;
+}
+.formErrors {
+  color: #ed1c24;
+  font-weight: bold;
+}
+
+.icontringale {
+  top: 23% !important;
+  position: absolute;
+  right: -8%;
+}
+
+/* ::-webkit-scrollbar {
+  width: 13px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #aaa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 10px;
+} */
