@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Container ,Dropdown } from 'react-bootstrap';
 import { NavLink, withRouter } from 'react-router-dom';
 import logo from '../../Images/logo.png';
 import '../stylesheets/NavCSS.css';
 import {LogOut} from '../../globalState/actions/authActions';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+
 
 
  class Navb extends Component {
@@ -92,17 +93,28 @@ import PropTypes from 'prop-types';
                 CONTACT
               </NavLink>
 {this.props.isAuth ?
-              <NavLink
-                exact
-                to=""
-                activeStyle={{
-                  color: 'black',
-                  textDecoration: 'none',
-                }}
-                onClick={this.SignOut}
-              >
+//               <NavLink
+//                 exact
+//                 to=""
+//                 activeStyle={{
+//                   color: 'black',
+//                   textDecoration: 'none',
+//                 }}
+//                 onClick={this.SignOut}
+//               >
 
-Logout              </NavLink>
+// Logout              </NavLink>
+<Dropdown>
+  <Dropdown.Toggle variant="success" id="dropdown-basic">
+   N
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="/AccountSettings" > Account</Dropdown.Item>
+    <Dropdown.Item href="#/action-2"> MY BOOKING</Dropdown.Item>
+    <Dropdown.Item  onClick={this.SignOut}>Logout</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
 : <NavLink
 exact
 to="/login"

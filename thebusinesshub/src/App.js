@@ -7,6 +7,7 @@ import Login from '../src/components/pages/Login';
 import store from './globalState/store';
 import jwt_decode from 'jwt-decode';
 import Home from './components/pages/Home';
+import AccountSettings from './components/pages/AccountSettings';
 import Space from './components/pages/Space';
 import Booking from './components/pages/Booking';
 import Contact from './components/pages/Contact';
@@ -33,6 +34,7 @@ if(localStorage.userToken){
           <Navb />
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/AccountSettings" component={AccountSettings} />
         </div>
       </Router>
     );
