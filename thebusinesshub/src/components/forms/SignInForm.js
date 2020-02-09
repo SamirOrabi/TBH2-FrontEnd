@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { Container, Form, Col, Row, Button } from 'react-bootstrap';
 import '../stylesheets/forms.css';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {Login} from '../../globalState/actions/authActions'
 import {
   NameErrors,
   PasswordErrors,
   PasswordErrorsIcon,
   NameErrorsIcon
 } from '../layout/FormErrors';
-export default class SignInForm extends Component {
-  componentDidMount() {}
+import { withRouter } from 'react-router-dom';
+class SignInForm extends Component {
   constructor(props) {
     super(props);
 
@@ -34,6 +37,7 @@ export default class SignInForm extends Component {
       this.validateField(name, value);
     });
   };
+
   validateField(fieldName, value) {
     let nameValidationErrors = this.state.nameErrors;
     let passwordValidationErrors = this.state.passwordErrors;
@@ -77,6 +81,32 @@ export default class SignInForm extends Component {
     }
   }
 
+Signin=e=>{
+  e.preventDefault();
+  this.props.Login({
+    Account:{
+      username: this.state.name ,
+      password: this.state.password
+}  },this.props.history
+
+)
+
+}
+
+componentDidMount(){
+  if(this.props.isAuth){
+    this.props.history.push('/')
+  }
+}
+
+componentWillReceiveProps(nextProps){
+  console.log('componentwillreciveprrrrops')
+  if(nextProps.auth.isAuth){
+    this.props.history.push('/')
+  }
+
+}
+
   render() {
     return (
       <Container className="signIn">
@@ -113,10 +143,25 @@ export default class SignInForm extends Component {
           <PasswordErrors passwordErrors={this.state.passwordErrors} />
           <p className="signinForget text-center">Forgot Password?</p>
           <Col sm={12} className="text-center">
-            <Button className="my-4 signInBtn">SIGN IN</Button>
+            <Button className="my-4 signInBtn" onClick={this.Signin}>SIGN IN</Button>
           </Col>
         </Form>
       </Container>
     );
   }
 }
+
+SignInForm.propTypes ={
+  Login : PropTypes.func.isRequired,
+  auth:PropTypes.object.isRequired
+}
+ const mapStatetoProps=state=>({
+   isAuth:state.auth.isAuth,
+   auth:state.auth
+
+ })
+ 
+
+export default connect(mapStatetoProps,
+  {Login}
+)(withRouter( SignInForm))

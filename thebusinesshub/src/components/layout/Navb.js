@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import logo from '../../Images/logo.png';
 import '../stylesheets/NavCSS.css';
+import {LogOut} from '../../globalState/actions/authActions';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
-export default class Navb extends Component {
+
+ class Navb extends Component {
+
+
+  SignOut=e=>{
+    e.preventDefault();
+    this.props.LogOut(this.props.history)
+  }
+
   render() {
+
+
     return (
       <Container>
         <Navbar
@@ -78,19 +91,31 @@ export default class Navb extends Component {
                 {' '}
                 CONTACT
               </NavLink>
-
+{this.props.isAuth ?
               <NavLink
                 exact
-                to="/login"
+                to=""
                 activeStyle={{
                   color: 'black',
                   textDecoration: 'none',
-                  borderLeft: '5px solid red'
                 }}
+                onClick={this.SignOut}
               >
-                {' '}
-                SIGN IN / SIGN UP
-              </NavLink>
+
+Logout              </NavLink>
+: <NavLink
+exact
+to="/login"
+activeStyle={{
+  color: 'black',
+  textDecoration: 'none',
+  borderLeft: '5px solid red'
+}}
+>
+
+SIGN IN / SIGN UP
+</NavLink>
+}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -98,3 +123,13 @@ export default class Navb extends Component {
     );
   }
 }
+
+
+Navb.propTypes ={
+  LogOut : PropTypes.func.isRequired,
+}
+const mapStatetoProps=state=>({
+  isAuth:state.auth.isAuth,
+
+});
+export default connect(mapStatetoProps,{LogOut})(withRouter( Navb))
