@@ -13,6 +13,10 @@ import './App.css';
 // import SignInUp from './components/forms/SignInUp';
 // Components
 
+
+import { connect } from 'react-redux';
+import store from './globalState/store';
+
 export default class App extends Component {
   render() {
     return (
