@@ -1,0 +1,24 @@
+.usersidenav {
+  text-align: center;
+}
+
+/* .usersidenav a.active > .activecol {
+  background-color: #ed1c24;
+} */
+
+.firstChardiv {
+  border-radius: 50%;
+  background-color: #ed1c24;
+  border-color: #ed1c24;
+  width: 50px;
+  padding: 5px 15px;
+  text-align: center;
+  color: #fff;
+  margin: auto !important;
+}
+
+/*********PROFILE********/
+
+.profilePage {
+  padding-top: 50px;
+}
