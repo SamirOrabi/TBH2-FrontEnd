@@ -38,6 +38,9 @@ class SignUp extends Component {
       lname: '',
       lnameError: '',
       errors: {},
+      user: '',
+      code:'',
+      show: false,
 
       nameErrors: { name: '' },
       emailErrors: { email: '' },
@@ -152,9 +155,9 @@ class SignUp extends Component {
     }
   }
 
-  onRegist = e => {
+  onRegist = async e => {
     e.preventDefault();
-    this.props.userRegister(
+    const userData = await this.props.userRegister(
       {
         Account: {
           username: this.state.name,
@@ -167,6 +170,12 @@ class SignUp extends Component {
       },
       this.props.history
     );
+    console.log('hnaaa el res');
+
+    console.log(userData);
+    this.setState({ user: userData.error });
+    this.setState({ user: userData.code });
+
   };
 
   componentWillReceiveProps(nextProps) {
@@ -174,12 +183,12 @@ class SignUp extends Component {
       this.setState({ errors: nextProps.errors });
     }
   }
-  componentDidMount() {
-    console.log(this.props);
-  }
-  render() {
-    // console.log('errors hna');
 
+  render() {
+    console.log('hna el error msg');
+    if (this.state.user !== '') {
+      console.log(this.state.user);
+    }
     return (
       <Container>
         <Form className="SignUpForm " onSubmit={this.handleSubmit}>
@@ -278,11 +287,17 @@ class SignUp extends Component {
             </div>{' '}
           </Form.Group>{' '}
           <PasswordErrors passwordErrors={this.state.passwordErrors} />
+          {this.state.user ? (
+            <span className="BbachError">
+              {' '}
+              <i class="fas fa-exclamation-triangle px-2"></i>
+              {this.state.user}
+            </span>
+          ) : null}
           <div className="signupButton">
             <button onClick={this.onRegist}>Sign Up</button>
           </div>
         </Form>
-
       </Container>
     );
   }

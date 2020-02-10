@@ -385,3 +385,8 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.BbachError {
+  color: #ed1c24;
+  font-weight: bold !important;
+}
