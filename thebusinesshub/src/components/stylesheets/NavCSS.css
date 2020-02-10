@@ -77,3 +77,31 @@
         flex-basis: auto;
         margin-left: 300px;}
 }
+
+.btn-success{
+  border-radius: 50%;
+  background-color: red;
+  border-color: red;
+}
+
+.btn-success:hover{
+  background-color: red;
+  border-color: red;
+}
+
+.show>.btn-success.dropdown-toggle {
+  color: #fff;
+  background-color: red;
+  border-color: red;
+}
+
+.dropdown-toggle::after {
+  display: none;
+  margin-left: .255em;
+  vertical-align: .255em;
+  content: "";
+  border-top: .3em solid;
+  border-right: .3em solid transparent;
+  border-bottom: 0;
+  border-left: .3em solid transparent;
+}
