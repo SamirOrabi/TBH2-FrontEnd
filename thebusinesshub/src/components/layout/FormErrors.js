@@ -64,7 +64,6 @@ export const EmailErrorsIcon = ({ emailErrors }) => (
   </div>
 );
 
-
 export const PhonenumberErrors = ({ phonenumberErrors }) => (
   <div className="formErrors">
     {Object.keys(phonenumberErrors).map((fieldName, i) => {
@@ -127,13 +126,13 @@ export const PasswordErrorsIcon = ({ passwordErrors }) => (
   </div>
 );
 
-export const ConfirmPasswordErrors = ({ confirmpasswordErrors }) => (
+export const FNameErrors = ({ fnameErrors }) => (
   <div className="formErrors">
-    {Object.keys(confirmpasswordErrors).map((fieldName, i) => {
-      if (confirmpasswordErrors[fieldName].length > 0) {
+    {Object.keys(fnameErrors).map((fieldName, i) => {
+      if (fnameErrors[fieldName].length > 0) {
         return (
           <p key={i} className="pl-3">
-            *{confirmpasswordErrors[fieldName]}
+            *{fnameErrors[fieldName]}
           </p>
         );
       } else {
@@ -143,11 +142,42 @@ export const ConfirmPasswordErrors = ({ confirmpasswordErrors }) => (
   </div>
 );
 
-
-export const ConfirmPasswordErrorsIcon = ({ confirmpasswordErrors }) => (
+export const FNameErrorsIcon = ({ fnameErrors }) => (
   <div className="formErrors">
-    {Object.keys(confirmpasswordErrors).map((fieldName, i) => {
-      if (confirmpasswordErrors[fieldName].length > 0) {
+    {Object.keys(fnameErrors).map((fieldName, i) => {
+      if (fnameErrors[fieldName].length > 0) {
+        return (
+          <div key={i}>
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+        );
+      } else {
+        return '';
+      }
+    })}
+  </div>
+);
+
+export const LNameErrors = ({ lnameErrors }) => (
+  <div className="formErrors">
+    {Object.keys(lnameErrors).map((fieldName, i) => {
+      if (lnameErrors[fieldName].length > 0) {
+        return (
+          <p key={i} className="pl-3">
+            *{lnameErrors[fieldName]}
+          </p>
+        );
+      } else {
+        return '';
+      }
+    })}
+  </div>
+);
+
+export const LNameErrorsIcon = ({ lnameErrors }) => (
+  <div className="formErrors">
+    {Object.keys(lnameErrors).map((fieldName, i) => {
+      if (lnameErrors[fieldName].length > 0) {
         return (
           <div key={i}>
             <i class="fas fa-exclamation-triangle"></i>
