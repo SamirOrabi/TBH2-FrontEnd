@@ -4,7 +4,7 @@ import isEmpty from '../../helpers/is-Empty';
 const initialState = {
   isAuth: false,
   user: {},
-  code: ''
+  regData: false
 };
 
 export default function(state = initialState, action) {
@@ -12,7 +12,7 @@ export default function(state = initialState, action) {
     case USER_REG:
       return {
         ...state,
-        isAuth: true,
+        regData: true,
         user: action.payload
       };
 
