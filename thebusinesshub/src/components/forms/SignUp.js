@@ -39,7 +39,7 @@ class SignUp extends Component {
       lnameError: '',
       errors: {},
       user: '',
-      code:'',
+      code: '',
       show: false,
 
       nameErrors: { name: '' },
@@ -58,6 +58,7 @@ class SignUp extends Component {
       formValid: false
     };
   }
+
   handleUserInput = e => {
     const name = e.target.name;
     const value = e.target.value;
@@ -157,25 +158,33 @@ class SignUp extends Component {
 
   onRegist = async e => {
     e.preventDefault();
+    let regestrequest = {};
+
+    regestrequest.username = this.state.name;
+    regestrequest.password = this.state.password;
+    regestrequest.email = this.state.email;
+    regestrequest.firstName = this.state.fname;
+    regestrequest.lastName = this.state.lname;
+    regestrequest.phoneNumber = this.state.phonenumber;
     const userData = await this.props.userRegister(
       {
+        Account: regestrequest
+      },
+      {
         Account: {
-          username: this.state.name,
-          firstName: this.state.fname,
-          lastName: this.state.lname,
-          password: this.state.password,
-          phoneNumber: this.state.phonenumber,
-          email: this.state.email
+          username: regestrequest.username,
+          password: regestrequest.password
         }
       },
       this.props.history
     );
-    console.log('hnaaa el res');
 
-    console.log(userData);
     this.setState({ user: userData.error });
-    this.setState({ user: userData.code });
-
+    // this.setState({ code: userData.code });
+    console.log(userData.code);
+    // if (userData.code === 0) {
+    //   return this.props.handleSignIn(true);
+    // }
   };
 
   componentWillReceiveProps(nextProps) {
@@ -189,6 +198,7 @@ class SignUp extends Component {
     if (this.state.user !== '') {
       console.log(this.state.user);
     }
+
     return (
       <Container>
         <Form className="SignUpForm " onSubmit={this.handleSubmit}>
