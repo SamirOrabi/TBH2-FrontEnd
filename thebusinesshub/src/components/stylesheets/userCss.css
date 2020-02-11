@@ -1,24 +1,161 @@
 .usersidenav {
   text-align: center;
+  padding-top: 30%;
 }
 
 /* .usersidenav a.active > .activecol {
   background-color: #ed1c24;
 } */
 
-.firstChardiv {
+.firstChardivside {
   border-radius: 50%;
   background-color: #ed1c24;
   border-color: #ed1c24;
-  width: 50px;
-  padding: 5px 15px;
+  width: 70px;
+  height: 70px;
+  padding: 3% 2%;
   text-align: center;
+  font-family: Arial;
+  font-size: 40px;
   color: #fff;
   margin: auto !important;
 }
 
+.firstChardivprofile {
+  border-radius: 50%;
+  background-color: #ed1c24;
+  border-color: #ed1c24;
+  width: 90px;
+  height: 90px;
+  padding: 2% 2%;
+  text-align: center;
+  font-family: Arial;
+  font-size: 40px;
+  color: #fff;
+  margin: auto !important;
+}
+
+.usersidenav a {
+  color: #ed1c24;
+  width: 100% !important;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold !important;
+}
+
+.usersidenav .sidename {
+  font-size: 30px;
+  color: #000;
+}
+
+.usersidenav hr {
+  width: 80% !important;
+  margin: auto !important;
+}
+.usersidenav .sidemail {
+  color: #7e7e7e;
+}
+
+.SideLinksdiv {
+  padding-top: 40px;
+}
+
+.SideLinksdiv .sidelinkParent {
+  padding-bottom: 10%;
+}
+
+.parentBG {
+  background-color: #ed1c24 !important;
+}
 /*********PROFILE********/
+
+.profilePage label {
+  color: #ed1c24;
+}
 
 .profilePage {
   padding-top: 50px;
+}
+
+.genderdrop {
+  width: 100% !important;
+  padding-left: 3%;
+  border-left: 5px solid #ed1c24;
+}
+
+.genderdrop select {
+  width: 50% !important;
+  height: 50px !important;
+  text-align: center !important;
+  border-color: #ed1c24 !important;
+}
+
+.profilePage .profilesaveBtn {
+  background: #ed1c24;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 25px;
+  margin: 10% auto;
+  transition: transform 80ms ease-in;
+  border: 1px solid #ed1c24;
+}
+.profilePage .profilesaveBtn:active {
+  transform: scale(0.95);
+  background-color: #ed1c24 !important;
+}
+.profilePage .profilesaveBtn:hover {
+  background: #ed1c24;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 25px;
+  transition: transform 80ms ease-in;
+  border: 1px solid #ed1c24;
+}
+.profilePage .profilesaveBtn:focus {
+  outline: none;
+  background-color: #ed1c24 !important;
+}
+
+.deadlineInput {
+  height: 60px;
+  width: 100% !important;
+  padding-left: 3%;
+  border-left: 5px solid #ed1c24;
+}
+
+.react-date-picker__inputGroup__input {
+  border-bottom: none !important;
+}
+
+.react-date-picker {
+  width: 100% !important;
+  border: 1px solid #ed1c24;
+}
+.react-date-picker__wrapper {
+  border: none !important;
+  height: 60px;
+}
+
+.react-date-picker__inputGroup__divider {
+  padding: 0 5px !important;
+}
+.react-date-picker__inputGroup {
+  padding-left: 5px !important;
+}
+
+.react-date-picker__inputGroup__day,
+.react-date-picker__inputGroup__month {
+  width: 20px !important;
+}
+.react-date-picker__inputGroup__year {
+  width: 50px !important ;
+}
+.react-date-picker__calendar {
+  bottom: 0 !important;
 }
