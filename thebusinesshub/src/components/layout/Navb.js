@@ -7,8 +7,11 @@ import { LogOut } from '../../globalState/actions/authActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-class Navb extends Component {
-  SignOut = e => {
+
+
+ class Navb extends Component {
+
+  SignOut=e=>{
     e.preventDefault();
     this.props.LogOut(this.props.history);
   };
@@ -86,45 +89,43 @@ class Navb extends Component {
                 {' '}
                 CONTACT
               </NavLink>
-              {this.props.isAuth ? (
-                //               <NavLink
-                //                 exact
-                //                 to=""
-                //                 activeStyle={{
-                //                   color: 'black',
-                //                   textDecoration: 'none',
-                //                 }}
-                //                 onClick={this.SignOut}
-                //               >
+{this.props.isAuth ?
+//               <NavLink
+//                 exact
+//                 to=""
+//                 activeStyle={{
+//                   color: 'black',
+//                   textDecoration: 'none',
+//                 }}
+//                 onClick={this.SignOut}
+//               >
 
-                // Logout              </NavLink>
-                <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    N
-                  </Dropdown.Toggle>
+// Logout              </NavLink>
+<Dropdown>
+  <Dropdown.Toggle variant="success" id="dropdown-basic">
+   {this.props.user.firstName.substring(0,1)}
+  </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="/AccountSettings">
-                      {' '}
-                      Account
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-2"> MY BOOKING</Dropdown.Item>
-                    <Dropdown.Item onClick={this.SignOut}>Logout</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              ) : (
-                <NavLink
-                  exact
-                  to="/login"
-                  activeStyle={{
-                    color: 'black',
-                    textDecoration: 'none',
-                    borderLeft: '5px solid red'
-                  }}
-                >
-                  SIGN IN / SIGN UP
-                </NavLink>
-              )}
+  <Dropdown.Menu>
+   
+  <div className="dropdownlink"><Dropdown.Item href="/UserBoard/Account-Settings" > ACCOUNT</Dropdown.Item></div>
+  <div className="dropdownbookinglink"> <Dropdown.Item href="/UserBoard/Booking"> MY BOOKINGS</Dropdown.Item></div>
+  <div className="dropdownsignoutlink"> <Dropdown.Item  onClick={this.SignOut}> <i class="fas fa-sign-out-alt"></i>SIGN OUT</Dropdown.Item></div>
+  </Dropdown.Menu>
+</Dropdown>
+: <NavLink
+exact
+to="/login"
+activeStyle={{
+  color: 'black',
+  textDecoration: 'none',
+  borderLeft: '5px solid red'
+}}
+>
+
+SIGN IN / SIGN UP
+</NavLink>
+}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -133,10 +134,13 @@ class Navb extends Component {
   }
 }
 
-Navb.propTypes = {
-  LogOut: PropTypes.func.isRequired
-};
-const mapStatetoProps = state => ({
-  isAuth: state.auth.isAuth
+
+Navb.propTypes ={
+  LogOut : PropTypes.func.isRequired,
+}
+const mapStatetoProps=state=>({
+  isAuth:state.auth.isAuth,
+  user:state.auth.user
+
 });
 export default connect(mapStatetoProps, { LogOut })(withRouter(Navb));

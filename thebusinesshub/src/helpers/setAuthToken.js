@@ -6,3 +6,4 @@ const setAuthToken = userToken => {
 };
 
 export default setAuthToken;
+
