@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Form, Col, Row, Button } from 'react-bootstrap';
 import '../stylesheets/forms.css';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {Login} from '../../globalState/actions/authActions'
+import { Login } from '../../globalState/actions/authActions';
 import {
   NameErrors,
   PasswordErrors,
@@ -16,6 +16,8 @@ class SignInForm extends Component {
     super(props);
 
     this.state = {
+      errors: {},
+      user: '',
       name: '',
       nameError: '',
       password: '',
@@ -81,31 +83,26 @@ class SignInForm extends Component {
     }
   }
 
-Signin=e=>{
-  e.preventDefault();
-  this.props.Login({
-    Account:{
-      username: this.state.name ,
-      password: this.state.password
-}  },this.props.history
+  Signin = async e => {
+    e.preventDefault();
+    let loginRequest = {};
+    loginRequest.username = this.state.name;
+    loginRequest.password = this.state.password;
+    const userdata = await this.props.Login(
+      {
+        Account: loginRequest
+      },
+      this.props.history
+    );
 
-)
+    this.setState({ user: userdata.error });
+  };
 
-}
-
-componentDidMount(){
-  if(this.props.isAuth){
-    this.props.history.push('/')
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
-}
-
-componentWillReceiveProps(nextProps){
-  console.log('componentwillreciveprrrrops')
-  if(nextProps.auth.isAuth){
-    this.props.history.push('/')
-  }
-
-}
 
   render() {
     return (
@@ -127,7 +124,6 @@ componentWillReceiveProps(nextProps){
           </Form.Group>
           <NameErrors nameErrors={this.state.nameErrors} />
           <Form.Group className="formgroupmargin">
-            
             <Form.Control
               required
               type="password"
@@ -141,9 +137,18 @@ componentWillReceiveProps(nextProps){
             </div>
           </Form.Group>
           <PasswordErrors passwordErrors={this.state.passwordErrors} />
+          {this.state.user ? (
+            <span className="BbachError">
+              {' '}
+              <i class="fas fa-exclamation-triangle px-2"></i>
+              Username or Password is incorrect
+            </span>
+          ) : null}
           <p className="signinForget text-center">Forgot Password?</p>
           <Col sm={12} className="text-center">
-            <Button className="my-4 signInBtn" onClick={this.Signin}>SIGN IN</Button>
+            <Button className="my-4 signInBtn" onClick={this.Signin}>
+              SIGN IN
+            </Button>
           </Col>
         </Form>
       </Container>
@@ -151,17 +156,13 @@ componentWillReceiveProps(nextProps){
   }
 }
 
-SignInForm.propTypes ={
-  Login : PropTypes.func.isRequired,
-  auth:PropTypes.object.isRequired
-}
- const mapStatetoProps=state=>({
-   isAuth:state.auth.isAuth,
-   auth:state.auth
+SignInForm.propTypes = {
+  Login: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+const mapStatetoProps = state => ({
+  isAuth: state.auth.isAuth,
+  auth: state.auth
+});
 
- })
- 
-
-export default connect(mapStatetoProps,
-  {Login}
-)(withRouter( SignInForm))
+export default connect(mapStatetoProps, { Login })(withRouter(SignInForm));

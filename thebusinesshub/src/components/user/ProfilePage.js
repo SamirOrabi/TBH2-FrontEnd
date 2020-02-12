@@ -207,7 +207,7 @@ class ProfilePage extends Component {
       })
       .then(res => {
         this.setState({ profileInfo: res.data.profile });
-        console.log(this.state.profileInfo.firstName);
+        console.log(this.state.profileInfo);
       });
   }
 
@@ -238,30 +238,33 @@ class ProfilePage extends Component {
     e.preventDefault();
 
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
+    if (this.props.user.status === 'pending') {
+      
+    } else {
+      let request = {};
+      request.ownerId = this.state.profileInfo.ownerId;
+      if (this.state.profileInfo.firstName)
+        request.firstName = this.state.profileInfo.firstName;
 
-    let request = {};
-    request.ownerId = this.state.profileInfo.ownerId;
-    if (this.state.profileInfo.firstName)
-      request.firstName = this.state.profileInfo.firstName;
+      if (this.state.profileInfo.lastName)
+        request.lastName = this.state.profileInfo.lastName;
 
-    if (this.state.profileInfo.lastName)
-      request.lastName = this.state.profileInfo.lastName;
+      if (this.state.profileInfo.gender)
+        request.gender = this.state.profileInfo.gender;
 
-    if (this.state.profileInfo.gender)
-      request.gender = this.state.profileInfo.gender;
+      if (this.state.profileInfo.birthdate)
+        request.birthdate = this.state.profileInfo.birthdate;
 
-    if (this.state.profileInfo.birthdate)
-      request.birthdate = this.state.profileInfo.birthdate;
-
-    axios
-      .post('http://18.185.138.12:5000/api/accounts/updateprofile', {
-        Account: request
-      })
-      .then(res => {
-        console.log(res);
-        console.log(this.state.profileInfo.firstName);
-      })
-      .catch(err => console.log(err));
+      axios
+        .post('http://18.185.138.12:5000/api/accounts/updateprofile', {
+          Account: request
+        })
+        .then(res => {
+          console.log(res);
+          console.log(this.state.profileInfo.firstName);
+        })
+        .catch(err => console.log(err));
+    }
   };
   render() {
     return (
