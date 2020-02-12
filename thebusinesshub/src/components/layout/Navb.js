@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Container ,Dropdown } from 'react-bootstrap';
+import { Navbar, Nav, Container, Dropdown } from 'react-bootstrap';
 import { NavLink, withRouter } from 'react-router-dom';
 import logo from '../../Images/logo.png';
 import '../stylesheets/NavCSS.css';
-import {LogOut} from '../../globalState/actions/authActions';
-import {connect} from 'react-redux';
+import { LogOut } from '../../globalState/actions/authActions';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
@@ -13,11 +13,10 @@ import PropTypes from 'prop-types';
 
   SignOut=e=>{
     e.preventDefault();
-    this.props.LogOut(this.props.history)
-  }
+    this.props.LogOut(this.props.history);
+  };
 
   render() {
-
     return (
       <Container>
         <Navbar
@@ -109,8 +108,8 @@ import PropTypes from 'prop-types';
 
   <Dropdown.Menu>
    
-  <div className="dropdownlink"><Dropdown.Item href="/AccountSettings" > ACCOUNT</Dropdown.Item></div>
-  <div className="dropdownbookinglink"> <Dropdown.Item href=""> MY BOOKINGS</Dropdown.Item></div>
+  <div className="dropdownlink"><Dropdown.Item href="/UserBoard/Account-Settings" > ACCOUNT</Dropdown.Item></div>
+  <div className="dropdownbookinglink"> <Dropdown.Item href="/UserBoard/Booking"> MY BOOKINGS</Dropdown.Item></div>
   <div className="dropdownsignoutlink"> <Dropdown.Item  onClick={this.SignOut}> <i class="fas fa-sign-out-alt"></i>SIGN OUT</Dropdown.Item></div>
   </Dropdown.Menu>
 </Dropdown>
@@ -144,4 +143,4 @@ const mapStatetoProps=state=>({
   user:state.auth.user
 
 });
-export default connect(mapStatetoProps,{LogOut})(withRouter( Navb))
+export default connect(mapStatetoProps, { LogOut })(withRouter(Navb));
