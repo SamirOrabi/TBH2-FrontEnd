@@ -1,12 +1,9 @@
 import { LOGIN, LOGOUT, SET_CURRENT_USER } from './actionTypes';
 import axios from 'axios';
-import { LOGIN, LOGOUT, SET_CURRENT_USER } from './actionTypes';
 import setAuthToken from '../../helpers/setAuthToken';
 import jwt_decode from 'jwt-decode';
 
 
-import setAuthToken from '../../helpers/setAuthToken';
-import jwt_decode from 'jwt-decode';
 
 export const userRegister = (
   userData,
