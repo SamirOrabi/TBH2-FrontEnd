@@ -76,7 +76,8 @@ class VerifyBy extends Component {
 
     return (
       <Container className="mt-5 w-50">
-        {this.props.userID.status === 'verified' ? null : (
+        {this.props.userID.status === 'verified' &&
+        this.props.isAuth ? null : (
           <div>
             {' '}
             <Modal show={this.state.show} onHide={this.handleClose}>
@@ -140,6 +141,7 @@ class VerifyBy extends Component {
 }
 
 const mapStateToProps = state => ({
-  userID: state.auth.user
+  userID: state.auth.user,
+  isAuth: state.auth.isAuth
 });
 export default connect(mapStateToProps)(withRouter(VerifyBy));

@@ -101,6 +101,7 @@
   top: 0;
   height: 100%;
   transition: all 0.6s ease-in-out;
+  overflow-y: auto;
 }
 .form-control {
   padding: 25px 15px;
@@ -477,4 +478,10 @@
   position: absolute !important;
   top: 500px !important;
   left: 520px;
+}
+
+.SignUpForm p {
+  font-size: 12px !important;
+  margin-top: unset !important;
+  margin-bottom: unset !important;
 }
