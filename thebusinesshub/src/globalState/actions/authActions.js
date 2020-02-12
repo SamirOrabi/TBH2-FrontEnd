@@ -9,6 +9,7 @@ export const Login =(userdata , history) => dispatch =>{
 axios.post('http://18.185.138.12:5000/api/accounts/login',userdata)
 .then(res=>
     {
+        console.log('userdata',userdata)
         console.log(res.data.token);
         console.log(res.data.error);
         const userToken = res.data.token;
@@ -30,13 +31,15 @@ export const setCurrentUser=decodedToken=>{
     }
 }
 
-export const LogOut=history=>dispatch =>{
-    localStorage.removeItem('usertoken');
+export const LogOut= history => dispatch =>{
+    localStorage.removeItem('userToken' );
     setAuthToken(false); 
     dispatch(setCurrentUser({}));
     dispatch({type:LOGOUT});
     history.push('/')
 
 }
+
+
 
 

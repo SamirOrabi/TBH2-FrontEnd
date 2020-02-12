@@ -11,14 +11,12 @@ import PropTypes from 'prop-types';
 
  class Navb extends Component {
 
-
   SignOut=e=>{
     e.preventDefault();
     this.props.LogOut(this.props.history)
   }
 
   render() {
-
 
     return (
       <Container>
@@ -106,13 +104,14 @@ import PropTypes from 'prop-types';
 // Logout              </NavLink>
 <Dropdown>
   <Dropdown.Toggle variant="success" id="dropdown-basic">
-   N
+   {this.props.user.firstName.substring(0,1)}
   </Dropdown.Toggle>
 
   <Dropdown.Menu>
-    <Dropdown.Item href="/AccountSettings" > Account</Dropdown.Item>
-    <Dropdown.Item href="#/action-2"> MY BOOKING</Dropdown.Item>
-    <Dropdown.Item  onClick={this.SignOut}>Logout</Dropdown.Item>
+   
+  <div className="dropdownlink"><Dropdown.Item href="/AccountSettings" > ACCOUNT</Dropdown.Item></div>
+  <div className="dropdownbookinglink"> <Dropdown.Item href=""> MY BOOKINGS</Dropdown.Item></div>
+  <div className="dropdownsignoutlink"> <Dropdown.Item  onClick={this.SignOut}> <i class="fas fa-sign-out-alt"></i>SIGN OUT</Dropdown.Item></div>
   </Dropdown.Menu>
 </Dropdown>
 : <NavLink
@@ -142,6 +141,7 @@ Navb.propTypes ={
 }
 const mapStatetoProps=state=>({
   isAuth:state.auth.isAuth,
+  user:state.auth.user
 
 });
 export default connect(mapStatetoProps,{LogOut})(withRouter( Navb))
