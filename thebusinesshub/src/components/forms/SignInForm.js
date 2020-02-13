@@ -28,7 +28,6 @@ class SignInForm extends Component {
 
       nameValid: false,
       passwordValid: false,
-
       formValid: false
     };
   }
@@ -43,7 +42,6 @@ class SignInForm extends Component {
   validateField(fieldName, value) {
     let nameValidationErrors = this.state.nameErrors;
     let passwordValidationErrors = this.state.passwordErrors;
-
     let nameValid = this.state.nameValid;
     let passwordValid = this.state.passwordValidationValid;
     switch (fieldName) {

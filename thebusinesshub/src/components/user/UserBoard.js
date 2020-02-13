@@ -13,11 +13,11 @@ export default class UserBoard extends Component {
     return (
       <Container fluid className="userboard">
         <Row>
-          <Col sm="3">
+          <Col sm="12" md={3}>
             <UserBoardSideNav />
           </Col>
           <Col
-            sm="9"
+            sm={12} md={9}
             style={{
               borderTop: '1px solid #eee',
               borderLeft: '1px solid #eee'

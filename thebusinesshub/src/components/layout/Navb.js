@@ -100,19 +100,30 @@ class Navb extends Component {
                 // Logout              </NavLink>
                 <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    N
+                    {this.props.user.firstName.substring(0, 1)}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item href="/UserBoard/Account-Settings">
+                    <div className="dropdownlink">
+                      <Dropdown.Item href="/UserBoard/Account-Settings">
+                        {' '}
+                        ACCOUNT
+                      </Dropdown.Item>
+                    </div>
+                    <div className="dropdownbookinglink">
                       {' '}
-                      Account
-                    </Dropdown.Item>
-                    <Dropdown.Item href="/UserBoard/Booking">
+                      <Dropdown.Item href="/UserBoard/Booking">
+                        {' '}
+                        MY BOOKINGS
+                      </Dropdown.Item>
+                    </div>
+                    <div className="dropdownsignoutlink">
                       {' '}
-                      MY BOOKING
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={this.SignOut}>Logout</Dropdown.Item>
+                      <Dropdown.Item onClick={this.SignOut}>
+                        {' '}
+                        <i class="fas fa-sign-out-alt"></i>SIGN OUT
+                      </Dropdown.Item>
+                    </div>
                   </Dropdown.Menu>
                 </Dropdown>
               ) : (
@@ -140,6 +151,7 @@ Navb.propTypes = {
   LogOut: PropTypes.func.isRequired
 };
 const mapStatetoProps = state => ({
-  isAuth: state.auth.isAuth
+  isAuth: state.auth.isAuth,
+  user: state.auth.user
 });
 export default connect(mapStatetoProps, { LogOut })(withRouter(Navb));

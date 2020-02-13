@@ -176,7 +176,7 @@ class ProfilePage extends Component {
             
             </Col>
             <Col md={2}></Col>
-            <Col sm={12} md={3}>
+            <Col sm={12} md={4}>
               <Form.Label className="pl-3">GENDER</Form.Label>
               <div className="genderdrop">
                 <select
