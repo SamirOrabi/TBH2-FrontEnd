@@ -10,7 +10,7 @@ export default class Home extends Component {
     return (
       <section className="homepage">
         {' '}
-        <VerifyBy />
+        {/* <VerifyBy /> */}
       </section>
     );
   }
