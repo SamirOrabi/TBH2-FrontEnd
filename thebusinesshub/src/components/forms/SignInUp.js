@@ -14,6 +14,12 @@ export default class SignInUp extends Component {
     container.classList.remove('right-panel-active');
   };
 
+  changepanel = e => {
+    if (e) {
+      this.handleSignUp();
+    }
+  };
+
   render() {
     return (
       <div className="signupinbackground">
@@ -25,7 +31,7 @@ export default class SignInUp extends Component {
               <SignInForm />
             </div>
             <div class="form-container sign-in-container">
-              <SignUp />
+              <SignUp handleSignIn={this.changepanel} />
             </div>
             <div class="overlay-container">
               <div class="overlay">

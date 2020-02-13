@@ -1,0 +1,149 @@
+.usersidenav {
+  text-align: center;
+  padding-top: 30%;
+}
+
+/* .usersidenav a.active > .activecol {
+  background-color: #ed1c24;
+} */
+
+.firstChardivside {
+  border-radius: 50%;
+  background-color: #ed1c24;
+  border-color: #ed1c24;
+  width: 70px;
+  height: 70px;
+  padding: 3% 2%;
+  text-align: center;
+  font-family: Arial;
+  font-size: 40px;
+  color: #fff;
+  margin: auto !important;
+}
+
+.firstChardivprofile {
+  border-radius: 50%;
+  background-color: #ed1c24;
+  border-color: #ed1c24;
+  width: 90px;
+  height: 90px;
+  padding: 2% 2%;
+  text-align: center;
+  font-family: Arial;
+  font-size: 40px;
+  color: #fff;
+  margin: auto !important;
+}
+
+.usersidenav a {
+  color: #ed1c24;
+  width: 100% !important;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold !important;
+}
+
+.usersidenav .sidename {
+  font-size: 30px;
+  color: #000;
+}
+
+.usersidenav hr {
+  width: 80% !important;
+  margin: auto !important;
+}
+.usersidenav .sidemail {
+  color: #7e7e7e;
+}
+
+.SideLinksdiv {
+  padding-top: 40px;
+}
+
+.SideLinksdiv .sidelinkParent {
+  padding-bottom: 10%;
+}
+
+.sidelinkParent a {
+  display: block;
+  width: 100%;
+  padding-top: 2%;
+  height: 50px;
+  text-align: center;
+}
+
+.parentBG {
+  background-color: #ed1c24 !important;
+}
+/*********PROFILE********/
+
+.profilePage label {
+  color: #ed1c24;
+}
+
+.profilePage {
+  padding-top: 50px;
+}
+
+.genderdrop {
+  width: 100% !important;
+  padding-left: 3%;
+  border-left: 5px solid #ed1c24;
+}
+
+.genderdrop select {
+  width: 50% !important;
+  height: 60px !important;
+  text-align: center !important;
+  border-color: #ed1c24 !important;
+}
+
+.profilePage .profilesaveBtn {
+  background: #ed1c24;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 25px;
+  margin: 5% auto;
+  transition: transform 80ms ease-in;
+  border: 1px solid #ed1c24;
+}
+.profilePage .profilesaveBtn:active {
+  transform: scale(0.95);
+  background-color: #ed1c24 !important;
+}
+.profilePage .profilesaveBtn:hover {
+  background: #ed1c24;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 25px;
+  transition: transform 80ms ease-in;
+  border: 1px solid #ed1c24;
+}
+.profilePage .profilesaveBtn:focus {
+  outline: none;
+  background-color: #ed1c24 !important;
+}
+
+.deadlineInput {
+  height: 60px;
+  width: 100% !important;
+  padding-left: 3%;
+  border-left: 5px solid #ed1c24;
+}
+
+.DayPickerInput {
+  width: 100% !important;
+}
+
+.DayPickerInput input {
+  width: 100% !important;
+  height: 60px;
+  border: 1px solid #ed1c24;
+  padding-left: 6px;
+}
