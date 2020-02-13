@@ -35,7 +35,6 @@ export const userRegister = (
           localStorage.setItem('userToken', userToken);
           setAuthToken(userToken);
           const decodedToken = jwt_decode(userToken);
-          dispatch({ type: LOGIN });
           dispatch(setCurrentUser(decodedToken));
           history.push('/');
         })
@@ -63,7 +62,6 @@ export const Login = (userdata, history) => async dispatch => {
           localStorage.setItem('userToken', userToken);
           setAuthToken(userToken);
           const decodedToken = jwt_decode(userToken);
-          dispatch({ type: LOGIN });
           dispatch(setCurrentUser(decodedToken));
           history.push('/');
         }
