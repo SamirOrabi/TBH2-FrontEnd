@@ -181,7 +181,6 @@ class SignUp extends Component {
 
     this.setState({ user: userData.error });
     // this.setState({ code: userData.code });
-    console.log(userData.code);
     // if (userData.code === 0) {
     //   return this.props.handleSignIn(true);
     // }
@@ -196,7 +195,6 @@ class SignUp extends Component {
   render() {
     console.log('hna el error msg');
     if (this.state.user !== '') {
-      console.log(this.state.user);
     }
 
     return (

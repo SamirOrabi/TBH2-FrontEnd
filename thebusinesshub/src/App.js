@@ -1,7 +1,7 @@
 // Libraries
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import {connect} from 'react-redux'; 
+import { connect } from 'react-redux';
 import Navb from '../src/components/layout/Navb';
 import Login from '../src/components/pages/Login';
 import store from './globalState/store';
@@ -19,14 +19,13 @@ import { setCurrentUser } from './globalState/actions/authActions';
 // import SignInUp from './components/forms/SignInUp';
 // Components
 
-if(localStorage.userToken){
+if (localStorage.userToken) {
   setAuthToken(localStorage.userToken);
   const decodedToken = jwt_decode(localStorage.userToken);
-  store.dispatch(setCurrentUser(decodedToken)) ;
+  store.dispatch(setCurrentUser(decodedToken));
 }
 
-
- class App extends Component {
+class App extends Component {
   render() {
     return (
       <Router>
@@ -34,6 +33,8 @@ if(localStorage.userToken){
           <Navb />
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/contact" component={Contact} />
+
           <Route exact path="/AccountSettings" component={AccountSettings} />
         </div>
       </Router>
@@ -41,8 +42,8 @@ if(localStorage.userToken){
   }
 }
 
-const mapStateToProps = state =>({
-  isAuth:state.auth.isAuth
-})
+const mapStateToProps = state => ({
+  isAuth: state.auth.isAuth
+});
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(App);
