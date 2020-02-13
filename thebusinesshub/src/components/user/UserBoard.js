@@ -17,7 +17,8 @@ export default class UserBoard extends Component {
             <UserBoardSideNav />
           </Col>
           <Col
-            sm={12} md={9}
+            sm={12}
+            md={9}
             style={{
               borderTop: '1px solid #eee',
               borderLeft: '1px solid #eee'
