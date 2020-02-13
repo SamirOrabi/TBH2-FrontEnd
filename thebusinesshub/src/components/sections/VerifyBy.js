@@ -14,17 +14,17 @@ class VerifyBy extends Component {
       show2: false
     };
   }
-  setGender(e) {
+  sendBy = e => {
     console.log(e.target.value);
     this.setState({ verifyby: e.target.value });
-  }
+  };
 
   sendCode = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('http://18.185.138.12:5000/api/accounts/verify', {
         Account: {
-          id: this.props.userID.id,
+          id: this.props.user.id,
           verifyBy: this.state.verifyby
         }
       })
@@ -46,13 +46,14 @@ class VerifyBy extends Component {
     axios
       .post('http://18.185.138.12:5000/api/accounts/confirmverify', {
         Account: {
-          id: this.props.userID.id,
+          id: this.props.user.id,
           code: this.state.code
         }
       })
       .then(res => {
         console.log(res);
-
+        this.props.user.status = res.data.state;
+        console.log(this.props.user.status);
         this.setState({ show: false });
       })
       .catch(err => console.log(err));
@@ -72,76 +73,74 @@ class VerifyBy extends Component {
     console.log(this.state.code);
   };
   render() {
-    console.log(this.props.userID.status);
-
+    console.log(this.props.user.status);
     return (
       <Container className="mt-5 w-50">
-        {this.props.userID.status === 'verified' &&
-        this.props.isAuth ? null : (
-          <div>
-            {' '}
-            <Modal show={this.state.show} onHide={this.handleClose}>
-              <Modal.Body className="verifyby">
+        {/* {this.props.user.status === 'verified' && this.props.isAuth ? null : ( */}
+        <div>
+          {' '}
+          <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal.Body className="verifyby">
+              {' '}
+              <h3 className="mt-5 text-center">VERIFICATION</h3>
+              <p>Recieve via :</p>
+              <Row onChange={this.sendBy}>
                 {' '}
-                <h3 className="mt-5 text-center">VERIFICATION</h3>
-                <p>Recieve via :</p>
-                <Row onChange={this.setGender.bind(this)}>
+                <Col sm={5}>
+                  <label className="verifyCon">
+                    <input type="radio" value="email" name="verify" /> Email
+                    <span className="checkmark"></span>
+                  </label>
+                </Col>
+                <Col sm={5}>
                   {' '}
-                  <Col sm={5}>
-                    <label className="verifyCon">
-                      <input type="radio" value="email" name="verify" /> Email
-                      <span className="checkmark"></span>
-                    </label>
-                  </Col>
-                  <Col sm={5}>
-                    {' '}
-                    <label className="verifyCon">
-                      <input type="radio" value="sms" name="verify" /> Sms
-                      <span className="checkmark"></span>
-                    </label>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col sm={8}>
-                    <Form className="" onSubmit={this.handleSubmit}>
-                      <Form.Group className="formgroupfloat">
-                        <Form.Control
-                          noValidate
-                          required
-                          type="text"
-                          onChange={this.handleUserInput}
-                          value={this.state.code}
-                          name="code"
-                          className="floatcontrol"
-                          placeholder="ENTER THE CODE "
-                        />
-                      </Form.Group>
-                    </Form>
-                  </Col>
-                  <Col className="pt-3 sendcodeBtn" sm={4}>
-                    <Button onClick={this.sendCode}>SEND CODE</Button>
-                  </Col>
-                </Row>
-                <Row>
-                  {' '}
-                  <Col className="m-auto text-center verifyBtn pt-3" sm={12}>
-                    <Button onClick={this.verifyme}>VERIFY</Button>
-                  </Col>
-                </Row>
-              </Modal.Body>
-              <Modal className="mt-2 feedBack" show={this.state.show2}>
-                <div id="snackbar">Sent Successfully!</div>
-              </Modal>
+                  <label className="verifyCon">
+                    <input type="radio" value="sms" name="verify" /> Sms
+                    <span className="checkmark"></span>
+                  </label>
+                </Col>
+              </Row>
+              <Row>
+                <Col sm={8}>
+                  <Form className="" onSubmit={this.handleSubmit}>
+                    <Form.Group className="formgroupfloat">
+                      <Form.Control
+                        noValidate
+                        required
+                        type="text"
+                        onChange={this.handleUserInput}
+                        value={this.state.code}
+                        name="code"
+                        className="floatcontrol"
+                        placeholder="ENTER THE CODE "
+                      />
+                    </Form.Group>
+                  </Form>
+                </Col>
+                <Col className="pt-3 sendcodeBtn" sm={4}>
+                  <Button onClick={this.sendCode}>SEND CODE</Button>
+                </Col>
+              </Row>
+              <Row>
+                {' '}
+                <Col className="m-auto text-center verifyBtn pt-3" sm={12}>
+                  <Button onClick={this.verifyme}>VERIFY</Button>
+                </Col>
+              </Row>
+            </Modal.Body>
+            <Modal className="mt-2 feedBack" show={this.state.show2}>
+              <div id="snackbar">Sent Successfully!</div>
             </Modal>
-          </div>
-        )}
+          </Modal>
+        </div>
+        {/* )} */}
       </Container>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  userID: state.auth.user,
+  user: state.auth.user,
   isAuth: state.auth.isAuth
 });
 export default connect(mapStateToProps)(withRouter(VerifyBy));
