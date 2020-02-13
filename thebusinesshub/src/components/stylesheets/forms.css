@@ -101,6 +101,7 @@
   top: 0;
   height: 100%;
   transition: all 0.6s ease-in-out;
+  overflow-y: auto;
 }
 .form-control {
   padding: 25px 15px;
@@ -389,4 +390,98 @@
 .BbachError {
   color: #ed1c24;
   font-weight: bold !important;
+}
+
+.verifyby h3 {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 29px;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #ed1c24;
+}
+.verifyby p {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+
+  color: #ed1c24;
+}
+.sendcodeBtn button {
+  background: transparent;
+  border-radius: 0;
+  color: #ed1c24;
+  font-size: 13px;
+  border: none !important;
+}
+.sendcodeBtn button:hover,
+.sendcodeBtn button:active,
+.sendcodeBtn button:focus {
+  background: transparent !important;
+  border-radius: 0;
+  color: #ed1c24;
+  font-size: 13px;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.verifyBtn button {
+  background: #ed1c24;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 25px;
+  transition: transform 80ms ease-in;
+  border: 1px solid #ed1c24;
+}
+
+.verifyBtn button:hover,
+.verifyBtn button:active,
+.verifyBtn button:focus {
+  background: #ed1c24;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 25px;
+  transition: transform 80ms ease-in;
+  border: 1px solid #ed1c24;
+}
+
+#snackbar {
+  width: 500px;
+  background-color: #ed1c24;
+  padding: 15px;
+  color: white;
+  position: absolute;
+  bottom: -50% !important;
+  z-index: 500;
+  text-align: center;
+}
+
+.modal-dialog {
+  top: 100px;
+}
+
+.modal.feedBack .modal-dialog {
+  position: absolute !important;
+  top: 500px !important;
+  left: 520px;
+}
+
+.SignUpForm p {
+  font-size: 12px !important;
+  margin-top: unset !important;
+  margin-bottom: unset !important;
 }

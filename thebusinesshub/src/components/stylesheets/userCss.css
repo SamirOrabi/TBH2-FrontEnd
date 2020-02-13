@@ -64,6 +64,14 @@
   padding-bottom: 10%;
 }
 
+.sidelinkParent a {
+  display: block;
+  width: 100%;padding-top: 2%;
+  height: 50px;
+  text-align: center;
+  
+}
+
 .parentBG {
   background-color: #ed1c24 !important;
 }
@@ -85,7 +93,7 @@
 
 .genderdrop select {
   width: 50% !important;
-  height: 50px !important;
+  height: 60px !important;
   text-align: center !important;
   border-color: #ed1c24 !important;
 }
@@ -129,33 +137,13 @@
   border-left: 5px solid #ed1c24;
 }
 
-.react-date-picker__inputGroup__input {
-  border-bottom: none !important;
-}
-
-.react-date-picker {
+.DayPickerInput{
   width: 100% !important;
-  border: 1px solid #ed1c24;
-}
-.react-date-picker__wrapper {
-  border: none !important;
-  height: 60px;
 }
 
-.react-date-picker__inputGroup__divider {
-  padding: 0 5px !important;
-}
-.react-date-picker__inputGroup {
-  padding-left: 5px !important;
+.DayPickerInput input{
+  width: 100% !important;
+  height: 60px;  border: 1px solid #ed1c24;
+padding-left: 6px;
 }
 
-.react-date-picker__inputGroup__day,
-.react-date-picker__inputGroup__month {
-  width: 20px !important;
-}
-.react-date-picker__inputGroup__year {
-  width: 50px !important ;
-}
-.react-date-picker__calendar {
-  bottom: 0 !important;
-}
