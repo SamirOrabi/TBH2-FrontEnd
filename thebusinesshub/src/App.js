@@ -7,7 +7,7 @@ import Login from '../src/components/pages/Login';
 import store from './globalState/store';
 import jwt_decode from 'jwt-decode';
 import Home from './components/pages/Home';
-import AccountSettings from './components/pages/AccountSettings';
+import UserBoard from './components/user/UserBoard';
 import Space from './components/pages/Space';
 import Booking from './components/pages/Booking';
 import Contact from './components/pages/Contact';
@@ -33,9 +33,14 @@ class App extends Component {
           <Navb />
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/contact" component={Contact} />
-
-          <Route exact path="/AccountSettings" component={AccountSettings} />
+          <Route
+            exact
+            path="/UserBoard/Account-Settings"
+            component={UserBoard}
+          />
+          <Route exact path="/UserBoard/Profile" component={UserBoard} />
+          <Route exact path="/UserBoard/Booking" component={UserBoard} />
+          <Route exact path="/UserBoard/Purchase" component={UserBoard} />{' '}
         </div>
       </Router>
     );

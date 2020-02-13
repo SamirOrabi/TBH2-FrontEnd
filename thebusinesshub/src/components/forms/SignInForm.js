@@ -17,6 +17,8 @@ class SignInForm extends Component {
     super(props);
 
     this.state = {
+      errors: {},
+      user: '',
       name: '',
       nameError: '',
       password: '',
@@ -53,7 +55,6 @@ class SignInForm extends Component {
   validateField(fieldName, value) {
     let nameValidationErrors = this.state.nameErrors;
     let passwordValidationErrors = this.state.passwordErrors;
-
     let nameValid = this.state.nameValid;
     let passwordValid = this.state.passwordValidationValid;
     switch (fieldName) {
@@ -93,29 +94,24 @@ class SignInForm extends Component {
     }
   }
 
-  Signin = e => {
+  Signin = async e => {
     e.preventDefault();
-    this.props.Login(
+    let loginRequest = {};
+    loginRequest.username = this.state.name;
+    loginRequest.password = this.state.password;
+    const userdata = await this.props.Login(
       {
-        Account: {
-          username: this.state.name,
-          password: this.state.password
-        }
+        Account: loginRequest
       },
       this.props.history
     );
+
+    this.setState({ user: userdata.error });
   };
 
-  componentDidMount() {
-    if (this.props.isAuth) {
-      this.props.history.push('/');
-    }
-  }
-
   componentWillReceiveProps(nextProps) {
-    console.log('componentwillreciveprrrrops');
-    if (nextProps.auth.isAuth) {
-      this.props.history.push('/');
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
   }
 

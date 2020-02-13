@@ -8,7 +8,7 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case LOGIN:
-      return { ...state, isAuth: true };
+      return { ...state, isAuth: true, user: action.payload };
 
     case LOGOUT:
       return { ...state, isAuth: false };

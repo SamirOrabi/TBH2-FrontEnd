@@ -1,6 +1,5 @@
 import { LOGIN, LOGOUT, SET_CURRENT_USER } from './actionTypes';
 import axios from 'axios';
-
 import setAuthToken from '../../helpers/setAuthToken';
 import jwt_decode from 'jwt-decode';
 
@@ -17,6 +16,7 @@ export const userRegister = (
 
       .then(res => {
         resolve(res.data);
+        console.log(res);
       })
       .catch(err => {
         reject(err);
@@ -31,6 +31,7 @@ export const userRegister = (
         .post('http://18.185.138.12:5000/api/accounts/login', userDatalogin)
         .then(res => {
           resolve(res);
+
           const userToken = res.data.token;
           localStorage.setItem('userToken', userToken);
           setAuthToken(userToken);
