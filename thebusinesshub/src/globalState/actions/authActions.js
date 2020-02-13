@@ -65,21 +65,27 @@ export const userRegister = (
   return call;
 };
 
-export const Login = (userdata, history) => dispatch => {
-  console.log(userdata);
-  axios
-    .post('http://18.185.138.12:5000/api/accounts/login', userdata)
-    .then(res => {
-      const userToken = res.data.token;
-
-      localStorage.setItem('userToken', userToken);
-
-      setAuthToken(userToken);
-      const decodedToken = jwt_decode(userToken);
-      dispatch(setCurrentUser(decodedToken));
-      history.push('/');
-    })
-    .catch(err => console.log(err));
+export const Login = (userdata, history) => async dispatch => {
+  const logindata = await new Promise((resolve, reject) => {
+    axios
+      .post('http://18.185.138.12:5000/api/accounts/login', userdata)
+      .then(res => {
+        resolve(res.data);
+        console.log(res.data);
+        if (res.data.token) {
+          const userToken = res.data.token;
+          localStorage.setItem('userToken', userToken);
+          setAuthToken(userToken);
+          const decodedToken = jwt_decode(userToken);
+          dispatch(setCurrentUser(decodedToken));
+          history.push('/');
+        }
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+  return logindata;
 };
 export const setCurrentUser = decodedToken => {
   return {

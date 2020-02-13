@@ -17,7 +17,8 @@ class ProfilePage extends Component {
       selectedDay: undefined,
       isEmpty: true,
       isDisabled: false,
-      verifyerror: ''
+      verifyerror: '',
+      showverify: false
     };
   }
 
