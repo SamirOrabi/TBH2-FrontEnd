@@ -19,6 +19,10 @@ class ForgetPassword extends Component {
     this.setState({ number: e.target.value });
     console.log(e.target.value);
   };
+  handleClose = e => {
+    // this.props.hideModal2(e);
+    console.log(e);
+  };
   sendPassword = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
@@ -48,6 +52,17 @@ class ForgetPassword extends Component {
           <Modal show={this.props.show} onHide={this.handleClose}>
             <Modal.Body className="verifyby">
               {' '}
+              <Row>
+                <Col className="closebtn" sm={12}>
+                  <Button onClick={this.handleClose(false)}>
+                    {' '}
+                    <i
+                      className="fas fa-times"
+                      style={{ color: '#ed1c24' }}
+                    ></i>
+                  </Button>
+                </Col>
+              </Row>
               <h3 className="mt-3 text-center">FORGET PASSWORD</h3>
               <Row>
                 <Col sm={12}>

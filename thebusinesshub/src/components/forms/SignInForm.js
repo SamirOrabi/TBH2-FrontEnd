@@ -44,6 +44,9 @@ class SignInForm extends Component {
     }, 1600);
   };
 
+  hideModal2 = e => {
+    this.setState({ show: e });
+  };
   handleUserInput = e => {
     const name = e.target.name;
     const value = e.target.value;
@@ -158,6 +161,7 @@ class SignInForm extends Component {
               <ForgetPassword
                 show={this.state.show}
                 hideModal={this.hideModal}
+                hideModal2={this.hideModal2}
               />
             </Button>
           </Col>
