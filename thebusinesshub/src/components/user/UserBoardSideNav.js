@@ -8,6 +8,9 @@ import { connect } from 'react-redux';
 class UserBoardSideNav extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      
+  }
   }
 
   render() {
