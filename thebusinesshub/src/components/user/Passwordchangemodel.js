@@ -9,9 +9,11 @@ import '../stylesheets/ChangesmodelCSS.css';
     super(props)
 
     this.state = {
-          password:'',
+          oldpassword:'',
           newPassword:'' ,
-          ConfirmPassword:''
+          ConfirmPassword:'',
+          error:'',
+          passerror:''
           
 
     }
@@ -19,8 +21,16 @@ import '../stylesheets/ChangesmodelCSS.css';
 
 
 handleconfirmpasswordUserInput = e => {
-  this.setState({ConfirmPassword: e.target.value });
-  console.log(e.target.value)
+   this.setState({ConfirmPassword: e.target.value });
+
+  if(e.target.value!==this.state.newPassword){
+    this.setState({passerror:'password does not match '})
+  }
+else{
+  this.setState({passerror:''})
+
+}
+
 };
 
 handlenewpasswordUserInput = e => {
@@ -29,29 +39,35 @@ handlenewpasswordUserInput = e => {
 };
 
 handlepasswordUserInput = e => {
-  this.setState({password: e.target.value });
+  this.setState({oldpassword: e.target.value });
   console.log(e.target.value)
 };
 
 changePassword=()=>{
   axios.defaults.headers.common['authorization'] =localStorage.userToken;
+  if(this.state.newPassword===this.state.ConfirmPassword){
   axios.post('http://18.185.138.12:5000/api/accounts/changepassword' , 
   {
     Credentials:{
       id:this.props.user.id,
-      password: this.state.password,
+      password: this.state.oldpassword,
       newPassword:this.state.newPassword
 }
   }
   )
   .then(
     res=>{
-      // this.props.user.password=this.state.newPassword
       console.log(res)
+      if(res.data.error){
+        this.setState({error:res.data.error,passerror:''})
+      }
     }
   ).catch(err=>console.log(err))
   
 }
+else{
+  this.setState({passerror:'Please Confirm your password',error:''})
+}}
   render() {
     return (
      
@@ -112,10 +128,11 @@ changePassword=()=>{
               placeholder="CONFIRM NEW PASSWORD"
             />{' '}
             <div className="icontringale">
-              {' '}
+             
              
             </div>{' '}
-          </Form.Group>{' '}
+          </Form.Group>  <p className="pl-3" style={{color:'#ed1c24',fontWeight:'bold'}}>{this.state.passerror}</p>
+          <p className="pl-3" style={{color:'#ed1c24',fontWeight:'bold'}}>{this.state.error}</p>
             </Form>
         </Modal.Body>
 

@@ -6,6 +6,7 @@ import Passwordchangemodel from './Passwordchangemodel';
 import '../stylesheets/AccountCSS.css';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import isEqual from 'lodash/isEqual';
 
 
 
@@ -42,28 +43,27 @@ profileData:[],
   
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if(this.props.user.id){
-      
-  //   if (this.state.profile === prevState.profile) {
-      
-  //      axios.defaults.headers.common['authorization'] =localStorage.userToken;
-  //       axios.post('http://18.185.138.12:5000/api/accounts/getprofile' , 
-  //       {
-  //         Account:{
-  //           ownerId:this.props.user.id,
-  //   }
-  //       }
-  //       )
-  //       .then(res => {
-         
-  //         this.setState({profileData:res.data.profile})
-  //         console.log('new result',res)
-  //       });
-      
-  //      }
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState) {
+
+      if ( !isEqual(prevState ,this.state)){
+        this.forceUpdate()
+       axios.defaults.headers.common['authorization'] =localStorage.userToken;
+        axios.post('http://18.185.138.12:5000/api/accounts/getprofile' , 
+        {
+          Account:{
+            ownerId:this.props.user.id,
+    }
+        }
+        )
+        .then(res => {
+     this.setState({profileData:res.data.profile})    
+          console.log('new result',res.data.profile)
+        }).catch(err => console.log(err));
+
+       }
+       
+    
+  }
 
   componentWillUnmount=()=>{
     console.log('destroyyyyyyyyyyyyyy')
@@ -76,7 +76,7 @@ profileData:[],
       
    
       console.log(this.props.user)
-      let addModelClose =  ()=> this.setState({EmailmodalShow:false})
+      let addModelClose =  ()=> this.setState({EmailmodalShow:false}) 
       let addModelClose1 = ()=> this.setState({PhoneNumbermodalShow:false})
       let addModelClose2 = ()=> this.setState({changepasswordmodalShow:false})
 
@@ -137,7 +137,7 @@ profileData:[],
         </div>
         </Col>
         </Row>   
-       <EmailChangesmodel show={this.state.EmailmodalShow } onHide={addModelClose} />
+       <EmailChangesmodel show={this.state.EmailmodalShow } onHide={addModelClose}  />
        <PhoneNumberchangemodel show={this.state.PhoneNumbermodalShow}  onHide={addModelClose1} />
        <Passwordchangemodel show={this.state.changepasswordmodalShow}  onHide={addModelClose2} />
 
