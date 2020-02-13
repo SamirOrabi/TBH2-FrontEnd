@@ -33,6 +33,7 @@ class PhoneNumberchangemodel extends Component {
           this.setState({ phoneerror: 'Phone number must contain 11 numbers' });
         } else {
           this.setState({ phoneerror: '' });
+          this.props.onHide()
         }
       })
       .catch(err => console.log(err));

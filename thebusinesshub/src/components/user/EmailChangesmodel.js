@@ -10,7 +10,8 @@ class EmailChangesmodel extends Component {
 
     this.state = {
       newEmail: '',
-      emailerror: ''
+      emailerror: '' ,
+      EmailmodalShow:false
     };
   }
 
@@ -33,20 +34,26 @@ class EmailChangesmodel extends Component {
           this.setState({ emailerror: res.data.error });
         } else {
           this.setState({ emailerror: '' });
+          this.props.onHide()
         }
+ 
       })
+    
+
       .catch(err => console.log(err));
   };
   render() {
+    
+  // const handleClose = () =>this.setState({EmailmodalShow:false}) 
     return (
-      <Modal
+      <Modal  
         className="userdatachanemodel"
         {...this.props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
+        <Modal.Header >
           <Modal.Title id="contained-modal-title-vcenter">
             <p>CHANGE EMAIL</p>
           </Modal.Title>
@@ -78,7 +85,7 @@ class EmailChangesmodel extends Component {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={this.changeEmail} className="savebtn">
+          <Button onClick={this.changeEmail}  className="savebtn"   >
             SAVE
           </Button>
         </Modal.Footer>
