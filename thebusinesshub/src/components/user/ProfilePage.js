@@ -194,8 +194,8 @@ class ProfilePage extends Component {
             <div className="pt-5 text-center m-auto">
               <span style={{ color: '#ed1c24', fontWeight: 'bold' }}>
                 <i className="fas fa-exclamation-triangle px-2"></i> WARNING:
-                {this.state.verifyerror} before any updates{' '}
-                <Button onClick={this.verifyhere}>Verify</Button>
+                {this.state.verifyerror} before any updates
+                {/* <Button onClick={this.verifyhere}>Verify</Button> */}
               </span>
             </div>
           ) : null}
