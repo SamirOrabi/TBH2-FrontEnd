@@ -153,7 +153,14 @@ class SignInForm extends Component {
               <PasswordErrorsIcon passwordErrors={this.state.passwordErrors} />
             </div>
           </Form.Group>
-          <PasswordErrors passwordErrors={this.state.passwordErrors} />
+          <PasswordErrors passwordErrors={this.state.passwordErrors} />{' '}
+          {this.state.user ? (
+            <span className="BbachError pb-3">
+              {' '}
+              <i class="fas fa-exclamation-triangle px-2"></i>
+              Username or Password is incorrect
+            </span>
+          ) : null}
           <Col className="forgetdev text-center" sm={12}>
             {' '}
             <Button className="resetBtn" onClick={this.handleShow}>
@@ -165,7 +172,6 @@ class SignInForm extends Component {
               />
             </Button>
           </Col>
-
           <Col sm={12} className="text-center">
             <Button className="my-4 signInBtn" onClick={this.Signin}>
               SIGN IN
