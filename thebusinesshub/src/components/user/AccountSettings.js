@@ -65,20 +65,23 @@ profileData:[],
     
   }
 
-  componentWillUnmount=()=>{
-    console.log('destroyyyyyyyyyyyyyy')
-   
-  }
-  
  
+  
+ closeEmailModal=e=>{
+  this.setState({EmailmodalShow:!this.state.EmailmodalShow})
+ }
+
+ closePhoneModal=e=>{
+  this.setState({PhoneNumbermodalShow:!this.state.PhoneNumbermodalShow})
+ }
+
+ closePasswordModal=e=>{
+  this.setState({changepasswordmodalShow:!this.state.changepasswordmodalShow})
+ }
 
     render() {
-      
-   
       console.log(this.props.user)
-      let addModelClose =  ()=> this.setState({EmailmodalShow:false}) 
-      let addModelClose1 = ()=> this.setState({PhoneNumbermodalShow:false})
-      let addModelClose2 = ()=> this.setState({changepasswordmodalShow:false})
+     
 
         return (
             <Container className="accountsettings">
@@ -102,7 +105,7 @@ profileData:[],
         </p>
         <ButtonToolbar>
       <Button className="changeemailbtn"
-      onClick={()=>this.setState({EmailmodalShow:true})}
+      onClick={this.closeEmailModal}
       >CHANGE</Button>
     </ButtonToolbar>
         </div>
@@ -116,12 +119,11 @@ profileData:[],
         <p className="mr-3">{this.state.profileData.phoneNumber}</p>
         <ButtonToolbar>
       <Button className="changeemailbtn"
-      onClick={()=>this.setState({PhoneNumbermodalShow:true})}
+      onClick={this.closePhoneModal}
+     
       >CHANGE</Button>
     </ButtonToolbar>
         </div>
-
-        
         <div className="label">
         <p className="ml-3">PASSWORD</p>
         </div>
@@ -130,16 +132,16 @@ profileData:[],
       <p className="mr-3">*********</p>
       <ButtonToolbar>
       <Button className="changeemailbtn"
-      onClick={()=>this.setState({changepasswordmodalShow:true})}
+      onClick={this.closePasswordModal}
       >CHANGE</Button>
     </ButtonToolbar>
         </div>
         </div>
         </Col>
         </Row>   
-       <EmailChangesmodel show={this.state.EmailmodalShow } onHide={addModelClose}  />
-       <PhoneNumberchangemodel show={this.state.PhoneNumbermodalShow}  onHide={addModelClose1} />
-       <Passwordchangemodel show={this.state.changepasswordmodalShow}  onHide={addModelClose2} />
+       <EmailChangesmodel show={this.state.EmailmodalShow }  onHide={this.closeEmailModal} />
+       <PhoneNumberchangemodel show={this.state.PhoneNumbermodalShow}  onHide={this.closePhoneModal} />
+       <Passwordchangemodel show={this.state.changepasswordmodalShow}  onHide={this.closePasswordModal} />
 
       </Container>
         )

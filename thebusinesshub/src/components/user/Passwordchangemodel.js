@@ -28,6 +28,7 @@ handleconfirmpasswordUserInput = e => {
   }
 else{
   this.setState({passerror:''})
+ 
 
 }
 
@@ -60,6 +61,7 @@ changePassword=()=>{
       console.log(res)
       if(res.data.error){
         this.setState({error:res.data.error,passerror:''})
+        this.props.onHide()
       }
     }
   ).catch(err=>console.log(err))
