@@ -161,3 +161,14 @@
   text-decoration: none;
   background-color: white !important;
 }
+
+
+@media (min-width: 1000px) and (max-width:1366px){
+
+  .navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+    top:55px;
+    left:-52px
+}
+
+}
