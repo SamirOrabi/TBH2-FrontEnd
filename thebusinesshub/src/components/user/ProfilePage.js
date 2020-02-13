@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { NavLink, withRouter } from 'react-router-dom';
+import {withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import DatePicker from 'react-date-picker';
 import axios from 'axios';
 import VerifyBy from '../sections/VerifyBy';
-import moment from 'moment';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 let subBirthDate;

@@ -131,8 +131,13 @@ else{
              
              
             </div>{' '}
-          </Form.Group>  <p className="pl-3" style={{color:'#ed1c24',fontWeight:'bold'}}>{this.state.passerror}</p>
-          <p className="pl-3" style={{color:'#ed1c24',fontWeight:'bold'}}>{this.state.error}</p>
+          </Form.Group> 
+          {this.state.passerror ? <span className="pl-3" style={{color:'#ed1c24',fontWeight:'bold'}}>
+              {' '}
+              <i className="fas fa-exclamation-triangle px-2"></i>  {this.state.passerror}</span> :null}
+              {this.state.error ? <span className="pl-3" style={{color:'#ed1c24',fontWeight:'bold'}}>
+              {' '}
+              <i className="fas fa-exclamation-triangle px-2"></i> {this.state.error}</span>:null}
             </Form>
         </Modal.Body>
 
