@@ -45,7 +45,13 @@ class SignInForm extends Component {
   };
 
   hideModal2 = e => {
-    this.setState({ show: e });
+    // this.setState({ show: false });
+    // console.log('eeeeeeee');
+    // console.log(e);
+    // console.log(this.state.show);
+    setTimeout(() => {
+      this.setState({ show: e });
+    }, 0);
   };
   handleUserInput = e => {
     const name = e.target.name;
