@@ -81,7 +81,6 @@ export const Login = (userdata, history) => dispatch => {
     })
     .catch(err => console.log(err));
 };
-
 export const setCurrentUser = decodedToken => {
   return {
     type: SET_CURRENT_USER,

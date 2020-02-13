@@ -105,8 +105,11 @@ class SignInForm extends Component {
       },
       this.props.history
     );
-
-    this.setState({ user: userdata.error });
+    if (userdata.error) {
+      this.setState({ user: userdata.error });
+    } else {
+      this.setState({ user: '' });
+    }
   };
 
   componentWillReceiveProps(nextProps) {
