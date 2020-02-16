@@ -21,18 +21,16 @@ class ForgetPassword extends Component {
   };
   handleClose = e => {
     this.props.hideModal2(false);
-    console.log('fire');
   };
   sendPassword = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
-      .post('http://18.185.138.12:5000/api/accounts/forgetpassword', {
+      .post('https://cubexs.net/tbhapp/accounts/forgetpassword', {
         Account: {
           phoneNumber: this.state.number
         }
       })
       .then(res => {
-        console.log(res);
         if (res.data.code === 0) {
           this.setState({ show: false });
           this.props.hideModal(false);
@@ -41,8 +39,6 @@ class ForgetPassword extends Component {
             this.setState({ show2: false });
           }, 1600);
         } else {
-          console.log('errorrrrrrrr');
-          console.log(res.data.error);
           this.setState({ myerror: res.data.error });
         }
       })
@@ -50,7 +46,6 @@ class ForgetPassword extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <Container className="mt-5 w-50">
         <div>
@@ -69,7 +64,7 @@ class ForgetPassword extends Component {
                   </Button>
                 </Col>
               </Row>
-              <h3 className="mt-3 text-center">FORGET PASSWORD</h3>
+              <h3 className="mt-1 text-center">FORGET PASSWORD</h3>
               <Row>
                 <Col sm={12}>
                   <p style={{ color: 'grey', fontSize: '12px' }}>
@@ -94,14 +89,20 @@ class ForgetPassword extends Component {
                     </Form.Group>
                   </Form>
                 </Col>
+
+                <Col sm={12}>
+                  {this.state.myerror ? (
+                    <p>
+                      {' '}
+                      <i className="fas fa-exclamation-triangle px-2"></i>
+                      {this.state.myerror}
+                    </p>
+                  ) : null}
+                </Col>
                 <Col className="m-auto text-center verifyBtn pt-3" sm={12}>
                   <Button onClick={this.sendPassword}>RESET</Button>
                 </Col>
               </Row>{' '}
-              <Row>
-                {this.state.myerror ? <p>{this.state.myerror}</p> : null}
-               
-              </Row>
             </Modal.Body>
             <Modal className="mt-2 feedBack" show={this.state.show2}>
               <div id="snackbar">Message Sent Successfully!</div>

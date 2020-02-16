@@ -163,7 +163,7 @@ class SignInForm extends Component {
           {this.state.user ? (
             <span className="BbachError pb-3">
               {' '}
-              <i class="fas fa-exclamation-triangle px-2"></i>
+              <i className="fas fa-exclamation-triangle px-2"></i>
               Username or Password is incorrect
             </span>
           ) : null}
