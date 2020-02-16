@@ -12,6 +12,7 @@ class VerifyBy extends Component {
       code: '',
       show: true,
       userId: '',
+      myerror: '',
       // show2: false,
       mystate: 'verified'
     };
@@ -21,35 +22,41 @@ class VerifyBy extends Component {
     }
   }
 
-  // sendCode = e => {
-  //   axios.defaults.headers.common['authorization'] = localStorage.userToken;
-  //   axios
-  //     .post('http://18.185.138.12:5000/api/accounts/verify', {
-  //       Account: {
-  //         id: this.props.user.id,
-  //         verifyBy: 'sms'
-  //       }
-  //     })
-  //     .then(res => {
-  //       // console.log(res);
-  //     })
-  //     .catch(err => console.log(err));
-  // };
+  verifyAgain = e => {
+    axios.defaults.headers.common['authorization'] = localStorage.userToken;
+    axios
+      .post('https://cubexs.net/tbhapp/accounts/verify', {
+        Account: {
+          id: this.props.user.id,
+          verifyBy: 'sms'
+        }
+      })
+      .then(res => {
+        // console.log(res);
+        this.setState({ show: false });
+      })
+      .catch(err => console.log(err));
+  };
 
   confirmVerify = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
-      .post('http://18.185.138.12:5000/api/accounts/confirmverify', {
+      .post('https://cubexs.net/tbhapp/accounts/confirmverify', {
         Account: {
           id: this.props.user.id,
           code: this.state.code
         }
       })
       .then(res => {
-        console.log(res);
+        if (res.data.code === 0) {
+          console.log(res);
 
-        this.setState({ mystate: res.data.state });
-        this.setState({ show: false });
+          this.setState({ mystate: res.data.state });
+          this.setState({ show: false });
+        } else {
+          console.log(res.data.error);
+          this.setState({ myerror: res.data.error });
+        }
       })
       .catch(err => console.log(err));
   };
@@ -67,12 +74,6 @@ class VerifyBy extends Component {
     this.setState({ code: e.target.value });
   };
 
-  // componentWillMount() {
-  //   console.log('Willmount');
-
-  //   console.log(this.props.user.id);
-  // }
-
   componentDidMount() {
     this.getProfile();
   }
@@ -80,9 +81,9 @@ class VerifyBy extends Component {
   getProfile = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
-      .post('http://18.185.138.12:5000/api/accounts/getprofile', {
+      .post('https://cubexs.net/tbhapp/accounts/getprofile', {
         Account: {
-          ownerId: this.props.user.id
+          id: this.props.user.id
         }
       })
 
@@ -105,7 +106,18 @@ class VerifyBy extends Component {
             <Modal show={this.state.show} onHide={this.handleClose}>
               <Modal.Body className="verifyby">
                 {' '}
-                <h3 className="mt-3 text-center">VERIFICATION</h3>
+                <Row>
+                  <Col className="closebtn" sm={12}>
+                    <Button onClick={this.handleClose}>
+                      {' '}
+                      <i
+                        className="fas fa-times"
+                        style={{ color: '#ed1c24' }}
+                      ></i>
+                    </Button>
+                  </Col>
+                </Row>
+                <h3 className="mt-1 text-center">VERIFICATION</h3>
                 <Row>
                   {/* {' '}
                   <Col sm={4}>
@@ -115,14 +127,9 @@ class VerifyBy extends Component {
                       <span className="checkmark"></span>
                     </label>
                   </Col>
-                  <Col className="sendcodeBtn" sm={3}>
-                    <Button onClick={this.sendCode}>SEND CODE</Button>
-                  </Col> */}
+                   */}
                   <Col sm={12}>
                     {' '}
-                    {/* <Col className="sendcodeBtn" sm={3}>
-                      <Button onClick={this.sendCode}>SEND CODE</Button>
-                    </Col> */}
                     <p style={{ color: 'grey', fontSize: '12px' }}>
                       check your phone for code
                     </p>
@@ -149,6 +156,28 @@ class VerifyBy extends Component {
                     <Button onClick={this.confirmVerify}>VERIFY</Button>
                   </Col>
                 </Row>{' '}
+                <Col sm={12}>
+                  {this.state.myerror ? (
+                    <p>
+                      {' '}
+                      <i className="fas fa-exclamation-triangle px-2"></i>
+                      {this.state.myerror}
+                    </p>
+                  ) : null}
+                </Col>
+                <Row className="pt-1">
+                  <Col className="pt-1" sm={8}>
+                    <p style={{ fontSize: '9px', color: 'grey' }}>
+                      please note that the code will expire within 48 hour
+                    </p>
+                  </Col>
+                  <Col className="forgetdev" sm={4}>
+                    {' '}
+                    <Button className="resetBtn" onClick={this.verifyAgain}>
+                      Resend
+                    </Button>
+                  </Col>
+                </Row>
               </Modal.Body>
               {/* <Modal className="mt-2 feedBack" show={this.state.show2}>
                 <div id="snackbar">Sent Successfully!</div>

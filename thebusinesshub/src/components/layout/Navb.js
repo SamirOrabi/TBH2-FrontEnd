@@ -121,7 +121,7 @@ class Navb extends Component {
                       {' '}
                       <Dropdown.Item onClick={this.SignOut}>
                         {' '}
-                        <i class="fas fa-sign-out-alt"></i>SIGN OUT
+                        <i className="fas fa-sign-out-alt"></i>SIGN OUT
                       </Dropdown.Item>
                     </div>
                   </Dropdown.Menu>

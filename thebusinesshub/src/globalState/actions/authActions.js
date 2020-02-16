@@ -12,7 +12,7 @@ export const userRegister = (
 
   const call = await new Promise((resolve, reject) => {
     axios
-      .post('http://18.185.138.12:5000/api/accounts/register', userData)
+      .post('https://cubexs.net/tbhapp/accounts/register', userData)
 
       .then(res => {
         resolve(res.data);
@@ -28,7 +28,7 @@ export const userRegister = (
   if (call.code === 0) {
     login = await new Promise((resolve, reject) => {
       axios
-        .post('http://18.185.138.12:5000/api/accounts/login', userDatalogin)
+        .post('https://cubexs.net/tbhapp/accounts/login', userDatalogin)
         .then(res => {
           resolve(res);
 
@@ -42,7 +42,7 @@ export const userRegister = (
           axios.defaults.headers.common['authorization'] =
             localStorage.userToken;
           axios
-            .post('http://18.185.138.12:5000/api/accounts/verify', {
+            .post('https://cubexs.net/tbhapp/accounts/verify', {
               Account: {
                 id: res.data.id,
                 verifyBy: 'sms'
@@ -68,7 +68,7 @@ export const userRegister = (
 export const Login = (userdata, history) => async dispatch => {
   const logindata = await new Promise((resolve, reject) => {
     axios
-      .post('http://18.185.138.12:5000/api/accounts/login', userdata)
+      .post('https://cubexs.net/tbhapp/accounts/login', userdata)
       .then(res => {
         resolve(res.data);
         console.log(res.data);

@@ -22,7 +22,7 @@ class EmailChangesmodel extends Component {
   changeEmail = () => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
-      .post('http://18.185.138.12:5000/api/accounts/changeemail', {
+      .post('https://cubexs.net/tbhapp/accounts/changeemail', {
         Account: {
           id: this.props.user.id,
           email: this.state.newEmail

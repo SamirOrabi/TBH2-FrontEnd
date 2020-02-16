@@ -8,9 +8,9 @@ class ForgetPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false,
       number: '',
-      show2: false
+      show2: false,
+      myerror: ''
     };
   }
 
@@ -20,31 +20,32 @@ class ForgetPassword extends Component {
     console.log(e.target.value);
   };
   handleClose = e => {
-    // this.props.hideModal2(e);
-    console.log(e);
+    this.props.hideModal2(false);
   };
   sendPassword = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
-      .post('http://18.185.138.12:5000/api/accounts/forgetpassword', {
+      .post('https://cubexs.net/tbhapp/accounts/forgetpassword', {
         Account: {
           phoneNumber: this.state.number
         }
       })
       .then(res => {
-        console.log(res);
-        this.setState({ show: false });
-        this.props.hideModal(false);
-        this.setState({ show2: true });
-        setTimeout(() => {
-          this.setState({ show2: false });
-        }, 1600);
+        if (res.data.code === 0) {
+          this.setState({ show: false });
+          this.props.hideModal(false);
+          this.setState({ show2: true });
+          setTimeout(() => {
+            this.setState({ show2: false });
+          }, 1600);
+        } else {
+          this.setState({ myerror: res.data.error });
+        }
       })
       .catch(err => console.log(err));
   };
 
   render() {
-    console.log(this.props);
     return (
       <Container className="mt-5 w-50">
         <div>
@@ -54,7 +55,7 @@ class ForgetPassword extends Component {
               {' '}
               <Row>
                 <Col className="closebtn" sm={12}>
-                  <Button onClick={this.handleClose(false)}>
+                  <Button onClick={this.handleClose}>
                     {' '}
                     <i
                       className="fas fa-times"
@@ -63,7 +64,7 @@ class ForgetPassword extends Component {
                   </Button>
                 </Col>
               </Row>
-              <h3 className="mt-3 text-center">FORGET PASSWORD</h3>
+              <h3 className="mt-1 text-center">FORGET PASSWORD</h3>
               <Row>
                 <Col sm={12}>
                   <p style={{ color: 'grey', fontSize: '12px' }}>
@@ -87,6 +88,16 @@ class ForgetPassword extends Component {
                       />
                     </Form.Group>
                   </Form>
+                </Col>
+
+                <Col sm={12}>
+                  {this.state.myerror ? (
+                    <p>
+                      {' '}
+                      <i className="fas fa-exclamation-triangle px-2"></i>
+                      {this.state.myerror}
+                    </p>
+                  ) : null}
                 </Col>
                 <Col className="m-auto text-center verifyBtn pt-3" sm={12}>
                   <Button onClick={this.sendPassword}>RESET</Button>
