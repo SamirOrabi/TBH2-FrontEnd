@@ -26,7 +26,7 @@ class ForgetPassword extends Component {
   sendPassword = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
-      .post('http://18.185.138.12:5000/api/accounts/forgetpassword', {
+      .post('https://cubexs.net/tbhapp/accounts/forgetpassword', {
         Account: {
           phoneNumber: this.state.number
         }

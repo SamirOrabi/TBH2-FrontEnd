@@ -39,7 +39,7 @@ class VerifyBy extends Component {
   confirmVerify = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
-      .post('http://18.185.138.12:5000/api/accounts/confirmverify', {
+      .post('https://cubexs.net/tbhapp/accounts/confirmverify', {
         Account: {
           id: this.props.user.id,
           code: this.state.code
@@ -80,9 +80,9 @@ class VerifyBy extends Component {
   getProfile = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
-      .post('http://18.185.138.12:5000/api/accounts/getprofile', {
+      .post('https://cubexs.net/tbhapp/accounts/getprofile', {
         Account: {
-          ownerId: this.props.user.id
+          id: this.props.user.id
         }
       })
 
