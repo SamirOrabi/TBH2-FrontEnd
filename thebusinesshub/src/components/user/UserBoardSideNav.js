@@ -19,9 +19,9 @@ class UserBoardSideNav extends Component {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
 
     axios
-      .post('http://18.185.138.12:5000/api/accounts/getprofile', {
+      .post('https://cubexs.net/tbhapp/accounts/getprofile', {
         Account: {
-          ownerId: this.props.user.id
+          id: this.props.user.id
         }
       })
       .then(res => {

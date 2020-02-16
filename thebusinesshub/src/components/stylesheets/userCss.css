@@ -147,3 +147,10 @@
   border: 1px solid #ed1c24;
   padding-left: 6px;
 }
+
+.modal.updatesnackbar .modal-dialog {
+  position: absolute !important;
+  top: 15% !important;
+  left: 40%;
+  font-weight: bold !important;
+}
