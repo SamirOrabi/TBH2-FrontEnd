@@ -45,7 +45,7 @@ export default class Login extends Component {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i class="fab p-1 fa-linkedin-in"></i>
+              <i className="fab p-1 fa-linkedin-in"></i>
             </a>
           </div>
         </Row>
