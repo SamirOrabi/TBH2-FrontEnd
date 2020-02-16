@@ -66,10 +66,10 @@
 
 .sidelinkParent a {
   display: block;
-  width: 100%;padding-top: 2%;
+  width: 100%;
+  padding-top: 2%;
   height: 50px;
   text-align: center;
-  
 }
 
 .parentBG {
@@ -106,7 +106,7 @@
   font-size: 16px;
   font-weight: bold;
   padding: 6px 25px;
-  margin: 10% auto;
+  margin: 5% auto;
   transition: transform 80ms ease-in;
   border: 1px solid #ed1c24;
 }
@@ -137,13 +137,13 @@
   border-left: 5px solid #ed1c24;
 }
 
-.DayPickerInput{
+.DayPickerInput {
   width: 100% !important;
 }
 
-.DayPickerInput input{
+.DayPickerInput input {
   width: 100% !important;
-  height: 60px;  border: 1px solid #ed1c24;
-padding-left: 6px;
+  height: 60px;
+  border: 1px solid #ed1c24;
+  padding-left: 6px;
 }
-

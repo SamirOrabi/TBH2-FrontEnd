@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import {withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import VerifyBy from '../sections/VerifyBy';
@@ -16,7 +16,9 @@ class ProfilePage extends Component {
       profile: [],
       selectedDay: undefined,
       isEmpty: true,
-      isDisabled: false
+      isDisabled: false,
+      verifyerror: '',
+      showverify: false
     };
   }
 
@@ -41,7 +43,7 @@ class ProfilePage extends Component {
         this.setState({ profileInfo: res.data });
         this.setState({ profile: res.data.profile });
         // this.setState({ selectedDay: res.data.profile.birthdate });
-        console.log(this.state.profileInfo);
+        console.log(this.state.profileInfo.state);
       });
   }
 
@@ -64,13 +66,6 @@ class ProfilePage extends Component {
     console.log(this.state.profile.gender);
   };
 
-  // OnChangeBirthDate = birthDate => {
-  //   // birthDate.preventDefault();
-  //   console.log('ehhhhhhhh');
-  //   this.setState({ birthDate });
-  //   console.log(birthDate);
-  // };
-
   OnEditProfile = e => {
     e.preventDefault();
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
@@ -91,15 +86,24 @@ class ProfilePage extends Component {
         Account: request
       })
       .then(res => {
-        console.log(res);
-        console.log(this.state.selectedDay.toLocaleDateString());
+        if (this.state.profileInfo.state === 'pending') {
+          this.setState({ verifyerror: res.data.error });
+        } else {
+          this.setState({ verifyerror: '' });
+        }
       })
       .catch(err => console.log(err));
   };
+
+  verifyhere = e => {
+    return <VerifyBy />;
+  };
   render() {
     if (this.state.profile.birthdate) {
-      subBirthDate = this.state.profile.birthdate.substring(0, 10);
-      console.log(subBirthDate);
+      if (this.state.profile.birthdate.length > 13) {
+        subBirthDate = this.state.profile.birthdate.substring(0, 10);
+        console.log(subBirthDate);
+      }
     }
     return (
       <div className="profilePage">
@@ -148,17 +152,6 @@ class ProfilePage extends Component {
               {' '}
               <Form.Label className="pl-3">BIRTHDATE</Form.Label>
               <div className="deadlineInput">
-                {/* <DatePicker
-                  // format='MM-dd-yyyy'
-                  onChange={value => this.OnChangeBirthDate(value)}
-                  // value={moment().format(this.state.birthDate)}
-                  // value={this.state.profile.birthdate}
-                  // onSelect={() => this.OnChangeBirthDate()} //when day is clicked
-                  showTimeSelect
-                  value={this.state.profile.birthdate}
-                  // selected={this.state.birthDate}
-                />{' '} */}
-
                 <DayPickerInput
                   value={subBirthDate}
                   onDayChange={this.handleDayChange}
@@ -170,7 +163,6 @@ class ProfilePage extends Component {
                   }}
                 />
               </div>
-            
             </Col>
             <Col md={2}></Col>
             <Col sm={12} md={4}>
@@ -196,12 +188,21 @@ class ProfilePage extends Component {
                 </select>
               </div>
             </Col>
-          </Row>
+          </Row>{' '}
+          {this.state.verifyerror ? (
+            <div className="pt-5 text-center m-auto">
+              <span style={{ color: '#ed1c24', fontWeight: 'bold' }}>
+                <i className="fas fa-exclamation-triangle px-2"></i> WARNING:
+                {this.state.verifyerror} before any updates
+                {/* <Button onClick={this.verifyhere}>Verify</Button> */}
+              </span>
+            </div>
+          ) : null}
           <Row style={{ textAlign: 'center', margin: 'auto' }}>
             <Button className="profilesaveBtn" onClick={this.OnEditProfile}>
               SAVE
             </Button>
-          </Row>
+          </Row>{' '}
         </Container>
       </div>
     );

@@ -11,6 +11,7 @@ import {
   NameErrorsIcon
 } from '../layout/FormErrors';
 import { withRouter } from 'react-router-dom';
+import ForgetPassword from '../sections/ForgetPassword';
 class SignInForm extends Component {
   constructor(props) {
     super(props);
@@ -28,9 +29,24 @@ class SignInForm extends Component {
 
       nameValid: false,
       passwordValid: false,
-      formValid: false
+
+      formValid: false,
+      show: false
     };
   }
+
+  handleShow = () => {
+    this.setState({ show: true });
+  };
+  hideModal = e => {
+    setTimeout(() => {
+      this.setState({ show: e });
+    }, 1600);
+  };
+
+  hideModal2 = e => {
+    this.setState({ show: e });
+  };
   handleUserInput = e => {
     const name = e.target.name;
     const value = e.target.value;
@@ -92,8 +108,11 @@ class SignInForm extends Component {
       },
       this.props.history
     );
-
-    this.setState({ user: userdata.error });
+    if (userdata.error) {
+      this.setState({ user: userdata.error });
+    } else {
+      this.setState({ user: '' });
+    }
   };
 
   componentWillReceiveProps(nextProps) {
@@ -134,15 +153,25 @@ class SignInForm extends Component {
               <PasswordErrorsIcon passwordErrors={this.state.passwordErrors} />
             </div>
           </Form.Group>
-          <PasswordErrors passwordErrors={this.state.passwordErrors} />
+          <PasswordErrors passwordErrors={this.state.passwordErrors} />{' '}
           {this.state.user ? (
-            <span className="BbachError">
+            <span className="BbachError pb-3">
               {' '}
               <i class="fas fa-exclamation-triangle px-2"></i>
               Username or Password is incorrect
             </span>
           ) : null}
-          <p className="signinForget text-center">Forgot Password?</p>
+          <Col className="forgetdev text-center" sm={12}>
+            {' '}
+            <Button className="resetBtn" onClick={this.handleShow}>
+              Forget Password
+              <ForgetPassword
+                show={this.state.show}
+                hideModal={this.hideModal}
+                hideModal2={this.hideModal2}
+              />
+            </Button>
+          </Col>
           <Col sm={12} className="text-center">
             <Button className="my-4 signInBtn" onClick={this.Signin}>
               SIGN IN

@@ -24,6 +24,7 @@ export const userRegister = (
   });
   console.log(call);
   let login;
+
   if (call.code === 0) {
     login = await new Promise((resolve, reject) => {
       axios
@@ -37,6 +38,20 @@ export const userRegister = (
           const decodedToken = jwt_decode(userToken);
           dispatch(setCurrentUser(decodedToken));
           history.push('/');
+
+          axios.defaults.headers.common['authorization'] =
+            localStorage.userToken;
+          axios
+            .post('http://18.185.138.12:5000/api/accounts/verify', {
+              Account: {
+                id: res.data.id,
+                verifyBy: 'sms'
+              }
+            })
+            .then(myres => {
+              console.log(myres);
+            })
+            .catch(err => console.log(err));
         })
         .catch(err => {
           console.log(err);
@@ -72,7 +87,6 @@ export const Login = (userdata, history) => async dispatch => {
   });
   return logindata;
 };
-
 export const setCurrentUser = decodedToken => {
   return {
     type: SET_CURRENT_USER,
