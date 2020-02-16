@@ -298,7 +298,7 @@ class SignUp extends Component {
           {this.state.user ? (
             <span className="BbachError">
               {' '}
-              <i class="fas fa-exclamation-triangle px-2"></i>
+              <i className="fas fa-exclamation-triangle px-2"></i>
               {this.state.user}
             </span>
           ) : null}
