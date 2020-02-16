@@ -30,6 +30,7 @@ class PhoneNumberchangemodel extends Component {
       .then(res => {
         this.props.user.phone = this.state.NewPhoneNumber;
         if (res.data.error) {
+          console.log(res.data.error)
           this.setState({ phoneerror: res.data.error });
         } else {
           this.setState({ phoneerror: '' });

@@ -80,7 +80,7 @@ Account:{ id:this.props.user.id}
       if(res.data.error){
         this.setState({error:res.data.error,passerror:''})
       }
-      else{        this.props.onHide()
+      else{this.props.onHide()
       }
     }
   ).catch(err=>console.log(err))
