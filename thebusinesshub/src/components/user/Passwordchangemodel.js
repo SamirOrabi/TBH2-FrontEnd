@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Modal , Button  , Form} from 'react-bootstrap';
+import {Modal , Button  , Form,Col} from 'react-bootstrap';
 import axios from 'axios';
+import ForgetPassword from '../sections/ForgetPassword';
 import {connect} from 'react-redux';
 import '../stylesheets/ChangesmodelCSS.css';
  class Passwordchangemodel extends Component {
@@ -13,12 +14,29 @@ import '../stylesheets/ChangesmodelCSS.css';
           newPassword:'' ,
           ConfirmPassword:'',
           error:'',
-          passerror:''
+          passerror:'',show:false
           
 
     }
 }
+handleShow = () => {
+  this.setState({ show: true });
+};
+hideModal = e => {
+  setTimeout(() => {
+    this.setState({ show: e });
+  }, 1600);
+};
 
+hideModal2 = e => {
+  // this.setState({ show: false });
+  // console.log('eeeeeeee');
+  // console.log(e);
+  // console.log(this.state.show);
+  setTimeout(() => {
+    this.setState({ show: e });
+  }, 0);
+};
 
 handleconfirmpasswordUserInput = e => {
    this.setState({ConfirmPassword: e.target.value });
@@ -47,13 +65,13 @@ handlepasswordUserInput = e => {
 changePassword=()=>{
   axios.defaults.headers.common['authorization'] =localStorage.userToken;
   if(this.state.newPassword===this.state.ConfirmPassword){
-  axios.post('https://cubexs.net/tbhapp/accounts/changepassword' , 
+  axios.post('https://cubexs.net/tbhapp/accounts/changePassword' , 
   {
     Credentials:{
-      id:this.props.user.id,
       password: this.state.oldpassword,
       newPassword:this.state.newPassword
-}
+} ,
+Account:{ id:this.props.user.id}
   }
   )
   .then(
@@ -61,7 +79,8 @@ changePassword=()=>{
       console.log(res)
       if(res.data.error){
         this.setState({error:res.data.error,passerror:''})
-        this.props.onHide()
+      }
+      else{this.props.onHide()
       }
     }
   ).catch(err=>console.log(err))
@@ -102,8 +121,17 @@ else{
              
             </div>{' '}
           </Form.Group>{' '}
-
-          <Form.Group className="formgroupmargin">
+          <div className="modalforgetdev text-right" >
+            {' '}
+            <Button onClick={this.handleShow} >
+              Forget Password?
+              <ForgetPassword
+                show={this.state.show}
+                hideModal={this.hideModal}
+                hideModal2={this.hideModal2}
+              />
+            </Button>
+          </div>          <Form.Group className="formgroupmargin">
             <Form.Control
               noValidate
               required
