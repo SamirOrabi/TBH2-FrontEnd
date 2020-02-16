@@ -21,7 +21,7 @@ class PhoneNumberchangemodel extends Component {
   changephonenumber = () => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
-      .post('https://cubexs.net/tbhapp/accounts/changephone', {
+      .post('https://cubexs.net/tbhapp/accounts/changePhone', {
         Account: {
           id: this.props.user.id,
           phoneNumber: this.state.NewPhoneNumber
@@ -30,7 +30,7 @@ class PhoneNumberchangemodel extends Component {
       .then(res => {
         this.props.user.phone = this.state.NewPhoneNumber;
         if (res.data.error) {
-          this.setState({ phoneerror: 'Phone number must contain 11 numbers' });
+          this.setState({ phoneerror: res.data.error });
         } else {
           this.setState({ phoneerror: '' });
           this.props.onHide()

@@ -39,7 +39,12 @@ padding-left: 10px;
 .emailValue .changeemailbtn{
     background: none;
     border: none;
-    color: red;
+    color: #ED1C24;;
     text-decoration: underline
 }
 
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: white;;
+    background-color: #ED1C24;
+    border-color: #ED1C24
+}
