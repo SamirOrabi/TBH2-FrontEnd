@@ -9,7 +9,8 @@ class ForgetPassword extends Component {
     super(props);
     this.state = {
       number: '',
-      show2: false
+      show2: false,
+      myerror: ''
     };
   }
 
@@ -32,12 +33,18 @@ class ForgetPassword extends Component {
       })
       .then(res => {
         console.log(res);
-        this.setState({ show: false });
-        this.props.hideModal(false);
-        this.setState({ show2: true });
-        setTimeout(() => {
-          this.setState({ show2: false });
-        }, 1600);
+        if (res.data.code === 0) {
+          this.setState({ show: false });
+          this.props.hideModal(false);
+          this.setState({ show2: true });
+          setTimeout(() => {
+            this.setState({ show2: false });
+          }, 1600);
+        } else {
+          console.log('errorrrrrrrr');
+          console.log(res.data.error);
+          this.setState({ myerror: res.data.error });
+        }
       })
       .catch(err => console.log(err));
   };
@@ -91,6 +98,10 @@ class ForgetPassword extends Component {
                   <Button onClick={this.sendPassword}>RESET</Button>
                 </Col>
               </Row>{' '}
+              <Row>
+                {this.state.myerror ? <p>{this.state.myerror}</p> : null}
+               
+              </Row>
             </Modal.Body>
             <Modal className="mt-2 feedBack" show={this.state.show2}>
               <div id="snackbar">Message Sent Successfully!</div>
