@@ -22,7 +22,7 @@ export const NameErrorsIcon = ({ nameErrors }) => (
       if (nameErrors[fieldName].length > 0) {
         return (
           <div key={i}>
-            <i class="fas fa-exclamation-triangle"></i>
+            <i className="fas fa-exclamation-triangle"></i>
           </div>
         );
       } else {
@@ -54,7 +54,7 @@ export const EmailErrorsIcon = ({ emailErrors }) => (
       if (emailErrors[fieldName].length > 0) {
         return (
           <div key={i}>
-            <i class="fas fa-exclamation-triangle"></i>
+            <i className="fas fa-exclamation-triangle"></i>
           </div>
         );
       } else {
@@ -85,7 +85,7 @@ export const PhoneErrorsIcon = ({ phonenumberErrors }) => (
       if (phonenumberErrors[fieldName].length > 0) {
         return (
           <div key={i}>
-            <i class="fas fa-exclamation-triangle"></i>
+            <i className="fas fa-exclamation-triangle"></i>
           </div>
         );
       } else {
@@ -116,7 +116,7 @@ export const PasswordErrorsIcon = ({ passwordErrors }) => (
       if (passwordErrors[fieldName].length > 0) {
         return (
           <div key={i}>
-            <i class="fas fa-exclamation-triangle"></i>
+            <i className="fas fa-exclamation-triangle"></i>
           </div>
         );
       } else {
@@ -148,7 +148,7 @@ export const FNameErrorsIcon = ({ fnameErrors }) => (
       if (fnameErrors[fieldName].length > 0) {
         return (
           <div key={i}>
-            <i class="fas fa-exclamation-triangle"></i>
+            <i className="fas fa-exclamation-triangle"></i>
           </div>
         );
       } else {
@@ -180,7 +180,7 @@ export const LNameErrorsIcon = ({ lnameErrors }) => (
       if (lnameErrors[fieldName].length > 0) {
         return (
           <div key={i}>
-            <i class="fas fa-exclamation-triangle"></i>
+            <i className="fas fa-exclamation-triangle"></i>
           </div>
         );
       } else {

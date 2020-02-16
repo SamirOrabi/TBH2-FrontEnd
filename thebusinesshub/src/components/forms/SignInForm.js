@@ -45,7 +45,13 @@ class SignInForm extends Component {
   };
 
   hideModal2 = e => {
-    this.setState({ show: e });
+    // this.setState({ show: false });
+    // console.log('eeeeeeee');
+    // console.log(e);
+    // console.log(this.state.show);
+    setTimeout(() => {
+      this.setState({ show: e });
+    }, 0);
   };
   handleUserInput = e => {
     const name = e.target.name;
@@ -157,7 +163,7 @@ class SignInForm extends Component {
           {this.state.user ? (
             <span className="BbachError pb-3">
               {' '}
-              <i class="fas fa-exclamation-triangle px-2"></i>
+              <i className="fas fa-exclamation-triangle px-2"></i>
               Username or Password is incorrect
             </span>
           ) : null}

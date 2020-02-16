@@ -25,17 +25,17 @@ export default class SignInUp extends Component {
       <div className="signupinbackground">
         {' '}
         <Container style={{ display: 'flex', justifyContent: 'center' }}>
-          <div class="FormsContainer" id="FormsContainer">
-            <div class="form-container sign-up-container">
+          <div className="FormsContainer" id="FormsContainer">
+            <div className="form-container sign-up-container">
               {' '}
               <SignInForm />
             </div>
-            <div class="form-container sign-in-container">
+            <div className="form-container sign-in-container">
               <SignUp handleSignIn={this.changepanel} />
             </div>
-            <div class="overlay-container">
-              <div class="overlay">
-                <div class="overlay-panel overlay-left">
+            <div className="overlay-container">
+              <div className="overlay">
+                <div className="overlay-panel overlay-left">
                   <Container>
                     <div className="overlaytexts">
                       <h1>Welcome Back!</h1>
@@ -53,7 +53,7 @@ export default class SignInUp extends Component {
                     </div>
                   </Container>
                 </div>
-                <div class="overlay-panel overlay-right">
+                <div className="overlay-panel overlay-right">
                   <Container>
                     {' '}
                     <div className="overlaytexts">
