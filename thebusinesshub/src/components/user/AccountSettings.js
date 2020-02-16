@@ -1,28 +1,22 @@
 import React, { Component } from 'react';
-import { Container, Col, Row , Button , ButtonToolbar } from 'react-bootstrap';
+import { Container, Col, Row, Button, ButtonToolbar } from 'react-bootstrap';
 import EmailChangesmodel from './EmailChangesmodel';
 import PhoneNumberchangemodel from './PhoneNumberchangemodel';
 import Passwordchangemodel from './Passwordchangemodel';
 import '../stylesheets/AccountCSS.css';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import isEqual from 'lodash/isEqual';
 
-
-
 class AccountSettings extends Component {
-  constructor(props){
-     super(props);
-     this.state = {
-      EmailmodalShow:false,
-      PhoneNumbermodalShow:false,
-      changepasswordmodalShow:false , 
-profileData:[],
-      
-
-}
-
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      EmailmodalShow: false,
+      PhoneNumbermodalShow: false,
+      changepasswordmodalShow: false,
+      profileData: []
+    };
   }
 
   componentDidMount(){
@@ -35,12 +29,11 @@ profileData:[],
       }
       )
       .then(res => {
-        console.log( 'getdatafromgetprofile',res.data.pofile)
-        this.setState({profileData:res.data.profile})
+        console.log('getdatafromgetprofile', res.data.pofile);
+        this.setState({ profileData: res.data.profile });
         console.log(res.data);
-      }).catch(err=>console.log(err))
-      
-  
+      })
+      .catch(err => console.log(err));
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -144,13 +137,12 @@ profileData:[],
        <Passwordchangemodel show={this.state.changepasswordmodalShow}  onHide={this.closePasswordModal} />
 
       </Container>
-        )
-    }
+    );
+  }
 }
 
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
 
- const mapStateToProps=state=>({
-   user:state.auth.user ,
- })
-
-export default connect(mapStateToProps)(AccountSettings) 
+export default connect(mapStateToProps)(AccountSettings);

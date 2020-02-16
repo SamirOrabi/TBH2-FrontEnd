@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -18,7 +18,9 @@ class ProfilePage extends Component {
       isEmpty: true,
       isDisabled: false,
       verifyerror: '',
-      showverify: false
+      showverify: false,
+      show: false,
+      show1: false
     };
   }
 
@@ -34,8 +36,9 @@ class ProfilePage extends Component {
 
   componentDidMount() {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
-    axios.post('https://cubexs.net/tbhapp/accounts/getprofile' , {
-    Account: {
+    axios
+      .post('https://cubexs.net/tbhapp/accounts/getprofile', {
+        Account: {
           id: this.props.user.id
         }
       })
@@ -70,7 +73,7 @@ class ProfilePage extends Component {
     e.preventDefault();
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     let request = {};
-    request.ownerId = this.state.profile.ownerId;
+    request.id = this.props.user.id;
     if (this.state.profile.firstName)
       request.firstName = this.state.profile.firstName;
 
@@ -82,14 +85,20 @@ class ProfilePage extends Component {
     if (this.state.selectedDay) request.birthdate = this.state.selectedDay;
 
     axios
-      .post('http://18.185.138.12:5000/api/accounts/updateprofile', {
+      .post('https://cubexs.net/tbhapp/accounts/updateprofile', {
         Account: request
       })
       .then(res => {
+        console.log(res);
         if (this.state.profileInfo.state === 'pending') {
           this.setState({ verifyerror: res.data.error });
         } else {
           this.setState({ verifyerror: '' });
+          this.setState({ show1: false });
+          this.setState({ show: true });
+          setTimeout(() => {
+            this.setState({ show: false });
+          }, 1600);
         }
       })
       .catch(err => console.log(err));
@@ -204,6 +213,9 @@ class ProfilePage extends Component {
             </Button>
           </Row>{' '}
         </Container>
+        <Modal className="mt-2 updatesnackbar" show={this.state.show}>
+          <div id="snackbar">your information Updated Successfully!</div>
+        </Modal>
       </div>
     );
   }
