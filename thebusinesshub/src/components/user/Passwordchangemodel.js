@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Modal , Button  , Form} from 'react-bootstrap';
+import {Modal , Button  , Form,Col} from 'react-bootstrap';
 import axios from 'axios';
+import ForgetPassword from '../sections/ForgetPassword';
 import {connect} from 'react-redux';
 import '../stylesheets/ChangesmodelCSS.css';
  class Passwordchangemodel extends Component {
@@ -13,12 +14,29 @@ import '../stylesheets/ChangesmodelCSS.css';
           newPassword:'' ,
           ConfirmPassword:'',
           error:'',
-          passerror:''
+          passerror:'',show:false
           
 
     }
 }
+handleShow = () => {
+  this.setState({ show: true });
+};
+hideModal = e => {
+  setTimeout(() => {
+    this.setState({ show: e });
+  }, 1600);
+};
 
+hideModal2 = e => {
+  // this.setState({ show: false });
+  // console.log('eeeeeeee');
+  // console.log(e);
+  // console.log(this.state.show);
+  setTimeout(() => {
+    this.setState({ show: e });
+  }, 0);
+};
 
 handleconfirmpasswordUserInput = e => {
    this.setState({ConfirmPassword: e.target.value });
@@ -103,8 +121,17 @@ else{
              
             </div>{' '}
           </Form.Group>{' '}
-
-          <Form.Group className="formgroupmargin">
+          <div className="modalforgetdev text-right" >
+            {' '}
+            <Button onClick={this.handleShow} >
+              Forget Password?
+              <ForgetPassword
+                show={this.state.show}
+                hideModal={this.hideModal}
+                hideModal2={this.hideModal2}
+              />
+            </Button>
+          </div>          <Form.Group className="formgroupmargin">
             <Form.Control
               noValidate
               required

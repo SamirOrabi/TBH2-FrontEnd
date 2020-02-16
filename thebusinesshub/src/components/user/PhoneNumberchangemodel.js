@@ -29,9 +29,8 @@ class PhoneNumberchangemodel extends Component {
       })
       .then(res => {
         this.props.user.phone = this.state.NewPhoneNumber;
-        console.log(res.data.error)
         if (res.data.error) {
-          this.setState({ phoneerror: 'Phone number must contain 11 numbers' });
+          this.setState({ phoneerror: res.data.error });
         } else {
           this.setState({ phoneerror: '' });
           this.props.onHide()

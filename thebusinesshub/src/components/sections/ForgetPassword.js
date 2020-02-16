@@ -47,7 +47,7 @@ class ForgetPassword extends Component {
 
   render() {
     return (
-      <Container className="mt-5 w-50">
+      <Container className=" w-50">
         <div>
           {' '}
           <Modal show={this.props.show} onHide={this.handleClose}>
