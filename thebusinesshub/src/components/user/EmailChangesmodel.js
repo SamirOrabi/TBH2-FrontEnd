@@ -22,7 +22,7 @@ class EmailChangesmodel extends Component {
   changeEmail = () => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
-      .post('http://18.185.138.12:5000/api/accounts/changeemail', {
+      .post('https://cubexs.net/tbhapp/accounts/changeEmail', {
         Account: {
           id: this.props.user.id,
           email: this.state.newEmail
@@ -53,7 +53,7 @@ class EmailChangesmodel extends Component {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header >
+        <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             <p>CHANGE EMAIL</p>
           </Modal.Title>

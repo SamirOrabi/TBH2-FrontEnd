@@ -32,10 +32,9 @@ class ProfilePage extends Component {
 
   componentDidMount() {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
-    axios
-      .post('http://18.185.138.12:5000/api/accounts/getprofile', {
-        Account: {
-          ownerId: this.props.user.id
+    axios.post('https://cubexs.net/tbhapp/accounts/getprofile' , {
+    Account: {
+          id: this.props.user.id
         }
       })
       .then(res => {

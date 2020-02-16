@@ -27,10 +27,10 @@ profileData:[],
 
   componentDidMount(){
       axios.defaults.headers.common['authorization'] =localStorage.userToken;
-      axios.post('http://18.185.138.12:5000/api/accounts/getprofile' , 
+      axios.post('https://cubexs.net/tbhapp/accounts/getprofile' , 
       {
         Account:{
-          ownerId:this.props.user.id,
+          id:this.props.user.id,
   }
       }
       )
@@ -46,16 +46,16 @@ profileData:[],
   componentDidUpdate(prevProps, prevState) {
 
       if ( !isEqual(prevState ,this.state)){
-        this.forceUpdate()
        axios.defaults.headers.common['authorization'] =localStorage.userToken;
-        axios.post('http://18.185.138.12:5000/api/accounts/getprofile' , 
+        axios.post('https://cubexs.net/tbhapp/accounts/getprofile' , 
         {
           Account:{
-            ownerId:this.props.user.id,
+            id:this.props.user.id,
     }
         }
         )
         .then(res => {
+          console.log(res)
      this.setState({profileData:res.data.profile})    
           console.log('new result',res.data.profile)
         }).catch(err => console.log(err));
@@ -93,7 +93,7 @@ profileData:[],
                </Row>
                <Row>
                    <Col sm={2}></Col>
-              
+             
 <Col sm={8}  style={{padding:'5%'}}>
   <div className="changedValue">
     <div className="label">
@@ -137,7 +137,7 @@ profileData:[],
     </ButtonToolbar>
         </div>
         </div>
-        </Col>
+        </Col> 
         </Row>   
        <EmailChangesmodel show={this.state.EmailmodalShow }  onHide={this.closeEmailModal} />
        <PhoneNumberchangemodel show={this.state.PhoneNumbermodalShow}  onHide={this.closePhoneModal} />

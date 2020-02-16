@@ -47,13 +47,13 @@ handlepasswordUserInput = e => {
 changePassword=()=>{
   axios.defaults.headers.common['authorization'] =localStorage.userToken;
   if(this.state.newPassword===this.state.ConfirmPassword){
-  axios.post('http://18.185.138.12:5000/api/accounts/changepassword' , 
+  axios.post('https://cubexs.net/tbhapp/accounts/changePassword' , 
   {
     Credentials:{
-      id:this.props.user.id,
       password: this.state.oldpassword,
       newPassword:this.state.newPassword
-}
+} ,
+Account:{ id:this.props.user.id}
   }
   )
   .then(
@@ -61,7 +61,8 @@ changePassword=()=>{
       console.log(res)
       if(res.data.error){
         this.setState({error:res.data.error,passerror:''})
-        this.props.onHide()
+      }
+      else{        this.props.onHide()
       }
     }
   ).catch(err=>console.log(err))

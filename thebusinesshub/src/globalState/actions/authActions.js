@@ -27,7 +27,7 @@ export const userRegister = (
   if (call.code === 0) {
     login = await new Promise((resolve, reject) => {
       axios
-        .post('http://18.185.138.12:5000/api/accounts/login', userDatalogin)
+        .post('https://cubexs.net/tbhapp/accounts/login', userDatalogin)
         .then(res => {
           resolve(res);
 
@@ -53,7 +53,7 @@ export const userRegister = (
 export const Login = (userdata, history) => async dispatch => {
   const logindata = await new Promise((resolve, reject) => {
     axios
-      .post('http://18.185.138.12:5000/api/accounts/login', userdata)
+      .post('https://cubexs.net/tbhapp/accounts/login', userdata)
       .then(res => {
         resolve(res.data);
         console.log(res.data);
