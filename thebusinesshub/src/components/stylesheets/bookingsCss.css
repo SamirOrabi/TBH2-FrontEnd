@@ -1,0 +1,23 @@
+.nobookings {
+  color: #ed1c24;
+  position: absolute;
+  left: 30%;
+  top: 50%;
+}
+
+.bookingtable th {
+  border-bottom: none !important;
+  border-top: none !important;
+  padding-top: 5%;
+  text-align: center;
+}
+
+.bookingtable td {
+  border-top: none !important;
+}
+
+.bookingstr {
+  border: 1px solid #eee !important;
+  width: 100% !important;
+  margin-top: 2%;
+}

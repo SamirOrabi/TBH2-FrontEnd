@@ -73,6 +73,7 @@ class VerifyBy extends Component {
           setTimeout(() => {
             this.props.closeModal();
           }, 2000);
+          this.getProfile();
         } else {
           this.setState({ myerror: res.data.error });
         }
@@ -98,7 +99,8 @@ class VerifyBy extends Component {
     this.setState({ showMe: this.props.show });
   }
 
-  enter = e => {
+  en
+  ter = e => {
     if (e.keyCode === 13) {
       e.preventDefault();
 

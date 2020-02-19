@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import VerifyBy from './VerifyBy';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import isEqual from 'lodash/isEqual';
 
 class VerifyBarAlert extends Component {
   constructor(props) {
@@ -43,6 +44,12 @@ class VerifyBarAlert extends Component {
       })
       .catch(err => console.log(err));
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!isEqual(prevState, this.state)) {
+      this.getProfile();
+    }
+  }
 
   render() {
     console.log(this.props.isAuth);
