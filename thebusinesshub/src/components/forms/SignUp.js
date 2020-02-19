@@ -169,7 +169,6 @@ class SignUp extends Component {
     regestrequest.lastName = this.state.lname;
     regestrequest.phoneNumber = this.state.phonenumber;
     const userData = await this.props.userRegister(
-      
       {
         Account: regestrequest
       },
@@ -195,15 +194,16 @@ class SignUp extends Component {
     }
   }
 
+  // enter = e => {
+  //   if (e.keyCode === 13) {
+  //     e.preventDefault();
+  //     this.onRegist();
+  //   }
+  // };
   render() {
-    console.log('hna el error msg');
-    
-    if (this.state.user !== '') {
-    }
-
     return (
       <Container>
-        <Form className="SignUpForm " onSubmit={this.handleSubmit}>
+        <Form className="SignUpForm ">
           <h1>SIGN UP</h1>
           <Form.Group className="formgroupfloat">
             <Form.Control
@@ -324,7 +324,6 @@ SignUp.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors,
-  user: state.auth.user 
-  
+  user: state.auth.user
 });
 export default connect(mapStateToProps, { userRegister })(withRouter(SignUp));
