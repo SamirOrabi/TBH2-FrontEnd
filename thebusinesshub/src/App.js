@@ -16,7 +16,7 @@ import BookDetails from './components/user/booking/BookDetails';
 // Styling
 import './App.css';
 import setAuthToken from './helpers/setAuthToken';
-import { setCurrentUser } from './globalState/actions/authActions';
+import { setCurrentUser, LogOut } from './globalState/actions/authActions';
 // import SignInUp from './components/forms/SignInUp';
 // Components
 
@@ -24,6 +24,11 @@ if (localStorage.userToken) {
   setAuthToken(localStorage.userToken);
   const decodedToken = jwt_decode(localStorage.userToken);
   store.dispatch(setCurrentUser(decodedToken));
+  const currentTime = Date.now() / 1000;
+  if (decodedToken.exp < currentTime) {
+    store.dispatch(LogOut);
+    window.location.href = '/login';
+  }
 }
 
 class App extends Component {
@@ -41,8 +46,7 @@ class App extends Component {
           />
           <Route exact path="/UserBoard/Profile" component={UserBoard} />
           <Route exact path="/UserBoard/Booking" component={UserBoard} />
-          <Route exact path="/UserBoard/Purchase" component={UserBoard} />{' '}
-          {/* <BookDetails /> */}
+          <Route exact path="/UserBoard/Purchase" component={UserBoard} />
         </div>
       </Router>
     );

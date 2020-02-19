@@ -122,17 +122,7 @@ class Navb extends Component {
                 // Logout              </NavLink>
                 <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    {this.state.profleDate.firstName ? (
-                      this.state.profleDate.firstName.substring(0, 1)
-                    ) : (
-                      <div className="spinner-border" role="status"></div>
-                    )}
-
-                    {this.state.profleDate.firstName? (this.state.profleDate.lastName.substring(0, 1))
-                      : ''}
-
-                    {/* {this.props.user.firstName.substring(0, 1)}
-                   {this.props.user.lastName.substring(0, 1)} */}
+                    {this.props.user.username.charAt(0).toUpperCase()}{' '}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>

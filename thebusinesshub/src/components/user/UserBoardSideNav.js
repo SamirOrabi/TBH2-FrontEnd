@@ -62,29 +62,25 @@ class UserBoardSideNav extends Component {
       .catch(err => console.log(err));
   };
 
-  componentDidUpdate(prevProps, prevState  ) {
-    
-    if ( !isEqual(prevState ,this.state)){
-     axios.defaults.headers.common['authorization'] =localStorage.userToken;
-      axios.post('https://cubexs.net/tbhapp/accounts/getprofile' , 
-      {
-        Account:{
-          id:this.props.user.id,
+  componentDidUpdate(prevProps, prevState) {
+    if (!isEqual(prevState, this.state)) {
+      axios.defaults.headers.common['authorization'] = localStorage.userToken;
+      axios
+        .post('https://cubexs.net/tbhapp/accounts/getprofile', {
+          Account: {
+            id: this.props.user.id
+          }
+        })
+        .then(res => {
+          console.log('change', res);
+          this.setState({ profile: res.data.profile });
+          this.setState({ mystate: res.data.state });
+
+          console.log('new result in sidenav', res.data.profile);
+        })
+        .catch(err => console.log(err));
+    }
   }
-      }
-      )
-      .then(res => {
-        
-        console.log('change',res)
-   this.setState({profile:res.data.profile})    
-        console.log('new result in sidenav',res.data.profile)
-      }).catch(err => console.log(err));
-
-     }
-     
-  
-}
-
 
   render() {
     return (
@@ -101,8 +97,7 @@ class UserBoardSideNav extends Component {
         ) : null}
 
         <h1 className="firstChardivside">
-      
-          {this.props.user.firstName.substring(0, 1)}
+          {this.props.user.username.charAt(0).toUpperCase()}
         </h1>
         <h3 className="sidename pt-4">{this.props.user.username}</h3>
         <p className="sidemail pt-1 pb-2">{this.state.profile.email}</p>
@@ -150,7 +145,7 @@ class UserBoardSideNav extends Component {
             {' '}
             <NavLink
               exact
-              to="/UserBoard/booking"
+              to="/UserBoard/Booking"
               activeStyle={{
                 color: 'white',
                 textDecoration: 'none',

@@ -3,8 +3,8 @@ import { Col, Row, Container } from 'react-bootstrap';
 import ProfilePage from './ProfilePage';
 import UserBoardSideNav from './UserBoardSideNav';
 import AccountSettingsPage from './AccountSettingsPage';
-
 import '../stylesheets/userCss.css';
+import BookingPage from './BookingPage';
 
 export default class UserBoard extends Component {
   componentDidMount() {
@@ -31,7 +31,9 @@ export default class UserBoard extends Component {
             )}
             {this.props.location.pathname.substring(11) ===
               'Account-Settings' && <AccountSettingsPage />}
-
+            {this.props.location.pathname.substring(11) === 'Booking' && (
+              <BookingPage />
+            )}
           </Col>
          
         </Row>

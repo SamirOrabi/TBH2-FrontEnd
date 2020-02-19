@@ -194,16 +194,16 @@ class SignUp extends Component {
     }
   }
 
-  // enter = e => {
-  //   if (e.keyCode === 13) {
-  //     e.preventDefault();
-  //     this.onRegist();
-  //   }
-  // };
+  enter = e => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.onRegist();
+    }
+  };
   render() {
     return (
       <Container>
-        <Form className="SignUpForm ">
+        <Form className="SignUpForm" onSubmit={this.onRegist}>
           <h1>SIGN UP</h1>
           <Form.Group className="formgroupfloat">
             <Form.Control
