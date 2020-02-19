@@ -99,8 +99,7 @@ class VerifyBy extends Component {
     this.setState({ showMe: this.props.show });
   }
 
-  en
-  ter = e => {
+  enter = e => {
     if (e.keyCode === 13) {
       e.preventDefault();
 
