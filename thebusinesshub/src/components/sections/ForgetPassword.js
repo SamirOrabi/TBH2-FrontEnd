@@ -45,9 +45,16 @@ class ForgetPassword extends Component {
       .catch(err => console.log(err));
   };
 
+  enter = e => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.sendPassword();
+    }
+  };
+
   render() {
     return (
-      <Container className="mt-5 w-50">
+      <Container className="w-50">
         <div>
           {' '}
           <Modal show={this.props.show} onHide={this.handleClose}>
@@ -79,6 +86,7 @@ class ForgetPassword extends Component {
                       <Form.Control
                         noValidate
                         required
+                        onKeyDown={this.enter}
                         type="text"
                         onChange={this.handleUserInput}
                         value={this.state.number}
@@ -89,7 +97,9 @@ class ForgetPassword extends Component {
                     </Form.Group>
                   </Form>
                 </Col>
-
+                <Col className="m-auto text-center verifyBtn pt-2" sm={4}>
+                  <Button onClick={this.sendPassword}>RESET</Button>
+                </Col>
                 <Col sm={12}>
                   {this.state.myerror ? (
                     <p>
@@ -98,9 +108,6 @@ class ForgetPassword extends Component {
                       {this.state.myerror}
                     </p>
                   ) : null}
-                </Col>
-                <Col className="m-auto text-center verifyBtn pt-3" sm={12}>
-                  <Button onClick={this.sendPassword}>RESET</Button>
                 </Col>
               </Row>{' '}
             </Modal.Body>

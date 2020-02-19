@@ -21,6 +21,7 @@
   color: #7e7e7e !important;
   padding: 25px;
 } */
+
 .signinForget {
   font-family: Arial;
   font-style: normal;
@@ -83,7 +84,7 @@
   overflow: hidden;
   /* margin: 5% 0 !important; */
   height: 600px;
-  margin: 130px 0 30px !important;
+  margin: 100px 0 30px !important;
 }
 .form-group {
   width: 100% !important;
@@ -515,6 +516,97 @@
 .closebtn button:focus,
 .closebtn button:hover {
   background: transparent !important;
+  color: #ed1c24 !important;
+  border: none !important;
+  margin: auto;
+  box-shadow: none !important;
+}
+
+#countdown {
+  /* position: absolute; */
+  margin: auto;
+  /* margin-top: 100px; */
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  /* background-color: blue; */
+}
+
+#countdown-number {
+  color: black;
+  display: inline-block;
+  line-height: 40px;
+}
+
+svg {
+  position: relative;
+  top: -40px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+svg circle {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: black;
+  fill: none;
+  animation: countdown 10s linear infinite forwards;
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 113px;
+  }
+}
+
+.alertVerify {
+  background-color: #ed1c24;
+  position: absolute;
+  top: 8%;
+  right: 20%;
+  left: 10%;
+  color: white;
+}
+.alertVerify p {
+  color: white;
+}
+
+.alertVerify button {
+  background: transparent !important;
+  border: none !important;
+  margin: auto;
+  box-shadow: none !important;
+}
+.alertVerify span {
+  text-decoration-line: underline;
+}
+
+.alertverify2 {
+  background-color: #fff;
+  color: #ed1c24;
+}
+.alertverify2 button {
+  background-color: #fff;
+  color: #ed1c24;
+  border: none !important;
+  margin: auto;
+  box-shadow: none !important;
+}
+.alertverify2 span {
+  text-decoration-line: underline;
+}
+
+.alertverify2 button:active,
+.alertverify2 button:focus,
+.alertverify2 button:hover {
+  background-color: #fff !important;
   color: #ed1c24 !important;
   border: none !important;
   margin: auto;

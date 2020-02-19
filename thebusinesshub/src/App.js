@@ -11,7 +11,6 @@ import UserBoard from './components/user/UserBoard';
 import Space from './components/pages/Space';
 import Booking from './components/pages/Booking';
 import Contact from './components/pages/Contact';
-
 // Styling
 import './App.css';
 import setAuthToken from './helpers/setAuthToken';
