@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Col, Row, Container } from 'react-bootstrap';
 import ProfilePage from './ProfilePage';
 import UserBoardSideNav from './UserBoardSideNav';
-import AccountSettings from './AccountSettings';
+import AccountSettingsPage from './AccountSettingsPage';
+
 import '../stylesheets/userCss.css';
 
 export default class UserBoard extends Component {
@@ -26,10 +27,13 @@ export default class UserBoard extends Component {
           >
             {this.props.location.pathname.substring(11) === 'Profile' && (
               <ProfilePage />
+              
             )}
             {this.props.location.pathname.substring(11) ===
-              'Account-Settings' && <AccountSettings />}
+              'Account-Settings' && <AccountSettingsPage />}
+
           </Col>
+         
         </Row>
       </Container>
     );

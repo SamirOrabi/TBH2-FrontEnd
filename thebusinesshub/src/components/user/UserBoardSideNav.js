@@ -4,6 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { Button, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 import VerifyBy from '../sections/VerifyBy';
+import isEqual from 'lodash/isEqual';
 
 //css
 import { connect } from 'react-redux';
@@ -32,9 +33,9 @@ class UserBoardSideNav extends Component {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
 
     axios
-      .post('http://18.185.138.12:5000/api/accounts/getprofile', {
+      .post('https://cubexs.net/tbhapp/accounts/getprofile', {
         Account: {
-          ownerId: this.props.user.id
+          id: this.props.user.id
         }
       })
       .then(res => {
@@ -61,6 +62,30 @@ class UserBoardSideNav extends Component {
       .catch(err => console.log(err));
   };
 
+  componentDidUpdate(prevProps, prevState  ) {
+    
+    if ( !isEqual(prevState ,this.state)){
+     axios.defaults.headers.common['authorization'] =localStorage.userToken;
+      axios.post('https://cubexs.net/tbhapp/accounts/getprofile' , 
+      {
+        Account:{
+          id:this.props.user.id,
+  }
+      }
+      )
+      .then(res => {
+        
+        console.log('change',res)
+   this.setState({profile:res.data.profile})    
+        console.log('new result in sidenav',res.data.profile)
+      }).catch(err => console.log(err));
+
+     }
+     
+  
+}
+
+
   render() {
     return (
       <div className="usersidenav">
@@ -76,6 +101,7 @@ class UserBoardSideNav extends Component {
         ) : null}
 
         <h1 className="firstChardivside">
+      
           {this.props.user.firstName.substring(0, 1)}
         </h1>
         <h3 className="sidename pt-4">{this.props.user.username}</h3>

@@ -1,61 +1,55 @@
 import React, { Component } from 'react';
-import { Container, Col, Row , Button , ButtonToolbar } from 'react-bootstrap';
-import EmailChangesmodel from './EmailChangesmodel';
-import PhoneNumberchangemodel from './PhoneNumberchangemodel';
-import Passwordchangemodel from './Passwordchangemodel';
+import { Container, Col, Row, Button, ButtonToolbar } from 'react-bootstrap';
+import EmailChangesmodel from './account/EmailChangesmodel';
+import PhoneNumberchangemodel from './account/PhoneNumberchangemodel';
+import Passwordchangemodel from './account/Passwordchangemodel';
 import '../stylesheets/AccountCSS.css';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import isEqual from 'lodash/isEqual';
 
 
-
 class AccountSettings extends Component {
-  constructor(props){
-     super(props);
-     this.state = {
-      EmailmodalShow:false,
-      PhoneNumbermodalShow:false,
-      changepasswordmodalShow:false , 
-profileData:[],
-      
-
-}
-
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      EmailmodalShow: false,
+      PhoneNumbermodalShow: false,
+      changepasswordmodalShow: false,
+      profileData: []
+    };
   }
 
   componentDidMount(){
       axios.defaults.headers.common['authorization'] =localStorage.userToken;
-      axios.post('http://18.185.138.12:5000/api/accounts/getprofile' , 
+      axios.post('https://cubexs.net/tbhapp/accounts/getprofile' , 
       {
         Account:{
-          ownerId:this.props.user.id,
-  }
+          id:this.props.user.id,
+                }
       }
       )
       .then(res => {
-        console.log( 'getdatafromgetprofile',res.data.pofile)
-        this.setState({profileData:res.data.profile})
+        console.log('getdatafromgetprofile', res.data.pofile);
+        this.setState({ profileData: res.data.profile });
         console.log(res.data);
-      }).catch(err=>console.log(err))
-      
-  
+      })
+      .catch(err => console.log(err));
   }
 
   componentDidUpdate(prevProps, prevState) {
 
       if ( !isEqual(prevState ,this.state)){
-        this.forceUpdate()
        axios.defaults.headers.common['authorization'] =localStorage.userToken;
-        axios.post('http://18.185.138.12:5000/api/accounts/getprofile' , 
+        axios.post('https://cubexs.net/tbhapp/accounts/getprofile' , 
         {
           Account:{
-            ownerId:this.props.user.id,
+            id:this.props.user.id,
     }
         }
         )
         .then(res => {
+          console.log(res)
      this.setState({profileData:res.data.profile})    
           console.log('new result',res.data.profile)
         }).catch(err => console.log(err));
@@ -93,7 +87,7 @@ profileData:[],
                </Row>
                <Row>
                    <Col sm={2}></Col>
-              
+             
 <Col sm={8}  style={{padding:'5%'}}>
   <div className="changedValue">
     <div className="label">
@@ -137,20 +131,19 @@ profileData:[],
     </ButtonToolbar>
         </div>
         </div>
-        </Col>
+        </Col> 
         </Row>   
        <EmailChangesmodel show={this.state.EmailmodalShow }  onHide={this.closeEmailModal} />
        <PhoneNumberchangemodel show={this.state.PhoneNumbermodalShow}  onHide={this.closePhoneModal} />
        <Passwordchangemodel show={this.state.changepasswordmodalShow}  onHide={this.closePasswordModal} />
 
       </Container>
-        )
-    }
+    );
+  }
 }
 
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
 
- const mapStateToProps=state=>({
-   user:state.auth.user ,
- })
-
-export default connect(mapStateToProps)(AccountSettings) 
+export default connect(mapStateToProps)(AccountSettings);

@@ -78,8 +78,14 @@
         margin-left: 300px;}
 }
 
+
+#dropdown-basic{
+  text-transform:uppercase
+}
 .btn-success{
   border-radius: 50%;
+  height:50px;
+  width:50px;
   background-color: #ED1C24;
   border-color: #ED1C24ed;
 }

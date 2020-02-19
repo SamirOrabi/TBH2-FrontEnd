@@ -130,7 +130,7 @@ class SignInForm extends Component {
   render() {
     return (
       <Container className="signIn">
-        <Form className="SignInForm">
+        <Form className="SignInForm" >
           <h3 className="pt-4">SIGN IN </h3>
           <Form.Group>
             <Form.Control
@@ -179,7 +179,11 @@ class SignInForm extends Component {
             </Button>
           </Col>
           <Col sm={12} className="text-center">
-            <Button className="my-4 signInBtn" onClick={this.Signin}>
+            <Button
+              type="submit"
+              className="my-4 signInBtn"
+              onClick={this.Signin}
+            >
               SIGN IN
             </Button>
           </Col>
@@ -195,7 +199,8 @@ SignInForm.propTypes = {
 };
 const mapStatetoProps = state => ({
   isAuth: state.auth.isAuth,
-  auth: state.auth
+  auth: state.auth,
+  user: state.auth.user
 });
 
 export default connect(mapStatetoProps, { Login })(withRouter(SignInForm));
