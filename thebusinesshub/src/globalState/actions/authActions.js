@@ -82,11 +82,7 @@ export const Login = (userdata, history) => async dispatch => {
         }
       })
       .catch(err => {
-        dispatch({
-          type: GET_ERRORS,
-          payload: err.res.data
-        });
-        // reject(err);
+        reject(err);
       });
   });
   return logindata;

@@ -16,6 +16,10 @@ import Contact from './components/pages/Contact';
 import './App.css';
 import setAuthToken from './helpers/setAuthToken';
 import { setCurrentUser, LogOut } from './globalState/actions/authActions';
+// import {
+//   clearCurrentProfile,
+//   getProfile
+// } from './globalState/actions/profileActions';
 // import SignInUp from './components/forms/SignInUp';
 // Components
 
@@ -23,10 +27,13 @@ if (localStorage.userToken) {
   setAuthToken(localStorage.userToken);
   const decodedToken = jwt_decode(localStorage.userToken);
   store.dispatch(setCurrentUser(decodedToken));
+  // store.dispatch(getProfile());
+
   const currentTime = Date.now() / 1000;
   if (decodedToken.exp < currentTime) {
+    // store.dispatch(clearCurrentProfile);
     store.dispatch(LogOut);
-    window.location.href='/login'
+    window.location.href = '/login';
   }
 }
 
