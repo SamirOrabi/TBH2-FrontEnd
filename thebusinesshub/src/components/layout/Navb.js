@@ -100,7 +100,7 @@ class Navb extends Component {
                 // Logout              </NavLink>
                 <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    {this.props.user.firstName.substring(0, 1)}
+                    {this.props.user.username.charAt(0).toUpperCase()}{' '}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>

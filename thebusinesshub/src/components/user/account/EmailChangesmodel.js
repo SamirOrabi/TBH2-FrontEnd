@@ -1,47 +1,52 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import axios from 'axios';
+import '../../stylesheets/ChangesmodelCSS.css';
 import { connect } from 'react-redux';
-import '../stylesheets/ChangesmodelCSS.css';
-class PhoneNumberchangemodel extends Component {
+import axios from 'axios';
+
+class EmailChangesmodel extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      NewPhoneNumber: '',
-      phoneerror: ''
+      newEmail: '',
+      emailerror: '' ,
+      EmailmodalShow:false
     };
   }
 
   handleUserInput = e => {
-    this.setState({ NewPhoneNumber: e.target.value });
+    this.setState({ newEmail: e.target.value });
     console.log(e.target.value);
   };
-
-  changephonenumber = () => {
+  changeEmail = () => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
-      .post('https://cubexs.net/tbhapp/accounts/changePhone', {
+      .post('https://cubexs.net/tbhapp/accounts/changeEmail', {
         Account: {
           id: this.props.user.id,
-          phoneNumber: this.state.NewPhoneNumber
+          email: this.state.newEmail
         }
       })
       .then(res => {
-        this.props.user.phone = this.state.NewPhoneNumber;
+        this.props.user.email = this.state.newEmail;
         if (res.data.error) {
-          console.log(res.data.error)
-          this.setState({ phoneerror: res.data.error });
+          this.setState({ emailerror: res.data.error });
         } else {
-          this.setState({ phoneerror: '' });
+          this.setState({ emailerror: '' });
           this.props.onHide()
         }
+ 
       })
+    
+
       .catch(err => console.log(err));
   };
   render() {
+    
+  // const handleClose = () =>this.setState({EmailmodalShow:false}) 
     return (
-      <Modal
+      <Modal  
         className="userdatachanemodel"
         {...this.props}
         size="lg"
@@ -50,7 +55,7 @@ class PhoneNumberchangemodel extends Component {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            <p>Change Phone Number</p>
+            <p>CHANGE EMAIL</p>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -59,28 +64,28 @@ class PhoneNumberchangemodel extends Component {
               <Form.Control
                 noValidate
                 required
-                type="number"
+                type="text"
                 onChange={this.handleUserInput}
-                value={this.state.NewPhoneNumber}
-                name="phoneNumber"
-                placeholder="NEW PHONE NUMBER"
+                value={this.state.newEmail}
+                name="email"
+                placeholder="NEW E-MAIL"
               />
             </Form.Group>
-          </Form>{' '}
-          {this.state.phoneerror ? (
+          </Form>
+          {this.state.emailerror ? (
             <span
               className="pl-3"
               style={{ color: '#ed1c24', fontWeight: 'bold' }}
             >
               {' '}
               <i className="fas fa-exclamation-triangle px-2"></i>{' '}
-              {this.state.phoneerror}
+              {this.state.emailerror}
             </span>
           ) : null}
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={this.changephonenumber} className="savebtn">
+          <Button onClick={this.changeEmail}  className="savebtn"   >
             SAVE
           </Button>
         </Modal.Footer>
@@ -88,8 +93,9 @@ class PhoneNumberchangemodel extends Component {
     );
   }
 }
+
 const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps)(PhoneNumberchangemodel);
+export default connect(mapStateToProps)(EmailChangesmodel);

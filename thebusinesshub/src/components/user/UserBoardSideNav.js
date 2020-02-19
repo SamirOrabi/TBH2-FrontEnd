@@ -33,7 +33,7 @@ class UserBoardSideNav extends Component {
     return (
       <div className="usersidenav">
         <h1 className="firstChardivside">
-          {this.props.user.firstName.substring(0, 1)}
+          {this.props.user.username.charAt(0).toUpperCase()}
         </h1>
         <h3 className="sidename pt-4">{this.props.user.username}</h3>
         <p className="sidemail pt-1 pb-2">{this.state.profile.email}</p>
@@ -81,7 +81,7 @@ class UserBoardSideNav extends Component {
             {' '}
             <NavLink
               exact
-              to="/UserBoard/booking"
+              to="/UserBoard/Booking"
               activeStyle={{
                 color: 'white',
                 textDecoration: 'none',
