@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Container, Col, Row, Button, ButtonToolbar } from 'react-bootstrap';
-import EmailChangesmodel from './EmailChangesmodel';
-import PhoneNumberchangemodel from './PhoneNumberchangemodel';
-import Passwordchangemodel from './Passwordchangemodel';
+import EmailChangesmodel from './account/EmailChangesmodel';
+import PhoneNumberchangemodel from './account/PhoneNumberchangemodel';
+import Passwordchangemodel from './account/Passwordchangemodel';
 import '../stylesheets/AccountCSS.css';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import isEqual from 'lodash/isEqual';
+
 
 class AccountSettings extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class AccountSettings extends Component {
       {
         Account:{
           id:this.props.user.id,
-  }
+                }
       }
       )
       .then(res => {
