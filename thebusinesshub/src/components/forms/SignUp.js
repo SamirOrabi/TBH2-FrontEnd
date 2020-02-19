@@ -66,6 +66,7 @@ class SignUp extends Component {
       this.validateField(name, value);
     });
   };
+
   validateField(fieldName, value) {
     let nameValidationErrors = this.state.nameErrors;
 
@@ -110,10 +111,11 @@ class SignUp extends Component {
         lnameValidationErrors.lname = lnameValid ? '' : 'name is too short';
         break;
       case 'phonenumber':
-        phonenumberValid = value.length > 8;
+        phonenumberValid = value.match(/^[0][1-9]\d{9}$|^[1-9]\d{9}$/);
+        // phonenumberValid = value.length > 11;
         phonenumberValidationErrors.phonenumber = phonenumberValid
           ? ''
-          : ' is too short';
+          : 'Phone number must contain 11 numbers only';
         break;
       default:
         break;
@@ -167,6 +169,7 @@ class SignUp extends Component {
     regestrequest.lastName = this.state.lname;
     regestrequest.phoneNumber = this.state.phonenumber;
     const userData = await this.props.userRegister(
+      
       {
         Account: regestrequest
       },
@@ -194,6 +197,7 @@ class SignUp extends Component {
 
   render() {
     console.log('hna el error msg');
+    
     if (this.state.user !== '') {
     }
 
@@ -319,6 +323,8 @@ SignUp.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
+  user: state.auth.user 
+  
 });
 export default connect(mapStateToProps, { userRegister })(withRouter(SignUp));

@@ -195,7 +195,8 @@ SignInForm.propTypes = {
 };
 const mapStatetoProps = state => ({
   isAuth: state.auth.isAuth,
-  auth: state.auth
+  auth: state.auth ,
+  user: state.auth.user
 });
 
 export default connect(mapStatetoProps, { Login })(withRouter(SignInForm));

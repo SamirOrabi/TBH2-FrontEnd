@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {Modal , Button  , Form,Col} from 'react-bootstrap';
 import axios from 'axios';
-import ForgetPassword from '../sections/ForgetPassword';
+import ForgetPassword from '../../sections/ForgetPassword';
 import {connect} from 'react-redux';
-import '../stylesheets/ChangesmodelCSS.css';
+import '../../stylesheets/ChangesmodelCSS.css';
  class Passwordchangemodel extends Component {
 
   constructor(props) {

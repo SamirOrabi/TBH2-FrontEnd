@@ -11,6 +11,7 @@ import UserBoard from './components/user/UserBoard';
 import Space from './components/pages/Space';
 import Booking from './components/pages/Booking';
 import Contact from './components/pages/Contact';
+import BookDetails from './components/user/booking/BookDetails'
 
 // Styling
 import './App.css';
@@ -41,6 +42,7 @@ class App extends Component {
           <Route exact path="/UserBoard/Profile" component={UserBoard} />
           <Route exact path="/UserBoard/Booking" component={UserBoard} />
           <Route exact path="/UserBoard/Purchase" component={UserBoard} />{' '}
+          {/* <BookDetails /> */}
         </div>
       </Router>
     );

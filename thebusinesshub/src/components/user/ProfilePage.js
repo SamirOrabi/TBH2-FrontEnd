@@ -118,9 +118,12 @@ class ProfilePage extends Component {
       <div className="profilePage">
         {this.state.profileInfo.state === 'pending' && <VerifyBy />}
         <h1 className="firstChardivprofile">
+        
           {this.props.user.firstName.substring(0, 1)}
+    
         </h1>
         <h3 style={{ textAlign: 'center' }} className="pt-1">
+       
           {this.props.user.username}
         </h3>
         <p style={{ textAlign: 'center', color: '#7e7e7e' }} className="pb-5">
