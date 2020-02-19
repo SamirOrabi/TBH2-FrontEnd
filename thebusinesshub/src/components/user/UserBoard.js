@@ -27,6 +27,7 @@ export default class UserBoard extends Component {
           >
             {this.props.location.pathname.substring(11) === 'Profile' && (
               <ProfilePage />
+              
             )}
             {this.props.location.pathname.substring(11) ===
               'Account-Settings' && <AccountSettingsPage />}
@@ -34,6 +35,7 @@ export default class UserBoard extends Component {
               <BookingPage />
             )}
           </Col>
+         
         </Row>
       </Container>
     );

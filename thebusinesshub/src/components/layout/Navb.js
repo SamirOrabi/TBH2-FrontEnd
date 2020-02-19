@@ -7,8 +7,30 @@ import { LogOut } from '../../globalState/actions/authActions';
 // import { clearCurrentProfile } from '../../globalState/actions/profileActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 class Navb extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      profleDate: []
+    };
+  }
+
+  componentDidMount() {
+    axios.defaults.headers.common['authorization'] = localStorage.userToken;
+    axios
+      .post('https://cubexs.net/tbhapp/accounts/getprofile', {
+        Account: {
+          id: this.props.user.id
+        }
+      })
+      .then(res => {
+        console.log('getprofile from nav', res);
+        this.setState({ profleDate: res.data.profile });
+      })
+      .catch(err => console.log(err));
+  }
   SignOut = e => {
     e.preventDefault();
     // this.props.clearCurrentProfile();
