@@ -4,12 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import VerifyBy from '../sections/VerifyBy';
-import 'react-day-picker/lib/style.css';
-
 import 'react-datez/dist/css/react-datez.css';
 import { ReactDatez } from 'react-datez';
-
-let subBirthDate;
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -17,19 +13,12 @@ class ProfilePage extends Component {
     this.state = {
       profileInfo: [],
       profile: [],
-      selectedDay: undefined,
       isEmpty: true,
       isDisabled: false,
       verifyerror: '',
       showverify: false,
       show: false,
       show1: false,
-      show6: false,
-      show12: false,
-      show7: false,
-      show13: false,
-      show8: false,
-      show14: false,
       firstnamefontWeight: 'normal',
       firstnamebackgroundColor: 'transparent',
       firstnametransform: '',
@@ -39,27 +28,18 @@ class ProfilePage extends Component {
       genderbackgroundColor: 'transparent',
       gendertransform: '',
       genderfontweight: 'normal',
-
-      selectedDate: undefined,
       validationerror: '',
       modalnote: '',
       dateInput: '',
-      datevalidationerror: ''
+      datevalidationerror: '',
+
+      namewarn: ''
     };
   }
   handleChangedate = value => {
     this.setState({ dateInput: value });
     this.state.profile.birthdate = value;
   };
-  // handleDayChange(selectedDay, modifiers, dayPickerInput) {
-  //   const input = dayPickerInput.getInput();
-  //   this.setState({
-  //     selectedDay,
-  //     isEmpty: !input.value.trim(),
-  //     isDisabled: modifiers.disabled === true
-  //   });
-  //   this.state.profile.birthdate = this.state.selectedDay;
-  // }
 
   componentDidMount() {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
@@ -108,6 +88,7 @@ class ProfilePage extends Component {
 
   OnEditProfile = e => {
     e.preventDefault();
+
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     let request = {};
     request.id = this.props.user.id;
@@ -144,7 +125,20 @@ class ProfilePage extends Component {
         } else {
           this.setState({ datevalidationerror: '', validationerror: '' });
         }
-        if (this.state.profile === request) {
+
+        if (
+          this.state.profile.firstName === '' ||
+          this.state.profile.lastName === ''
+        ) {
+          this.setState({ namewarn: 'Name Cannot be empty' });
+        } else {
+          this.setState({ namewarn: '' });
+        }
+        if (
+          res.data.code === 0 &&
+          this.state.profile.firstName !== '' &&
+          this.state.profile.lastName !== ''
+        ) {
           this.setState({
             modalnote: 'Your data Updated Successfully',
             show1: false
@@ -170,8 +164,7 @@ class ProfilePage extends Component {
     return (
       <div className="profilePage">
         <h1 className="firstChardivprofile">
-          {this.props.user.firstName.charAt(0).toUpperCase() +
-            this.props.user.lastName.charAt(0).toUpperCase()}
+          {this.props.user.username.charAt(0).toUpperCase()}{' '}
         </h1>
         <h3 style={{ textAlign: 'center' }} className="pt-1">
           {this.props.user.username}
@@ -228,7 +221,15 @@ class ProfilePage extends Component {
                 />
               </Form.Group>
             </Col>
-          </Row>{' '}
+          </Row>
+          {this.state.namewarn ? (
+            <div className="pt-2 text-center m-auto">
+              <span style={{ color: '#ed1c24', fontWeight: 'bold' }}>
+                <i className="fas fa-exclamation-triangle px-2"></i>
+                {this.state.namewarn}
+              </span>
+            </div>
+          ) : null}
           {this.state.validationerror ? (
             <div className="pt-2 text-center m-auto">
               <span style={{ color: '#ed1c24', fontWeight: 'bold' }}>
