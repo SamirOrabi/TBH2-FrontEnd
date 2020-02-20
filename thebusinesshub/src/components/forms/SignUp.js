@@ -159,7 +159,7 @@ class SignUp extends Component {
   }
 
   onRegist = async e => {
-    // e.preventDefault();
+    e.preventDefault();
     let regestrequest = {};
 
     regestrequest.username = this.state.name;

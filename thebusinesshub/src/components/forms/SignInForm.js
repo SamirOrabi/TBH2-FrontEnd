@@ -104,7 +104,7 @@ class SignInForm extends Component {
   }
 
   Signin = async e => {
-    // e.preventDefault();
+    e.preventDefault();
     let loginRequest = {};
     loginRequest.username = this.state.name;
     loginRequest.password = this.state.password;

@@ -72,7 +72,6 @@ class PhoneNumberchangemodel extends Component {
                 noValidate
                 required
                 onKeyDown={this.enter}
-                type="number"
                 onChange={this.handleUserInput}
                 value={this.state.NewPhoneNumber}
                 name="phoneNumber"
