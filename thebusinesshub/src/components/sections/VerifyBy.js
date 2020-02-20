@@ -69,10 +69,10 @@ class VerifyBy extends Component {
           this.setState({ show2: true });
           setTimeout(() => {
             this.setState({ show2: false });
-          }, 1600);
+          }, 2100);
           setTimeout(() => {
             this.props.closeModal();
-          }, 2000);
+          }, 3000);
           this.getProfile();
         } else {
           this.setState({ myerror: res.data.error });

@@ -92,7 +92,8 @@ class SignUp extends Component {
         }
         break;
       case 'name':
-        nameValid = value.length > 2;
+        nameValid =
+          value.length > 2 || value.match(/^[a-zA-Z0-9!#_$%&*]{3,25}$/i);
         nameValidationErrors.name = nameValid ? '' : ' is too short';
         break;
 
