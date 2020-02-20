@@ -205,9 +205,6 @@ class VerifyBy extends Component {
                     )}
                   </Col>
                 </Row>{' '}
-                <Col className="m-auto text-center verifyBtn pt-3" sm={12}>
-                  <Button onClick={this.confirmVerify}>VERIFY</Button>
-                </Col>
                 <Col sm={12}>
                   {this.state.myerror ? (
                     <p>
@@ -216,6 +213,9 @@ class VerifyBy extends Component {
                       {this.state.myerror}
                     </p>
                   ) : null}
+                </Col>
+                <Col className="m-auto text-center verifyBtn pt-3" sm={12}>
+                  <Button onClick={this.confirmVerify}>VERIFY</Button>
                 </Col>
               </Modal.Body>
               <Modal className="mt-2 feedBack" show={this.state.show2}>
