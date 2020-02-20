@@ -159,7 +159,7 @@ class SignUp extends Component {
   }
 
   onRegist = async e => {
-    // e.preventDefault();
+    e.preventDefault();
     let regestrequest = {};
 
     regestrequest.username = this.state.name;
@@ -195,18 +195,11 @@ class SignUp extends Component {
   }
 
   enter = e => {
-    document.addEventListener('keydown', e => {
-      if (e.keyCode === 13) {
-        e.preventDefault();
-
-        this.onRegist();
-      }
-    });
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.onRegist();
+    }
   };
-  componentDidMount() {
-    this.enter();
-  }
-
   render() {
     return (
       <Container>
