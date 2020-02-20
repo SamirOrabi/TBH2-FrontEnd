@@ -4,36 +4,36 @@ import { NavLink, withRouter } from 'react-router-dom';
 import logo from '../../Images/logo.png';
 import '../stylesheets/NavCSS.css';
 import { LogOut } from '../../globalState/actions/authActions';
+// import { clearCurrentProfile } from '../../globalState/actions/profileActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
 class Navb extends Component {
-constructor(props){
-  super(props);
-  this.state={
-    profleDate:[]
-  };
-}
-
-
-componentDidMount(){
-  axios.defaults.headers.common['authorization']=localStorage.userToken;
-  axios.post('https://cubexs.net/tbhapp/accounts/getprofile' , 
-  {
-    Account:{
-      id:this.props.user.id,
-}
+  constructor(props) {
+    super(props);
+    this.state = {
+      profleDate: []
+    };
   }
-  ).then(
-    res=>{
-      console.log('getprofile from nav',res)
-      this.setState({profleDate:res.data.profile})
-    }
-  ).catch(err=>console.log(err))
-}
+
+  componentDidMount() {
+    axios.defaults.headers.common['authorization'] = localStorage.userToken;
+    axios
+      .post('https://cubexs.net/tbhapp/accounts/getprofile', {
+        Account: {
+          id: this.props.user.id
+        }
+      })
+      .then(res => {
+        console.log('getprofile from nav', res);
+        this.setState({ profleDate: res.data.profile });
+      })
+      .catch(err => console.log(err));
+  }
   SignOut = e => {
     e.preventDefault();
+    // this.props.clearCurrentProfile();
     this.props.LogOut(this.props.history);
   };
 
@@ -124,14 +124,7 @@ componentDidMount(){
                 // Logout              </NavLink>
                 <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    
-                  {this.state.profleDate.firstName ? this.state.profleDate.firstName.substring(0, 1):<div className="spinner-border" role="status"></div>}
-
-
-                  {this.state.profleDate.firstName ? this.state.profleDate.lastName.substring(0, 1):''}
-           
-                    {/* {this.props.user.firstName.substring(0, 1)}
-                   {this.props.user.lastName.substring(0, 1)} */}
+                    {this.props.user.username.charAt(0).toUpperCase()}{' '}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
@@ -179,10 +172,12 @@ componentDidMount(){
 }
 
 Navb.propTypes = {
-  LogOut: PropTypes.func.isRequired
+  LogOut: PropTypes.func.isRequired,
 };
 const mapStatetoProps = state => ({
   isAuth: state.auth.isAuth,
   user: state.auth.user
 });
-export default connect(mapStatetoProps, { LogOut })(withRouter(Navb));
+export default connect(mapStatetoProps, { LogOut })(
+  withRouter(Navb)
+);

@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, SET_CURRENT_USER } from './actionTypes';
+import { LOGIN, LOGOUT, SET_CURRENT_USER, GET_ERRORS } from './actionTypes';
 import axios from 'axios';
 import setAuthToken from '../../helpers/setAuthToken';
 import jwt_decode from 'jwt-decode';
@@ -37,7 +37,7 @@ export const userRegister = (
           setAuthToken(userToken);
           const decodedToken = jwt_decode(userToken);
           dispatch(setCurrentUser(decodedToken));
-          history.push('/');
+          history.push('/UserBoard/Account-Settings');
 
           axios.defaults.headers.common['authorization'] =
             localStorage.userToken;
@@ -78,7 +78,7 @@ export const Login = (userdata, history) => async dispatch => {
           setAuthToken(userToken);
           const decodedToken = jwt_decode(userToken);
           dispatch(setCurrentUser(decodedToken));
-          history.push('/');
+          history.push('/UserBoard/Account-Settings');
         }
       })
       .catch(err => {
@@ -99,5 +99,5 @@ export const LogOut = history => dispatch => {
   setAuthToken(false);
   dispatch(setCurrentUser({}));
   dispatch({ type: LOGOUT });
-  history.push('/');
+  history.push('/login');
 };

@@ -104,7 +104,7 @@ class SignInForm extends Component {
   }
 
   Signin = async e => {
-    e.preventDefault();
+    // e.preventDefault();
     let loginRequest = {};
     loginRequest.username = this.state.name;
     loginRequest.password = this.state.password;
@@ -127,9 +127,22 @@ class SignInForm extends Component {
     }
   }
 
+  enter = e => {
+    document.addEventListener('keydown', e => {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+
+        this.Signin();
+      }
+    });
+  };
+
+  componentDidMount() {
+    this.enter();
+  }
   render() {
     return (
-      <Container className="signIn">
+      <Container className="signIn" onSubmit={this.Signin}>
         <Form className="SignInForm">
           <h3 className="pt-4">SIGN IN </h3>
           <Form.Group>
@@ -179,7 +192,11 @@ class SignInForm extends Component {
             </Button>
           </Col>
           <Col sm={12} className="text-center">
-            <Button className="my-4 signInBtn" onClick={this.Signin}>
+            <Button
+              type="submit"
+              className="my-4 signInBtn"
+              onClick={this.Signin}
+            >
               SIGN IN
             </Button>
           </Col>
@@ -195,7 +212,7 @@ SignInForm.propTypes = {
 };
 const mapStatetoProps = state => ({
   isAuth: state.auth.isAuth,
-  auth: state.auth ,
+  auth: state.auth,
   user: state.auth.user
 });
 

@@ -29,21 +29,28 @@ class PhoneNumberchangemodel extends Component {
       })
       .then(res => {
         this.props.user.phone = this.state.NewPhoneNumber;
-        console.log(res.data.error)
-        if (res.data.code===101 ) {
-          this.setState({ phoneerror: 'Phone number must contain 11 numbers only' });
-        } 
-        else if (res.data.code===102 ) {
+        console.log(res.data.error);
+        if (res.data.code === 101) {
+          this.setState({
+            phoneerror: 'Phone number must contain 11 numbers only'
+          });
+        } else if (res.data.code === 102) {
           this.setState({ phoneerror: res.data.error });
-
-        }
-        else {
+        } else {
           this.setState({ phoneerror: '' });
-          this.props.onHide()
+          this.props.onHide();
         }
       })
       .catch(err => console.log(err));
   };
+
+  enter = e => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.changephonenumber();
+    }
+  };
+
   render() {
     return (
       <Modal
@@ -64,6 +71,7 @@ class PhoneNumberchangemodel extends Component {
               <Form.Control
                 noValidate
                 required
+                onKeyDown={this.enter}
                 type="number"
                 onChange={this.handleUserInput}
                 value={this.state.NewPhoneNumber}

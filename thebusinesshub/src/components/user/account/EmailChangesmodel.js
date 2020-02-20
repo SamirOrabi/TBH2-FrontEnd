@@ -77,19 +77,24 @@ class EmailChangesmodel extends Component {
           this.setState({ emailerror: res.data.error });
         } else {
           this.setState({ emailerror: '' });
-          this.props.onHide()
+          this.props.onHide();
         }
- 
       })
-    
 
       .catch(err => console.log(err));
   };
+
+  enter = e => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.changeEmail();
+    }
+  };
+
   render() {
-    
-  // const handleClose = () =>this.setState({EmailmodalShow:false}) 
+    // const handleClose = () =>this.setState({EmailmodalShow:false})
     return (
-      <Modal  
+      <Modal
         className="userdatachanemodel"
         {...this.props}
         size="lg"
@@ -108,6 +113,7 @@ class EmailChangesmodel extends Component {
                 noValidate
                 required
                 type="text"
+                onKeyDown={this.enter}
                 onChange={this.handleUserInput}
                 value={this.state.newEmail}
                 name="email"
@@ -134,7 +140,7 @@ class EmailChangesmodel extends Component {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button onClick={this.changeEmail}  className="savebtn"   >
+          <Button onClick={this.changeEmail} className="savebtn">
             SAVE
           </Button>
         </Modal.Footer>

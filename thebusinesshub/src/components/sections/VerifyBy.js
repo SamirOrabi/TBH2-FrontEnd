@@ -10,19 +10,18 @@ class VerifyBy extends Component {
     this.state = {
       verifyby: '',
       code: '',
-      show: true,
+      // show: true,
       userId: '',
       myerror: '',
-      // show2: false,
-      mystate: 'verified'
+      show2: false,
+      mystate: 'verified',
+      showTimer: false,
+      isButtonDisabled: false,
+      num: ''
     };
-    if (this.props) {
-      console.log('this.props');
-      console.log(this.props);
-    }
   }
 
-  verifyAgain = e => {
+  sendAgain = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/accounts/verify', {
@@ -33,7 +32,25 @@ class VerifyBy extends Component {
       })
       .then(res => {
         // console.log(res);
-        this.setState({ show: false });
+        if (res.data.code === 0) {
+          this.setState({
+            isButtonDisabled: true
+          });
+
+          setTimeout(() => this.setState({ isButtonDisabled: false }), 10000);
+
+          var countdownNumberEl = document.getElementById('countdown-number');
+          var countdown = 10;
+
+          countdownNumberEl.textContent = countdown;
+
+          setInterval(function() {
+            countdown = --countdown <= 0 ? 10 : countdown;
+
+            countdownNumberEl.textContent = countdown;
+          }, 1000);
+        }
+        // this.setState({ show: false });
       })
       .catch(err => console.log(err));
   };
@@ -49,12 +66,15 @@ class VerifyBy extends Component {
       })
       .then(res => {
         if (res.data.code === 0) {
-          console.log(res);
-
-          this.setState({ mystate: res.data.state });
-          this.setState({ show: false });
+          this.setState({ show2: true });
+          setTimeout(() => {
+            this.setState({ show2: false });
+          }, 1600);
+          setTimeout(() => {
+            this.props.closeModal();
+          }, 2000);
+          this.getProfile();
         } else {
-          console.log(res.data.error);
           this.setState({ myerror: res.data.error });
         }
       })
@@ -62,12 +82,12 @@ class VerifyBy extends Component {
   };
 
   handleClose = () => {
-    this.setState({ show: false });
+    this.props.closeModal();
   };
 
-  handleShow = () => {
-    this.setState({ show: true });
-  };
+  // handleShow = () => {
+  //   this.setState({ show: true });
+  // };
 
   handleUserInput = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -76,7 +96,16 @@ class VerifyBy extends Component {
 
   componentDidMount() {
     this.getProfile();
+    this.setState({ showMe: this.props.show });
   }
+
+  enter = e => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+
+      this.confirmVerify();
+    }
+  };
 
   getProfile = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
@@ -99,11 +128,11 @@ class VerifyBy extends Component {
 
   render() {
     return (
-      <Container className="mt-5 w-50">
+      <Container className="w-50">
         {this.state.mystate !== 'verified' && this.props.isAuth !== false ? (
           <div>
             {' '}
-            <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal show={this.props.show} onHide={this.handleClose}>
               <Modal.Body className="verifyby">
                 {' '}
                 <Row>
@@ -117,7 +146,16 @@ class VerifyBy extends Component {
                     </Button>
                   </Col>
                 </Row>
-                <h3 className="mt-1 text-center">VERIFICATION</h3>
+                <h3 className="text-center my-2">VERIFICATION</h3>
+                <Row className="pt-1 text-center m-auto">
+                  <Col className="pt-1 m-auto" sm={10}>
+                    <p style={{ fontSize: '11px', color: '#7E7E7E' }}>
+                      We have sent a verification code to your phone number,
+                      please enter the code sent via sms. The code expires in 24
+                      hours.
+                    </p>
+                  </Col>
+                </Row>
                 <Row>
                   {/* {' '}
                   <Col sm={4}>
@@ -128,20 +166,15 @@ class VerifyBy extends Component {
                     </label>
                   </Col>
                    */}
-                  <Col sm={12}>
-                    {' '}
-                    <p style={{ color: 'grey', fontSize: '12px' }}>
-                      check your phone for code
-                    </p>
-                  </Col>
                 </Row>
-                <Row>
+                <Row className="py-1 m-auto">
                   <Col sm={8}>
                     <Form className="" onSubmit={this.handleSubmit}>
                       <Form.Group className="formgroupfloat">
                         <Form.Control
                           noValidate
                           required
+                          onKeyDown={this.enter}
                           type="text"
                           onChange={this.handleUserInput}
                           value={this.state.code}
@@ -152,36 +185,42 @@ class VerifyBy extends Component {
                       </Form.Group>
                     </Form>
                   </Col>
-                  <Col className="m-auto text-center verifyBtn pt-3" sm={4}>
-                    <Button onClick={this.confirmVerify}>VERIFY</Button>
+                  <Col className="forgetdev pt-3" sm={4}>
+                    {' '}
+                    {this.state.isButtonDisabled === false ? (
+                      <Button
+                        className="resetBtn"
+                        onClick={this.sendAgain}
+                        disabled={this.state.isButtonDisabled}
+                      >
+                        Resend Code
+                      </Button>
+                    ) : (
+                      <div id="countdown">
+                        <div id="countdown-number"></div>
+                        <svg>
+                          <circle r="18" cx="20" cy="20"></circle>
+                        </svg>
+                      </div>
+                    )}
                   </Col>
                 </Row>{' '}
                 <Col sm={12}>
                   {this.state.myerror ? (
                     <p>
                       {' '}
-                      <i className="fas fa-exclamation-triangle px-2"></i>
+                      <i className="fas fa-exclamation-triangle"></i>
                       {this.state.myerror}
                     </p>
                   ) : null}
                 </Col>
-                <Row className="pt-1">
-                  <Col className="pt-1" sm={8}>
-                    <p style={{ fontSize: '9px', color: 'grey' }}>
-                      please note that the code will expire within 48 hour
-                    </p>
-                  </Col>
-                  <Col className="forgetdev" sm={4}>
-                    {' '}
-                    <Button className="resetBtn" onClick={this.verifyAgain}>
-                      Resend
-                    </Button>
-                  </Col>
-                </Row>
+                <Col className="m-auto text-center verifyBtn pt-3" sm={12}>
+                  <Button onClick={this.confirmVerify}>VERIFY</Button>
+                </Col>
               </Modal.Body>
-              {/* <Modal className="mt-2 feedBack" show={this.state.show2}>
-                <div id="snackbar">Sent Successfully!</div>
-              </Modal> */}
+              <Modal className="mt-2 feedBack" show={this.state.show2}>
+                <div id="snackbar">Activated Successfully!</div>
+              </Modal>
             </Modal>
           </div>
         ) : null}
