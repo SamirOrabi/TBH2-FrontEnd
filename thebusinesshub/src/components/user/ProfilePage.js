@@ -4,11 +4,10 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import VerifyBy from '../sections/VerifyBy';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 
 import 'react-datez/dist/css/react-datez.css';
-import { ReactDatez, ReduxReactDatez } from 'react-datez';
+import { ReactDatez } from 'react-datez';
 
 let subBirthDate;
 
@@ -43,11 +42,9 @@ class ProfilePage extends Component {
 
       selectedDate: undefined,
       validationerror: '',
-      firstNameModal: '',
-      lastNameModal: '',
-      genderModal: '',
-      birthdateModal: '',
-      dateInput: ''
+      modalnote: '',
+      dateInput: '',
+      datevalidationerror: ''
     };
   }
   handleChangedate = value => {
@@ -116,43 +113,14 @@ class ProfilePage extends Component {
     request.id = this.props.user.id;
     if (this.state.profile.firstName)
       request.firstName = this.state.profile.firstName;
-    this.setState({ firstNameModal: 'Your First Name Updated Successfully' });
-
-    if (this.props.user.firstName != request.firstName) {
-      this.setState({
-        show1: false,
-        show: true
-      });
-
-      setTimeout(() => {
-        this.setState({
-          show: false
-        });
-      }, 1600);
-    }
 
     if (this.state.profile.lastName)
       request.lastName = this.state.profile.lastName;
-    this.setState({ lastNameModal: 'Your Last Name Updated Successfully' });
-    // if (this.props.user.lastName === request.lastName) {
-    //   this.setState({
-    //     show12: false,
-    //     show6: true
-    //   });
-
-    //   setTimeout(() => {
-    //     this.setState({
-    //       show6: false
-    //     });
-    //   }, 1600);
-    // }
 
     if (this.state.profile.gender) request.gender = this.state.profile.gender;
-    this.setState({ genderModal: 'Your gender Updated Successfully' });
 
     if (this.state.profile.birthdate)
       request.birthdate = this.state.profile.birthdate;
-    this.setState({ birthdateModal: 'Your birthdate Updated Successfully' });
 
     axios
       .post('https://cubexs.net/tbhapp/accounts/updateprofile', {
@@ -164,9 +132,27 @@ class ProfilePage extends Component {
           this.setState({ verifyerror: res.data.error, validationerror: '' });
         } else if (
           res.data.code === 101 &&
-          this.state.profile.status === 'verified'
+          this.state.profileInfo.state === 'verified'
         ) {
           this.setState({ verifyerror: '', validationerror: res.data.error });
+        } else if (
+          res.data.code === 127 &&
+          this.state.profileInfo.state === 'verified'
+        ) {
+          console.log(res.data.error);
+          this.setState({ datevalidationerror: res.data.error });
+        } else {
+          this.setState({ datevalidationerror: '', validationerror: '' });
+        }
+        if (this.state.profile === request) {
+          this.setState({
+            modalnote: 'Your data Updated Successfully',
+            show1: false
+          });
+          this.setState({ show: true });
+          setTimeout(() => {
+            this.setState({ show: false });
+          }, 1600);
         }
       })
       .catch(err => console.log(err));
@@ -242,23 +228,20 @@ class ProfilePage extends Component {
                 />
               </Form.Group>
             </Col>
-          </Row>
+          </Row>{' '}
+          {this.state.validationerror ? (
+            <div className="pt-2 text-center m-auto">
+              <span style={{ color: '#ed1c24', fontWeight: 'bold' }}>
+                <i className="fas fa-exclamation-triangle px-2"></i>
+                {this.state.validationerror}
+              </span>
+            </div>
+          ) : null}
           <Row className="pt-4">
             <Col sm={12} md={4}>
               {' '}
               <Form.Label className="pl-3">BIRTHDATE</Form.Label>
               <div className="deadlineInput">
-                {/* <DayPickerInput
-                  value={subBirthDate}
-                  onDayChange={this.handleDayChange}
-                  dayPickerProps={{
-                    selectedDays: this.state.selectedDay,
-                    disabledDays: {
-                      daysOfWeek: [0, 6]
-                    }
-                  }}
-                /> */}
-
                 <ReactDatez
                   name="dateInput"
                   handleChange={this.handleChangedate}
@@ -266,7 +249,7 @@ class ProfilePage extends Component {
                   allowPast={true}
                 />
               </div>
-            </Col>
+            </Col>{' '}
             <Col md={2}></Col>
             <Col sm={12} md={4}>
               <Form.Label
@@ -301,19 +284,19 @@ class ProfilePage extends Component {
               </div>
             </Col>
           </Row>{' '}
+          {this.state.datevalidationerror ? (
+            <div className="pt-2">
+              <span style={{ color: '#ed1c24', fontWeight: 'bold' }}>
+                <i className="fas fa-exclamation-triangle px-2"></i> WARNING:
+                User {this.state.datevalidationerror}
+              </span>
+            </div>
+          ) : null}
           {this.state.verifyerror ? (
             <div className="pt-5 text-center m-auto">
               <span style={{ color: '#ed1c24', fontWeight: 'bold' }}>
                 <i className="fas fa-exclamation-triangle px-2"></i> WARNING:
                 {this.state.verifyerror} before any updates
-              </span>
-            </div>
-          ) : null}
-          {this.state.validationerror ? (
-            <div className="pt-5 text-center m-auto">
-              <span style={{ color: '#ed1c24', fontWeight: 'bold' }}>
-                <i className="fas fa-exclamation-triangle px-2"></i>
-                {this.state.validationerror} before any updates
               </span>
             </div>
           ) : null}
@@ -324,16 +307,7 @@ class ProfilePage extends Component {
           </Row>{' '}
         </Container>
         <Modal className="mt-2 firstnameupdatesnackbar" show={this.state.show}>
-          <div id="snackbar">{this.state.firstNameModal}</div>
-        </Modal>
-        <Modal className="mt-2 lastnameupdatesnackbar" show={this.state.show6}>
-          <div id="snackbar">{this.state.lastNameModal}</div>
-        </Modal>
-        <Modal className="mt-2 genderupdatesnackbar" show={this.state.show7}>
-          <div id="snackbar">{this.state.genderModal}</div>
-        </Modal>
-        <Modal className="mt-2 dateupdatesnackbar" show={this.state.show8}>
-          <div id="snackbar">{this.state.birthdateModal}</div>
+          <div id="snackbar">{this.state.modalnote}</div>
         </Modal>
       </div>
     );

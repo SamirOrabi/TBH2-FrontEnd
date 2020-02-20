@@ -4,6 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import logo from '../../Images/logo.png';
 import '../stylesheets/NavCSS.css';
 import { LogOut } from '../../globalState/actions/authActions';
+// import { clearCurrentProfile } from '../../globalState/actions/profileActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -32,6 +33,7 @@ class Navb extends Component {
   }
   SignOut = e => {
     e.preventDefault();
+    // this.props.clearCurrentProfile();
     this.props.LogOut(this.props.history);
   };
 
@@ -170,10 +172,12 @@ class Navb extends Component {
 }
 
 Navb.propTypes = {
-  LogOut: PropTypes.func.isRequired
+  LogOut: PropTypes.func.isRequired,
 };
 const mapStatetoProps = state => ({
   isAuth: state.auth.isAuth,
   user: state.auth.user
 });
-export default connect(mapStatetoProps, { LogOut })(withRouter(Navb));
+export default connect(mapStatetoProps, { LogOut })(
+  withRouter(Navb)
+);
