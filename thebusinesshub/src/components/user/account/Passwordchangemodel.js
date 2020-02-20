@@ -56,16 +56,6 @@ class Passwordchangemodel extends Component {
     console.log(e.target.value);
   };
 
-  enter = e => {
-    document.addEventListener('keydown', e => {
-      if (e.keyCode === 13) {
-        e.preventDefault();
-
-        this.changePassword();
-      }
-    });
-  };
-
   changePassword = () => {
     console.log('testttttttt change password');
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
@@ -90,6 +80,16 @@ class Passwordchangemodel extends Component {
     } else {
       this.setState({ passerror: 'Please Confirm your password', error: '' });
     }
+  };
+
+  enter = e => {
+    document.addEventListener('keydown', e => {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+
+        this.changePassword();
+      }
+    });
   };
 
   componentDidMount() {
