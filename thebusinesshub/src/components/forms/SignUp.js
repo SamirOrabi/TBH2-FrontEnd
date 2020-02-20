@@ -262,7 +262,6 @@ class SignUp extends Component {
             <Form.Control
               noValidate
               required
-              type="number"
               onChange={this.handleUserInput}
               value={this.state.phonenumber}
               name="phonenumber"
