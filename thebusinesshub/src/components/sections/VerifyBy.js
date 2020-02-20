@@ -69,7 +69,7 @@ class VerifyBy extends Component {
           this.setState({ show2: true });
           setTimeout(() => {
             this.setState({ show2: false });
-          }, 2100);
+          }, 2300);
           setTimeout(() => {
             this.props.closeModal();
           }, 3000);
