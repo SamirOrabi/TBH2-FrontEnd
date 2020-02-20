@@ -198,7 +198,7 @@ class VerifyBy extends Component {
                     ) : (
                       <div id="countdown">
                         <div id="countdown-number"></div>
-                        <svg>
+                        <svg className="myCounter">
                           <circle r="18" cx="20" cy="20"></circle>
                         </svg>
                       </div>

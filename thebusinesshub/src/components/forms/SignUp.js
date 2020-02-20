@@ -194,18 +194,18 @@ class SignUp extends Component {
     }
   }
 
-  enter = e => {
-    document.addEventListener('keydown', e => {
-      if (e.keyCode === 13) {
-        e.preventDefault();
+  // enter = e => {
+  //   document.addEventListener('keydown', e => {
+  //     if (e.keyCode === 13) {
+  //       e.preventDefault();
 
-        this.onRegist();
-      }
-    });
-  };
-  componentDidMount() {
-    this.enter();
-  }
+  //       this.onRegist();
+  //     }
+  //   });
+  // };
+  // componentDidMount() {
+  //   this.enter();
+  // }
 
   render() {
     return (
