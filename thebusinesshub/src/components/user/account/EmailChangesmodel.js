@@ -3,22 +3,65 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import '../../stylesheets/ChangesmodelCSS.css';
 import { connect } from 'react-redux';
 import axios from 'axios';
-
+import {EmailErrors,EmailErrorsIcon} from '../../layout/FormErrors'
 class EmailChangesmodel extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       newEmail: '',
-      emailerror: '',
-      EmailmodalShow: false
+      emailerror: '' ,
+      EmailmodalShow:false,
+      emailErros: '',
+      emailErrors: { email: '' },
+      emailValid: false,
+      formValid: false
+
+
     };
   }
 
   handleUserInput = e => {
+    const name = e.target.name;
+    const value = e.target.value;
     this.setState({ newEmail: e.target.value });
+    this.validateField(name, value);
     console.log(e.target.value);
+   
   };
+  validateField(fieldName, value) {
+    let emailValidationErrors = this.state.emailErrors;
+    let emailValid = this.state.emailValid;
+
+    switch (fieldName) {
+      case 'email':
+        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        emailValidationErrors.email = emailValid ? '' : ' is invalid';
+        if (value === 0) {
+        }
+        break;
+        default:
+          break;}
+
+
+          this.setState(
+            {
+             
+              emailErrors: emailValidationErrors,
+             
+              emailValid: emailValid,
+             
+            },      this.validateForm
+            )
+  }
+
+  validateForm() {
+    this.setState({
+      formValid:
+        this.state.emailValid 
+      
+    });
+  }
   changeEmail = () => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
@@ -76,7 +119,13 @@ class EmailChangesmodel extends Component {
                 name="email"
                 placeholder="NEW E-MAIL"
               />
+
+<div className="icontringale">
+              <EmailErrorsIcon emailErrors={this.state.emailErrors} />
+            </div>{' '}
             </Form.Group>
+            <EmailErrors emailErrors={this.state.emailErrors} />
+
           </Form>
           {this.state.emailerror ? (
             <span

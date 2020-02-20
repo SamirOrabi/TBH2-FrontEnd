@@ -1,47 +1,69 @@
 import React, { Component } from 'react';
-import {Col , Container , Img} from 'react-bootstrap';
-// import "~slick-carousel/slick/slick.css"; 
-// import "~slick-carousel/slick/slick-theme.css";
+import {Col , Container , Row } from 'react-bootstrap';
+import img from '../../../Images/img.png'
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+
 import Slider from "react-slick";
 
 export default class BookDetails extends Component {
   render() {
+
+    
     const settings = {
-        customPaging: function(i) {
-          return (
-            <a>
-              {/* <Img /> */}
-            </a>
-          );
-        },
-        dots: true,
-        dotsClass: "slick-dots slick-thumb",
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1};
+      customPaging:function(i){
+        return (
+          <Container>
+       
+          <a>
+             <img src={img} alt="Logo" />
+          </a>
+         
+          </Container>
+        );
+      } ,
+      
+      dots: true,
+      fade: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
 
     return (
       <div >
         <Container>
-  <Col sm={6}>
+        <Row>
+        
+    <Col sm={6}>
   <Slider {...settings}>
+ 
           <div>
-            <img  />
+          <img src={img} alt="Logo" />
           </div>
+      
+         
           <div>
-            <img />
+          <img src={img} alt="Logo" />
           </div>
+         
+        
           <div>
-            <img />
+          <img src={img} alt="Logo" />
           </div>
+       
+         
           <div>
-            <img />
+          <img src={img} alt="Logo" />
           </div>
+        
         </Slider>
  
   </Col>
   <Col sm={6}>calender</Col>
+  </Row>
+ 
   </Container>
       </div>
     );
