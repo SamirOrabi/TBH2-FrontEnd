@@ -136,10 +136,7 @@ class Navb extends Component {
                     </div>
                     <div className="dropdownbookinglink">
                       {' '}
-                      <Dropdown.Item href="/UserBoard/Booking">
-                        {' '}
-                        MY BOOKINGS
-                      </Dropdown.Item>
+                      <Dropdown.Item href="/"> MY BOOKINGS</Dropdown.Item>
                     </div>
                     <div className="dropdownsignoutlink">
                       {' '}
@@ -172,12 +169,10 @@ class Navb extends Component {
 }
 
 Navb.propTypes = {
-  LogOut: PropTypes.func.isRequired,
+  LogOut: PropTypes.func.isRequired
 };
 const mapStatetoProps = state => ({
   isAuth: state.auth.isAuth,
   user: state.auth.user
 });
-export default connect(mapStatetoProps, { LogOut })(
-  withRouter(Navb)
-);
+export default connect(mapStatetoProps, { LogOut })(withRouter(Navb));
