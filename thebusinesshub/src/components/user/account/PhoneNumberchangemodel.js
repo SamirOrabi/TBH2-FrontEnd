@@ -39,6 +39,7 @@ class PhoneNumberchangemodel extends Component {
         } else {
           this.setState({ phoneerror: '' });
           this.props.onHide();
+          this.setState({NewPhoneNumber:''})
         }
       })
       .catch(err => console.log(err));
