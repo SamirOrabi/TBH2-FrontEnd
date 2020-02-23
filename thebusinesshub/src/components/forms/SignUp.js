@@ -92,7 +92,8 @@ class SignUp extends Component {
         }
         break;
       case 'name':
-        nameValid = value.length > 2;
+        nameValid =
+          value.length > 2 || value.match(/^[a-zA-Z0-9!#_$%&*]{3,25}$/i);
         nameValidationErrors.name = nameValid ? '' : ' is too short';
         break;
 
@@ -159,7 +160,7 @@ class SignUp extends Component {
   }
 
   onRegist = async e => {
-    // e.preventDefault();
+    e.preventDefault();
     let regestrequest = {};
 
     regestrequest.username = this.state.name;
@@ -194,18 +195,18 @@ class SignUp extends Component {
     }
   }
 
-  enter = e => {
-    document.addEventListener('keydown', e => {
-      if (e.keyCode === 13) {
-        e.preventDefault();
+  // enter = e => {
+  //   document.addEventListener('keydown', e => {
+  //     if (e.keyCode === 13) {
+  //       e.preventDefault();
 
-        this.onRegist();
-      }
-    });
-  };
-  componentDidMount() {
-    this.enter();
-  }
+  //       this.onRegist();
+  //     }
+  //   });
+  // };
+  // componentDidMount() {
+  //   this.enter();
+  // }
 
   render() {
     return (
@@ -262,7 +263,6 @@ class SignUp extends Component {
             <Form.Control
               noValidate
               required
-              type="number"
               onChange={this.handleUserInput}
               value={this.state.phonenumber}
               name="phonenumber"

@@ -104,7 +104,7 @@ class SignInForm extends Component {
   }
 
   Signin = async e => {
-    // e.preventDefault();
+    e.preventDefault();
     let loginRequest = {};
     loginRequest.username = this.state.name;
     loginRequest.password = this.state.password;
@@ -127,19 +127,19 @@ class SignInForm extends Component {
     }
   }
 
-  enter = e => {
-    document.addEventListener('keydown', e => {
-      if (e.keyCode === 13) {
-        e.preventDefault();
+  // enter = e => {
+  //   document.addEventListener('keydown', e => {
+  //     if (e.keyCode === 13) {
+  //       e.preventDefault();
 
-        this.Signin();
-      }
-    });
-  };
+  //       this.Signin();
+  //     }
+  //   });
+  // };
 
-  componentDidMount() {
-    this.enter();
-  }
+  // componentDidMount() {
+  //   this.enter();
+  // }
   render() {
     return (
       <Container className="signIn" onSubmit={this.Signin}>
