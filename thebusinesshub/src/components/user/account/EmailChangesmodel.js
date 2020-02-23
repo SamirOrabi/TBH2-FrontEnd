@@ -120,12 +120,9 @@ class EmailChangesmodel extends Component {
                 placeholder="NEW E-MAIL"
               />
 
-<div className="icontringale">
-              <EmailErrorsIcon emailErrors={this.state.emailErrors} />
-            </div>{' '}
+          
             </Form.Group>
-            <EmailErrors emailErrors={this.state.emailErrors} />
-
+                <EmailErrors emailErrors={this.state.emailErrors} />
           </Form>
           {this.state.emailerror ? (
             <span
