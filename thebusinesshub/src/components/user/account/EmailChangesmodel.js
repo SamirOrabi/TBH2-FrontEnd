@@ -72,6 +72,7 @@ class EmailChangesmodel extends Component {
         } else {
           this.setState({ emailerror: '' });
           this.props.onHide();
+          this.setState({newEmail:''})
         }
       })
 
