@@ -145,7 +145,7 @@ class UserBoardSideNav extends Component {
             {' '}
             <NavLink
               exact
-              to="/"
+              to="/UserBoard/Booking"
               activeStyle={{
                 color: 'white',
                 textDecoration: 'none',

@@ -21,3 +21,25 @@
   width: 100% !important;
   margin-top: 2%;
 }
+
+.bookingtable {
+  padding-top: 20px;
+}
+
+.bookingtable .tabletype {
+  color: #ed1c24;
+  border-left: 5px solid #ed1c24;
+  padding-left: 10px;
+}
+
+.tabletype h5 {
+  font-weight: bold !important;
+}
+
+.bookingtable th {
+  color: #ed1c24 !important;
+}
+
+.bookingtable tr {
+  margin-bottom: 10px !important;
+}
