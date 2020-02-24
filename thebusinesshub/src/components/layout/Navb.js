@@ -136,7 +136,10 @@ class Navb extends Component {
                     </div>
                     <div className="dropdownbookinglink">
                       {' '}
-                      <Dropdown.Item href="/"> MY BOOKINGS</Dropdown.Item>
+                      <Dropdown.Item href="/UserBoard/Booking">
+                        {' '}
+                        MY BOOKINGS
+                      </Dropdown.Item>
                     </div>
                     <div className="dropdownsignoutlink">
                       {' '}

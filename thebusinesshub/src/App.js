@@ -34,7 +34,7 @@ if (localStorage.userToken) {
   if (decodedToken.exp < currentTime) {
     // store.dispatch(clearCurrentProfile);
     store.dispatch(LogOut);
-    window.location.href = '/login';
+    // window.location.href = '/login';
   }
 }
 
