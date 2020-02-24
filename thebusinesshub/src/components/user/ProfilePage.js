@@ -52,7 +52,6 @@ class ProfilePage extends Component {
       .then(res => {
         this.setState({ profileInfo: res.data });
         this.setState({ profile: res.data.profile });
-        // this.setState({ selectedDay: res.data.profile.birthdate });
       });
   }
 
@@ -127,8 +126,9 @@ class ProfilePage extends Component {
         }
 
         if (
-          this.state.profile.firstName === '' ||
-          this.state.profile.lastName === ''
+          (this.state.profile.firstName === '' ||
+            this.state.profile.lastName === '') &&
+          this.state.profileInfo.state === 'verified'
         ) {
           this.setState({ namewarn: 'Name Cannot be empty' });
         } else {
@@ -156,15 +156,10 @@ class ProfilePage extends Component {
     return <VerifyBy />;
   };
   render() {
-    // if (this.state.profile.birthdate) {
-    //   if (this.state.profile.birthdate.length > 13) {
-    //     subBirthDate = this.state.profile.birthdate.substring(0, 10);
-    //   }
-    // }
     return (
       <div className="profilePage">
         <h1 className="firstChardivprofile">
-          {this.props.user.username.charAt(0).toUpperCase()}{' '}
+          {this.props.user.username.charAt(0).toUpperCase()}
         </h1>
         <h3 style={{ textAlign: 'center' }} className="pt-1">
           {this.props.user.username}
@@ -244,6 +239,7 @@ class ProfilePage extends Component {
               <Form.Label className="pl-3">BIRTHDATE</Form.Label>
               <div className="deadlineInput">
                 <ReactDatez
+                  placeholder="Select your birthdate"
                   name="dateInput"
                   handleChange={this.handleChangedate}
                   value={this.state.profile.birthdate}

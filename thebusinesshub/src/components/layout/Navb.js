@@ -4,10 +4,21 @@ import { NavLink, withRouter } from 'react-router-dom';
 import logo from '../../Images/logo.png';
 import '../stylesheets/NavCSS.css';
 import { LogOut } from '../../globalState/actions/authActions';
-// import { clearCurrentProfile } from '../../globalState/actions/profileActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+
+import store from '../../globalState/store';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from '../../helpers/setAuthToken';
+import { setCurrentUser } from '../../globalState/actions/authActions';
+let currentTime = Date.now() / 1000;
+let decodedToken;
+if (localStorage.userToken) {
+  setAuthToken(localStorage.userToken);
+  decodedToken = jwt_decode(localStorage.userToken);
+  store.dispatch(setCurrentUser(decodedToken));
+}
 
 class Navb extends Component {
   constructor(props) {
@@ -111,17 +122,6 @@ class Navb extends Component {
                 CONTACT
               </NavLink>
               {this.props.isAuth ? (
-                //               <NavLink
-                //                 exact
-                //                 to=""
-                //                 activeStyle={{
-                //                   color: 'black',
-                //                   textDecoration: 'none',
-                //                 }}
-                //                 onClick={this.SignOut}
-                //               >
-
-                // Logout              </NavLink>
                 <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
                     {this.props.user.username.charAt(0).toUpperCase()}{' '}
@@ -160,6 +160,18 @@ class Navb extends Component {
                   SIGN IN / SIGN UP
                 </NavLink>
               )}
+
+              {/* //   <NavLink
+                //                 exact
+                //                 to=""
+                //                 activeStyle={{
+                //                   color: 'black',
+                //                   textDecoration: 'none',
+                //                 }}
+                //                 onClick={this.SignOut}
+                //               >
+
+                // Logout              </NavLink> */}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
