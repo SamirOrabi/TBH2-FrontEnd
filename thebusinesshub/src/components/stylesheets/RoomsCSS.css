@@ -27,6 +27,13 @@
     border-left: 5px solid #ed1c24;
     display: flex;
   }
+
+  /* .monthdrop .DayPickerInput{
+    width: 50% !important;
+    height: 60px !important;
+    text-align: center !important;
+    border-color: #ed1c24 !important;
+  } */
   
    .monthdrop select {
     width: 50% !important;
@@ -92,4 +99,3 @@
     padding: 20px;
   }
 
-  

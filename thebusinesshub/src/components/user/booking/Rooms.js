@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row , Col , Form, FormControl , Button} from 'react-bootstrap';
 import '../../stylesheets/RoomsCSS.css'
-import Payment from '../booking/Payment';
+// import Payment from '../booking/Payment';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import 'react-day-picker/lib/style.css'
 export default class Rooms extends Component {
   
 
@@ -15,16 +17,17 @@ export default class Rooms extends Component {
   <p> START DATE</p>
   <div className="monthdrop">
             
-                <select
+                {/* <select
                   name="month"
                 >
                   <option selected disabled>
                     month
                   </option>
                  
-                </select>
+                </select> */}
+                 <DayPickerInput className="DayPickerInput" onDayChange={day => console.log(day)} />
 
-                <div className="daydrop pl-2">
+                {/* <div className="daydrop pl-2">
                 <select
                   name="day"
                   className=""
@@ -34,12 +37,12 @@ export default class Rooms extends Component {
                   </option>
                  
                 </select>
-              </div>
+              </div> */}
               </div>
     
 </Col>
 
-<Col sm={12} md={6}>
+{/* <Col sm={12} md={6}>
   <p> END DATE</p>
   <div className="monthdrop">
             
@@ -65,7 +68,7 @@ export default class Rooms extends Component {
               </div>
               </div>
 
-</Col>
+</Col> */}
 </Row>
 
 
