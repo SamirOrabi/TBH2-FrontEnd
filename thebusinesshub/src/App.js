@@ -17,6 +17,7 @@ import BookDetails from './components/user/booking/BookDetails';
 import './App.css';
 import setAuthToken from './helpers/setAuthToken';
 import { setCurrentUser, LogOut } from './globalState/actions/authActions';
+import BookingPage from './components/user/BookingPage';
 // import {
 //   clearCurrentProfile,
 //   getProfile
@@ -46,6 +47,8 @@ class App extends Component {
           <Navb />
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/booking" component={BookingPage} />
+          {/* <Route exact path="/booking/week" component={BookingPage} /> */}
           <Route
             exact
             path="/UserBoard/Account-Settings"

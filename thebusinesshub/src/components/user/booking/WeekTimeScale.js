@@ -1,6 +1,5 @@
 import * as ReactDOM from 'react-dom';
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
 import {
   ScheduleComponent,
   ViewsDirective,
@@ -10,11 +9,11 @@ import {
   Resize,
   DragAndDrop,
   Inject,
-  Day,
+  Week,
   TimelineViews,
   Agenda
 } from '@syncfusion/ej2-react-schedule';
-export default class DayTimeScale extends Component {
+export default class WeekTimeScale extends Component {
   generateStaticEvents(start, resCount, overlapCount) {
     let data = [];
     let id = 1;
@@ -54,7 +53,22 @@ export default class DayTimeScale extends Component {
   }
   generateResourceData(startId, endId, text) {
     let data = [];
-    let colors = [];
+    let colors = [
+      '#ff8787',
+      '#9775fa',
+      '#748ffc',
+      '#3bc9db',
+      '#69db7c',
+      '#fdd835',
+      '#748ffc',
+      '#9775fa',
+      '#df5286',
+      '#7fa900',
+      '#fec200',
+      '#5978ee',
+      '#00bdae',
+      '#ea80fc'
+    ];
     for (let a = startId; a <= endId; a++) {
       let n = Math.floor(Math.random() * colors.length);
       data.push({
@@ -65,26 +79,17 @@ export default class DayTimeScale extends Component {
     }
     return data;
   }
-  onPopupOpen(args) {
-    args.cancel = true;
-  }
-
-  OpenDetails = e => {
-    console.log('jsns');
-  };
   render() {
-    console.log(this.props);
     return (
       <div>
         <ScheduleComponent
-          // cssClass="virtual-scrolling"
+          cssClass="virtual-scrolling"
+          ref={schedule => (this.scheduleObj = schedule)}
           width="100%"
           height="auto"
           selectedDate={new Date()}
           eventSettings={{ dataSource: this.data }}
           group={{ resources: ['Rooms'] }}
-          popupOpen={this.onPopupOpen.bind(this)}
-          onClick={this.OpenDetails}
         >
           <ResourcesDirective>
             <ResourceDirective
@@ -95,15 +100,16 @@ export default class DayTimeScale extends Component {
               dataSource={this.generateResourceData(1, 4, 'Room')}
               textField="Text"
               idField="Id"
+              colorField="Color"
             ></ResourceDirective>
           </ResourcesDirective>
           <ViewsDirective>
-            <ViewDirective option="TimelineDay" allowVirtualScrolling={true} />
+            <ViewDirective option="TimelineWeek" allowVirtualScrolling={true} />
           </ViewsDirective>
           <Inject
-            services={[Agenda, Day, TimelineViews, Resize, DragAndDrop]}
+            services={[Agenda, Week, TimelineViews, Resize, DragAndDrop]}
           />
-        </ScheduleComponent>
+        </ScheduleComponent>{' '}
         <div className="booknowbtn">
           <button onClick={this.OpenDetails}>BOOK NOW</button>
         </div>

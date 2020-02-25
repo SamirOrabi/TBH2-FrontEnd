@@ -1,133 +1,110 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { withRouter, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import '../stylesheets/bookingsCss.css';
-import { Table, Container } from 'react-bootstrap';
-class BookingPage extends Component {
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import 'react-datez/dist/css/react-datez.css';
+import { ReactDatez } from 'react-datez';
+import DayTimeScale from './booking/DayTimeScale';
+import WeekTimeScale from './booking/WeekTimeScale';
+
+export default class BookingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userbook: []
+      dateInput: '',
+      showdaycomponent: true,
+      showweekcomponent: false,
+      daycolor: '#ed1c24',
+      dayborder: '5px solid #ed1c24',
+      weekcolor: '#000',
+      weekborder: 'none'
     };
   }
 
-  componentDidMount() {
-    axios.defaults.headers.common['authorization'] = localStorage.userToken;
-    axios
-      .post('https://cubexs.net/tbhapp/bookings/showmybookings', {
-        Account: {
-          id: this.props.user.id
-        }
-      })
-      .then(res => {
-        console.log(res.data.bookings);
-        this.setState({ userbook: res.data.bookings });
-      });
-  }
+  DayComponent = e => {
+    this.setState({
+      showdaycomponent: true,
+      showweekcomponent: false,
+      weekborder: 'none',
+      weekcolor: '#000',
+      daycolor: '#ed1c24',
+      dayborder: '5px solid #ed1c24'
+    });
+  };
+  WeekComponent = e => {
+    this.setState({
+      showweekcomponent: true,
+      showdaycomponent: false,
+      dayborder: 'none',
+      daycolor: '#000',
+      weekcolor: '#ed1c24',
+      weekborder: '5px solid #ed1c24'
+    });
+  };
+  handleChangedate = value => {
+    this.setState({ dateInput: value });
+  };
 
   render() {
-    const today = new Date();
-    var date =
-      today.getFullYear() +
-      '-' +
-      (today.getMonth() + 1) +
-      '-' +
-      today.getDate();
     return (
-      <Container>
-        {this.state.userbook ? (
-          this.state.userbook.length === 0 ? (
-            <h1 className="nobookings">You have no bookings yet</h1>
-          ) : (
-            <div className="bookingtable">
-              <div className="tabletype">
-                {' '}
-                <h5 className="py-2">UPCOMING</h5>
-              </div>
-              <React.Fragment>
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>ROOM</th>
-                      <th>DATE</th>
-                      <th>SLOT</th>
-                      <th>NUMBER OF PEOPLE</th>
-                      <th>PAYMENT METHOD</th>
-                      <th>PACKAGE CODE</th>
-                      <th>STATUS</th>
-                    </tr>
-                  </thead>
-                  {this.state.userbook.map(
-                    (book, i) =>
-                      book.date > date && (
-                        <tbody>
-                          <tr key={i} className="text-center bookingstr">
-                            <td>{book.roomType}</td>
-                            <td>{book.date.substring(0, 10)}</td>
-                            <td>{book.slot}</td>
-                            <td>{book.amountOfPeople}</td>
-                            <td>{book.paymentMethod}</td>
-                            {book.packageCode === null ? (
-                              <td>-</td>
-                            ) : (
-                              <td>{book.packageCode}</td>
-                            )}{' '}
-                            <td>{book.status}</td>
-                          </tr>
-                        </tbody>
-                      )
-                  )}{' '}
-                </Table>
-              </React.Fragment>
-              <div className="tabletype mt-5">
-                <h5 className='py-2'>HISTORY</h5>
-              </div>
-              <React.Fragment>
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>ROOM</th>
-                      <th>DATE</th>
-                      <th>SLOT</th>
-                      <th>NUMBER OF PEOPLE</th>
-                      <th>PAYMENT METHOD</th>
-                      <th>PACKAGE CODE</th>
-                      <th>STATUS</th>
-                    </tr>
-                  </thead>
-                  {this.state.userbook.map(
-                    (book, i) =>
-                      book.date < date && (
-                        <tbody>
-                          <tr key={i} className="text-center bookingstr  mb-5">
-                            <td>{book.roomType}</td>
-                            <td>{book.date.substring(0, 10)}</td>
-                            <td>{book.slot}</td>
-                            <td>{book.amountOfPeople}</td>
-                            <td>{book.paymentMethod}</td>
-                            {book.packageCode === null ? (
-                              <td>-</td>
-                            ) : (
-                              <td>{book.packageCode}</td>
-                            )}{' '}
-                            <td>{book.status}</td>
-                          </tr>
-                        </tbody>
-                      )
-                  )}{' '}
-                </Table>
-              </React.Fragment>
-            </div>
-          )
-        ) : (
-          <h1 className="nobookings">You have no bookings yet</h1>
-        )}
-      </Container>
+      <div className="bookingpage">
+        <Container>
+          <Row className='mb-4'>
+            <Col sm={12} md={6}>
+              <h2 className="pt-5">{this.state.dateInput}</h2>
+            </Col>
+            <Col sm={12} md={6}>
+              <Row>
+                <Col sm={4}>
+                  {/* <Form.Label className="pl-3" style={{ color: '#ed1c24' }}>
+                    DATE
+                  </Form.Label>
+                  <div className="deadlineInput">
+                    <ReactDatez
+                      placeholder="DATE"
+                      name="dateInput"
+                      handleChange={this.handleChangedate}
+                      value={this.state.dateInput}
+                    />
+                  </div> */}
+                </Col>
+                <Col sm={3}></Col>
+                <Col sm={5} className="pt-5 dayweekbuttons pl-3">
+                  <Button
+                    onClick={this.DayComponent}
+                    style={{
+                      color: this.state.daycolor,
+                      borderLeft: this.state.dayborder
+                    }}
+                  >
+                    DAY
+                  </Button>
+                  <Button
+                    onClick={this.WeekComponent}
+                    style={{
+                      color: this.state.weekcolor,
+                      borderLeft: this.state.weekborder
+                    }}
+                    className="ml-5"
+                  >
+                    {' '}
+                    WEEK
+                  </Button>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          {this.state.showdaycomponent ? (
+            <DayTimeScale dateInput={this.state.dateInput} />
+          ) : null}
+
+          {this.state.showweekcomponent ? <WeekTimeScale /> : null}
+          {/* {this.props.location.pathname.substring(9) === 'day' && (
+            <DayTimeScale />
+          )}
+          {this.props.location.pathname.substring(9) === 'week' && (
+            <WeekTimeScale />
+          )} */}
+        </Container>
+      </div>
     );
   }
 }
-const mapStatetoProps = state => ({
-  user: state.auth.user
-});
-export default connect(mapStatetoProps)(withRouter(BookingPage));
