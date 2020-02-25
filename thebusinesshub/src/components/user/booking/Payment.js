@@ -29,7 +29,7 @@ showPayment=e=>{
         <Container>
             <Row>
           <Col sm={12} md={6}>
-          <div className="Policies">
+          <div className="Regulations">
           <h2>Policies & Regulations </h2>
           <div style={{display:'flex'}}  className="mt-3"><p><i class="fas fa-square-full"></i> Pay full amount on the first day of the workshop.</p></div>
 

@@ -9,6 +9,8 @@ class Bookingmodal extends Component {
       this.state = {
                 bookingmodalShow: false}}
         render(){
+          
+
 
             return(<Modal
                 {...this.props}
@@ -23,6 +25,7 @@ class Bookingmodal extends Component {
                 {/* <Modal.Footer>
                   <Button >Close</Button>
                 </Modal.Footer> */}
+
               </Modal>
             
             )

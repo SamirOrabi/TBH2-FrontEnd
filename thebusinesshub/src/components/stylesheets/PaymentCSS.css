@@ -1,4 +1,15 @@
 
+.Policies {
+padding-left: 55px;
+border-left: 2px solid  #D2D0D0
+}
+
+.Regulations i{
+    color: #ED1C24;
+    font-size: 5px;
+    padding-right: 15px;
+    }
+
 .Policies h2{
 color: #ED1C24;
 font-family: Arial;

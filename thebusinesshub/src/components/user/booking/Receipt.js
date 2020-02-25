@@ -11,7 +11,7 @@ export default class Receipt extends Component {
 
                   <Col sm={1}></Col>
                       <Col sm={11}>
-                      <div className="Policies">
+                      <div className="receipt">
           <h2>Receipt For Ahmed orabi</h2>
           </div>
                       </Col>
