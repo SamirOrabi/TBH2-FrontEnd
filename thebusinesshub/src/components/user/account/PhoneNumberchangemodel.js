@@ -39,6 +39,7 @@ class PhoneNumberchangemodel extends Component {
         } else {
           this.setState({ phoneerror: '' });
           this.props.onHide();
+          this.setState({NewPhoneNumber:''})
         }
       })
       .catch(err => console.log(err));
@@ -72,7 +73,6 @@ class PhoneNumberchangemodel extends Component {
                 noValidate
                 required
                 onKeyDown={this.enter}
-                type="number"
                 onChange={this.handleUserInput}
                 value={this.state.NewPhoneNumber}
                 name="phoneNumber"

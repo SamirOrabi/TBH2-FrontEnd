@@ -3,21 +3,19 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import '../../stylesheets/ChangesmodelCSS.css';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import {EmailErrors,EmailErrorsIcon} from '../../layout/FormErrors'
+import { EmailErrors, EmailErrorsIcon } from '../../layout/FormErrors';
 class EmailChangesmodel extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       newEmail: '',
-      emailerror: '' ,
-      EmailmodalShow:false,
+      emailerror: '',
+      EmailmodalShow: false,
       emailErros: '',
       emailErrors: { email: '' },
       emailValid: false,
       formValid: false
-
-
     };
   }
 
@@ -27,7 +25,6 @@ class EmailChangesmodel extends Component {
     this.setState({ newEmail: e.target.value });
     this.validateField(name, value);
     console.log(e.target.value);
-   
   };
   validateField(fieldName, value) {
     let emailValidationErrors = this.state.emailErrors;
@@ -40,26 +37,23 @@ class EmailChangesmodel extends Component {
         if (value === 0) {
         }
         break;
-        default:
-          break;}
+      default:
+        break;
+    }
 
+    this.setState(
+      {
+        emailErrors: emailValidationErrors,
 
-          this.setState(
-            {
-             
-              emailErrors: emailValidationErrors,
-             
-              emailValid: emailValid,
-             
-            },      this.validateForm
-            )
+        emailValid: emailValid
+      },
+      this.validateForm
+    );
   }
 
   validateForm() {
     this.setState({
-      formValid:
-        this.state.emailValid 
-      
+      formValid: this.state.emailValid
     });
   }
   changeEmail = () => {
@@ -78,6 +72,7 @@ class EmailChangesmodel extends Component {
         } else {
           this.setState({ emailerror: '' });
           this.props.onHide();
+          this.setState({newEmail:''})
         }
       })
 
@@ -119,13 +114,11 @@ class EmailChangesmodel extends Component {
                 name="email"
                 placeholder="NEW E-MAIL"
               />
-
-<div className="icontringale">
-              <EmailErrorsIcon emailErrors={this.state.emailErrors} />
-            </div>{' '}
+              <div className="icontringale">
+                <EmailErrorsIcon emailErrors={this.state.emailErrors} />
+              </div>{' '}
             </Form.Group>
             <EmailErrors emailErrors={this.state.emailErrors} />
-
           </Form>
           {this.state.emailerror ? (
             <span
@@ -133,7 +126,7 @@ class EmailChangesmodel extends Component {
               style={{ color: '#ed1c24', fontWeight: 'bold' }}
             >
               {' '}
-              <i className="fas fa-exclamation-triangle px-2"></i>{' '}
+              {/* <i className="fas fa-exclamation-triangle px-2"></i>{' '} */}
               {this.state.emailerror}
             </span>
           ) : null}

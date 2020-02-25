@@ -74,6 +74,9 @@ class Passwordchangemodel extends Component {
             this.setState({ error: res.data.error, passerror: '' });
           } else {
             this.props.onHide();
+            this.setState({newPassword:''})
+            this.setState({oldpassword:''})
+            this.setState({ConfirmPassword:''})
           }
         })
         .catch(err => console.log(err));
