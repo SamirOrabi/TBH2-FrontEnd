@@ -16,8 +16,8 @@ let currentTime = Date.now() / 1000;
 let decodedToken;
 if (localStorage.userToken) {
   setAuthToken(localStorage.userToken);
-  decodedToken = jwt_decode(localStorage.userToken);
-  store.dispatch(setCurrentUser(decodedToken));
+   decodedToken = jwt_decode(localStorage.userToken);
+  store.dispatch(setCurrentUser(decodedToken));         
 }
 
 class Navb extends Component {
@@ -121,8 +121,7 @@ class Navb extends Component {
                 {' '}
                 CONTACT
               </NavLink>
-              {this.props.isAuth ? (
-                <Dropdown>
+  {this.props.isAuth ?<Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
                     {this.props.user.username.charAt(0).toUpperCase()}{' '}
                   </Dropdown.Toggle>
@@ -149,9 +148,7 @@ class Navb extends Component {
                       </Dropdown.Item>
                     </div>
                   </Dropdown.Menu>
-                </Dropdown>
-              ) : (
-                <NavLink
+                </Dropdown>  :  <NavLink
                   exact
                   to="/login"
                   activeStyle={{
@@ -161,10 +158,9 @@ class Navb extends Component {
                   }}
                 >
                   SIGN IN / SIGN UP
-                </NavLink>
-              )}
-
-              {/* //   <NavLink
+                </NavLink> }
+                
+                           {/* //   <NavLink
                 //                 exact
                 //                 to=""
                 //                 activeStyle={{
@@ -175,6 +171,8 @@ class Navb extends Component {
                 //               >
 
                 // Logout              </NavLink> */}
+              
+           
             </Nav>
           </Navbar.Collapse>
         </Navbar>

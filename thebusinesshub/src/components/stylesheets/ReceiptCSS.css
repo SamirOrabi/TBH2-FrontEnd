@@ -1,0 +1,47 @@
+.table thead th {
+    vertical-align: bottom;
+    border-top: #FFFFFF;
+   
+}
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #FFFFFF;
+}
+
+.table td{
+    padding: 30px  0px;
+}
+
+.receipt h6{
+    color: black;
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    }
+
+    .receipt i{
+        color: #ED1C24;
+        font-size: 5px;
+        padding-right: 15px;
+        }
+    .printbtn{
+        background: none;
+        border: none;
+    }
+
+    .printbtn:hover{
+        background: none;
+        border: none;
+    }
+
+    .printbtn i{
+        color:rgb(117, 117, 117);
+        font-size: 20px;
+    }
