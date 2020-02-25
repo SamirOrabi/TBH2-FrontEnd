@@ -14,6 +14,16 @@ import {
   Agenda
 } from '@syncfusion/ej2-react-schedule';
 export default class WeekTimeScale extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bookingmodalShow: false
+    };
+  }
+  OpenDetails = e => {
+    e.cancel = true;
+    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
+  };
   generateStaticEvents(start, resCount, overlapCount) {
     let data = [];
     let id = 1;
@@ -90,6 +100,7 @@ export default class WeekTimeScale extends Component {
           selectedDate={new Date()}
           eventSettings={{ dataSource: this.data }}
           group={{ resources: ['Rooms'] }}
+          popupOpen={this.OpenDetails}
         >
           <ResourcesDirective>
             <ResourceDirective

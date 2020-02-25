@@ -1,6 +1,6 @@
 import * as ReactDOM from 'react-dom';
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import Bookingmodal from '../booking/Bookingmodal';
 import {
   ScheduleComponent,
   ViewsDirective,
@@ -15,6 +15,15 @@ import {
   Agenda
 } from '@syncfusion/ej2-react-schedule';
 export default class DayTimeScale extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bookingmodalShow: false,
+      startDate: '',
+      endDate: '',
+      roomId: ''
+    };
+  }
   generateStaticEvents(start, resCount, overlapCount) {
     let data = [];
     let id = 1;
@@ -29,7 +38,7 @@ export default class DayTimeScale extends Component {
           randomCollection.indexOf(random + 2) !== -1 ||
           randomCollection.indexOf(random - 2) !== -1
         ) {
-          random += Math.max.apply(null, randomCollection) + 10;
+          random += Math.max.apply(null, randomCollection) + 5;
         }
         for (let k = 1; k <= 2; k++) {
           randomCollection.push(random + k);
@@ -65,26 +74,41 @@ export default class DayTimeScale extends Component {
     }
     return data;
   }
-  onPopupOpen(args) {
-    args.cancel = true;
-  }
 
   OpenDetails = e => {
-    console.log('jsns');
+    e.cancel = true;
+    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
+    console.log(e.data);
+
+    if (e.data) {
+      this.setState({
+        startDate: e.data.startTime,
+        roomId: e.data.RoomId,
+        endDate: e.data.endTime
+      });
+      console.log(this.state.startDate);
+    }
   };
   render() {
-    console.log(this.props);
+    console.log(this);
     return (
       <div>
         <ScheduleComponent
           // cssClass="virtual-scrolling"
           width="100%"
           height="auto"
-          selectedDate={new Date()}
           eventSettings={{ dataSource: this.data }}
           group={{ resources: ['Rooms'] }}
-          popupOpen={this.onPopupOpen.bind(this)}
-          onClick={this.OpenDetails}
+          popupOpen={this.OpenDetails}
+          startHour="09:00"
+          endHour="22:00"
+          enablePersistence={true}
+          quickInfoOnSelectionEnd={true}
+          timeScale={{
+            interval: 120,
+            slotCount: 2
+          }}
+          minDate={new Date()}
         >
           <ResourcesDirective>
             <ResourceDirective
@@ -107,6 +131,11 @@ export default class DayTimeScale extends Component {
         <div className="booknowbtn">
           <button onClick={this.OpenDetails}>BOOK NOW</button>
         </div>
+
+        <Bookingmodal
+          show={this.state.bookingmodalShow}
+          onHide={this.bookingmodalShow}
+        />
       </div>
     );
   }
