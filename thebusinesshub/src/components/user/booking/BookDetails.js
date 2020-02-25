@@ -12,7 +12,7 @@ export default class BookDetails extends Component {
     const settings = {
       customPaging:function(i){
         return (
-          <Container classNam="bookdetails ">
+          <Container className="bookdetails ">
           <Row>
       <Col sm={6}>
           <a>
@@ -61,7 +61,7 @@ export default class BookDetails extends Component {
  
   </Col>
   <Col className='m-auto' md={7} sm={12}>
-     <Rooms />
+     <Rooms showPayment={this.props.showPayment}/>
     </Col>
 
   </Row>

@@ -171,9 +171,10 @@ export default class Rooms extends Component {
             <Button
               type="submit"
               className="my-4 nextBtn"
-           to='/payment'
+           onClick={this.props.showPayment}
             >
               NEXT
+              {/* <Payment/> */}
             </Button>
             
           </Col>

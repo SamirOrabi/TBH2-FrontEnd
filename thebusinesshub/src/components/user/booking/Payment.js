@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
 import { Row , Container , Col ,Button ,Form} from 'react-bootstrap';
-import '../../stylesheets/PaymentCSS.css'
+import '../../stylesheets/PaymentCSS.css';
+import Receipt from '../booking/Receipt';
 export default class Payment extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+        showreceiptcomponent:false,
+        showpaymentcomponent:true,
+      
+    }
+}
+
+showreceipt=e=>{
+  this.setState({showreceiptcomponent:true,showpaymentcomponent:false ,
+     
+
+  })
+}
+showPayment=e=>{
+  this.setState({showreceiptcomponent:false,showpaymentcomponent:true ,
+  })
+}
   render() {
+
     return (
       <div>
         <Container>
             <Row>
-                <Col sm={12} md={6}>
-           
+          <Col sm={12} md={6}>
           <div className="Policies">
           <h2>Policies & Regulations </h2>
           <div style={{display:'flex'}}  className="mt-3"><p><i class="fas fa-square-full"></i> Pay full amount on the first day of the workshop.</p></div>
@@ -24,6 +44,7 @@ export default class Payment extends Component {
             <Button
               type="submit"
               className="my-4 nextBtn mt-5"
+              onClick={this.props.showDetails}
             >
               BACK
             </Button>
@@ -67,6 +88,7 @@ export default class Payment extends Component {
             <Button
               type="submit"
               className="my-4 nextBtn mr-5"
+              onClick={this.props.showreceipt}
             >
           Book
             </Button>
@@ -76,6 +98,10 @@ export default class Payment extends Component {
                 </Col>
             </Row>
         </Container>
+        
+
+        {/* {this.state.showdetailscomponent && <Receipt showreceipt={this.showreceipt} /> }
+       {this.state.showpaymentcomponent && <Payment showPayment={this.showPayment}/> } */}
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Modal, Button,  } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import '../../stylesheets/BookingmodelCSS.css';
 import DetailsPaymentHolder from '../booking/DetailsPaymentHolder';
 
 class Bookingmodal extends Component {
@@ -15,9 +16,9 @@ class Bookingmodal extends Component {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
               >
-               <DetailsPaymentHolder />
+             <Modal.Header closeButton></Modal.Header>
                 <Modal.Body>
-                 
+                <DetailsPaymentHolder />
                 </Modal.Body>
                 {/* <Modal.Footer>
                   <Button >Close</Button>
