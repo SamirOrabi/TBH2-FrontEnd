@@ -25,3 +25,8 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance:textfield;
 }
+
+
+/* .slick-dots li{
+padding-left: 100px !important;
+} */

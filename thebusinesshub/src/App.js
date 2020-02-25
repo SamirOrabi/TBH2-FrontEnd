@@ -11,7 +11,10 @@ import UserBoard from './components/user/UserBoard';
 import Space from './components/pages/Space';
 import Booking from './components/pages/Booking';
 import Contact from './components/pages/Contact';
-import BookDetails from './components/user/booking/BookDetails';
+import DetailsPaymentHolder from './components/user/booking/DetailsPaymentHolder';
+import Receipt from './components/user/booking/Receipt';
+
+
 
 // Styling
 import './App.css';
@@ -33,8 +36,8 @@ if (localStorage.userToken) {
   const currentTime = Date.now() / 1000;
   if (decodedToken.exp < currentTime) {
     // store.dispatch(clearCurrentProfile);
-    store.dispatch(LogOut);
-    window.location.href = '/login';
+    localStorage.removeItem('userToken');
+    // window.location.href = '/login';
   }
 }
 
@@ -51,9 +54,13 @@ class App extends Component {
             path="/UserBoard/Account-Settings"
             component={UserBoard}
           />
+          
           <Route exact path="/UserBoard/Profile" component={UserBoard} />
           <Route exact path="/UserBoard/Booking" component={UserBoard} />
           <Route exact path="/UserBoard/Purchase" component={UserBoard} />
+   
+      <DetailsPaymentHolder />
+      <Receipt />
         </div>
       </Router>
     );
