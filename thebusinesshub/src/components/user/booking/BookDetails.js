@@ -33,9 +33,9 @@ export default class BookDetails extends Component {
     return (
       <div>
         <Container className="mt-5">
-        <Row>
+        <Row className='m-auto'>
         
-    <Col md={5} sm={12}>
+    <Col  className='m-auto pl-4' md={5} sm={12}>
   <Slider {...settings}>
  
           <div>
@@ -60,7 +60,7 @@ export default class BookDetails extends Component {
         </Slider>
  
   </Col>
-  <Col  md={7} sm={12}>
+  <Col className='m-auto' md={7} sm={12}>
      <Rooms />
     </Col>
 

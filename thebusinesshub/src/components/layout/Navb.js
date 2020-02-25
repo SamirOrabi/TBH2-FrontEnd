@@ -4,7 +4,6 @@ import { NavLink, withRouter } from 'react-router-dom';
 import logo from '../../Images/logo.png';
 import '../stylesheets/NavCSS.css';
 import { LogOut } from '../../globalState/actions/authActions';
-// import { clearCurrentProfile } from '../../globalState/actions/profileActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -136,7 +135,10 @@ class Navb extends Component {
                     </div>
                     <div className="dropdownbookinglink">
                       {' '}
-                      <Dropdown.Item href="/"> MY BOOKINGS</Dropdown.Item>
+                      <Dropdown.Item href="/UserBoard/Booking">
+                        {' '}
+                        MY BOOKINGS
+                      </Dropdown.Item>
                     </div>
                     <div className="dropdownsignoutlink">
                       {' '}

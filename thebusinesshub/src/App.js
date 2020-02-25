@@ -13,6 +13,7 @@ import Booking from './components/pages/Booking';
 import Contact from './components/pages/Contact';
 import DetailsPaymentHolder from './components/user/booking/DetailsPaymentHolder';
 import Receipt from './components/user/booking/Receipt';
+// import Payment from './components/user/booking/Payment';
 
 
 
@@ -36,7 +37,7 @@ if (localStorage.userToken) {
   const currentTime = Date.now() / 1000;
   if (decodedToken.exp < currentTime) {
     // store.dispatch(clearCurrentProfile);
-    localStorage.removeItem('userToken');
+    store.dispatch(LogOut);
     // window.location.href = '/login';
   }
 }
@@ -49,6 +50,9 @@ class App extends Component {
           <Navb />
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/booking" component={Booking} />
+        
+          
           <Route
             exact
             path="/UserBoard/Account-Settings"
@@ -59,8 +63,8 @@ class App extends Component {
           <Route exact path="/UserBoard/Booking" component={UserBoard} />
           <Route exact path="/UserBoard/Purchase" component={UserBoard} />
    
-      <DetailsPaymentHolder />
-      <Receipt />
+      {/* <DetailsPaymentHolder />
+      <Receipt /> */}
         </div>
       </Router>
     );

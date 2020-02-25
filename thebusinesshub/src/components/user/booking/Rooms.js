@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { Container, Row , Col , Form, FormControl , Button} from 'react-bootstrap';
 import '../../stylesheets/RoomsCSS.css'
+import Payment from '../booking/Payment';
 export default class Rooms extends Component {
+  
+
+  
   render() {
     return (
     <Container className="roomdetails">
  <Form>
 <Row>
-  <Col sm={12} md={5}>
+  <Col sm={12} md={6}>
   <p> START DATE</p>
   <div className="monthdrop">
             
@@ -35,7 +39,7 @@ export default class Rooms extends Component {
     
 </Col>
 
-<Col sm={12} md={5}>
+<Col sm={12} md={6}>
   <p> END DATE</p>
   <div className="monthdrop">
             
@@ -66,7 +70,7 @@ export default class Rooms extends Component {
 
 
 <Row  className="mt-4">
-  <Col sm={12} md={5}>
+  <Col sm={12} md={6}>
   <p> START TIME</p>
   <div className="monthdrop">
 
@@ -95,7 +99,7 @@ export default class Rooms extends Component {
     
 </Col>
 
-<Col sm={12} md={5}>
+<Col sm={12} md={6}>
   <p> END TIME</p>
   <div className="monthdrop">
                     
@@ -132,7 +136,7 @@ export default class Rooms extends Component {
 
 
 <Row className="mt-4">
-  <Col sm={12} md={5}>
+  <Col sm={12} md={6}>
   <p> Room Type</p>
   <div className="roomtypedrop">
             
@@ -153,7 +157,7 @@ export default class Rooms extends Component {
   <p>Number of people</p>
   <div className="monthdrop">
             
-  <FormControl style={{height:'60px' , margin:'0px' ,width:'63%'}}
+  <FormControl style={{height:'60px' , margin:'0px' }}
   className="startTime"
    type="number"
    name="startTime" />  
@@ -167,11 +171,15 @@ export default class Rooms extends Component {
             <Button
               type="submit"
               className="my-4 nextBtn"
+           to='/payment'
             >
               NEXT
             </Button>
+            
           </Col>
 </Form>
+
+
               </Container>  
      
     );

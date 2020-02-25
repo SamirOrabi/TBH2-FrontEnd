@@ -3,7 +3,7 @@ import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../stylesheets/bookingsCss.css';
-import { Table } from 'react-bootstrap';
+import { Table, Container } from 'react-bootstrap';
 class BookingPage extends Component {
   constructor(props) {
     super(props);
@@ -27,46 +27,103 @@ class BookingPage extends Component {
   }
 
   render() {
+    const today = new Date();
+    var date =
+      today.getFullYear() +
+      '-' +
+      (today.getMonth() + 1) +
+      '-' +
+      today.getDate();
     return (
-      <div>
-        {this.state.userbook.length === 0 && (
+      <Container>
+        {this.state.userbook ? (
+          this.state.userbook.length === 0 ? (
+            <h1 className="nobookings">You have no bookings yet</h1>
+          ) : (
+            <div className="bookingtable">
+              <div className="tabletype">
+                {' '}
+                <h5 className="py-2">UPCOMING</h5>
+              </div>
+              <React.Fragment>
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>ROOM</th>
+                      <th>DATE</th>
+                      <th>SLOT</th>
+                      <th>NUMBER OF PEOPLE</th>
+                      <th>PAYMENT METHOD</th>
+                      <th>PACKAGE CODE</th>
+                      <th>STATUS</th>
+                    </tr>
+                  </thead>
+                  {this.state.userbook.map(
+                    (book, i) =>
+                      book.date > date && (
+                        <tbody>
+                          <tr key={i} className="text-center bookingstr">
+                            <td>{book.roomType}</td>
+                            <td>{book.date.substring(0, 10)}</td>
+                            <td>{book.slot}</td>
+                            <td>{book.amountOfPeople}</td>
+                            <td>{book.paymentMethod}</td>
+                            {book.packageCode === null ? (
+                              <td>-</td>
+                            ) : (
+                              <td>{book.packageCode}</td>
+                            )}{' '}
+                            <td>{book.status}</td>
+                          </tr>
+                        </tbody>
+                      )
+                  )}{' '}
+                </Table>
+              </React.Fragment>
+              <div className="tabletype mt-5">
+                <h5 className='py-2'>HISTORY</h5>
+              </div>
+              <React.Fragment>
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>ROOM</th>
+                      <th>DATE</th>
+                      <th>SLOT</th>
+                      <th>NUMBER OF PEOPLE</th>
+                      <th>PAYMENT METHOD</th>
+                      <th>PACKAGE CODE</th>
+                      <th>STATUS</th>
+                    </tr>
+                  </thead>
+                  {this.state.userbook.map(
+                    (book, i) =>
+                      book.date < date && (
+                        <tbody>
+                          <tr key={i} className="text-center bookingstr  mb-5">
+                            <td>{book.roomType}</td>
+                            <td>{book.date.substring(0, 10)}</td>
+                            <td>{book.slot}</td>
+                            <td>{book.amountOfPeople}</td>
+                            <td>{book.paymentMethod}</td>
+                            {book.packageCode === null ? (
+                              <td>-</td>
+                            ) : (
+                              <td>{book.packageCode}</td>
+                            )}{' '}
+                            <td>{book.status}</td>
+                          </tr>
+                        </tbody>
+                      )
+                  )}{' '}
+                </Table>
+              </React.Fragment>
+            </div>
+          )
+        ) : (
           <h1 className="nobookings">You have no bookings yet</h1>
         )}
-        {this.state.userbook.length > 0 && (
-          <div className="bookingtable">
-            <Table>
-              <thead>
-                <tr>
-                  <th>ROOM</th>
-                  <th>DATE</th>
-                  <th>SLOT</th>
-                  <th>NUMBER OF PEOPLE</th>
-                  <th>PAYMENT METHOD</th>
-                  <th>PACKAGE CODE</th>
-                  <th>STATUS</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.userbook.map((book, i) => (
-                  <tr key={i} className="text-center bookingstr">
-                    <td>{book.roomType}</td>
-                    <td>{book.date.substring(0, 10)}</td>
-                    <td>{book.slot}</td>
-                    <td>{book.amountOfPeople}</td>
-                    <td>{book.paymentMethod}</td>
-                    {book.packageCode === null ? (
-                      <td>-</td>
-                    ) : (
-                      <td>{book.packageCode}</td>
-                    )}{' '}
-                    <td>{book.status}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
-        )}
-      </div>
+      </Container>
     );
   }
 }
