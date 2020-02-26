@@ -72,8 +72,28 @@ export default class Rooms extends Component {
             <Col sm={12} md={6}>
               <p> Room Type</p>
               <div className="roomtypedrop">
-                <select name="month">
-                  <option>Room Type</option>
+                <select
+                  className="browser-default"
+                  value=""
+                  onChange=""
+                  name="roomtype"
+                >
+                  <option selected disabled>
+                    roomtype
+                  </option>
+                  <option name="meetingRoom" value="meetingRoom">
+                    {' '}
+                    Meeting Room{' '}
+                  </option>
+                  <option name="TrainingRoom" value="TrainingRoom">
+                    {' '}
+                    Training Room{' '}
+                  </option>
+
+                  <option name="PrivateRoom" value="PrivateRoom">
+                    {' '}
+                    Private Room{' '}
+                  </option>
                 </select>
               </div>
             </Col>
@@ -98,7 +118,6 @@ export default class Rooms extends Component {
               onClick={this.props.showPayment}
             >
               NEXT
-              {/* <Payment/> */}
             </Button>
           </Col>
         </Form>

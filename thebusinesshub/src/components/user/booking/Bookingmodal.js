@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import '../../stylesheets/BookingmodelCSS.css';
 import DetailsPaymentHolder from '../booking/DetailsPaymentHolder';
 let startD;
@@ -12,12 +12,9 @@ export default class Bookingmodal extends Component {
     };
   }
 
- 
-
   render() {
     console.log();
     console.log(String(this.props.endDate).substring(16, 18));
-
 
     return (
       <Modal
@@ -26,13 +23,18 @@ export default class Bookingmodal extends Component {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton></Modal.Header>
+        <Modal.Header>
+          <Button className="closebtn" onClick={this.props.closebookModal}>
+            <i class="fas fa-times"></i>
+          </Button>
+        </Modal.Header>{' '}
         <Modal.Body>
           <DetailsPaymentHolder
             startDate={String(this.props.startDate).substring(4, 10)}
             startTime={String(this.props.startDate).substring(16, 21)}
             endTime={String(this.props.endDate).substring(16, 21)}
             rommId={this.props.roomId}
+            closebookModal={this.props.closebookModal}
           />
         </Modal.Body>
         {/* <Modal.Footer>

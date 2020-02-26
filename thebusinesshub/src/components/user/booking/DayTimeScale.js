@@ -89,6 +89,9 @@ export default class DayTimeScale extends Component {
       console.log(this.state.startDate);
     }
   };
+  closebookModal = e => {
+    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
+  };
   render() {
     console.log(this);
     return (
@@ -140,6 +143,7 @@ export default class DayTimeScale extends Component {
           startDate={this.state.startDate}
           roomId={this.state.roomId}
           endDate={this.state.endDate}
+          closebookModal={this.closebookModal}
         />
       </div>
     );

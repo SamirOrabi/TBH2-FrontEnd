@@ -11,6 +11,12 @@
   border-left: 5px solid #ed1c24;
   display: flex;
 }
+
+.roomtypedrop{
+  padding-left: 4%;
+    border-left: 5px solid #ed1c24;
+    display: flex;
+}
 .roomtypedrop select {
   width: 90% !important;
   height: 60px !important;
@@ -80,6 +86,63 @@
   transition: transform 80ms ease-in;
   border: 1px solid #ed1c24;
 }
+ .monthdrop {
+    /* width: 100% !important; */
+    padding-left: 4%;
+    border-left: 5px solid #ed1c24;
+    display: flex;
+  }
+
+  /* .monthdrop input{
+    width: 50% !important;
+    height: 60px !important;
+    text-align: center !important;
+    border-color: #ed1c24 !important;
+  } */
+
+  .DayPickerInput input{
+    height: 60px !important;
+    text-align: center !important;
+    border: 1px solid #ed1c24 !important;
+  }
+  
+
+  .DayPickerInput input{
+    height: 60px !important;
+  }
+   .monthdrop select {
+    width: 50% !important;
+    height: 60px !important;
+    text-align: center !important;
+    border-color: #ed1c24 !important;
+  }
+  
+  .daydrop{
+    /* width: 50% !important; */
+    padding-left: 1%
+   
+  }
+
+  .daydrop select{
+    width: 70% !important;
+    height: 60px !important;
+    text-align: center !important;
+    border-color: #ed1c24 !important;
+  } 
+  .daydrop .startTime {
+    width: 50% !important;
+    height: 60px !important;
+    text-align: center !important;
+    border-color: #ed1c24 !important;
+  }
+ 
+   
+  .rooms  .daydrop select {
+    width: 40% !important;
+    height: 30px !important;
+    text-align: center !important;
+    border-color: #ed1c24 !important;
+  }
 
 .roomdetails {
   border-left: 1px solid #d2d0d0;
@@ -97,3 +160,10 @@
 .react-time-picker__inputGroup__input {
 width: 20px !important;
 }
+  .roomdetails{
+    border-left: 1px solid  #D2D0D0;
+    padding: 50px;
+    padding-left: 30px;
+    padding-right: 93px;
+  }
+

@@ -94,7 +94,9 @@ export default class DetailsPaymentHolder extends Component {
             showreceipt={this.showreceipt}
           />
         )}
-        {this.state.showreceiptcomponent && <Receipt />}
+        {this.state.showreceiptcomponent && (
+          <Receipt closebookModal={this.props.closebookModal} />
+        )}
       </div>
     );
   }
