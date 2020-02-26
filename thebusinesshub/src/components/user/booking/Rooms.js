@@ -71,16 +71,16 @@ export default class Rooms extends Component {
                   className="browser-default"
                   value={this.state.payment}
                   onChange={this.OnChangepayment}
-                  name="roomtype"
+                  name="payment"
                 >
                   <option selected disabled>
                    Payment Way
                   </option>
-                  <option name="meetingRoom" value="meetingRoom">
+                  <option name="cash" value="cash">
                     {' '}
                    cash{' '}
                   </option>
-                  <option name="TrainingRoom" value="TrainingRoom">
+                  <option name="vodafonecash" value="vodafone cash">
                     {' '}
                     vodafone cash{' '}
                   </option>
@@ -127,21 +127,21 @@ export default class Rooms extends Component {
                   <option selected disabled>
                     roomtype
                   </option>
-                  <option name="meetingRoom" value="meetingRoom">
+                  <option name="meetingRoom" value="Meeting Room">
                     {' '}
                     Meeting Room{' '}
                   </option>
-                  <option name="TrainingRoom" value="TrainingRoom">
+                  <option name="TrainingRoom" value="Training Room">
                     {' '}
                     Training Room{' '}
                   </option>
 
-                  <option name="PrivateRoom" value="PrivateRoom">
+                  <option name="PrivateRoom" value="Private Room">
                     {' '}
                     Private Room{' '}
                   </option>
 
-                  <option name=" virtualOffice" value=" virtualOffice">
+                  <option name=" virtualOffice" value="virtual Office">
                     {' '}
                     virtual Office{' '}
                   </option>
@@ -158,7 +158,7 @@ export default class Rooms extends Component {
                   type="number"
                   name="startTime"
                   // step="1"
-                  min="1" max="5"
+                  min="1" max="20"
                 />
               </div>
             </Col>

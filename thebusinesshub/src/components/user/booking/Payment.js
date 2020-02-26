@@ -3,6 +3,11 @@ import { Row , Container , Col ,Button ,Form} from 'react-bootstrap';
 import '../../stylesheets/PaymentCSS.css';
 import Receipt from '../booking/Receipt';
 export default class Payment extends Component {
+
+  componentDidMount(){
+    this.props.paymentfun(this.props.startDate)
+      }
+      
   constructor(props){
     super(props)
     this.state={

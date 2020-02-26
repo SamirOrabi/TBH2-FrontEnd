@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Container, Col, Row, Table, Button } from 'react-bootstrap';
 import '../../stylesheets/ReceiptCSS.css';
+
+// import Printcomponent from '../booking/Printcomponent';
 export default class Receipt extends Component {
   render() {
+
     return (
       <div>
         <Container>
@@ -81,9 +84,7 @@ export default class Receipt extends Component {
 
           <Row>
             <Col sm={12} className="text-right">
-              <Button type="submit" className=" printbtn my-4 mr-5">
-                <i class="fas fa-print"></i>
-              </Button>
+           {/* < Printcomponent  /> */}
               <Button
                 type="submit"
                 className="my-4 nextBtn mr-5"

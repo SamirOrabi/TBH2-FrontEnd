@@ -8,6 +8,11 @@ import '../../stylesheets/BookdetailsCSS.css';
 import Rooms from '../booking/Rooms';
 
 export default class BookDetails extends Component {
+
+  componentDidMount(){
+this.props.detailsfun(this.props.startDate)
+  }
+
   render() {
     const settings = {
       customPaging: function(i) {

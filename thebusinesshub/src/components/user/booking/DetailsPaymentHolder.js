@@ -3,7 +3,7 @@ import { Row, Container, Col, Button } from 'react-bootstrap';
 import '../../stylesheets/PaymentCSS.css';
 import BookDetails from './BookDetails';
 import Payment from './Payment';
-import Receipt from '../booking/Receipt';
+import Printcomponent from '../booking/Printcomponent';
 
 export default class DetailsPaymentHolder extends Component {
   constructor(props) {
@@ -15,9 +15,12 @@ export default class DetailsPaymentHolder extends Component {
       detailsborder: '5px solid #ED1C24',
       paymentColor: '#000',
       paymentborder: 'none',
-      showreceiptcomponent: false
+      showreceiptcomponent: false,
+      startDate:'',
+      startTime:'',
     };
   }
+
 
   showDetails = e => {
     this.setState({
@@ -29,6 +32,24 @@ export default class DetailsPaymentHolder extends Component {
       paymentColor: '#000'
     });
   };
+
+  test=e =>{
+console.log(e)
+this.setState({
+  startDate: e,
+});
+console.log( 'kkkk',this.state.startDate)
+  }
+
+  // paymenttest=e =>{
+  //   console.log(e)
+  //   this.setState({
+  //     startDate: e,
+     
+  //   });
+  //   console.log(this.state.startDate)
+  //     }
+
   showPayment = e => {
     this.setState({
       showdetailscomponent: false,
@@ -53,7 +74,7 @@ export default class DetailsPaymentHolder extends Component {
           this.state.showpaymentcomponent) && (
           <Container>
             <Row>
-              <Col sm={12} className="text-center">
+              <Col sm={12} className="paymentanddetailsbtn text-center">
                 <Button
                   className="detailsbtn mr-3"
                   onClick={this.showDetails}
@@ -78,24 +99,28 @@ export default class DetailsPaymentHolder extends Component {
             </Row>
           </Container>
         )}
-        ,
+        
         {this.state.showdetailscomponent && (
           <BookDetails
+            detailsfun={this.test}
             showPayment={this.showPayment}
-            startDate={this.props.startDate}
+            startDate={this.state.startDate}
             startTime={this.props.startTime}
             endTime={this.props.endTime}
             roomId={this.props.roomId}
           />
+
         )}
         {this.state.showpaymentcomponent && (
           <Payment
+            paymentfun={this.test}
             showDetails={this.showDetails}
             showreceipt={this.showreceipt}
+            startDate={this.state.startDate}
           />
         )}
         {this.state.showreceiptcomponent && (
-          <Receipt closebookModal={this.props.closebookModal} />
+          <Printcomponent closebookModal={this.props.closebookModal} />
         )}
       </div>
     );
