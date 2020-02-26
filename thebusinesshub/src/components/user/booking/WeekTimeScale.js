@@ -1,6 +1,5 @@
 import * as ReactDOM from 'react-dom';
 import React, { Component } from 'react';
-import Bookingmodal from '../booking/Bookingmodal';
 import {
   ScheduleComponent,
   ViewsDirective,
@@ -10,20 +9,21 @@ import {
   Resize,
   DragAndDrop,
   Inject,
-  Day,
+  Week,
   TimelineViews,
   Agenda
 } from '@syncfusion/ej2-react-schedule';
-export default class DayTimeScale extends Component {
+export default class WeekTimeScale extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bookingmodalShow: false,
-      startDate: '',
-      endDate: '',
-      roomId: ''
+      bookingmodalShow: false
     };
   }
+  OpenDetails = e => {
+    e.cancel = true;
+    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
+  };
   generateStaticEvents(start, resCount, overlapCount) {
     let data = [];
     let id = 1;
@@ -38,7 +38,7 @@ export default class DayTimeScale extends Component {
           randomCollection.indexOf(random + 2) !== -1 ||
           randomCollection.indexOf(random - 2) !== -1
         ) {
-          random += Math.max.apply(null, randomCollection) + 5;
+          random += Math.max.apply(null, randomCollection) + 10;
         }
         for (let k = 1; k <= 2; k++) {
           randomCollection.push(random + k);
@@ -63,7 +63,22 @@ export default class DayTimeScale extends Component {
   }
   generateResourceData(startId, endId, text) {
     let data = [];
-    let colors = [];
+    let colors = [
+      '#ff8787',
+      '#9775fa',
+      '#748ffc',
+      '#3bc9db',
+      '#69db7c',
+      '#fdd835',
+      '#748ffc',
+      '#9775fa',
+      '#df5286',
+      '#7fa900',
+      '#fec200',
+      '#5978ee',
+      '#00bdae',
+      '#ea80fc'
+    ];
     for (let a = startId; a <= endId; a++) {
       let n = Math.floor(Math.random() * colors.length);
       data.push({
@@ -74,46 +89,18 @@ export default class DayTimeScale extends Component {
     }
     return data;
   }
-
-  OpenDetails = e => {
-    e.cancel = true;
-    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
-    console.log(e.data);
-
-    if (e.data) {
-      this.setState({
-        startDate: e.data.startTime,
-        roomId: e.data.RoomId,
-        endDate: e.data.endTime
-      });
-      console.log(this.state.startDate);
-    }
-  };
-  closebookModal = e => {
-    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
-  };
   render() {
-    console.log(this);
     return (
       <div>
         <ScheduleComponent
-          // cssClass="virtual-scrolling"
+          cssClass="virtual-scrolling"
+          ref={schedule => (this.scheduleObj = schedule)}
           width="100%"
           height="auto"
+          selectedDate={new Date()}
           eventSettings={{ dataSource: this.data }}
           group={{ resources: ['Rooms'] }}
           popupOpen={this.OpenDetails}
-          startHour="09:00"
-          endHour="22:00"
-          locale="en-US"
-          enablePersistence={true}
-          // dateFormat='yyyy-MM-dd'
-          quickInfoOnSelectionEnd={true}
-          timeScale={{
-            interval: 120,
-            slotCount: 2
-          }}
-          minDate={new Date()}
         >
           <ResourcesDirective>
             <ResourceDirective
@@ -124,27 +111,19 @@ export default class DayTimeScale extends Component {
               dataSource={this.generateResourceData(1, 4, 'Room')}
               textField="Text"
               idField="Id"
+              colorField="Color"
             ></ResourceDirective>
           </ResourcesDirective>
           <ViewsDirective>
-            <ViewDirective option="TimelineDay" allowVirtualScrolling={true} />
+            <ViewDirective option="TimelineWeek" allowVirtualScrolling={true} />
           </ViewsDirective>
           <Inject
-            services={[Agenda, Day, TimelineViews, Resize, DragAndDrop]}
+            services={[Agenda, Week, TimelineViews, Resize, DragAndDrop]}
           />
-        </ScheduleComponent>
+        </ScheduleComponent>{' '}
         <div className="booknowbtn">
           <button onClick={this.OpenDetails}>BOOK NOW</button>
         </div>
-
-        <Bookingmodal
-          show={this.state.bookingmodalShow}
-          onHide={this.bookingmodalShow}
-          startDate={this.state.startDate}
-          roomId={this.state.roomId}
-          endDate={this.state.endDate}
-          closebookModal={this.closebookModal}
-        />
       </div>
     );
   }

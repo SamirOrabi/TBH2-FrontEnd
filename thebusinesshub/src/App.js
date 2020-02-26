@@ -15,8 +15,6 @@ import DetailsPaymentHolder from './components/user/booking/DetailsPaymentHolder
 import Receipt from './components/user/booking/Receipt';
 // import Payment from './components/user/booking/Payment';
 
-
-
 // Styling
 import './App.css';
 import setAuthToken from './helpers/setAuthToken';
@@ -51,19 +49,17 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/booking" component={Booking} />
-        
-          
           <Route
             exact
             path="/UserBoard/Account-Settings"
             component={UserBoard}
           />
-          
+
           <Route exact path="/UserBoard/Profile" component={UserBoard} />
           <Route exact path="/UserBoard/Booking" component={UserBoard} />
           <Route exact path="/UserBoard/Purchase" component={UserBoard} />
-   
-      {/* <DetailsPaymentHolder />
+
+          {/* <DetailsPaymentHolder />
       <Receipt /> */}
         </div>
       </Router>
