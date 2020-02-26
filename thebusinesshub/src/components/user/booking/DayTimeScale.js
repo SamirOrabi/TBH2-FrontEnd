@@ -14,6 +14,7 @@ import {
   TimelineViews,
   Agenda
 } from '@syncfusion/ej2-react-schedule';
+import { Button } from 'react-bootstrap';
 export default class DayTimeScale extends Component {
   constructor(props) {
     super(props);
@@ -63,7 +64,22 @@ export default class DayTimeScale extends Component {
   }
   generateResourceData(startId, endId, text) {
     let data = [];
-    let colors = [];
+    let colors = [
+      '#ff8787',
+      '#9775fa',
+      '#748ffc',
+      '#3bc9db',
+      '#69db7c',
+      '#fdd835',
+      '#748ffc',
+      '#9775fa',
+      '#df5286',
+      '#7fa900',
+      '#fec200',
+      '#5978ee',
+      '#00bdae',
+      '#ea80fc'
+    ];
     for (let a = startId; a <= endId; a++) {
       let n = Math.floor(Math.random() * colors.length);
       data.push({
@@ -86,18 +102,32 @@ export default class DayTimeScale extends Component {
         roomId: e.data.RoomId,
         endDate: e.data.endTime
       });
-      console.log(this.state.startDate);
+      // console.log(e.target.className)
+      //       if(e.target.className='e-work-cells e-work-hours e-selected-cell'){
+
+      //       }
     }
   };
   closebookModal = e => {
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
+    this.scheduleObj.saveEvent(this.state);
   };
+
   render() {
     console.log(this);
     return (
       <div>
+        {' '}
+        {/* <Button
+          id="btn1"
+          title="Click to open Editor"
+          onClick={this.onClickButton1.bind(this)}
+        >
+          Click to open Editor
+        </Button> */}
         <ScheduleComponent
           // cssClass="virtual-scrolling"
+          ref={t => (this.scheduleObj = t)}
           width="100%"
           height="auto"
           eventSettings={{ dataSource: this.data }}
@@ -124,10 +154,15 @@ export default class DayTimeScale extends Component {
               dataSource={this.generateResourceData(1, 4, 'Room')}
               textField="Text"
               idField="Id"
+              colorField="Color"
             ></ResourceDirective>
           </ResourcesDirective>
           <ViewsDirective>
-            <ViewDirective option="TimelineDay" allowVirtualScrolling={true} />
+            <ViewDirective
+              isSelected
+              option="TimelineDay"
+              allowVirtualScrolling={true}
+            />
           </ViewsDirective>
           <Inject
             services={[Agenda, Day, TimelineViews, Resize, DragAndDrop]}
@@ -136,7 +171,6 @@ export default class DayTimeScale extends Component {
         <div className="booknowbtn">
           <button onClick={this.OpenDetails}>BOOK NOW</button>
         </div>
-
         <Bookingmodal
           show={this.state.bookingmodalShow}
           onHide={this.bookingmodalShow}

@@ -10,23 +10,30 @@ import {
 import '../../stylesheets/RoomsCSS.css';
 import TimePicker from 'react-time-picker';
 
-// import Payment from '../booking/Payment';
+import MomentLocaleUtils, { formatDate } from 'react-day-picker/moment';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-let startTimee;
+let starttime;
+let endtime;
 export default class Rooms extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      endtime: '',
-      starttime: ''
-    };
+    this.state = {};
   }
 
   render() {
-    startTimee = this.props.startTime;
-    console.log(startTimee);
+    starttime = this.props.startTime;
+    endtime = this.props.endTime;
+    console.log(starttime);
+    this.onChangeStartTime = time => {
+      starttime = time;
+      console.log(starttime);
+    };
 
+    this.onChangeEndTime = time => {
+      endtime = time;
+      console.log(endtime);
+    };
     return (
       <Container className="roomdetails">
         <Form>
@@ -36,7 +43,8 @@ export default class Rooms extends Component {
               <div className="monthdrop">
                 <DayPickerInput
                   className="DayPickerInput"
-                  value={this.props.startDate}
+                  formatDate={formatDate}
+                  value={formatDate(this.props.startDate)}
                   onDayChange={day => console.log(day)}
                 />
               </div>
@@ -49,7 +57,7 @@ export default class Rooms extends Component {
               <div className="monthdrop">
                 <TimePicker
                   onChange={this.onChangeStartTime}
-                  value={startTimee}
+                  value={starttime}
                 />
               </div>
             </Col>
@@ -57,13 +65,7 @@ export default class Rooms extends Component {
             <Col sm={12} md={6}>
               <p> END TIME</p>
               <div className="monthdrop">
-                <TimePicker
-                  onChange={time => {
-                    this.setState({ starttime: time });
-                    startTimee = this.state.starttime;
-                  }}
-                  value={this.props.endTime}
-                />
+                <TimePicker onChange={this.onChangeEndTime} value={endtime} />
               </div>
             </Col>
           </Row>
@@ -92,7 +94,7 @@ export default class Rooms extends Component {
 
                   <option name="PrivateRoom" value="PrivateRoom">
                     {' '}
-                    Private Room{' '}
+                    Private Room
                   </option>
                 </select>
               </div>

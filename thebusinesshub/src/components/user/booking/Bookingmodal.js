@@ -30,7 +30,7 @@ export default class Bookingmodal extends Component {
         </Modal.Header>{' '}
         <Modal.Body>
           <DetailsPaymentHolder
-            startDate={String(this.props.startDate).substring(4, 10)}
+            startDate={String(this.props.startDate).substring(4, 15)}
             startTime={String(this.props.startDate).substring(16, 21)}
             endTime={String(this.props.endDate).substring(16, 21)}
             rommId={this.props.roomId}
