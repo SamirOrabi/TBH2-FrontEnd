@@ -32,7 +32,7 @@ export default class BookDetails extends Component {
 
     return (
       <div>
-        <Container className="mt-5">
+        <Container >
         <Row className='m-auto'>
         
     <Col  className='m-auto pl-4' md={5} sm={12}>

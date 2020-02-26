@@ -11,3 +11,39 @@
     border-top-left-radius: .3rem;
     border-top-right-radius: .3rem;
 }
+
+.closebtn{
+    border:white;
+    background-color: white ;
+    color:black
+}
+
+.closebtn:hover{
+    border:white;
+    background-color: white ;
+    color:black
+}
+
+.closebtn:not(:disabled):not(.disabled).active, .closebtn:not(:disabled):not(.disabled):active, .show>.closebtn.dropdown-toggle {
+    color: black;
+    background-color: white;
+    border-color: white;
+}
+
+.closebtn:not(:disabled):not(.disabled).active:focus, .closebtn:not(:disabled):not(.disabled):active:focus, .show>.closebtn.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem white;
+    border-color: white;
+}
+
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0rem 0rem !important;
+    border-bottom: 1px solid white;
+    border-top-left-radius: .3rem;
+    border-top-right-radius: .3rem;
+}

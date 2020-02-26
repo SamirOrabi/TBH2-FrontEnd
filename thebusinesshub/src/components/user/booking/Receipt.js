@@ -9,10 +9,10 @@ export default class Receipt extends Component {
               <Container>
                   <Row>
 
-                  <Col sm={1}></Col>
-                      <Col sm={11}>
+                  {/* <Col sm={1}></Col> */}
+                      <Col sm={12}>
                       <div className="receipt">
-          <h2>Receipt For Ahmed orabi</h2>
+          <h2 className="ml-5">Receipt For Ahmed orabi</h2>
           </div>
                       </Col>
                   </Row>

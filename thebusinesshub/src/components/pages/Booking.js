@@ -12,15 +12,16 @@ export default class Booking extends Component {
 
     closebookModal=e=>{
       this.setState({bookingmodalShow:!this.state.bookingmodalShow})
-      console.log(' booking modall')
+    
      }
+
+    
   render() {
     return (
       <div>
         <VerifyBarAlert />
         <Button  onClick={this.closebookModal}>book now</Button>
-
-        <Bookingmodal show={this.state.bookingmodalShow} onHide={this.bookingmodalShow}  />
+        <Bookingmodal show={this.state.bookingmodalShow} onHide={this.closebookModal}  />
       </div>
     );
   }

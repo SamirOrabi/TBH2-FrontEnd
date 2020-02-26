@@ -7,10 +7,10 @@ import 'react-day-picker/lib/style.css'
 export default class Rooms extends Component {
   
 
-  
   render() {
     return (
     <Container className="roomdetails">
+      
  <Form>
 <Row>
   <Col sm={12} md={6}>
@@ -25,8 +25,9 @@ export default class Rooms extends Component {
                   </option>
                  
                 </select> */}
-                 <DayPickerInput className="DayPickerInput" onDayChange={day => console.log(day)} />
-
+                <div classNames="DayPickerInput" >
+                 <DayPickerInput onDayChange={day => console.log( day)} />
+                 </div>
                 {/* <div className="daydrop pl-2">
                 <select
                   name="day"
@@ -72,7 +73,7 @@ export default class Rooms extends Component {
 </Row>
 
 
-<Row  className="mt-4">
+{/* <Row  className="mt-4">
   <Col sm={12} md={6}>
   <p> START TIME</p>
   <div className="monthdrop">
@@ -133,9 +134,64 @@ export default class Rooms extends Component {
        
 </Col>
 
+</Row> */}
+
+<Row>
+  <Col sm={12} md={3}><p> START TIME</p>
+  <div className="monthdrop">   
+ 
+  <FormControl style={{height:'60px' , margin:'0px' ,width:'100%'}}
+  className="startTime"
+   type="number"
+   name="startTime" />  
+
+   </div>
+
+
+   </Col>
+
+
+   
+  <Col sm={12} md={3}> <div className="daydrop">
+
+<select className="mt-4" style={{height:'60px' , margin:'0px' ,width:'100%'}}
+  name="month"
+>
+  <option >
+    AM
+  </option>
+
+  <option>
+    PM
+  </option>
+ 
+</select>
+</div></Col>
+<Col sm={12} md={3}><p> END TIME</p>
+  <div className="monthdrop">     
+  <FormControl style={{height:'60px' , margin:'0px' ,width:'100%'}}
+  className="startTime"
+   type="number"
+   name="startTime" />  
+   </div>
+   </Col>
+
+  <Col sm={12} md={3}> <div className="daydrop">
+
+<select className="mt-4" style={{height:'60px' , margin:'0px' ,width:'100%'}}
+  name="month"
+>
+  <option >
+    AM
+  </option>
+
+  <option>
+    PM
+  </option>
+ 
+</select>
+</div></Col>
 </Row>
-
-
 
 
 <Row className="mt-4">
@@ -143,17 +199,31 @@ export default class Rooms extends Component {
   <p> Room Type</p>
   <div className="roomtypedrop">
             
-             
-                 <select
-                  name="month"
-                 >
-                  <option >
-                  Room Type
+  <select
+                  className="browser-default"
+                  value=''
+                  onChange=''
+                  name="roomtype"
+                >
+                  <option selected disabled>
+                  roomtype
                   </option>
-                 
+                  <option name="meetingRoom" value="meetingRoom">
+                    {' '}
+                    Meeting Room{' '}
+                  </option>
+                  <option name="TrainingRoom" value="TrainingRoom">
+                    {' '}
+                    Training Room{' '}
+                  </option>
+
+                  <option name="PrivateRoom" value="PrivateRoom">
+                    {' '}
+                    Private Room{' '}
+                  </option>
+                  
                 </select>
               </div>
-    
 </Col>
 
 <Col sm={12} md={6}>
