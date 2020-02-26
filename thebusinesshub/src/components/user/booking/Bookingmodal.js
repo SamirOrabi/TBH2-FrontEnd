@@ -17,6 +17,7 @@ export default class Bookingmodal extends Component {
     console.log(String(this.props.endDate).substring(16, 18));
 
     return (
+      <div className="bookmodal">
       <Modal
         {...this.props}
         size="xl"
@@ -41,6 +42,7 @@ export default class Bookingmodal extends Component {
                   <Button >Close</Button>
                 </Modal.Footer> */}
       </Modal>
+      </div>
     );
   }
 }

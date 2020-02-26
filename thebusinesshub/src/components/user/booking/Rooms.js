@@ -15,14 +15,35 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 let startTimee;
 export default class Rooms extends Component {
+ 
+
   constructor(props) {
     super(props);
     this.state = {
       endtime: '',
-      starttime: ''
+      starttime: '',
+      roomtype:'',
+      payment:''
     };
   }
 
+
+  OnChangeRoomtype = e => {
+    this.setState({
+      roomtype: e.target.value,
+    });
+    console.log(this.state.roomtype)
+  };
+
+
+
+  
+  OnChangepayment = e => {
+    this.setState({
+      payment: e.target.value,
+    });
+    console.log(this.state.payment)
+  };
   render() {
     startTimee = this.props.startTime;
     console.log(startTimee);
@@ -31,20 +52,45 @@ export default class Rooms extends Component {
       <Container className="roomdetails">
         <Form>
           <Row>
-            <Col sm={12} md={6}>
+            <Col sm={12} md={6} className="label">
               <p> START DATE</p>
               <div className="monthdrop">
-                <DayPickerInput
+                <DayPickerInput 
                   className="DayPickerInput"
                   value={this.props.startDate}
                   onDayChange={day => console.log(day)}
                 />
               </div>
+
+            </Col>
+
+            <Col sm={12} md={6} className="label">
+              <p> Payment</p>
+              <div className="roomtypedrop">
+                <select
+                  className="browser-default"
+                  value={this.state.payment}
+                  onChange={this.OnChangepayment}
+                  name="roomtype"
+                >
+                  <option selected disabled>
+                   Payment Way
+                  </option>
+                  <option name="meetingRoom" value="meetingRoom">
+                    {' '}
+                   cash{' '}
+                  </option>
+                  <option name="TrainingRoom" value="TrainingRoom">
+                    {' '}
+                    vodafone cash{' '}
+                  </option>
+                </select>
+              </div>
             </Col>
           </Row>
 
           <Row className="mt-4">
-            <Col sm={12} md={6}>
+            <Col sm={12} md={6} className="label">
               <p> START TIME</p>
               <div className="monthdrop">
                 <TimePicker
@@ -54,7 +100,7 @@ export default class Rooms extends Component {
               </div>
             </Col>
 
-            <Col sm={12} md={6}>
+            <Col sm={12} md={6} className="label">
               <p> END TIME</p>
               <div className="monthdrop">
                 <TimePicker
@@ -69,13 +115,13 @@ export default class Rooms extends Component {
           </Row>
 
           <Row className="mt-4">
-            <Col sm={12} md={6}>
+            <Col sm={12} md={6} className="label">
               <p> Room Type</p>
               <div className="roomtypedrop">
                 <select
                   className="browser-default"
-                  value=""
-                  onChange=""
+                  value={this.state.roomtype}
+                  onChange={this.OnChangeRoomtype}
                   name="roomtype"
                 >
                   <option selected disabled>
@@ -94,11 +140,16 @@ export default class Rooms extends Component {
                     {' '}
                     Private Room{' '}
                   </option>
+
+                  <option name=" virtualOffice" value=" virtualOffice">
+                    {' '}
+                    virtual Office{' '}
+                  </option>
                 </select>
               </div>
             </Col>
 
-            <Col sm={12} md={6}>
+            <Col sm={12} md={6} className="label">
               <p>Number of people</p>
               <div className="monthdrop">
                 <FormControl
@@ -106,6 +157,8 @@ export default class Rooms extends Component {
                   className="startTime"
                   type="number"
                   name="startTime"
+                  // step="1"
+                  min="1" max="5"
                 />
               </div>
             </Col>
