@@ -102,7 +102,9 @@ export default class DayTimeScale extends Component {
           popupOpen={this.OpenDetails}
           startHour="09:00"
           endHour="22:00"
+          locale="en-US"
           enablePersistence={true}
+          // dateFormat='yyyy-MM-dd'
           quickInfoOnSelectionEnd={true}
           timeScale={{
             interval: 120,
@@ -135,6 +137,9 @@ export default class DayTimeScale extends Component {
         <Bookingmodal
           show={this.state.bookingmodalShow}
           onHide={this.bookingmodalShow}
+          startDate={this.state.startDate}
+          roomId={this.state.roomId}
+          endDate={this.state.endDate}
         />
       </div>
     );

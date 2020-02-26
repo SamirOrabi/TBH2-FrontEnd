@@ -45,3 +45,16 @@
         color:rgb(117, 117, 117);
         font-size: 20px;
     }
+
+    .receipt h2{
+color: #ED1C24;
+font-family: Arial;
+font-style: normal;
+font-weight: bold;
+font-size: 25px;
+line-height: 29px;
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+    }
