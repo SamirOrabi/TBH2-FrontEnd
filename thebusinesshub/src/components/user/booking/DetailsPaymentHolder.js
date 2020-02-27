@@ -4,6 +4,7 @@ import '../../stylesheets/PaymentCSS.css';
 import BookDetails from './BookDetails';
 import Payment from './Payment';
 import Printcomponent from '../booking/Printcomponent';
+import isEqual from 'lodash/isEqual';
 
 export default class DetailsPaymentHolder extends Component {
   constructor(props) {
@@ -16,8 +17,12 @@ export default class DetailsPaymentHolder extends Component {
       paymentColor: '#000',
       paymentborder: 'none',
       showreceiptcomponent: false,
+      test:'here',
       startDate:'',
       startTime:'',
+      endTime:'',
+      roomId:''
+      
     };
   }
 
@@ -32,13 +37,42 @@ export default class DetailsPaymentHolder extends Component {
       paymentColor: '#000'
     });
   };
+  componentDidMount(){
+// this.test()
+// console.log(this.state.test)
+  }
+
+  componentDidUpdate(prevProps , prevState){
+    if ( isEqual(prevState ,this.state.test)){
+      this.test()
+
+      
+    }
+    console.log("state changed")
+      console.log(this.state.startDate)
+      console.log(this.state)
+
+  }
 
   test=e =>{
-console.log(e)
-this.setState({
-  startDate: e,
-});
-console.log( 'kkkk',this.state.startDate)
+    console.log("fun test")
+
+// console.log(e)
+
+// if(0){
+setTimeout(() => {
+
+  this.setState({ startDate: e });
+}, 0);
+
+  console.log("state changed2")
+  console.log(this.state.startDate)
+
+// console.log('start date')
+// console.log(this.state.test)
+// }
+// console.log('start date2 ')
+// console.log(this.state.test)
   }
 
   // paymenttest=e =>{
@@ -68,6 +102,7 @@ console.log( 'kkkk',this.state.startDate)
     });
   };
   render() {
+  
     return (
       <div>
         {(this.state.showdetailscomponent ||
@@ -104,6 +139,7 @@ console.log( 'kkkk',this.state.startDate)
           <BookDetails
             detailsfun={this.test}
             showPayment={this.showPayment}
+            // nnnn={this.state.test}
             startDate={this.state.startDate}
             startTime={this.props.startTime}
             endTime={this.props.endTime}
@@ -113,10 +149,13 @@ console.log( 'kkkk',this.state.startDate)
         )}
         {this.state.showpaymentcomponent && (
           <Payment
-            paymentfun={this.test}
+            paymentstae={this.state.test}
             showDetails={this.showDetails}
             showreceipt={this.showreceipt}
-            startDate={this.state.startDate}
+            // startDate={this.state.startDate}
+            startTime={this.state.startTime}
+            endTime={this.state.endTime}
+            roomId={this.state.roomId}
           />
         )}
         {this.state.showreceiptcomponent && (

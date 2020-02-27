@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row ,Button} from 'react-bootstrap';
 import img from '../../../Images/img.png';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -9,8 +9,15 @@ import Rooms from '../booking/Rooms';
 
 export default class BookDetails extends Component {
 
-  componentDidMount(){
-this.props.detailsfun(this.props.startDate)
+
+componentDidMount(){
+console.log( "props from book details")
+console.log(this.props)
+this.test()
+  }
+
+  test=()=>{
+    this.props.detailsfun("testtttttttttt")
   }
 
   render() {
@@ -21,7 +28,7 @@ this.props.detailsfun(this.props.startDate)
             <Row>
               <Col sm={6}>
                 <a>
-                  <img
+                  <img alt="img1"
                     src={require(`./img0${i + 1}.png`)}
                     style={{ width: '70px', height: '70px' }}
                   />
@@ -47,26 +54,26 @@ this.props.detailsfun(this.props.startDate)
             <Col className="m-auto pl-4" md={5} sm={12}>
               <Slider {...settings}>
                 <div>
-                  <img src={require('./img01.png')} className="img-fluid" />
+                  <img src={require('./img01.png')} className="img-fluid" alt="img" />
                 </div>
 
                 <div>
-                  <img src={require('./img02.png')} className="img-fluid" />
+                  <img src={require('./img02.png')} className="img-fluid" alt="img1" />
                 </div>
 
                 <div>
-                  <img src={require('./img03.png')} className="img-fluid" />
+                  <img src={require('./img03.png')} className="img-fluid" alt="img2" />
                 </div>
 
                 <div>
-                  <img src={require('./img04.png')} className="img-fluid" />
+                  <img src={require('./img04.png')} className="img-fluid" alt="img3" />
                 </div>
               </Slider>
             </Col>
             <Col className="m-auto" md={7} sm={12}>
               <Rooms
                 showPayment={this.props.showPayment}
-                startDate={this.props.startDate}
+                // startDate={this.props.startDate}
                 startTime={this.props.startTime}
                 endTime={this.props.endTime}
                 roomId={this.props.roomId}

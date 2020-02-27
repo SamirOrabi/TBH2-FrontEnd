@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Bookingmodal from '../booking/Bookingmodal';
 import {
   ScheduleComponent,
+  EventRenderedArgs,
   ViewsDirective,
   ViewDirective,
   ResourcesDirective,
@@ -12,9 +13,10 @@ import {
   Inject,
   Day,
   TimelineViews,
-  Agenda
+  Agenda,
+  PopupOpenEventArgs
 } from '@syncfusion/ej2-react-schedule';
-
+import { Button } from 'react-bootstrap';
 export default class DayTimeScale extends Component {
   constructor(props) {
     super(props);
@@ -64,13 +66,13 @@ export default class DayTimeScale extends Component {
   }
   generateResourceData(startId, endId, text) {
     let data = [];
-    let colors = [];
+    // let colors = ['#ed1c24', '#eee'];
     for (let a = startId; a <= endId; a++) {
-      let n = Math.floor(Math.random() * colors.length);
+      // let n = Math.floor(Math.random() * colors.length);
       data.push({
         Id: a,
         Text: text + ' ' + a,
-        Color: colors[n]
+        color: '#ed1c24'
       });
     }
     return data;
@@ -78,8 +80,9 @@ export default class DayTimeScale extends Component {
 
   OpenDetails = e => {
     e.cancel = true;
-    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
     console.log(e.data);
+
+    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
 
     if (e.data) {
       this.setState({
@@ -87,20 +90,43 @@ export default class DayTimeScale extends Component {
         roomId: e.data.RoomId,
         endDate: e.data.endTime
       });
-      console.log(this.state.startDate);
+      console.log(e.target.className);
+      //       if(e.target.className='e-work-cells e-work-hours e-selected-cell'){
+
+      //       }
     }
   };
   closebookModal = e => {
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
   };
+  OnEventRendered = args => {
+    console.log(args);
+    // The below code examples used to apply the background color to the appointments
+    var categoryColor;
+    if (args.data.Category == 'Assigned') {
+      categoryColor = 'green';
+    } else if (args.data.Category == 'UnAssigned') {
+      categoryColor = 'red';
+    }
+    args.element.style.backgroundColor = categoryColor;
+  };
   render() {
     console.log(this);
     return (
       <div>
+        {' '}
+        {/* <Button
+          id="btn1"
+          title="Click to open Editor"
+          onClick={this.onClickButton1.bind(this)}
+        >
+          Click to open Editor
+        </Button> */}
         <ScheduleComponent
           // cssClass="virtual-scrolling"
+          ref={t => (this.scheduleObj = t)}
           width="100%"
-          height="auto"
+          height="100%"
           eventSettings={{ dataSource: this.data }}
           group={{ resources: ['Rooms'] }}
           popupOpen={this.OpenDetails}
@@ -115,6 +141,7 @@ export default class DayTimeScale extends Component {
             slotCount: 2
           }}
           minDate={new Date()}
+          eventRendered='OnEventRendered'
         >
           <ResourcesDirective>
             <ResourceDirective
@@ -125,10 +152,14 @@ export default class DayTimeScale extends Component {
               dataSource={this.generateResourceData(1, 4, 'Room')}
               textField="Text"
               idField="Id"
+              colorField="color"
             ></ResourceDirective>
           </ResourcesDirective>
           <ViewsDirective>
-            <ViewDirective option="TimelineDay" allowVirtualScrolling={true} />
+            <ViewDirective
+              // isSelected
+              option="TimelineDay"
+            />
           </ViewsDirective>
           <Inject
             services={[Agenda, Day, TimelineViews, Resize, DragAndDrop]}
@@ -137,7 +168,6 @@ export default class DayTimeScale extends Component {
         <div className="booknowbtn">
           <button onClick={this.OpenDetails}>BOOK NOW</button>
         </div>
-
         <Bookingmodal
           show={this.state.bookingmodalShow}
           onHide={this.bookingmodalShow}

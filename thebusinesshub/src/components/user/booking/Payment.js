@@ -4,10 +4,15 @@ import '../../stylesheets/PaymentCSS.css';
 import Receipt from '../booking/Receipt';
 export default class Payment extends Component {
 
+  
+
+  
   componentDidMount(){
-    this.props.paymentfun(this.props.startDate)
+    console.log( "props from holder to payment")
+    console.log(this.props)
+    // this.test()
       }
-      
+
   constructor(props){
     super(props)
     this.state={
