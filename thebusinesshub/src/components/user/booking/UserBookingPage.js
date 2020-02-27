@@ -3,7 +3,9 @@ import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../stylesheets/bookingsCss.css';
-import { Table, Container } from 'react-bootstrap';
+import { Table, Container, Button } from 'react-bootstrap';
+import isEqual from 'lodash/isEqual';
+
 class UserBookingPage extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +29,42 @@ class UserBookingPage extends Component {
       });
   }
 
+  CancelPendingBook = id => {
+    console.log(id.target.id);
+    axios.defaults.headers.common['authorization'] = localStorage.userToken;
+    axios
+      .post('https://cubexs.net/tbhapp/bookings/cancelpending', {
+        Account: {
+          id: this.props.user.id
+        },
+        Booking: {
+          id: id.target.id
+        }
+      })
+      .then(res => {
+        this.setState({ userbook: this.state.userbook });
+        if(res.data.code==='0'){
+          console.log('hah')
+
+        }
+      });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (isEqual(prevState, this.state)) {
+      axios.defaults.headers.common['authorization'] = localStorage.userToken;
+      axios
+        .post('https://cubexs.net/tbhapp/bookings/showmybookings', {
+          Account: {
+            id: this.props.user.id
+          }
+        })
+        .then(res => {
+          console.log(res.data.bookings);
+          this.setState({ userbook: res.data.bookings });
+        });
+    }
+  }
   render() {
     const today = new Date();
     var todaydate =
@@ -62,7 +100,7 @@ class UserBookingPage extends Component {
                   <tbody>
                     {this.state.userbook.map(
                       (book, i) =>
-                        (book.date = todaydate || book.date > todaydate) && (
+                        book.date > todaydate && (
                           <tr key={i} className="text-center bookingstr">
                             <td>{book.roomType}</td>
                             <td>{book.date.substring(0, 10)}</td>
@@ -166,9 +204,19 @@ class UserBookingPage extends Component {
                                 {book.status}
                               </td>
                             ) : (
-                              <td style={{ textTransform: 'uppercase' }}>
-                                {book.status}
-                              </td>
+                              <React.Fragment>
+                                <td style={{ textTransform: 'uppercase' }}>
+                                  {book.status}
+                                </td>
+                                <td>
+                                  <Button
+                                    id={book.id}
+                                    onClick={this.CancelPendingBook}
+                                  >
+                                    Cancel
+                                  </Button>
+                                </td>
+                              </React.Fragment>
                             )}{' '}
                           </tr>
                         )
