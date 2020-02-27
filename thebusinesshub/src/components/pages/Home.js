@@ -6,6 +6,7 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import VerifyBarAlert from '../sections/VerifyBarAlert';
 class Home extends Component {
+ 
   render() {
     return (
       <section className="homepage">

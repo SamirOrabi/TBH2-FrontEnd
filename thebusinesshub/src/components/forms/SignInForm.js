@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Form, Col, Row, Button } from 'react-bootstrap';
 import '../stylesheets/forms.css';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Login } from '../../globalState/actions/authActions';
 import {
@@ -23,7 +24,7 @@ class SignInForm extends Component {
       nameError: '',
       password: '',
       passwordError: '',
-
+      myLink: '',
       nameErrors: { name: '' },
       passwordErrors: { password: '' },
 
@@ -31,7 +32,8 @@ class SignInForm extends Component {
       passwordValid: false,
 
       formValid: false,
-      show: false
+      show: false,
+      id:''
     };
   }
 
@@ -104,7 +106,9 @@ class SignInForm extends Component {
   }
 
   Signin = async e => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     let loginRequest = {};
     loginRequest.username = this.state.name;
     loginRequest.password = this.state.password;
@@ -112,7 +116,8 @@ class SignInForm extends Component {
       {
         Account: loginRequest
       },
-      this.props.history
+      this.props.history,
+      ''
     );
     if (userdata.error) {
       this.setState({ user: userdata.error });
@@ -127,19 +132,30 @@ class SignInForm extends Component {
     }
   }
 
-  // enter = e => {
-  //   document.addEventListener('keydown', e => {
-  //     if (e.keyCode === 13) {
-  //       e.preventDefault();
+  enter = e => {
+    document.addEventListener('keydown', e => {
+      if (e.keyCode === 13) {
+        e.preventDefault();
 
-  //       this.Signin();
-  //     }
-  //   });
-  // };
+        this.Signin();
+      }
+    });
+  };
 
-  // componentDidMount() {
-  //   this.enter();
-  // }
+  componentDidMount() {
+    this.enter();
+    axios
+      .post('https://cubexs.net/tbhapp/accounts/getgoogleurl', {
+        state: 'signIn'
+      })
+      .then(res => {
+        console.log(res.data.url);
+        this.setState({ myLink: res.data.url });
+      });
+    console.log('this.props');
+
+    console.log(this.props);
+  }
   render() {
     return (
       <Container className="signIn" onSubmit={this.Signin}>
@@ -200,6 +216,19 @@ class SignInForm extends Component {
               SIGN IN
             </Button>
           </Col>
+          <p className="text-center pt-1">
+            or you can sign in with{' '}
+            <a
+              href={this.state.myLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i
+                className="fab  fa-google xl"
+                style={{ padding: '4px 6px', fontSize: '15px' }}
+              ></i>
+            </a>
+          </p>
         </Form>
       </Container>
     );
