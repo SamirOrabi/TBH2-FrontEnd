@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Bookingmodal from '../booking/Bookingmodal';
 import {
   ScheduleComponent,
+  EventRenderedArgs,
   ViewsDirective,
   ViewDirective,
   ResourcesDirective,
@@ -12,7 +13,8 @@ import {
   Inject,
   Day,
   TimelineViews,
-  Agenda
+  Agenda,
+  PopupOpenEventArgs
 } from '@syncfusion/ej2-react-schedule';
 import { Button } from 'react-bootstrap';
 export default class DayTimeScale extends Component {
@@ -64,28 +66,13 @@ export default class DayTimeScale extends Component {
   }
   generateResourceData(startId, endId, text) {
     let data = [];
-    let colors = [
-      '#ff8787',
-      '#9775fa',
-      '#748ffc',
-      '#3bc9db',
-      '#69db7c',
-      '#fdd835',
-      '#748ffc',
-      '#9775fa',
-      '#df5286',
-      '#7fa900',
-      '#fec200',
-      '#5978ee',
-      '#00bdae',
-      '#ea80fc'
-    ];
+    // let colors = ['#ed1c24', '#eee'];
     for (let a = startId; a <= endId; a++) {
-      let n = Math.floor(Math.random() * colors.length);
+      // let n = Math.floor(Math.random() * colors.length);
       data.push({
         Id: a,
         Text: text + ' ' + a,
-        Color: colors[n]
+        color: '#ed1c24'
       });
     }
     return data;
@@ -93,8 +80,9 @@ export default class DayTimeScale extends Component {
 
   OpenDetails = e => {
     e.cancel = true;
-    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
     console.log(e.data);
+
+    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
 
     if (e.data) {
       this.setState({
@@ -102,7 +90,7 @@ export default class DayTimeScale extends Component {
         roomId: e.data.RoomId,
         endDate: e.data.endTime
       });
-      // console.log(e.target.className)
+      console.log(e.target.className);
       //       if(e.target.className='e-work-cells e-work-hours e-selected-cell'){
 
       //       }
@@ -110,9 +98,18 @@ export default class DayTimeScale extends Component {
   };
   closebookModal = e => {
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
-    this.scheduleObj.saveEvent(this.state);
   };
-
+  OnEventRendered = args => {
+    console.log(args);
+    // The below code examples used to apply the background color to the appointments
+    var categoryColor;
+    if (args.data.Category == 'Assigned') {
+      categoryColor = 'green';
+    } else if (args.data.Category == 'UnAssigned') {
+      categoryColor = 'red';
+    }
+    args.element.style.backgroundColor = categoryColor;
+  };
   render() {
     console.log(this);
     return (
@@ -129,7 +126,7 @@ export default class DayTimeScale extends Component {
           // cssClass="virtual-scrolling"
           ref={t => (this.scheduleObj = t)}
           width="100%"
-          height="auto"
+          height="100%"
           eventSettings={{ dataSource: this.data }}
           group={{ resources: ['Rooms'] }}
           popupOpen={this.OpenDetails}
@@ -144,6 +141,7 @@ export default class DayTimeScale extends Component {
             slotCount: 2
           }}
           minDate={new Date()}
+          eventRendered='OnEventRendered'
         >
           <ResourcesDirective>
             <ResourceDirective
@@ -154,14 +152,13 @@ export default class DayTimeScale extends Component {
               dataSource={this.generateResourceData(1, 4, 'Room')}
               textField="Text"
               idField="Id"
-              colorField="Color"
+              colorField="color"
             ></ResourceDirective>
           </ResourcesDirective>
           <ViewsDirective>
             <ViewDirective
-              isSelected
+              // isSelected
               option="TimelineDay"
-              allowVirtualScrolling={true}
             />
           </ViewsDirective>
           <Inject

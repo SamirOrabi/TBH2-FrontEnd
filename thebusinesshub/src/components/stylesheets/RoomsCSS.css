@@ -133,6 +133,15 @@
   border-color: #ed1c24 !important;
 }
 
+label p {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 30px;
+  text-transform: uppercase;
+  color: #ed1c24;
+}
+
 .rooms .daydrop select {
   width: 40% !important;
   height: 30px !important;
@@ -162,7 +171,6 @@
   padding-right: 93px;
 }
 
-
-.selectedBG{
+.selectedBG {
   background-color: #ed1c24 !important;
 }
