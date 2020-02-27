@@ -61,7 +61,7 @@ export default class BookDetails extends Component {
             <Col className="m-auto" md={7} sm={12}>
               <Rooms
                 showPayment={this.props.showPayment}
-                startDate={this.props.startDate}
+                startdate={this.props.startdate}
                 startTime={this.props.startTime}
                 endTime={this.props.endTime}
                 roomId={this.props.roomId}

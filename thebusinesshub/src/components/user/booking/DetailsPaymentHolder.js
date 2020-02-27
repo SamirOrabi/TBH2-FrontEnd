@@ -82,7 +82,7 @@ export default class DetailsPaymentHolder extends Component {
         {this.state.showdetailscomponent && (
           <BookDetails
             showPayment={this.showPayment}
-            startDate={this.props.startDate}
+            startdate={this.props.startdate}
             startTime={this.props.startTime}
             endTime={this.props.endTime}
             roomId={this.props.roomId}

@@ -52,8 +52,8 @@ class Rooms extends Component {
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps) {
-      console.log(nextProps.startDate);
-      startdatteee = formatDate(nextProps.startDate);
+      console.log(nextProps.startdate);
+      startdatteee = formatDate(nextProps.startdate);
       starttime = nextProps.startTime;
       endtime = nextProps.endTime;
       nextProps.roomId.map(roomId => this.setState({ roomId: String(roomId) }));
@@ -102,23 +102,20 @@ class Rooms extends Component {
     } else if (String(starttime).substring(0, 2) === '21') {
       finalstarttime = '9AM';
       this.state.slots.push(finalstarttime);
-    } 
-    else if (String(starttime).substring(0, 2) === '09') {
+    } else if (String(starttime).substring(0, 2) === '09') {
       finalstarttime = '9AM';
       this.state.slots.push(finalstarttime);
-    } 
-    else if (String(starttime).substring(0, 2) === '10') {
+    } else if (String(starttime).substring(0, 2) === '10') {
       finalstarttime = '10AM';
       this.state.slots.push(finalstarttime);
-    } 
-    else if (String(starttime).substring(0, 2) === '11') {
+    } else if (String(starttime).substring(0, 2) === '11') {
       finalstarttime = '11AM';
       this.state.slots.push(finalstarttime);
-    } 
-   
+    }
+
     let bookrequest = {};
     bookrequest.slot = this.state.slots;
-    bookrequest.date = formatDate(startdatteee);
+    bookrequest.date = formatDate(this.props.startdate);
     bookrequest.roomType = this.state.roomtype;
     bookrequest.roomNumber = this.state.roomId;
     bookrequest.amountOfPeople = this.state.amountofpeople;
@@ -155,13 +152,15 @@ class Rooms extends Component {
           <Row>
             <Col sm={12} md={6} className="label">
               <p> START DATE</p>
-              <div className="monthdrop">
-                <DayPickerInput
+              <div className=" datedrop">
+                {/* <DayPickerInput
                   className="DayPickerInput"
                   formatDate={formatDate}
                   value={formatDate(startdatteee)}
                   onChange={day => startdatteee === day}
-                />
+                /> */}
+
+                <p>{formatDate(this.props.startdate)}</p>
               </div>
             </Col>
 

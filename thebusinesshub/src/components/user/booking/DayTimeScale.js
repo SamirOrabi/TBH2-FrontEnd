@@ -16,14 +16,14 @@ import {
   Agenda,
   PopupOpenEventArgs
 } from '@syncfusion/ej2-react-schedule';
-import { Button } from 'react-bootstrap';
+let startdate;
 export default class DayTimeScale extends Component {
   constructor(props) {
     super(props);
     this.state = {
       bookingmodalShow: false,
-      startDate: '',
       endDate: '',
+      startTime: '',
       roomId: ''
     };
   }
@@ -71,7 +71,7 @@ export default class DayTimeScale extends Component {
       // let n = Math.floor(Math.random() * colors.length);
       data.push({
         Id: a,
-        Text: text + ' ' + a,
+        Text: text + '' + a,
         color: '#ed1c24'
       });
     }
@@ -80,21 +80,22 @@ export default class DayTimeScale extends Component {
 
   OpenDetails = e => {
     e.cancel = true;
-    console.log(e.data);
-
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
-
+    startdate = document.getElementsByClassName(
+      'e-toolbar-item e-date-range'
+    )[0].innerText;
+    console.log(startdate);
     if (e.data) {
       this.setState({
-        startDate: e.data.startTime,
+        startTime: e.data.startTime,
         roomId: e.data.RoomId,
         endDate: e.data.endTime
       });
       console.log(e.target.className);
       //       if(e.target.className='e-work-cells e-work-hours e-selected-cell'){
-
       //       }
     }
+    console.log(e);
   };
   closebookModal = e => {
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
@@ -141,7 +142,7 @@ export default class DayTimeScale extends Component {
             slotCount: 2
           }}
           minDate={new Date()}
-          eventRendered='OnEventRendered'
+          eventRendered="OnEventRendered"
         >
           <ResourcesDirective>
             <ResourceDirective
@@ -171,7 +172,8 @@ export default class DayTimeScale extends Component {
         <Bookingmodal
           show={this.state.bookingmodalShow}
           onHide={this.bookingmodalShow}
-          startDate={this.state.startDate}
+          startTime={this.state.startTime}
+          startdate={startdate}
           roomId={this.state.roomId}
           endDate={this.state.endDate}
           closebookModal={this.closebookModal}
