@@ -14,6 +14,7 @@ import {
   TimelineViews,
   Agenda
 } from '@syncfusion/ej2-react-schedule';
+
 export default class DayTimeScale extends Component {
   constructor(props) {
     super(props);

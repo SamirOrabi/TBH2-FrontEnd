@@ -44,6 +44,8 @@ export default class Rooms extends Component {
     });
     console.log(this.state.payment)
   };
+
+  
   render() {
     startTimee = this.props.startTime;
     console.log(startTimee);
