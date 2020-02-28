@@ -12,10 +12,10 @@
   display: flex;
 }
 
-.roomtypedrop{
+.roomtypedrop {
   padding-left: 4%;
-    border-left: 5px solid #ed1c24;
-    display: flex;
+  border-left: 5px solid #ed1c24;
+  display: flex;
 }
 .roomtypedrop select {
   width: 90% !important;
@@ -30,7 +30,19 @@
   border-left: 5px solid #ed1c24;
   display: flex;
 }
-
+.datedrop {
+  padding-left: 2%;
+  border-left: 5px solid #ed1c24;
+  width: 90% !important;
+  height: 75% !important;
+}
+.datedrop p {
+  border: 1px solid #ed1c24 !important;
+  height: 100%;
+  text-align: left;
+  padding-top: 20px;
+  color: #000 !important;
+}
 .monthdrop select {
   width: 50% !important;
   height: 60px !important;
@@ -86,74 +98,66 @@
   transition: transform 80ms ease-in;
   border: 1px solid #ed1c24;
 }
- .monthdrop {
-    /* width: 100% !important; */
-    padding-left: 4%;
-    border-left: 5px solid #ed1c24;
-    display: flex;
-  }
+.monthdrop {
+  /* width: 100% !important; */
+  padding-left: 4%;
+  border-left: 5px solid #ed1c24;
+  display: flex;
+}
 
-  /* .monthdrop input{
+/* .monthdrop input{
     width: 50% !important;
     height: 60px !important;
     text-align: center !important;
     border-color: #ed1c24 !important;
   } */
 
+.DayPickerInput input {
+  height: 60px !important;
+  border: 1px solid #ed1c24 !important;
+}
 
   label p{
 font-family: Arial;
 font-style: normal;
 font-weight: bolder;
 font-size: 30px;
-line-height: 18px;
 text-transform: uppercase;
-color: #ED1C24;
+color: #ED1C24;}
 
-  }
-  .DayPickerInput input{
-    height: 55px !important;
-    text-align: center !important;
-    border: 1px solid #ed1c24 !important;
-  }
-  
+.daydrop {
+  width: 50% !important;
+  padding-left: 1%;
+}
 
-  .DayPickerInput input{
-    height: 60px !important;
-  }
-   .monthdrop select {
-    width: 50% !important;
-    height: 60px !important;
-    text-align: center !important;
-    border-color: #ed1c24 !important;
-  }
-  
-  .daydrop{
-    /* width: 50% !important; */
-    padding-left: 1%
-   
-  }
+.daydrop select {
+  width: 70% !important;
+  height: 60px !important;
+  text-align: center !important;
+  border-color: #ed1c24 !important;
+}
+.daydrop .startTime {
+  width: 50% !important;
+  height: 60px !important;
+  text-align: center !important;
+  border-color: #ed1c24 !important;
+}
 
-  .daydrop select{
-    width: 70% !important;
-    height: 60px !important;
-    text-align: center !important;
-    border-color: #ed1c24 !important;
-  } 
-  .daydrop .startTime {
-    width: 50% !important;
-    height: 60px !important;
-    text-align: center !important;
-    border-color: #ed1c24 !important;
-  }
- 
-   
-  .rooms  .daydrop select {
-    width: 40% !important;
-    height: 30px !important;
-    text-align: center !important;
-    border-color: #ed1c24 !important;
-  }
+label p {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 30px;
+  text-transform: uppercase;
+  color: #ed1c24;
+}
+
+.rooms .daydrop select {
+  width: 40% !important;
+  height: 30px !important;
+  text-align: center !important;
+  border-color: #ed1c24 !important;
+}
 
 .roomdetails {
   border-left: 1px solid #d2d0d0;
@@ -167,14 +171,16 @@ color: #ED1C24;
   border-color: #ed1c24 !important;
 }
 
-
 .react-time-picker__inputGroup__input {
-width: 20px !important;
+  width: 20px !important;
 }
-  .roomdetails{
-    border-left: 1px solid  #D2D0D0;
-    padding: 50px;
-    padding-left: 30px;
-    padding-right: 93px;
-  }
+.roomdetails {
+  border-left: 1px solid #d2d0d0;
+  padding: 50px;
+  padding-left: 30px;
+  padding-right: 93px;
+}
 
+.selectedBG {
+  background-color: #ed1c24 !important;
+}

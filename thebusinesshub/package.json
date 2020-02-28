@@ -12,9 +12,12 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "install": "^0.13.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "npm": "^6.14.0",
+    "rc-time-picker": "^3.7.3",
     "react": "^16.12.0",
     "react-available-times": "^1.4.0",
     "react-big-scheduler": "^0.2.7",
@@ -59,5 +62,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-to-print": "^2.5.1"
   }
 }

@@ -10,6 +10,19 @@ border-left: 2px solid  #D2D0D0
     padding-right: 15px;
     }
 
+    .Regulations h2{
+        color: #ED1C24;
+        font-family: Arial;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 25px;
+        line-height: 29px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        text-transform: uppercase; 
+    }
+
 .Policies h2{
 color: #ED1C24;
 font-family: Arial;

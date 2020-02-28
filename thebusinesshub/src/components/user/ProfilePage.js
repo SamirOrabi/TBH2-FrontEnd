@@ -83,6 +83,7 @@ class ProfilePage extends Component {
       genderfontweight: 'bold'
     });
     this.state.profile.gender = e.target.value;
+    console.log(this.state.gender)
   };
 
   OnEditProfile = e => {

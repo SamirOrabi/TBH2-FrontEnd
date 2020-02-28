@@ -50,7 +50,7 @@ export default class Booking extends Component {
         <Container>
           <Row className="mb-4">
             <Col sm={12} md={6}>
-              <h2 className="pt-5">{this.state.dateInput}</h2>
+              {/* <h2 className="pt-5">{this.state.dateInput}</h2> */}
             </Col>
             <Col sm={12} md={6}>
               <Row>

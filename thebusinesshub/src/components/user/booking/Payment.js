@@ -3,6 +3,16 @@ import { Row , Container , Col ,Button ,Form} from 'react-bootstrap';
 import '../../stylesheets/PaymentCSS.css';
 import Receipt from '../booking/Receipt';
 export default class Payment extends Component {
+
+  
+
+  
+  componentDidMount(){
+    console.log( "props from holder to payment")
+    console.log(this.props)
+    // this.test()
+      }
+
   constructor(props){
     super(props)
     this.state={
@@ -63,7 +73,9 @@ showPayment=e=>{
                   noValidate
                   type="text"
                   name="Price"
+                  value={this.props.bookprice}
                 />
+              
               </Form.Group>
             </Col>
             </Row>
