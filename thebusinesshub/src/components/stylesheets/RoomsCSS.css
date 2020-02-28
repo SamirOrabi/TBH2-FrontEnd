@@ -30,7 +30,19 @@
   border-left: 5px solid #ed1c24;
   display: flex;
 }
-
+.datedrop {
+  padding-left: 2%;
+  border-left: 5px solid #ed1c24;
+  width: 90% !important;
+  height: 75% !important;
+}
+.datedrop p {
+  border: 1px solid #ed1c24 !important;
+  height: 100%;
+  text-align: left;
+  padding-top: 20px;
+  color: #000 !important;
+}
 .monthdrop select {
   width: 50% !important;
   height: 60px !important;

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Bookingmodal from '../booking/Bookingmodal';
 import {
   ScheduleComponent,
-  EventRenderedArgs,
   ViewsDirective,
   ViewDirective,
   ResourcesDirective,
@@ -13,17 +12,23 @@ import {
   Inject,
   Day,
   TimelineViews,
-  Agenda,
-  PopupOpenEventArgs
+  Agenda
 } from '@syncfusion/ej2-react-schedule';
-import { Button } from 'react-bootstrap';
+import { L10n } from '@syncfusion/ej2-base';
+let startdate;
+
+// L10n.load({
+//   'en-US': {
+//     newEvent: 'BOOK'
+//   }
+// });
 export default class DayTimeScale extends Component {
   constructor(props) {
     super(props);
     this.state = {
       bookingmodalShow: false,
-      startDate: '',
       endDate: '',
+      startTime: '',
       roomId: ''
     };
   }
@@ -57,7 +62,7 @@ export default class DayTimeScale extends Component {
           StartTime: startDate,
           EndTime: endDate,
           IsAllDay: id % 10 ? false : true,
-          ResourceId: i + 1
+          RoomId: i + 1
         });
         id++;
       }
@@ -66,13 +71,29 @@ export default class DayTimeScale extends Component {
   }
   generateResourceData(startId, endId, text) {
     let data = [];
-    // let colors = ['#ed1c24', '#eee'];
+    let colors = [
+      '#ff8787',
+      '#9775fa',
+      '#748ffc',
+      '#3bc9db',
+      '#69db7c',
+      '#fdd835',
+      '#748ffc',
+      '#9775fa',
+      '#df5286',
+      '#7fa900',
+      '#fec200',
+      '#5978ee',
+      '#00bdae',
+      '#ea80fc'
+    ];
     for (let a = startId; a <= endId; a++) {
-      // let n = Math.floor(Math.random() * colors.length);
+      let n = Math.floor(Math.random() * colors.length);
       data.push({
         Id: a,
-        Text: text + ' ' + a,
-        color: '#ed1c24'
+        Text: text + '' + a,
+        // color: '#ed1c24'
+        Color: colors[n]
       });
     }
     return data;
@@ -80,36 +101,28 @@ export default class DayTimeScale extends Component {
 
   OpenDetails = e => {
     e.cancel = true;
-    console.log(e.data);
-
+    console.log(e);
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
-
+    startdate = document.getElementsByClassName(
+      'e-toolbar-item e-date-range'
+    )[0].innerText;
+    console.log(startdate);
     if (e.data) {
       this.setState({
-        startDate: e.data.startTime,
+        startTime: e.data.startTime,
         roomId: e.data.RoomId,
         endDate: e.data.endTime
       });
-      console.log(e.target.className);
+      console.log(e.target);
       //       if(e.target.className='e-work-cells e-work-hours e-selected-cell'){
-
       //       }
     }
   };
+
   closebookModal = e => {
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
   };
-  OnEventRendered = args => {
-    console.log(args);
-    // The below code examples used to apply the background color to the appointments
-    var categoryColor;
-    if (args.data.Category == 'Assigned') {
-      categoryColor = 'green';
-    } else if (args.data.Category == 'UnAssigned') {
-      categoryColor = 'red';
-    }
-    args.element.style.backgroundColor = categoryColor;
-  };
+ 
   render() {
     console.log(this);
     return (
@@ -127,7 +140,9 @@ export default class DayTimeScale extends Component {
           ref={t => (this.scheduleObj = t)}
           width="100%"
           height="100%"
-          eventSettings={{ dataSource: this.data }}
+          eventSettings={{
+            dataSource: this.generateStaticEvents(new Date(2018, 4, 1), 300, 12)
+          }}
           group={{ resources: ['Rooms'] }}
           popupOpen={this.OpenDetails}
           startHour="09:00"
@@ -140,8 +155,9 @@ export default class DayTimeScale extends Component {
             interval: 120,
             slotCount: 2
           }}
+          eventSettingsTemplate={{ color: '#eee' }}
           minDate={new Date()}
-          eventRendered='OnEventRendered'
+          eventRendered="OnEventRendered"
         >
           <ResourcesDirective>
             <ResourceDirective
@@ -152,7 +168,7 @@ export default class DayTimeScale extends Component {
               dataSource={this.generateResourceData(1, 4, 'Room')}
               textField="Text"
               idField="Id"
-              colorField="color"
+              colorField="Color"
             ></ResourceDirective>
           </ResourcesDirective>
           <ViewsDirective>
@@ -171,7 +187,8 @@ export default class DayTimeScale extends Component {
         <Bookingmodal
           show={this.state.bookingmodalShow}
           onHide={this.bookingmodalShow}
-          startDate={this.state.startDate}
+          startTime={this.state.startTime}
+          startdate={startdate}
           roomId={this.state.roomId}
           endDate={this.state.endDate}
           closebookModal={this.closebookModal}

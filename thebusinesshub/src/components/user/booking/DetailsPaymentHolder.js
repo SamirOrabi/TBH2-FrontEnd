@@ -17,10 +17,17 @@ export default class DetailsPaymentHolder extends Component {
       paymentColor: '#000',
       paymentborder: 'none',
       showreceiptcomponent: false,
-      test:'here',
+      // test:'here',
+      bookprice:'',
       startDate:'',
       startTime:'',
       endTime:'',
+      roomId:'',
+      roomtype:'',
+      amountofpeople:'',
+      slots:[],
+      startdate:'',
+      payment:'',
       roomId:''
       
     };
@@ -43,47 +50,56 @@ export default class DetailsPaymentHolder extends Component {
   }
 
   componentDidUpdate(prevProps , prevState){
-    if ( isEqual(prevState ,this.state.test)){
+    if ( isEqual(prevState ,this.state.bookprice)){
       this.test()
-
-      
+this.testtoreceipt()
     }
     console.log("state changed")
-      console.log(this.state.startDate)
-      console.log(this.state)
+      console.log(this.state.bookprice)
+      
 
+      if ( isEqual(prevState ,this.state.roomtype)){
+       
+  this.testtoreceipt()
+  console.log("room type changed")
+      console.log(this.state.roomtype)
+      }
   }
 
+ 
+
   test=e =>{
-    console.log("fun test")
 
-// console.log(e)
-
-// if(0){
 setTimeout(() => {
 
-  this.setState({ startDate: e });
+  this.setState({ bookprice: e });
 }, 0);
 
   console.log("state changed2")
-  console.log(this.state.startDate)
+  console.log(this.state.bookprice)
 
-// console.log('start date')
-// console.log(this.state.test)
-// }
-// console.log('start date2 ')
-// console.log(this.state.test)
   }
 
-  // paymenttest=e =>{
-  //   console.log(e)
-  //   this.setState({
-  //     startDate: e,
-     
-  //   });
-  //   console.log(this.state.startDate)
-  //     }
 
+
+  
+  testtoreceipt=(r , a , s ,d ,p ,n ) =>{
+
+    setTimeout(() => {
+    
+      this.setState({ roomtype: r , amountofpeople:a , slots:s ,startdate:d ,
+         payment:p ,roomId:n});
+    }, 0);
+    
+      console.log("state changed2 amountofpeople")
+      console.log(this.state.roomtype  );
+      console.log(this.state.amountofpeople  )
+      console.log(this.state.slots  )
+      console.log(this.state.startdate  )
+      console.log(this.state.payment  )
+       console.log(this.state.roomId  )
+    
+      }
   showPayment = e => {
     this.setState({
       showdetailscomponent: false,
@@ -102,7 +118,19 @@ setTimeout(() => {
     });
   };
   render() {
-  
+ console.log('here is my rooooom')
+ console.log(this.state.roomtype)
+ console.log('here is  amountofpeople')
+ console.log(this.state.amountofpeople)
+ console.log('here is  slots')
+ console.log(this.state.slots)
+ console.log('here is  startdate')
+ console.log(this.state.startdate)
+ console.log('here is  payment')
+ console.log(this.state.payment)
+ console.log('here is  roomnumber')
+ console.log(this.state.roomId)
+
     return (
       <div>
         {(this.state.showdetailscomponent ||
@@ -137,10 +165,12 @@ setTimeout(() => {
         
         {this.state.showdetailscomponent && (
           <BookDetails
-            detailsfun={this.test}
+          testtoreceipt={this.testtoreceipt}
+           detailsfun={this.test}
             showPayment={this.showPayment}
             // nnnn={this.state.test}
             startDate={this.state.startDate}
+            startdate={this.props.startdate}
             startTime={this.props.startTime}
             endTime={this.props.endTime}
             roomId={this.props.roomId}
@@ -149,6 +179,7 @@ setTimeout(() => {
         )}
         {this.state.showpaymentcomponent && (
           <Payment
+          bookprice={this.state.bookprice}
             paymentstae={this.state.test}
             showDetails={this.showDetails}
             showreceipt={this.showreceipt}
@@ -158,8 +189,11 @@ setTimeout(() => {
             roomId={this.state.roomId}
           />
         )}
+        
         {this.state.showreceiptcomponent && (
-          <Printcomponent closebookModal={this.props.closebookModal} />
+          <Printcomponent closebookModal={this.props.closebookModal} roomtype={this.state.roomtype}  amountofpeople={this.state.amountofpeople} 
+          bookprice={this.state.bookprice} slots={this.state.slots} startdate={this.state.startdate}
+          payment={this.state.payment} roomId={this.state.roomId} />
         )}
       </div>
     );

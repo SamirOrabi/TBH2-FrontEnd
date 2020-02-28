@@ -13,6 +13,7 @@ import {
   TimelineViews,
   Agenda
 } from '@syncfusion/ej2-react-schedule';
+import Bookingmodal from './Bookingmodal';
 export default class WeekTimeScale extends Component {
   constructor(props) {
     super(props);
@@ -54,7 +55,7 @@ export default class WeekTimeScale extends Component {
           StartTime: startDate,
           EndTime: endDate,
           IsAllDay: id % 10 ? false : true,
-          ResourceId: i + 1
+          RoomId: i + 1
         });
         id++;
       }
@@ -89,6 +90,9 @@ export default class WeekTimeScale extends Component {
     }
     return data;
   }
+  closebookModal = e => {
+    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
+  };
   render() {
     return (
       <div>
@@ -98,9 +102,16 @@ export default class WeekTimeScale extends Component {
           width="100%"
           height="auto"
           selectedDate={new Date()}
-          eventSettings={{ dataSource: this.data }}
+          eventSettings={{
+            dataSource: this.generateStaticEvents(new Date(2018, 4, 1), 300, 12)
+          }}
+          quickInfoOnSelectionEnd={true}
           group={{ resources: ['Rooms'] }}
           popupOpen={this.OpenDetails}
+          startHour="09:00"
+          endHour="22:00"
+          enablePersistence={true}
+          locale="en-US"
         >
           <ResourcesDirective>
             <ResourceDirective
@@ -112,6 +123,7 @@ export default class WeekTimeScale extends Component {
               textField="Text"
               idField="Id"
               colorField="Color"
+              popupOpen={this.OpenDetails}
             ></ResourceDirective>
           </ResourcesDirective>
           <ViewsDirective>
@@ -124,6 +136,10 @@ export default class WeekTimeScale extends Component {
         <div className="booknowbtn">
           <button onClick={this.OpenDetails}>BOOK NOW</button>
         </div>
+        <Bookingmodal
+          show={this.state.bookingmodalShow}
+          closebookModal={this.closebookModal}
+        />
       </div>
     );
   }

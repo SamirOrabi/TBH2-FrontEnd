@@ -1,49 +1,114 @@
 import React, { Component } from 'react';
-import { Container, Col, Row, Table, Button } from 'react-bootstrap';
+import { Container, Col, Row, Table, Button , Modal } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import axios from 'axios';
 import '../../stylesheets/ReceiptCSS.css';
-
 // import Printcomponent from '../booking/Printcomponent';
-export default class Receipt extends Component {
+class Receipt extends Component {
+
+  constructor(props){
+    super(props);
+    this.state={
+      profile: [],
+      modalnote: '',
+      show: false,
+
+    }
+  }
+  componentDidMount() {
+    axios.defaults.headers.common['authorization'] = localStorage.userToken;
+
+    axios
+      .post('https://cubexs.net/tbhapp/accounts/getprofile', {
+        Account: {
+          id: this.props.user.id
+        }
+      })
+      .then(res => {
+        console.log(res.data)
+        this.setState({ profile: res.data.profile });
+       
+      });
+    console.log(this.props.isAuth);
+   
+  }
+
+sendbookingdetails=()=>{
+  axios.defaults.headers.common['authorization'] =localStorage.userToken;
+  axios.post('https://cubexs.net/tbhapp/bookings/addbooking' , 
+  {
+    Account:{
+      id:this.props.user.id,
+            },
+            Booking:{
+              date:this.props.startdate,
+              slot:this.props.slots,
+              roomType:this.props.roomtype,
+              roomNumber:this.props.roomId,
+              amountOfPeople:this.props.amountofpeople,
+              paymentMethod:this.props.payment,
+              packageCode:''
+
+            }
+  }
+  )
+  .then(res => {
+    console.log('addbooking', res.data);
+    this.setState({
+      modalnote: 'Your Booking Added Successfully',
+      show1: false
+    });
+    this.setState({ show: true });
+    setTimeout(() => {
+      this.setState({ show: false });
+    }, 1600);
+    console.log(res.data);
+    this.props.closebookModal()
+  })
+  .catch(err => console.log(err));
+
+}
+
   render() {
 
+  
     return (
-      <div>
+      <div >
         <Container>
           <Row>
             {/* <Col sm={1}></Col> */}
             <Col sm={12}>
               <div className="receipt">
-                <h2 className="ml-5">Receipt For Ahmed orabi</h2>
+    
+                <h2 className="ml-5 mb-5">Receipt For {this.state.profile.firstName}
+                 {this.state.profile.lastName}</h2>
               </div>
             </Col>
           </Row>
 
           <Row>
-            <Col sm={12}>
+            <Col sm={12} className="receipttable">
               <React.Fragment>
-                <Table>
+                <Table >
                   <thead>
                     <tr>
-                      <th>ROOM</th>
-                      <th>Start Date</th>
-                      <th>End Date</th>
-                      <th>Slot</th>
-                      <th>Number of people </th>
-                      <th>Package code</th>
-                      <th>Price</th>
+                      <th className=" pl-5">ROOM</th>
+                      <th className=" pl-5">Start Date</th>
+                      <th className=" pl-5">Slot</th>
+                      <th className=" pl-5">Number of people </th>
+                      <th className=" pl-5">Package code</th>
+                      <th className=" pl-5">Price</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     <tr className="text-center bookingstr  mb-5">
-                      <td>meeting room</td>
-                      <td>66/66</td>
-                      <td>66/666</td>
-                      <td>9 am</td>
-                      <td>6</td>
-                      <td>tytytyt</td>
-
-                      <td>554</td>
+                      <td>{this.props.roomtype}</td>
+                      <td>{this.props.startdate}</td>
+                      <td>{this.props.slots}</td>
+                      <td>{this.props.amountofpeople}</td>
+                      <td>-</td>
+                      <td>{this.props.bookprice}</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -54,9 +119,9 @@ export default class Receipt extends Component {
           <Row>
             <Col sm={12}>
               <div className="receipt">
-                <h6>
+                <h6 className="mb-5">
                   {' '}
-                  <i class="fas fa-square-full"></i>You can pay via: Vodafone
+                  <i class="fas fa-square-full" style={{fontSize:'10px'}}></i>You can pay via: Vodafone
                   Cash or visit our work space
                 </h6>
                 <div style={{ display: 'flex' }} className="mt-3">
@@ -88,14 +153,23 @@ export default class Receipt extends Component {
               <Button
                 type="submit"
                 className="my-4 nextBtn mr-5"
-                onClick={this.props.closebookModal}
+                onClick={this.sendbookingdetails}
               >
                 DONE
               </Button>
             </Col>
           </Row>
         </Container>
+        <Modal className="mt-2 firstnameupdatesnackbar" show={this.state.show}>
+          <div id="snackbar">{this.state.modalnote}</div>
+        </Modal>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+export default connect(mapStateToProps)(Receipt);

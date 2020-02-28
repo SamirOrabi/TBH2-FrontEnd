@@ -31,12 +31,12 @@
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 0rem 0rem !important;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid white !important;
     border-top-left-radius: .3rem;
     border-top-right-radius: .3rem;
 }
 
-.bookmodal .modal-header {
+/* .bookmodal .modal-header {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: start;
@@ -44,10 +44,10 @@
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 1rem 1rem;
-    border-bottom: 1px solid white !important;
+    border-bottom: 1px solid red !important;
     border-top-left-radius: .3rem;
     border-top-right-radius: .3rem;
-}
+} */
 
 
 .paymentanddetailsbtn .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
@@ -60,4 +60,17 @@
 .paymentanddetailsbtn .btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem white;
     border-color: white;
+}
+
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid white;
+    border-top-left-radius: .3rem;
+    border-top-right-radius: .3rem;
 }
