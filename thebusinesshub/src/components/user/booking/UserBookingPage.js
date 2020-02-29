@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../stylesheets/bookingsCss.css';
 import { Table, Container, Button, Modal } from 'react-bootstrap';
@@ -117,6 +117,7 @@ class UserBookingPage extends Component {
                               <td>
                                 {' '}
                                 <img
+                                  alt="vodafone"
                                   src={require('../../../Images/vodafone.png')}
                                   style={{ width: '50px', height: '50px' }}
                                 />
@@ -182,6 +183,7 @@ class UserBookingPage extends Component {
                             ) : (
                               <td>
                                 <img
+                                  alt="vodafone"
                                   src={require('../../../Images/vodafone.png')}
                                   style={{ width: '70px', height: '70px' }}
                                 />

@@ -7,9 +7,6 @@ import '../stylesheets/userCss.css';
 import UserBookingPage from './booking/UserBookingPage';
 
 export default class UserBoard extends Component {
-  componentDidMount() {
-    console.log(this.props.location);
-  }
   render() {
     return (
       <Container fluid className="userboard">

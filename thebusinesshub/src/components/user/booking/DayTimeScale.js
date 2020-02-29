@@ -137,7 +137,6 @@
 //           this.setState({ tbhdays: this.state.tbhCalendar[c].day });
 //           this.setState({ tbhmonths: this.state.tbhCalendar[c].month });
 //           this.setState({ tbhyears: this.state.tbhCalendar[c].year });
-//           console.log(this.state.tbhyears)
 //         }
 
 //         const allcell = document.getElementsByClassName('e-work-cells');
@@ -194,7 +193,6 @@
 
 //   OpenDetails = e => {
 //     e.cancel = true;
-//     // console.log(e);
 //     // this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
 //     startdate = document.getElementsByClassName(
 //       'e-toolbar-item e-date-range'
@@ -207,11 +205,9 @@
 //         endDate: e.data.endTime
 //       });
 
-//       // console.log(e.target);
 //       const test = Number(e.target.getAttribute('data-date'));
 //       // const test2 =;
 //       const test2 = moment(test);
-//       // console.log(formatDate(test2._d));
 //       const allcell = document.getElementsByClassName('e-work-cells');
 
 //       // var elements = document.getElementsByClassName("class-1");
@@ -221,24 +217,17 @@
 //         // allcell[i].style.background = 'red';
 
 //         allcell[i].style['background-color'] = '#000';
-//         // console.log(allcell[i].style['background-color']);
 //         // if (allcell[i].getAttribute('data-date') === '1590822000000') {
 //         //   allcell[i].classList.add('bgcolooor');
-//         //   console.log(allcell[i].className);
 
 //         //             allcell[i].classList.add('bgcolooor');
 
-//         //   console.log('yessssssssssssss');
 //         // }
-//         // console.log(allcell[i].getAttribute('data-date'));
 //       }
 
-//       // console.log('ddd');
 //       this.setState({ allcells: allcell });
-//       // console.log(this.state.allcells);
 
 //       // if (formatDate(test2._d) === '05/30/2020') {
-//       //   console.log('haha');
 //       //   allcell[5].style.backgroundColor = 'red';
 //       // }
 //     }
@@ -262,14 +251,10 @@ import {
   Agenda
 } from '@syncfusion/ej2-react-schedule';
 import { formatDate } from 'react-day-picker/moment';
-import moment from 'moment';
 import axios from 'axios';
 let startdate;
 let tbhdata;
-let finaltbhdata;
-let tbhstatus;
-let cellcolor;
-let slottime;
+let cellcolor = '#fff';
 export default class DayTimeScale extends Component {
   constructor() {
     super();
@@ -285,6 +270,11 @@ export default class DayTimeScale extends Component {
   }
 
   componentDidMount() {
+    this.convertMonthNameToNumber = monthName => {
+      var myDate = new Date(monthName + ' 1, 2000');
+      var monthDigit = myDate.getMonth();
+      return isNaN(monthDigit) ? 0 : monthDigit;
+    };
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/bookings/showcalendar', {
@@ -297,7 +287,6 @@ export default class DayTimeScale extends Component {
         if (res.data.bookings) {
           // this.setState({ TBHAllBooks: res.data.bookings });
           // this.state.TBHAllBooks.map((book,i) =>{
-          // console.log(book.slot)
           //   if(book.slot==='9AM'){
           //     slottime='9'
           //   }
@@ -334,20 +323,8 @@ export default class DayTimeScale extends Component {
           //     slottime='21'
           //   }
 
-          //   console.log(slottime)
           // })
 
-          res.data.bookings.map((book, i) => {
-            // console.log(String(book.slot).substring(0, 2))
-            if (book.slot.includes('PM')) {
-              slottime = Number(String(book.slot.substring(0, 1)))+12;
-              console.log(slottime);
-            }
-            else {
-              slottime=Number(String(book.slot.substring(0, 1)))
-              console.log(slottime) 
-            }
-          });
           this.setState({
             tbhdata: res.data.bookings.map((book, i) => ({
               Id: i,
@@ -355,42 +332,37 @@ export default class DayTimeScale extends Component {
               // StartTime: new Date(book.year, book.month, book.day, String(book.slot.substring(0,1))),
               StartTime: new Date(
                 book.year,
-                3,
+                this.convertMonthNameToNumber(book.month),
                 book.day,
-                // String(book.slot.substring(0, 1))
-                11
+                // String(book.slot.substring(0, 1)),
+                String(book.slot).includes('PM')
+                  ? Number(String(book.slot.substring(0, 1))) + 12
+                  : Number(String(book.slot.substring(0, 1)))
               ),
               EndTime: new Date(
                 book.year,
-                3,
+                this.convertMonthNameToNumber(book.month),
                 book.day,
-                14
+                String(book.slot).includes('PM')
+                  ? Number(String(book.slot.substring(0, 1))) + 13
+                  : Number(String(book.slot.substring(0, 1))) + 1
+
                 // String(book.slot.substring(0, 1))
               ),
-              ResourceId: 2
-              // status: book.status
+              ResourceId: 3,
+              status: book.status,
+              color: cellcolor
             }))
           });
-
-          console.log(tbhdata);
+        } else {
+          return null;
         }
-      });
+      })
+      .catch(err => console.log(err));
   }
-  generateResourceData(startId, endId, text) {
-    let data = [];
-    for (let a = startId; a <= endId; a++) {
-      data.push({
-        Id: a,
-        Text: text + ' ' + a,
-        // Color: cellcolor
-        Color: '#ed1c24'
-      });
-    }
-    return data;
-  }
+
   OpenDetails = e => {
     e.cancel = true;
-    console.log(e);
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
     startdate = document.getElementsByClassName(
       'e-toolbar-item e-date-range'
@@ -410,14 +382,38 @@ export default class DayTimeScale extends Component {
   };
   render() {
     tbhdata = this.state.tbhdata;
-    // tbhdata.map(status => {
+    // tbhdata.map((status, i) => {
     //   if (status.status === 'Busy') {
-    //     cellcolor = '#ed1c24';
+    //     status.color = '#ed1c24';
+    //     cellcolor = status.color;
     //   } else if (status.status === 'Pending') {
-    //     cellcolor = '#D2D0D0';
+    //     status.color = '#D2D0D0';
+    //     cellcolor = status.color;
     //   }
     // });
 
+    // for (var i = 0, len = tbhdata.length; i < len; i++) {
+    //   if (tbhdata[i].status === 'Pending') {
+    //     cellcolor = '#D2D0D0';
+    //   } else if (tbhdata[i].status === 'Busy') {
+    //     cellcolor = '#ed1c24';
+    //   } else {
+    //     cellcolor = '#fff';
+    //   }
+    // }
+
+    this.generateResourceData = (startId, endId, text) => {
+      let data = [];
+      for (let a = startId; a <= endId; a++) {
+        data.push({
+          Id: a,
+          Text: text + ' ' + a,
+          // Color: cellcolor
+          Color: cellcolor
+        });
+      }
+      return data;
+    };
     return (
       <div>
         <ScheduleComponent

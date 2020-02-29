@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import '../../stylesheets/BookingmodelCSS.css';
 import DetailsPaymentHolder from '../booking/DetailsPaymentHolder';
-let startD;
 export default class Bookingmodal extends Component {
   constructor(props) {
     super(props);
@@ -13,8 +12,6 @@ export default class Bookingmodal extends Component {
   }
 
   render() {
-    console.log();
-    console.log(String(this.props.endDate).substring(16, 18));
 
     return (
       <div className="bookmodal">

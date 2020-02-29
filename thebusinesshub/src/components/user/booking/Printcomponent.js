@@ -4,11 +4,6 @@ import ReactToPrint from 'react-to-print';
 import Receipt from '../booking/Receipt';
 
 class Printcomponent extends Component {
-  // componentDidMount(){
-  //   console.log("props of payment")
-  //   console.log(this.props.roomId)
-  // }
-
   render() {
     return (
       <div>

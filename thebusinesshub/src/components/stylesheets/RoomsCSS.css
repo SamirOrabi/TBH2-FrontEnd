@@ -117,18 +117,16 @@
   border: 1px solid #ed1c24 !important;
 }
 
-.DayPickerInput input {
-  height: 60px !important;
-}
-.monthdrop select {
-  width: 50% !important;
-  height: 60px !important;
-  text-align: center !important;
-  border-color: #ed1c24 !important;
-}
+  label p{
+font-family: Arial;
+font-style: normal;
+font-weight: bolder;
+font-size: 30px;
+text-transform: uppercase;
+color: #ED1C24;}
 
 .daydrop {
-  /* width: 50% !important; */
+  width: 50% !important;
   padding-left: 1%;
 }
 

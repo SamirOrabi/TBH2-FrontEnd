@@ -16,11 +16,9 @@ import {
   Agenda
 } from '@syncfusion/ej2-react-schedule';
 import { formatDate } from 'react-day-picker/moment';
-import moment from 'moment';
 import axios from 'axios';
 let startdate;
 let tbhdata;
-let tbhstatus;
 let cellcolor;
 export default class DayTimeScale extends Component {
   constructor() {
@@ -37,6 +35,11 @@ export default class DayTimeScale extends Component {
   }
 
   componentDidMount() {
+    this.convertMonthNameToNumber = monthName => {
+      var myDate = new Date(monthName + ' 1, 2000');
+      var monthDigit = myDate.getMonth();
+      return isNaN(monthDigit) ? 0 : monthDigit;
+    };
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/bookings/showcalendar', {
@@ -55,14 +58,14 @@ export default class DayTimeScale extends Component {
               // StartTime: new Date(book.year, book.month, book.day, String(book.slot.substring(0,1))),
               StartTime: new Date(
                 book.year,
-                3,
+                this.convertMonthNameToNumber(book.month),
                 book.day,
                 // String(book.slot.substring(0, 1))
                 9
               ),
               EndTime: new Date(
                 book.year,
-                3,
+                this.convertMonthNameToNumber(book.month),
                 book.day + 6,
                 11
                 // String(book.slot.substring(0, 1))
@@ -72,9 +75,9 @@ export default class DayTimeScale extends Component {
             }))
           });
 
-          console.log(tbhdata);
         }
-      });
+      })
+      .catch(err => console.log(err));
   }
   generateResourceData(startId, endId, text) {
     let data = [];
@@ -89,7 +92,6 @@ export default class DayTimeScale extends Component {
   }
   OpenDetails = e => {
     e.cancel = true;
-    console.log(e);
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
     startdate =
       String(
@@ -105,11 +107,13 @@ export default class DayTimeScale extends Component {
       String(
         document.getElementsByClassName('e-toolbar-item e-date-range')[0]
           .innerText
-      ).substring( String(
-        document.getElementsByClassName('e-toolbar-item e-date-range')[0]
-          .innerText
-      ).indexOf(','), 23);
-    console.log(startdate);
+      ).substring(
+        String(
+          document.getElementsByClassName('e-toolbar-item e-date-range')[0]
+            .innerText
+        ).indexOf(','),
+        23
+      );
     if (e.data) {
       this.setState({
         startTime: e.data.startTime,
@@ -124,13 +128,13 @@ export default class DayTimeScale extends Component {
   };
   render() {
     tbhdata = this.state.tbhdata;
-    tbhdata.map(status => {
-      if (status.status === 'Busy') {
-        cellcolor = '#ed1c24';
-      } else if (status.status === ' Pending') {
-        cellcolor = '#D2D0D0';
-      }
-    });
+    // tbhdata.map(status => {
+    //   if (status.status === 'Busy') {
+    //     cellcolor = '#ed1c24';
+    //   } else if (status.status === ' Pending') {
+    //     cellcolor = '#D2D0D0';
+    //   }
+    // });
 
     return (
       <div>
