@@ -25,11 +25,9 @@ class Receipt extends Component {
         }
       })
       .then(res => {
-        console.log(res.data)
         this.setState({ profile: res.data.profile });
        
       });
-    console.log(this.props.isAuth);
    
   }
 
@@ -53,7 +51,6 @@ sendbookingdetails=()=>{
   }
   )
   .then(res => {
-    console.log('addbooking', res.data);
     this.setState({
       modalnote: 'Your Booking Added Successfully',
       show1: false
@@ -62,7 +59,6 @@ sendbookingdetails=()=>{
     setTimeout(() => {
       this.setState({ show: false });
     }, 1600);
-    console.log(res.data);
     this.props.closebookModal()
   })
   .catch(err => console.log(err));

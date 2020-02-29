@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, Form, Col } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import ForgetPassword from '../../sections/ForgetPassword';
 import { connect } from 'react-redux';
@@ -28,9 +28,7 @@ class Passwordchangemodel extends Component {
 
   hideModal2 = e => {
     // this.setState({ show: false });
-    // console.log('eeeeeeee');
-    // console.log(e);
-    // console.log(this.state.show);
+
     setTimeout(() => {
       this.setState({ show: e });
     }, 0);
@@ -48,16 +46,13 @@ class Passwordchangemodel extends Component {
 
   handlenewpasswordUserInput = e => {
     this.setState({ newPassword: e.target.value });
-    console.log(e.target.value);
   };
 
   handlepasswordUserInput = e => {
     this.setState({ oldpassword: e.target.value });
-    console.log(e.target.value);
   };
 
   changePassword = () => {
-    console.log('testttttttt change password');
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     if (this.state.newPassword === this.state.ConfirmPassword) {
       axios
@@ -69,7 +64,6 @@ class Passwordchangemodel extends Component {
           Account: { id: this.props.user.id }
         })
         .then(res => {
-          console.log(res);
           if (res.data.error) {
             this.setState({ error: res.data.error, passerror: '' });
           } else {

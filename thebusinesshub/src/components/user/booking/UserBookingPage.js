@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../stylesheets/bookingsCss.css';
-import { Table, Container, Button } from 'react-bootstrap';
+import { Table, Container, Button, Modal } from 'react-bootstrap';
 import isEqual from 'lodash/isEqual';
+import EditSlot from './EditSlot';
 
 class UserBookingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userbook: []
+      userbook: [],
+      show: false,
+      showedit: false
     };
   }
 
@@ -23,14 +26,11 @@ class UserBookingPage extends Component {
         }
       })
       .then(res => {
-        console.log(res.data.bookings);
-
         this.setState({ userbook: res.data.bookings });
       });
   }
 
   CancelPendingBook = id => {
-    console.log(id.target.id);
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/bookings/cancelpending', {
@@ -43,13 +43,33 @@ class UserBookingPage extends Component {
       })
       .then(res => {
         this.setState({ userbook: this.state.userbook });
-        if(res.data.code==='0'){
-          console.log('hah')
-
+        if (res.data.code === 0) {
+          this.setState({ show: true });
+          setTimeout(() => {
+            this.setState({ show: false });
+          }, 1600);
         }
       });
   };
 
+  openeditTimeSlotModal = () => {
+    this.setState({ showedit: !this.state.showedit });
+  };
+
+  hideModal = e => {
+    setTimeout(() => {
+      this.setState({ show: e });
+    }, 1600);
+  };
+
+  hideModal2 = e => {
+    // this.setState({ show: false });
+
+    setTimeout(() => {
+      this.setState({ show: e });
+    }, 0);
+  };
+  
   componentDidUpdate(prevProps, prevState) {
     if (isEqual(prevState, this.state)) {
       axios.defaults.headers.common['authorization'] = localStorage.userToken;
@@ -60,7 +80,6 @@ class UserBookingPage extends Component {
           }
         })
         .then(res => {
-          console.log(res.data.bookings);
           this.setState({ userbook: res.data.bookings });
         });
     }
@@ -82,7 +101,7 @@ class UserBookingPage extends Component {
             <div className="bookingtable">
               <div className="tabletype">
                 {' '}
-                <h5 className="py-2">UPCOMING</h5>
+                <h5 className="py-2">HISTORY</h5>
               </div>
               <React.Fragment>
                 <Table className="upcometable">
@@ -117,6 +136,7 @@ class UserBookingPage extends Component {
                               <td>
                                 {' '}
                                 <img
+                                  alt="vodafone"
                                   src={require('../../../Images/vodafone.png')}
                                   style={{ width: '50px', height: '50px' }}
                                 />
@@ -148,7 +168,7 @@ class UserBookingPage extends Component {
                 </Table>
               </React.Fragment>
               <div className="tabletype mt-5">
-                <h5 className="py-2">HISTORY</h5>
+                <h5 className="py-2">UPCOMING</h5>
               </div>
               <React.Fragment>
                 <Table className="historytable">
@@ -169,8 +189,6 @@ class UserBookingPage extends Component {
                         book.date < todaydate && (
                           <tr key={i} className="text-center bookingstr">
                             <td>{book.roomType}</td>
-                            {console.log('ahahha')}
-                            {console.log(book.date)}
                             <td>{book.date.substring(0, 10)}</td>
                             <td>{book.slot}</td>
                             <td>{book.amountOfPeople}</td>
@@ -184,6 +202,7 @@ class UserBookingPage extends Component {
                             ) : (
                               <td>
                                 <img
+                                  alt="vodafone"
                                   src={require('../../../Images/vodafone.png')}
                                   style={{ width: '70px', height: '70px' }}
                                 />
@@ -212,8 +231,23 @@ class UserBookingPage extends Component {
                                   <Button
                                     id={book.id}
                                     onClick={this.CancelPendingBook}
+                                    className="cancelbtn"
                                   >
-                                    Cancel
+                                    <i class="far fa-window-close"></i>
+                                  </Button>
+                                </td>
+                                <td>
+                                  <Button
+                                    id={book.id}
+                                    onClick={this.openeditTimeSlotModal}
+                                    className="cancelbtn"
+                                  >
+                                    <i class="fas fa-edit"></i>
+                                    <EditSlot
+                                      show={this.state.showedit}
+                                      hideModal={this.hideModal}
+                                      hideModal2={this.hideModal2}
+                                    />
                                   </Button>
                                 </td>
                               </React.Fragment>
@@ -224,6 +258,12 @@ class UserBookingPage extends Component {
                   </tbody>
                 </Table>
               </React.Fragment>
+              <Modal
+                className="mt-2 firstnameupdatesnackbar"
+                show={this.state.show}
+              >
+                <div id="snackbar">Your book is canceled successfully</div>
+              </Modal>
             </div>
           )
         ) : (

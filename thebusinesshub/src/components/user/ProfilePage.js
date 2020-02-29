@@ -83,7 +83,6 @@ class ProfilePage extends Component {
       genderfontweight: 'bold'
     });
     this.state.profile.gender = e.target.value;
-    console.log(this.state.gender)
   };
 
   OnEditProfile = e => {
@@ -108,7 +107,6 @@ class ProfilePage extends Component {
         Account: request
       })
       .then(res => {
-        console.log(res);
         if (res.data.code === 105) {
           this.setState({ verifyerror: res.data.error, validationerror: '' });
         } else if (
@@ -120,7 +118,6 @@ class ProfilePage extends Component {
           res.data.code === 127 &&
           this.state.profileInfo.state === 'verified'
         ) {
-          console.log(res.data.error);
           this.setState({ datevalidationerror: res.data.error });
         } else {
           this.setState({ datevalidationerror: '', validationerror: '' });

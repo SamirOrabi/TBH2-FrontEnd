@@ -52,14 +52,12 @@ class Rooms extends Component {
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps) {
-      console.log(nextProps.startdate);
       startdatteee = formatDate(nextProps.startdate);
       starttime = nextProps.startTime;
       endtime = nextProps.endTime;
       nextProps.roomId.map(roomId => this.setState({ roomId: String(roomId) }));
       // this.onChangeEndTime = time => {
       //   endtime = time;
-      //   console.log(endtime);
       // };
     }
   }
@@ -130,16 +128,10 @@ class Rooms extends Component {
         Booking: bookrequest
       })
       .then(res => {
-        console.log(res.data);
         if (res.data.code === 0) {
           this.setState({ bookprice: res.data.price });
         }
-        console.log(this.state.bookprice);
-        console.log(formatDate(startdatteee));
-        console.log(this.state.roomtype);
-        console.log(this.state.roomId);
-        console.log(this.state.amountofpeople);
-        console.log(this.state.slots);
+        
 
         this.props.showPayment();
       })
