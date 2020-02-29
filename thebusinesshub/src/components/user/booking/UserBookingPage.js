@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import '../../stylesheets/bookingsCss.css';
 import { Table, Container, Button, Modal } from 'react-bootstrap';
 import isEqual from 'lodash/isEqual';
+import EditSlot from './EditSlot';
 
 class UserBookingPage extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class UserBookingPage extends Component {
     this.state = {
       userbook: [],
       show: false,
-      show1: false
+      showedit: false
     };
   }
 
@@ -51,6 +52,24 @@ class UserBookingPage extends Component {
       });
   };
 
+  openeditTimeSlotModal = () => {
+    this.setState({ showedit: !this.state.showedit });
+  };
+
+  hideModal = e => {
+    setTimeout(() => {
+      this.setState({ show: e });
+    }, 1600);
+  };
+
+  hideModal2 = e => {
+    // this.setState({ show: false });
+
+    setTimeout(() => {
+      this.setState({ show: e });
+    }, 0);
+  };
+  
   componentDidUpdate(prevProps, prevState) {
     if (isEqual(prevState, this.state)) {
       axios.defaults.headers.common['authorization'] = localStorage.userToken;
@@ -214,7 +233,21 @@ class UserBookingPage extends Component {
                                     onClick={this.CancelPendingBook}
                                     className="cancelbtn"
                                   >
-                                    Cancel
+                                    <i class="far fa-window-close"></i>
+                                  </Button>
+                                </td>
+                                <td>
+                                  <Button
+                                    id={book.id}
+                                    onClick={this.openeditTimeSlotModal}
+                                    className="cancelbtn"
+                                  >
+                                    <i class="fas fa-edit"></i>
+                                    <EditSlot
+                                      show={this.state.showedit}
+                                      hideModal={this.hideModal}
+                                      hideModal2={this.hideModal2}
+                                    />
                                   </Button>
                                 </td>
                               </React.Fragment>
