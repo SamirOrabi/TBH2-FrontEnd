@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 //Bootstrap
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Col } from 'react-bootstrap';
 import axios from 'axios';
 import VerifyBy from '../sections/VerifyBy';
 import isEqual from 'lodash/isEqual';

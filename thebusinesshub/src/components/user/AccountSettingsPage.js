@@ -30,9 +30,7 @@ class AccountSettings extends Component {
       }
       )
       .then(res => {
-        console.log('getdatafromgetprofile', res.data.pofile);
         this.setState({ profileData: res.data.profile });
-        console.log(res.data);
       })
       .catch(err => console.log(err));
   }

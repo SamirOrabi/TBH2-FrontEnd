@@ -37,7 +37,7 @@ class Navb extends Component {
         }
       })
       .then(res => {
-        console.log('getprofile from nav', res);
+        // console.log('getprofile from nav', res);
         this.setState({ profleDate: res.data.profile });
       })
       .catch(err => console.log(err));

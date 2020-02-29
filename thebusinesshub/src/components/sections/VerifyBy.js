@@ -117,9 +117,7 @@ class VerifyBy extends Component {
       })
 
       .then(res => {
-        console.log('res');
-
-        console.log(res);
+       
 
         this.setState({ mystate: res.data.state });
       })

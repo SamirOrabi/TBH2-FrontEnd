@@ -3,14 +3,16 @@ import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../stylesheets/bookingsCss.css';
-import { Table, Container, Button } from 'react-bootstrap';
+import { Table, Container, Button, Modal } from 'react-bootstrap';
 import isEqual from 'lodash/isEqual';
 
 class UserBookingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userbook: []
+      userbook: [],
+      show: false,
+      show1: false
     };
   }
 
@@ -23,14 +25,11 @@ class UserBookingPage extends Component {
         }
       })
       .then(res => {
-        console.log(res.data.bookings);
-
         this.setState({ userbook: res.data.bookings });
       });
   }
 
   CancelPendingBook = id => {
-    console.log(id.target.id);
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/bookings/cancelpending', {
@@ -43,9 +42,11 @@ class UserBookingPage extends Component {
       })
       .then(res => {
         this.setState({ userbook: this.state.userbook });
-        if(res.data.code==='0'){
-          console.log('hah')
-
+        if (res.data.code === 0) {
+          this.setState({ show: true });
+          setTimeout(() => {
+            this.setState({ show: false });
+          }, 1600);
         }
       });
   };
@@ -60,7 +61,6 @@ class UserBookingPage extends Component {
           }
         })
         .then(res => {
-          console.log(res.data.bookings);
           this.setState({ userbook: res.data.bookings });
         });
     }
@@ -82,7 +82,7 @@ class UserBookingPage extends Component {
             <div className="bookingtable">
               <div className="tabletype">
                 {' '}
-                <h5 className="py-2">UPCOMING</h5>
+                <h5 className="py-2">HISTORY</h5>
               </div>
               <React.Fragment>
                 <Table className="upcometable">
@@ -148,7 +148,7 @@ class UserBookingPage extends Component {
                 </Table>
               </React.Fragment>
               <div className="tabletype mt-5">
-                <h5 className="py-2">HISTORY</h5>
+                <h5 className="py-2">UPCOMING</h5>
               </div>
               <React.Fragment>
                 <Table className="historytable">
@@ -169,8 +169,6 @@ class UserBookingPage extends Component {
                         book.date < todaydate && (
                           <tr key={i} className="text-center bookingstr">
                             <td>{book.roomType}</td>
-                            {console.log('ahahha')}
-                            {console.log(book.date)}
                             <td>{book.date.substring(0, 10)}</td>
                             <td>{book.slot}</td>
                             <td>{book.amountOfPeople}</td>
@@ -212,6 +210,7 @@ class UserBookingPage extends Component {
                                   <Button
                                     id={book.id}
                                     onClick={this.CancelPendingBook}
+                                    className="cancelbtn"
                                   >
                                     Cancel
                                   </Button>
@@ -224,6 +223,12 @@ class UserBookingPage extends Component {
                   </tbody>
                 </Table>
               </React.Fragment>
+              <Modal
+                className="mt-2 firstnameupdatesnackbar"
+                show={this.state.show}
+              >
+                <div id="snackbar">Your book is canceled successfully</div>
+              </Modal>
             </div>
           )
         ) : (
