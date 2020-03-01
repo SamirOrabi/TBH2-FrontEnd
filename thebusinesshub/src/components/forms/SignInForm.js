@@ -220,7 +220,7 @@ class SignInForm extends Component {
             or you can sign in with{' '}
             <a
               href={this.state.myLink}
-              target="_blank"
+            
               rel="noopener noreferrer"
             >
               <i

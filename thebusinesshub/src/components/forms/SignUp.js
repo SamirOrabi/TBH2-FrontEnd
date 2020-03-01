@@ -39,7 +39,7 @@ class SignUp extends Component {
       lname: '',
       lnameError: '',
       errors: {},
-      user: '',
+      BEerror: '',
       code: '',
       show: false,
       myLink: '',
@@ -182,10 +182,13 @@ class SignUp extends Component {
           password: regestrequest.password
         }
       },
-      this.props.history
+      this.props.history,
+      ''
     );
-
-    this.setState({ user: userData.error });
+    if (userData.code !== 0) {
+      this.setState({ BEerror: userData.error });
+      console.log(userData);
+    }
     // this.setState({ code: userData.code });
     // if (userData.code === 0) {
     //   return this.props.handleSignIn(true);
@@ -318,11 +321,11 @@ class SignUp extends Component {
             </div>{' '}
           </Form.Group>{' '}
           <PasswordErrors passwordErrors={this.state.passwordErrors} />
-          {this.state.user ? (
+          {this.state.BEerror ? (
             <span className="BbachError">
               {' '}
               <i className="fas fa-exclamation-triangle px-2"></i>
-              {this.state.user}
+              {this.state.BEerror}
             </span>
           ) : null}
           <div className="signupButton">

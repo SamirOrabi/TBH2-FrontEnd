@@ -113,24 +113,26 @@ export const userRegister = (
 };
 
 export const Login = (userdata, history, state) => async dispatch => {
-  console.log(userdata, state);
+  // console.log(userdata, state);
   if (state === 'googleLogin') {
-    console.log('here');
-    axios
-      .post('https://cubexs.net/tbhapp/accounts/logingoogle', userdata)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-        if (res.data.token) {
-          const userToken = res.data.token;
-          localStorage.setItem('userToken', userToken);
-          setAuthToken(userToken);
-          const decodedToken = jwt_decode(userToken);
-          dispatch(setCurrentUser(decodedToken));
-          history.push('/UserBoard/Account-Settings');
-        }
-      })
-      .catch(err => console.log(err));
+    const logindatagoogle = await new Promise((resolve, reject) => {
+      axios
+        .post('https://cubexs.net/tbhapp/accounts/logingoogle', userdata)
+        .then(res => {
+          resolve(res.data);
+          console.log(res.data);
+          if (res.data.token) {
+            const userToken = res.data.token;
+            localStorage.setItem('userToken', userToken);
+            setAuthToken(userToken);
+            const decodedToken = jwt_decode(userToken);
+            dispatch(setCurrentUser(decodedToken));
+            history.push('/UserBoard/Account-Settings');
+          }
+        })
+        .catch(err => console.log(err));
+    });
+    return logindatagoogle;
   }
   if (state === '') {
     const logindata = await new Promise((resolve, reject) => {
