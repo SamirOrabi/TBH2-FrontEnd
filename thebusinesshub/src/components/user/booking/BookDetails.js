@@ -35,7 +35,8 @@ class BookDetails extends Component {
       amountofpeople: '2',
       slots: [],
       bookprice: '',
-      startdate: formatDate(this.props.startdate)
+      startdate: formatDate(this.props.startdate),
+      
     };
     
   }
