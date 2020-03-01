@@ -74,6 +74,8 @@ import {
 import { formatDate } from 'react-day-picker/moment';
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import isEqual from 'lodash/isEqual';
+
 let startdate;
 let finaltbhdata;
 let cellcolor = '#fff';
@@ -112,27 +114,30 @@ export default class DayTimeScale extends Component {
       })
       .then(res => {
         if (this._isMounted && res.data.bookings) {
+          console.log(res.data.bookings);
           this.setState({
             tbhdata: res.data.bookings.map((book, i) => ({
               Id: i,
-              Subject: 'hhhhh',
+              Subject: 'BOOKED',
               StartTime: new Date(
                 book.year,
                 this.convertMonthNameToNumber(book.month),
                 book.day,
-                String(book.slot).includes('PM')
-                  ? Number(String(book.slot.substring(0, 1))) + 12
-                  : Number(String(book.slot.substring(0, 1)))
+                String(book.slot).includes('PM') &&
+                String(book.slot.substring(0, 2)) !== '12'
+                  ? Number(String(book.slot.substring(0, 2))) + 12
+                  : Number(String(book.slot.substring(0, 2)))
               ),
               EndTime: new Date(
                 book.year,
                 this.convertMonthNameToNumber(book.month),
                 book.day,
-                String(book.slot).includes('PM')
-                  ? Number(String(book.slot.substring(0, 1))) + 13
-                  : Number(String(book.slot.substring(0, 1))) + 1
+                String(book.slot).includes('PM') &&
+                String(book.slot.substring(0, 2)) !== '12'
+                  ? Number(String(book.slot.substring(0, 2))) + 13
+                  : Number(String(book.slot.substring(0, 2))) + 1
               ),
-              ResourceId: 3
+              ResourceId: Number(book.roomNumber)
               // status: book.status,
               // color: cellcolor
             }))
@@ -144,6 +149,54 @@ export default class DayTimeScale extends Component {
       .catch(err => console.log(err));
   }
 
+  componentDidUpdate(nextProps, prevState) {
+    if (!isEqual(prevState, this.state)) {
+      this.convertMonthNameToNumber = monthName => {
+        var myDate = new Date(monthName + ' 1, 2000');
+        var monthDigit = myDate.getMonth();
+        return isNaN(monthDigit) ? 0 : monthDigit;
+      };
+      axios.defaults.headers.common['authorization'] = localStorage.userToken;
+      axios
+        .post('https://cubexs.net/tbhapp/bookings/showcalendar', {
+          BookingDate: {
+            from: formatDate(new Date()),
+            to: '05/20/2027'
+          }
+        })
+        .then(res => {
+          if (this._isMounted && res.data.bookings) {
+            this.setState({
+              tbhdata: res.data.bookings.map((book, i) => ({
+                Id: i,
+                Subject: 'BOOKED',
+                StartTime: new Date(
+                  book.year,
+                  this.convertMonthNameToNumber(book.month),
+                  book.day,
+                  (String(book.slot).includes('PM')&& String(book.slot.substring(0, 2))!=='12')
+                  ? Number(String(book.slot.substring(0, 2))) + 12
+                    : Number(String(book.slot.substring(0, 2)))
+                ),
+                EndTime: new Date(
+                  book.year,
+                  this.convertMonthNameToNumber(book.month),
+                  book.day,
+                  (String(book.slot).includes('PM')&& String(book.slot.substring(0, 2))!=='12')
+                  ? Number(String(book.slot.substring(0, 2))) + 13
+                    : Number(String(book.slot.substring(0, 2))) + 1
+                ),
+                ResourceId: Number(book.roomNumber)
+                // status: book.status,
+                // color: cellcolor
+              }))
+            });
+          }
+        })
+        .catch(err => console.log(err));
+    }
+  }
+
   generateResourceData(startId, endId, text) {
     let data = [];
     for (let a = startId; a <= endId; a++) {
@@ -151,7 +204,7 @@ export default class DayTimeScale extends Component {
         Id: a,
         Text: text + ' ' + a,
         // Color: cellcolor
-        Color: 'red'
+        Color: '#ed1c24'
       });
     }
     return data;
@@ -254,7 +307,7 @@ export default class DayTimeScale extends Component {
             <div className="redColor"></div>
             <div className="grayColor"></div>
           </Col>
-          <Col md='4'></Col>
+          <Col md="4"></Col>
           <Col md={4}>
             <div className="booknowbtn text-right">
               <button onClick={this.OpenDetails}>BOOK NOW</button>

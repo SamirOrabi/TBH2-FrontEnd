@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { Container, Col, Row, Table, Button , Modal } from 'react-bootstrap';
+import { Container, Col, Row, Table, Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import '../../stylesheets/ReceiptCSS.css';
 import PrintComponents from "react-print-components";
 // import Printcomponent from '../booking/Printcomponent';
 class Receipt extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       profile: [],
       modalnote: '',
  
@@ -27,7 +26,6 @@ class Receipt extends Component {
       })
       .then(res => {
         this.setState({ profile: res.data.profile });
-       
       });
    
   }
@@ -69,8 +67,6 @@ class Receipt extends Component {
 // }
 
   render() {
-
-  
     return (
       <div >
         
@@ -82,9 +78,10 @@ class Receipt extends Component {
             {/* <Col sm={1}></Col> */}
             <Col sm={12}>
               <div className="receipt">
-    
-                <h2 className="ml-5 mb-5">Receipt For {this.state.profile.firstName}
-                 {this.state.profile.lastName}</h2>
+                <h2 className="ml-5 mb-5">
+                  Receipt For {this.state.profile.firstName}
+                  {this.state.profile.lastName}
+                </h2>
               </div>
             </Col>
           </Row>
@@ -92,7 +89,7 @@ class Receipt extends Component {
           <Row>
             <Col sm={12} className="receipttable">
               <React.Fragment>
-                <Table >
+                <Table>
                   <thead>
                     <tr>
                       <th className=" pl-5">ROOM</th>
@@ -124,8 +121,11 @@ class Receipt extends Component {
               <div className="receipt">
                 <h6 className="mb-5">
                   {' '}
-                  <i class="fas fa-square-full" style={{fontSize:'10px'}}></i>You can pay via: Vodafone
-                  Cash or visit our work space
+                  <i
+                    class="fas fa-square-full"
+                    style={{ fontSize: '10px' }}
+                  ></i>
+                  You can pay via: Vodafone Cash or visit our work space
                 </h6>
                 <div style={{ display: 'flex' }} className="mt-3">
                   <p>
