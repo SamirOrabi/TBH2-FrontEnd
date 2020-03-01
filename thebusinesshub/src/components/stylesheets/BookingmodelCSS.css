@@ -36,18 +36,7 @@
     border-top-right-radius: .3rem;
 }
 
-/* .bookmodal .modal-header {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: start;
-    align-items: flex-start;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    padding: 1rem 1rem;
-    border-bottom: 1px solid red !important;
-    border-top-left-radius: .3rem;
-    border-top-right-radius: .3rem;
-} */
+
 
 
 .paymentanddetailsbtn .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {

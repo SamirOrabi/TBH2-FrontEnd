@@ -73,7 +73,7 @@ showPayment=e=>{
                   noValidate
                   type="text"
                   name="Price"
-                  value={this.props.bookprice}
+                  value={this.props.bookprice} 
                 />
               
               </Form.Group>

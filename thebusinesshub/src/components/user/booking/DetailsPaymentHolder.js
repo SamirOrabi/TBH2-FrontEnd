@@ -38,7 +38,7 @@ export default class DetailsPaymentHolder extends Component {
     this.setState({
       showdetailscomponent: true,
       showpaymentcomponent: false,
-      detailsColor: 'ED1C24',
+      detailsColor :'#ED1C24',
       detailsborder: '5px solid #ED1C24',
       paymentborder: 'none',
       paymentColor: '#000'
@@ -189,7 +189,7 @@ setTimeout(() => {
             roomId={this.state.roomId}
           />
         )}
-        
+
         {this.state.showreceiptcomponent && (
           <Printcomponent closebookModal={this.props.closebookModal} roomtype={this.state.roomtype}  amountofpeople={this.state.amountofpeople} 
           bookprice={this.state.bookprice} slots={this.state.slots} startdate={this.state.startdate}
