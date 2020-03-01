@@ -186,7 +186,7 @@ class UserBookingPage extends Component {
                   <tbody>
                     {this.state.userbook.map(
                       (book, i) =>
-                        book.date < todaydate && (
+                        book.date <= todaydate && (
                           <tr key={i} className="text-center bookingstr">
                             <td>{book.roomType}</td>
                             <td>{book.date.substring(0, 10)}</td>
@@ -244,6 +244,7 @@ class UserBookingPage extends Component {
                                   >
                                     <i class="fas fa-edit"></i>
                                     <EditSlot
+                                    slotdate={book.date}
                                       show={this.state.showedit}
                                       hideModal={this.hideModal}
                                       hideModal2={this.hideModal2}

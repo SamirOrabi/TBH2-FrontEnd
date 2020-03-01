@@ -74,34 +74,34 @@ class Rooms extends Component {
       finalstarttime = '12PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '13') {
-      finalstarttime = '1PM';
+      finalstarttime = '01PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '14') {
-      finalstarttime = '2PM';
+      finalstarttime = '02PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '15') {
-      finalstarttime = '3PM';
+      finalstarttime = '03PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '16') {
-      finalstarttime = '4PM';
+      finalstarttime = '04PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '17') {
-      finalstarttime = '5PM';
+      finalstarttime = '05PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '18') {
-      finalstarttime = '6PM';
+      finalstarttime = '06PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '19') {
-      finalstarttime = '7PM';
+      finalstarttime = '07PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '20') {
-      finalstarttime = '8PM';
+      finalstarttime = '08PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '21') {
-      finalstarttime = '9AM';
+      finalstarttime = '09PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '09') {
-      finalstarttime = '9AM';
+      finalstarttime = '09AM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '10') {
       finalstarttime = '10AM';
@@ -131,7 +131,6 @@ class Rooms extends Component {
         if (res.data.code === 0) {
           this.setState({ bookprice: res.data.price });
         }
-        
 
         this.props.showPayment();
       })
