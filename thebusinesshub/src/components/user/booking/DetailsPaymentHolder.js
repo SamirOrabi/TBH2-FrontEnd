@@ -5,6 +5,7 @@ import BookDetails from './BookDetails';
 import Payment from './Payment';
 import Printcomponent from '../booking/Printcomponent';
 import isEqual from 'lodash/isEqual';
+import { formatDate } from 'react-day-picker/moment';
 
 export default class DetailsPaymentHolder extends Component {
   constructor(props) {
@@ -19,14 +20,14 @@ export default class DetailsPaymentHolder extends Component {
       showreceiptcomponent: false,
       // test:'here',
       bookprice: '',
-      startDate: '',
+      // startDate: '',
       startTime: '',
       endTime: '',
       roomId: '',
       roomtype: '',
       amountofpeople: '',
       slots: [],
-      startdate: '',
+      startdate:formatDate(this.props.startdate),
       payment: ''
     };
   }
@@ -92,6 +93,8 @@ export default class DetailsPaymentHolder extends Component {
     });
   };
   render() {
+    console.log(' here startdate')
+    console.log(this.state.startdate)
     return (
       <div>
         {(this.state.showdetailscomponent ||
@@ -130,7 +133,7 @@ export default class DetailsPaymentHolder extends Component {
             detailsfun={this.test}
             showPayment={this.showPayment}
             // nnnn={this.state.test}
-            startDate={this.state.startDate}
+            // startDate={this.state.startDate}
             startdate={this.props.startdate}
             startTime={this.props.startTime}
             endTime={this.props.endTime}

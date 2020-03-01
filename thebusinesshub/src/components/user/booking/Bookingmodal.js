@@ -7,7 +7,6 @@ export default class Bookingmodal extends Component {
     super(props);
     this.state = {
       bookingmodalShow: false,
-      startDate: ''
     };
   }
 

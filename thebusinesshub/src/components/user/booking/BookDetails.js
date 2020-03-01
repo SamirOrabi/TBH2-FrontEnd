@@ -37,6 +37,7 @@ class BookDetails extends Component {
       bookprice: '',
       startdate: formatDate(this.props.startdate)
     };
+    
   }
   componentDidMount() {
     this.test();
@@ -155,7 +156,7 @@ class BookDetails extends Component {
           this.state.roomtype,
           this.state.amountofpeople,
           this.state.slots,
-          this.state.startdate,
+          formatDate(this.props.startdate),
           this.state.payment,
           this.state.roomId
         );
@@ -164,6 +165,8 @@ class BookDetails extends Component {
       .catch(err => console.log(err));
   };
   render() {
+    console.log('startdate ')
+    console.log((this.props.startdate))
     const settings = {
       customPaging: function(i) {
         return (
