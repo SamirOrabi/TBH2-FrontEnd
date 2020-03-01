@@ -17,7 +17,6 @@ class ForgetPassword extends Component {
   handleUserInput = e => {
     this.setState({ [e.target.name]: e.target.value });
     this.setState({ number: e.target.value });
-    console.log(e.target.value);
   };
   handleClose = e => {
     this.props.hideModal2(false);

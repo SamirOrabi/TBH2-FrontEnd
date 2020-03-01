@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, SET_CURRENT_USER, GET_ERRORS } from './actionTypes';
+import { LOGOUT, SET_CURRENT_USER } from './actionTypes';
 import axios from 'axios';
 import setAuthToken from '../../helpers/setAuthToken';
 import jwt_decode from 'jwt-decode';
@@ -9,7 +9,7 @@ export const userRegister = (
   history,
   state
 ) => async dispatch => {
-  console.log(userData, state);
+  // console.log(userData, state);
   if (state === 'googleSignup') {
     const googlereg = await new Promise((resolve, reject) => {
       axios
@@ -46,9 +46,7 @@ export const userRegister = (
                 verifyBy: 'sms'
               }
             })
-            .then(myres => {
-              console.log(myres);
-            })
+            .then(myres => {})
             .catch(err => console.log(err));
         })
         .catch(err => console.log(err));

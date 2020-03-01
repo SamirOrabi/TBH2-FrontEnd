@@ -16,7 +16,6 @@
 //           payload: res.data
 //         });
 //         resolve(res.data);
-//         console.log(res.data);
 //       })
 //       .catch(err => {
 //         reject(err);

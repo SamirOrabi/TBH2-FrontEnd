@@ -1,6 +1,3 @@
-
-
-
 * {
   transition: all 1s;
   margin: 0;
@@ -11,7 +8,7 @@
 
 body {
   overflow-x: hidden;
-  padding-top: 70px;
+  padding-top: 100px;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -25,3 +22,8 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance:textfield;
 }
+
+
+/* .slick-dots li{
+padding-left: 100px !important;
+} */

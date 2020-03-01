@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Form, Col, Row, Button } from 'react-bootstrap';
+import { Container, Form, Col, Button } from 'react-bootstrap';
 import '../stylesheets/forms.css';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -48,9 +48,7 @@ class SignInForm extends Component {
 
   hideModal2 = e => {
     // this.setState({ show: false });
-    // console.log('eeeeeeee');
-    // console.log(e);
-    // console.log(this.state.show);
+  
     setTimeout(() => {
       this.setState({ show: e });
     }, 0);
