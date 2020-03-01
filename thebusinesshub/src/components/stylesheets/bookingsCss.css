@@ -147,11 +147,24 @@ overflow: hidden;
   background-color: #ed1c24 !important;
 }
 
-.cancelbtn{
+.cancelbtn {
   background-color: #ed1c24 !important;
   border: none !important;
 }
 
-.e-schedule .e-timeline-view .e-work-cells{
+.e-schedule .e-timeline-view .e-work-cells {
   background-color: #fff !important;
+}
+
+.redColor {
+  width: 60px;
+  height: 60px;
+  background-color: #ed1c24;
+}
+
+.grayColor {
+  width: 60px;
+  height: 60px;
+  background-color: #d2d0d0;
+  margin-top: 10px;
 }

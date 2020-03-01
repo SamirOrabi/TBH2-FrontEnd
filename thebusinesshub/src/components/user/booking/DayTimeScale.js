@@ -247,12 +247,16 @@ export default class DayTimeScale extends Component {
               option="TimelineDay"
             />
           </ViewsDirective>
-          <Inject services={[Day, TimelineViews, Resize, DragAndDrop]} />{' '}
+          <Inject services={[Day, TimelineViews, Resize, DragAndDrop]} />
         </ScheduleComponent>
         <Row>
-          <Col md={4}>sss</Col>
+          <Col md={4} className="mt-4">
+            <div className="redColor"></div>
+            <div className="grayColor"></div>
+          </Col>
+          <Col md='4'></Col>
           <Col md={4}>
-            <div className="booknowbtn">
+            <div className="booknowbtn text-right">
               <button onClick={this.OpenDetails}>BOOK NOW</button>
             </div>
           </Col>
