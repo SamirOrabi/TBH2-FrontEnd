@@ -15,7 +15,6 @@ class VerifyBarAlert extends Component {
     };
   }
   componentDidMount() {
-    console.log(this.props.isAuth);
     this.getProfile();
   }
   handleShow = () => {
@@ -38,8 +37,6 @@ class VerifyBarAlert extends Component {
       })
 
       .then(res => {
-        console.log('res');
-        console.log(res.data);
         this.setState({ mystate: res.data.state });
       })
       .catch(err => console.log(err));
@@ -52,8 +49,7 @@ class VerifyBarAlert extends Component {
   }
 
   render() {
-    console.log(this.props.isAuth);
-    console.log(this.state.mystate);
+ 
 
     return (
       <div>

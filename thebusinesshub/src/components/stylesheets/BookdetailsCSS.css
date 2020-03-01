@@ -1,0 +1,47 @@
+ .slick-dots li{
+    padding-left: 50px !important;
+    
+}
+
+
+.slick-dots li {
+    cursor: pointer;
+    padding: 30px;
+
+}
+.slick-dots {
+
+    list-style: none;
+    text-align: left;
+    justify-content: center;
+    position: relative;
+    right: 18%;
+    bottom:3%
+}
+
+
+.slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: #ED1C24;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: absolute;
+    top: 772% !important;
+    right:80% !important;
+}
+
+.slick-next:before {
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: #ED1C24;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: absolute;
+    top: 772% !important;
+    left:-550% !important;
+}

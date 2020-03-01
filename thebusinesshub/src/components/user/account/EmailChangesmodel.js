@@ -24,7 +24,6 @@ class EmailChangesmodel extends Component {
     const value = e.target.value;
     this.setState({ newEmail: e.target.value });
     this.validateField(name, value);
-    console.log(e.target.value);
   };
   validateField(fieldName, value) {
     let emailValidationErrors = this.state.emailErrors;
@@ -72,6 +71,7 @@ class EmailChangesmodel extends Component {
         } else {
           this.setState({ emailerror: '' });
           this.props.onHide();
+          this.setState({newEmail:''})
         }
       })
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 //Bootstrap
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Col } from 'react-bootstrap';
 import axios from 'axios';
 import VerifyBy from '../sections/VerifyBy';
 import isEqual from 'lodash/isEqual';
@@ -41,7 +41,6 @@ class UserBoardSideNav extends Component {
       .then(res => {
         this.setState({ profile: res.data.profile });
       });
-    console.log(this.props.isAuth);
     this.getProfile();
   }
 
@@ -55,8 +54,7 @@ class UserBoardSideNav extends Component {
       })
 
       .then(res => {
-        console.log('res');
-        console.log(res.data);
+      
         this.setState({ mystate: res.data.state });
       })
       .catch(err => console.log(err));
@@ -72,11 +70,9 @@ class UserBoardSideNav extends Component {
           }
         })
         .then(res => {
-          console.log('change', res);
           this.setState({ profile: res.data.profile });
           this.setState({ mystate: res.data.state });
 
-          console.log('new result in sidenav', res.data.profile);
         })
         .catch(err => console.log(err));
     }
@@ -90,7 +86,6 @@ class UserBoardSideNav extends Component {
             <Button onClick={this.handleShow}>
               <i className="fas fa-exclamation-triangle px-2"></i>
               <span> Please verify your phone number </span>
-              {console.log(this.state.show)}
               <VerifyBy closeModal={this.closeModal} show={this.state.show} />
             </Button>
           </Col>
@@ -145,7 +140,7 @@ class UserBoardSideNav extends Component {
             {' '}
             <NavLink
               exact
-              to="/"
+              to="/UserBoard/Booking"
               activeStyle={{
                 color: 'white',
                 textDecoration: 'none',

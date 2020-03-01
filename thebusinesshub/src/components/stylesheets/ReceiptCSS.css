@@ -1,0 +1,79 @@
+.receipttable .table thead th {
+    vertical-align: bottom;
+    border-top: #FFFFFF;
+   
+}
+.receipttable .table thead th {
+    vertical-align: bottom;
+    border-bottom: none
+}
+
+.receipttable .table th{
+    color:  #ED1C24;;
+}
+.receipttable .table td, .table th {
+    /* padding: .75rem; */
+    vertical-align: top;
+    border-top:none
+  
+}
+
+
+.receipttable .table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border: 1px solid #dee2e6;
+    border-left: 1px solid #dee2e6;
+}
+
+
+.receipttable .table td{
+    padding: 30px  0px;
+}
+
+.receipt h6{
+    color: black;
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    }
+
+    .receipt i{
+        color: #ED1C24;
+        font-size: 5px;
+        padding-right: 15px;
+        }
+    .printbtn{
+        background: none;
+        border: none;
+    }
+
+    .printbtn:hover{
+        background: none;
+        border: none;
+    }
+
+    .printbtn i{
+        color:rgb(117, 117, 117);
+        font-size: 20px;
+    }
+
+    .receipt h2{
+color: #ED1C24;
+font-family: Arial;
+font-style: normal;
+font-weight: bold;
+font-size: 25px;
+line-height: 29px;
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+    }
