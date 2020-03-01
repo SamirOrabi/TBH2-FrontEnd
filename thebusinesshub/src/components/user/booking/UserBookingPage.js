@@ -69,9 +69,9 @@ class UserBookingPage extends Component {
       this.setState({ show: e });
     }, 0);
   };
-  
+
   componentDidUpdate(prevProps, prevState) {
-    if (isEqual(prevState, this.state)) {
+    if (!isEqual(prevState, this.state)) {
       axios.defaults.headers.common['authorization'] = localStorage.userToken;
       axios
         .post('https://cubexs.net/tbhapp/bookings/showmybookings', {
@@ -236,7 +236,7 @@ class UserBookingPage extends Component {
                                     <i class="far fa-window-close"></i>
                                   </Button>
                                 </td>
-                                <td>
+                                {/* <td>
                                   <Button
                                     id={book.id}
                                     onClick={this.openeditTimeSlotModal}
@@ -250,7 +250,7 @@ class UserBookingPage extends Component {
                                       hideModal2={this.hideModal2}
                                     />
                                   </Button>
-                                </td>
+                                </td> */}
                               </React.Fragment>
                             )}{' '}
                           </tr>
