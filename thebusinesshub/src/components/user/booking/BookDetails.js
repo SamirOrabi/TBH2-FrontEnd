@@ -28,11 +28,11 @@ class BookDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomId: '2',
+      roomId: '1',
       finalDate: '',
       roomtype: 'meeting room',
       payment: 'cash',
-      amountofpeople: '2',
+      amountofpeople: '1',
       slots: [],
       bookprice: '',
       startdate: formatDate(this.props.startdate)
@@ -89,34 +89,34 @@ class BookDetails extends Component {
       finalstarttime = '12PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '13') {
-      finalstarttime = '1PM';
+      finalstarttime = '01PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '14') {
-      finalstarttime = '2PM';
+      finalstarttime = '02PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '15') {
-      finalstarttime = '3PM';
+      finalstarttime = '03PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '16') {
-      finalstarttime = '4PM';
+      finalstarttime = '04PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '17') {
-      finalstarttime = '5PM';
+      finalstarttime = '05PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '18') {
-      finalstarttime = '6PM';
+      finalstarttime = '06PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '19') {
-      finalstarttime = '7PM';
+      finalstarttime = '07PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '20') {
-      finalstarttime = '8PM';
+      finalstarttime = '08PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '21') {
-      finalstarttime = '9AM';
+      finalstarttime = '09PM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '09') {
-      finalstarttime = '9AM';
+      finalstarttime = '09AM';
       this.state.slots.push(finalstarttime);
     } else if (String(starttime).substring(0, 2) === '10') {
       finalstarttime = '10AM';
@@ -127,7 +127,7 @@ class BookDetails extends Component {
     }
 
     let bookrequest = {};
-    bookrequest.slot = this.state.slots;
+    bookrequest.slot = [this.state.slots[0]];
     bookrequest.date = formatDate(this.props.startdate);
     bookrequest.roomType = this.state.roomtype;
     bookrequest.roomNumber = this.state.roomId;
@@ -143,16 +143,19 @@ class BookDetails extends Component {
         Booking: bookrequest
       })
       .then(res => {
+        console.log(res);
         if (res.data.code === 0) {
           this.setState({ bookprice: res.data.price });
+          console.log('price');
+          console.log(this.state.slots);
         }
 
         this.props.detailsfun(this.state.bookprice);
         this.props.testtoreceipt(
           this.state.roomtype,
           this.state.amountofpeople,
-          this.state.slots,
-          this.state.startdate,
+          [this.state.slots[0]],
+          formatDate(this.props.startdate),
           this.state.payment,
           this.state.roomId
         );
@@ -161,6 +164,8 @@ class BookDetails extends Component {
       .catch(err => console.log(err));
   };
   render() {
+    console.log('startdate ');
+    console.log(this.props.startdate);
     const settings = {
       customPaging: function(i) {
         return (

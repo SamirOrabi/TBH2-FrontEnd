@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
+import axios from 'axios';
 import { Container } from 'react-bootstrap';
 import {
   NameErrors,
@@ -38,10 +39,10 @@ class SignUp extends Component {
       lname: '',
       lnameError: '',
       errors: {},
-      user: '',
+      BEerror: '',
       code: '',
       show: false,
-
+      myLink: '',
       nameErrors: { name: '' },
       emailErrors: { email: '' },
       phonenumberErrors: { phonenumber: '' },
@@ -160,7 +161,9 @@ class SignUp extends Component {
   }
 
   onRegist = async e => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     let regestrequest = {};
 
     regestrequest.username = this.state.name;
@@ -179,10 +182,13 @@ class SignUp extends Component {
           password: regestrequest.password
         }
       },
-      this.props.history
+      this.props.history,
+      ''
     );
-
-    this.setState({ user: userData.error });
+    if (userData.code !== 0) {
+      this.setState({ BEerror: userData.error });
+      console.log(userData);
+    }
     // this.setState({ code: userData.code });
     // if (userData.code === 0) {
     //   return this.props.handleSignIn(true);
@@ -195,18 +201,27 @@ class SignUp extends Component {
     }
   }
 
-  // enter = e => {
-  //   document.addEventListener('keydown', e => {
-  //     if (e.keyCode === 13) {
-  //       e.preventDefault();
+  enter = e => {
+    document.addEventListener('keydown', e => {
+      if (e.keyCode === 13) {
+        e.preventDefault();
 
-  //       this.onRegist();
-  //     }
-  //   });
-  // };
-  // componentDidMount() {
-  //   this.enter();
-  // }
+        this.onRegist();
+      }
+    });
+  };
+  componentDidMount() {
+    this.enter();
+
+    axios
+      .post('https://cubexs.net/tbhapp/accounts/getgoogleurl', {
+        state: 'signUp'
+      })
+      .then(res => {
+        // console.log(res.data.url);
+        this.setState({ myLink: res.data.url });
+      });
+  }
 
   render() {
     return (
@@ -306,16 +321,29 @@ class SignUp extends Component {
             </div>{' '}
           </Form.Group>{' '}
           <PasswordErrors passwordErrors={this.state.passwordErrors} />
-          {this.state.user ? (
+          {this.state.BEerror ? (
             <span className="BbachError">
               {' '}
               <i className="fas fa-exclamation-triangle px-2"></i>
-              {this.state.user}
+              {this.state.BEerror}
             </span>
           ) : null}
           <div className="signupButton">
             <button onClick={this.onRegist}>Sign Up</button>
           </div>
+          <p className="text-center pt-1">
+            or you can sign up with{' '}
+            <a
+              href={this.state.myLink}
+              // target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i
+                className="fab  fa-google xl"
+                style={{ padding: '4px 6px', fontSize: '15px' }}
+              ></i>
+            </a>
+          </p>
         </Form>
       </Container>
     );

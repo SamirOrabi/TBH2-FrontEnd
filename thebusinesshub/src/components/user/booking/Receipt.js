@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import { Container, Col, Row, Table, Button , Modal } from 'react-bootstrap';
+import { Container, Col, Row, Table, Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import '../../stylesheets/ReceiptCSS.css';
+import PrintComponents from 'react-print-components';
 // import Printcomponent from '../booking/Printcomponent';
 class Receipt extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       profile: [],
-      modalnote: '',
-      show: false,
-
-    }
+      modalnote: ''
+    };
   }
   componentDidMount() {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
@@ -26,58 +24,57 @@ class Receipt extends Component {
       })
       .then(res => {
         this.setState({ profile: res.data.profile });
-       
       });
-   
   }
 
-sendbookingdetails=()=>{
-  axios.defaults.headers.common['authorization'] =localStorage.userToken;
-  axios.post('https://cubexs.net/tbhapp/bookings/addbooking' , 
-  {
-    Account:{
-      id:this.props.user.id,
-            },
-            Booking:{
-              date:this.props.startdate,
-              slot:this.props.slots,
-              roomType:this.props.roomtype,
-              roomNumber:this.props.roomId,
-              amountOfPeople:this.props.amountofpeople,
-              paymentMethod:this.props.payment,
-              packageCode:''
+  // sendbookingdetails=()=>{
+  //   axios.defaults.headers.common['authorization'] =localStorage.userToken;
+  //   axios.post('https://cubexs.net/tbhapp/bookings/addbooking' ,
+  //   {
+  //     Account:{
+  //       id:this.props.user.id,
+  //             },
+  //             Booking:{
+  //               date:this.props.startdate,
+  //               slot:this.props.slots,
+  //               roomType:this.props.roomtype,
+  //               roomNumber:this.props.roomId,
+  //               amountOfPeople:this.props.amountofpeople,
+  //               paymentMethod:this.props.payment,
+  //               packageCode:''
 
-            }
-  }
-  )
-  .then(res => {
-    this.setState({
-      modalnote: 'Your Booking Added Successfully',
-      show1: false
-    });
-    this.setState({ show: true });
-    setTimeout(() => {
-      this.setState({ show: false });
-    }, 1600);
-    this.props.closebookModal()
-  })
-  .catch(err => console.log(err));
+  //             }
+  //   }
+  //   )
+  //   .then(res => {
+  //     console.log('addbooking', res.data);
+  //     this.setState({
+  //       modalnote: 'Your Booking Added Successfully',
+  //       show1: false
+  //     });
+  //     this.setState({ show: true });
+  //     setTimeout(() => {
+  //       this.setState({ show: false });
+  //     }, 1600);
+  //     console.log(res.data);
+  //     this.props.closebookModal()
+  //   })
+  //   .catch(err => console.log(err));
 
-}
+  // }
 
   render() {
-
-  
     return (
-      <div >
+      <div>
         <Container>
           <Row>
             {/* <Col sm={1}></Col> */}
             <Col sm={12}>
               <div className="receipt">
-    
-                <h2 className="ml-5 mb-5">Receipt For {this.state.profile.firstName}
-                 {this.state.profile.lastName}</h2>
+                <h2 className="ml-5 mb-5">
+                  Receipt For {this.state.profile.firstName}
+                  {this.state.profile.lastName}
+                </h2>
               </div>
             </Col>
           </Row>
@@ -85,7 +82,7 @@ sendbookingdetails=()=>{
           <Row>
             <Col sm={12} className="receipttable">
               <React.Fragment>
-                <Table >
+                <Table>
                   <thead>
                     <tr>
                       <th className=" pl-5">ROOM</th>
@@ -104,7 +101,7 @@ sendbookingdetails=()=>{
                       <td>{this.props.slots}</td>
                       <td>{this.props.amountofpeople}</td>
                       <td>-</td>
-                      <td>{this.props.bookprice}</td>
+                      <td>{this.props.bookprice} LE</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -117,8 +114,11 @@ sendbookingdetails=()=>{
               <div className="receipt">
                 <h6 className="mb-5">
                   {' '}
-                  <i class="fas fa-square-full" style={{fontSize:'10px'}}></i>You can pay via: Vodafone
-                  Cash or visit our work space
+                  <i
+                    class="fas fa-square-full"
+                    style={{ fontSize: '10px' }}
+                  ></i>
+                  You can pay via: Vodafone Cash or visit our work space
                 </h6>
                 <div style={{ display: 'flex' }} className="mt-3">
                   <p>
@@ -143,9 +143,10 @@ sendbookingdetails=()=>{
             </Col>
           </Row>
 
+          {/* 
           <Row>
             <Col sm={12} className="text-right">
-           {/* < Printcomponent  /> */}
+          
               <Button
                 type="submit"
                 className="my-4 nextBtn mr-5"
@@ -154,11 +155,8 @@ sendbookingdetails=()=>{
                 DONE
               </Button>
             </Col>
-          </Row>
+          </Row> */}
         </Container>
-        <Modal className="mt-2 firstnameupdatesnackbar" show={this.state.show}>
-          <div id="snackbar">{this.state.modalnote}</div>
-        </Modal>
       </div>
     );
   }

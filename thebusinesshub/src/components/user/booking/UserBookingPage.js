@@ -69,9 +69,9 @@ class UserBookingPage extends Component {
       this.setState({ show: e });
     }, 0);
   };
-  
+
   componentDidUpdate(prevProps, prevState) {
-    if (isEqual(prevState, this.state)) {
+    if (!isEqual(prevState, this.state)) {
       axios.defaults.headers.common['authorization'] = localStorage.userToken;
       axios
         .post('https://cubexs.net/tbhapp/bookings/showmybookings', {
@@ -186,7 +186,7 @@ class UserBookingPage extends Component {
                   <tbody>
                     {this.state.userbook.map(
                       (book, i) =>
-                        book.date < todaydate && (
+                        book.date <= todaydate && (
                           <tr key={i} className="text-center bookingstr">
                             <td>{book.roomType}</td>
                             <td>{book.date.substring(0, 10)}</td>
@@ -236,7 +236,7 @@ class UserBookingPage extends Component {
                                     <i class="far fa-window-close"></i>
                                   </Button>
                                 </td>
-                                <td>
+                                {/* <td>
                                   <Button
                                     id={book.id}
                                     onClick={this.openeditTimeSlotModal}
@@ -244,12 +244,13 @@ class UserBookingPage extends Component {
                                   >
                                     <i class="fas fa-edit"></i>
                                     <EditSlot
+                                    slotdate={book.date}
                                       show={this.state.showedit}
                                       hideModal={this.hideModal}
                                       hideModal2={this.hideModal2}
                                     />
                                   </Button>
-                                </td>
+                                </td> */}
                               </React.Fragment>
                             )}{' '}
                           </tr>
