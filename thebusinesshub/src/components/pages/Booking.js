@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import VerifyBarAlert from '../sections/VerifyBarAlert';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import DayTimeScale from '../user/booking/DayTimeScale';
 import WeekTimeScale from '../user/booking/WeekTimeScale';
 

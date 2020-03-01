@@ -1,5 +1,7 @@
-import * as ReactDOM from 'react-dom';
 import React, { Component } from 'react';
+import Bookingmodal from '../booking/Bookingmodal';
+import '../../stylesheets/bookingsCss.css';
+
 import {
   ScheduleComponent,
   ViewsDirective,
@@ -13,131 +15,181 @@ import {
   TimelineViews,
   Agenda
 } from '@syncfusion/ej2-react-schedule';
-import Bookingmodal from './Bookingmodal';
-export default class WeekTimeScale extends Component {
-  constructor(props) {
-    super(props);
+import { formatDate } from 'react-day-picker/moment';
+import axios from 'axios';
+let startdate;
+let tbhdata;
+let cellcolor;
+export default class DayTimeScale extends Component {
+  constructor() {
+    super();
     this.state = {
-      bookingmodalShow: false
+      TBHAllBooks: [],
+      bookingmodalShow: false,
+      endDate: '',
+      startTime: '',
+      roomId: '',
+      tbhdata: [],
+      tbhstatus: []
     };
   }
-  OpenDetails = e => {
-    e.cancel = true;
-    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
-  };
-  generateStaticEvents(start, resCount, overlapCount) {
-    let data = [];
-    let id = 1;
-    for (let i = 0; i < resCount; i++) {
-      let randomCollection = [];
-      let random = 0;
-      for (let j = 0; j < overlapCount; j++) {
-        random = Math.floor(Math.random() * 30);
-        random = random === 0 ? 1 : random;
-        if (
-          randomCollection.indexOf(random) !== -1 ||
-          randomCollection.indexOf(random + 2) !== -1 ||
-          randomCollection.indexOf(random - 2) !== -1
-        ) {
-          random += Math.max.apply(null, randomCollection) + 10;
+
+  componentDidMount() {
+    this.convertMonthNameToNumber = monthName => {
+      var myDate = new Date(monthName + ' 1, 2000');
+      var monthDigit = myDate.getMonth();
+      return isNaN(monthDigit) ? 0 : monthDigit;
+    };
+    axios.defaults.headers.common['authorization'] = localStorage.userToken;
+    axios
+      .post('https://cubexs.net/tbhapp/bookings/showcalendar', {
+        BookingDate: {
+          from: formatDate(new Date()),
+          to: '05/20/2027'
         }
-        for (let k = 1; k <= 2; k++) {
-          randomCollection.push(random + k);
+      })
+      .then(res => {
+        if (res.data.bookings) {
+          this.setState({ TBHAllBooks: res.data.bookings });
+          this.setState({
+            tbhdata: this.state.TBHAllBooks.map((book, i) => ({
+              Id: i,
+              Subject: '',
+              // StartTime: new Date(book.year, book.month, book.day, String(book.slot.substring(0,1))),
+              StartTime: new Date(
+                book.year,
+                this.convertMonthNameToNumber(book.month),
+                book.day,
+                // String(book.slot.substring(0, 1))
+                9
+              ),
+              EndTime: new Date(
+                book.year,
+                this.convertMonthNameToNumber(book.month),
+                book.day + 6,
+                11
+                // String(book.slot.substring(0, 1))
+              ),
+              ResourceId: 2,
+              status: book.status
+            }))
+          });
+
         }
-        let startDate = new Date(start.getFullYear(), start.getMonth(), random);
-        startDate = new Date(
-          startDate.getTime() + (random % 10) * 10 * (1000 * 60)
-        );
-        let endDate = new Date(startDate.getTime() + (1440 + 30) * (1000 * 60));
-        data.push({
-          Id: id,
-          Subject: 'Event #' + id,
-          StartTime: startDate,
-          EndTime: endDate,
-          IsAllDay: id % 10 ? false : true,
-          RoomId: i + 1
-        });
-        id++;
-      }
-    }
-    return data;
+      })
+      .catch(err => console.log(err));
   }
   generateResourceData(startId, endId, text) {
     let data = [];
-    let colors = [
-      '#ff8787',
-      '#9775fa',
-      '#748ffc',
-      '#3bc9db',
-      '#69db7c',
-      '#fdd835',
-      '#748ffc',
-      '#9775fa',
-      '#df5286',
-      '#7fa900',
-      '#fec200',
-      '#5978ee',
-      '#00bdae',
-      '#ea80fc'
-    ];
     for (let a = startId; a <= endId; a++) {
-      let n = Math.floor(Math.random() * colors.length);
       data.push({
         Id: a,
         Text: text + ' ' + a,
-        Color: colors[n]
+        Color: cellcolor
       });
     }
     return data;
   }
+  OpenDetails = e => {
+    e.cancel = true;
+    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
+    startdate =
+      String(
+        document.getElementsByClassName('e-toolbar-item e-date-range')[0]
+          .innerText
+      ).substring(
+        0,
+        String(
+          document.getElementsByClassName('e-toolbar-item e-date-range')[0]
+            .innerText
+        ).indexOf('-')
+      ) +
+      String(
+        document.getElementsByClassName('e-toolbar-item e-date-range')[0]
+          .innerText
+      ).substring(
+        String(
+          document.getElementsByClassName('e-toolbar-item e-date-range')[0]
+            .innerText
+        ).indexOf(','),
+        23
+      );
+    if (e.data) {
+      this.setState({
+        startTime: e.data.startTime,
+        roomId: e.data.ResourceId,
+        endDate: e.data.endTime
+      });
+    }
+  };
+
   closebookModal = e => {
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
   };
   render() {
+    tbhdata = this.state.tbhdata;
+    // tbhdata.map(status => {
+    //   if (status.status === 'Busy') {
+    //     cellcolor = '#ed1c24';
+    //   } else if (status.status === ' Pending') {
+    //     cellcolor = '#D2D0D0';
+    //   }
+    // });
+
     return (
       <div>
         <ScheduleComponent
-          cssClass="virtual-scrolling"
-          ref={schedule => (this.scheduleObj = schedule)}
           width="100%"
           height="auto"
-          selectedDate={new Date()}
-          eventSettings={{
-            dataSource: this.generateStaticEvents(new Date(2018, 4, 1), 300, 12)
-          }}
-          quickInfoOnSelectionEnd={true}
-          group={{ resources: ['Rooms'] }}
-          popupOpen={this.OpenDetails}
+          eventSettings={{ dataSource: tbhdata }}
+          group={{ resources: ['Resources'] }}
           startHour="09:00"
           endHour="22:00"
-          enablePersistence={true}
           locale="en-US"
+          workHours={{
+            start: '09:00',
+            end: '21:00'
+          }}
+          popupOpen={this.OpenDetails}
+          // quickInfoOnSelectionEnd={true}
+          timeScale={{
+            interval: 120,
+            slotCount: 2
+          }}
+          minDate={new Date()}
         >
           <ResourcesDirective>
             <ResourceDirective
-              field="RoomId"
-              title="Room"
-              name="Rooms"
+              field="ResourceId"
+              title="Resource"
+              name="Resources"
               allowMultiple={true}
               dataSource={this.generateResourceData(1, 4, 'Room')}
               textField="Text"
               idField="Id"
               colorField="Color"
-              popupOpen={this.OpenDetails}
             ></ResourceDirective>
           </ResourcesDirective>
           <ViewsDirective>
-            <ViewDirective option="TimelineWeek" allowVirtualScrolling={true} />
+            <ViewDirective
+              // isSelected
+              option="TimelineWeek"
+            />
           </ViewsDirective>
           <Inject
             services={[Agenda, Week, TimelineViews, Resize, DragAndDrop]}
-          />
-        </ScheduleComponent>{' '}
+          />{' '}
+        </ScheduleComponent>
         <div className="booknowbtn">
           <button onClick={this.OpenDetails}>BOOK NOW</button>
         </div>
         <Bookingmodal
           show={this.state.bookingmodalShow}
+          onHide={this.bookingmodalShow}
+          startTime={this.state.startTime}
+          startdate={startdate}
+          roomId={this.state.roomId}
+          endDate={this.state.endDate}
           closebookModal={this.closebookModal}
         />
       </div>

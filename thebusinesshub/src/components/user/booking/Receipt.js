@@ -26,11 +26,9 @@ class Receipt extends Component {
         }
       })
       .then(res => {
-        console.log(res.data)
         this.setState({ profile: res.data.profile });
        
       });
-    console.log(this.props.isAuth);
    
   }
 

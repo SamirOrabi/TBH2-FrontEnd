@@ -52,7 +52,7 @@ sendbookingdetails=()=>{
     })
     setTimeout(() => {
       this.setState({ show: false });
-    }, 1600);
+    }, 2000);
   
   
   }
@@ -65,7 +65,7 @@ sendbookingdetails=()=>{
     })
     setTimeout(() => {
       this.setState({ show: false });
-    }, 2000);
+    }, 2500);
   
   }
 

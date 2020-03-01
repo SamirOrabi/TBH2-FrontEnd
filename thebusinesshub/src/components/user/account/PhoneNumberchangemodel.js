@@ -15,7 +15,6 @@ class PhoneNumberchangemodel extends Component {
 
   handleUserInput = e => {
     this.setState({ NewPhoneNumber: e.target.value });
-    console.log(e.target.value);
   };
 
   changephonenumber = () => {
@@ -29,7 +28,6 @@ class PhoneNumberchangemodel extends Component {
       })
       .then(res => {
         this.props.user.phone = this.state.NewPhoneNumber;
-        console.log(res.data.error);
         if (res.data.code === 101) {
           this.setState({
             phoneerror: 'Phone number must contain 11 numbers only'

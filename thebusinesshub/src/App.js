@@ -8,11 +8,7 @@ import store from './globalState/store';
 import jwt_decode from 'jwt-decode';
 import Home from './components/pages/Home';
 import UserBoard from './components/user/UserBoard';
-import Space from './components/pages/Space';
 import Booking from './components/pages/Booking';
-import Contact from './components/pages/Contact';
-import DetailsPaymentHolder from './components/user/booking/DetailsPaymentHolder';
-import Receipt from './components/user/booking/Receipt';
 // import Payment from './components/user/booking/Payment';
 
 // Styling

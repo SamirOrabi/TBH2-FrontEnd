@@ -1,169 +1,239 @@
+// //         // elements[i].style ...
+// //         // allcell[i].classList.add('bgcolooor');
+// //         // allcell[i].style.background = 'red';
+
+// //         // allcell[i].style['background-color'] = '#000';
+
+// //         for (var c = 0, len = this.state.tbhCalendar.length; c < len; c++) {
+// //           this.setState({ tbhdays: this.state.tbhCalendar[c].day });
+// //           this.setState({ tbhmonths: this.state.tbhCalendar[c].month });
+// //           this.setState({ tbhyears: this.state.tbhCalendar[c].year });
+// //         }
+
+// //         const allcell = document.getElementsByClassName('e-work-cells');
+// //         for (var i = 0, len = allcell.length; i < len; i++) {
+// //           this.setState({
+// //             eachcelldate: moment(Number(allcell[i].getAttribute('data-date')))
+// //               ._d
+// //           });
+// //           this.setState({
+// //             eachcellslot: String(this.state.eachcelldate).substring(16, 18)
+// //           });
+// //           this.setState({
+// //             eachcellday: String(this.state.eachcelldate).substring(8, 10)
+// //           });
+
+// //           this.setState({
+// //             eachcellyear: String(this.state.eachcelldate).substring(11, 15)
+// //           });
+
+// //           this.setState({
+// //             eachcellmonth: String(this.state.eachcelldate).substring(4)
+// //   OpenDetails = e => {
+// //       const test = Number(e.target.getAttribute('data-date'));
+// //       // const test2 =;
+// //       const test2 = moment(test);
+// //       const allcell = document.getElementsByClassName('e-work-cells');
+
+// //       // var elements = document.getElementsByClassName("class-1");
+// //       for (var i = 0, len = allcell.length; i < len; i++) {
+// //         // elements[i].style ...
+// //         allcell[i].classList.add('bgcolooor');
+// //         // allcell[i].style.background = 'red';
+
+// //         allcell[i].style['background-color'] = '#000';
+// //         // if (allcell[i].getAttribute('data-date') === '1590822000000') {
+// //         //   allcell[i].classList.add('bgcolooor');
+
+// //         //             allcell[i].classList.add('bgcolooor');
+
+// //         // }
+// //       }
+
+// //       this.setState({ allcells: allcell });
+
+// //       // if (formatDate(test2._d) === '05/30/2020') {
+// //       //   allcell[5].style.backgroundColor = 'red';
+
 import * as ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import Bookingmodal from '../booking/Bookingmodal';
+import '../../stylesheets/bookingsCss.css';
 import {
   ScheduleComponent,
   ViewsDirective,
   ViewDirective,
   ResourcesDirective,
   ResourceDirective,
+  TimelineViews,
+  Day,
   Resize,
   DragAndDrop,
-  Inject,
-  Day,
-  TimelineViews,
-  Agenda
+  Inject
 } from '@syncfusion/ej2-react-schedule';
-import { L10n } from '@syncfusion/ej2-base';
+import { formatDate } from 'react-day-picker/moment';
+import { Row, Col } from 'react-bootstrap';
+import axios from 'axios';
 let startdate;
+let finaltbhdata;
+let cellcolor = '#fff';
 
-// L10n.load({
-//   'en-US': {
-//     newEvent: 'BOOK'
-//   }
-// });
 export default class DayTimeScale extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
+      TBHAllBooks: [],
       bookingmodalShow: false,
       endDate: '',
       startTime: '',
-      roomId: ''
+      roomId: '',
+      tbhdata: [],
+      tbhstatus: []
     };
   }
-  generateStaticEvents(start, resCount, overlapCount) {
-    let data = [];
-    let id = 1;
-    for (let i = 0; i < resCount; i++) {
-      let randomCollection = [];
-      let random = 0;
-      for (let j = 0; j < overlapCount; j++) {
-        random = Math.floor(Math.random() * 30);
-        random = random === 0 ? 1 : random;
-        if (
-          randomCollection.indexOf(random) !== -1 ||
-          randomCollection.indexOf(random + 2) !== -1 ||
-          randomCollection.indexOf(random - 2) !== -1
-        ) {
-          random += Math.max.apply(null, randomCollection) + 5;
+
+  componentDidMount() {
+    this._isMounted = true;
+
+    this.convertMonthNameToNumber = monthName => {
+      var myDate = new Date(monthName + ' 1, 2000');
+      var monthDigit = myDate.getMonth();
+      return isNaN(monthDigit) ? 0 : monthDigit;
+    };
+    axios.defaults.headers.common['authorization'] = localStorage.userToken;
+    axios
+      .post('https://cubexs.net/tbhapp/bookings/showcalendar', {
+        BookingDate: {
+          from: formatDate(new Date()),
+          to: '05/20/2027'
         }
-        for (let k = 1; k <= 2; k++) {
-          randomCollection.push(random + k);
+      })
+      .then(res => {
+        if (this._isMounted && res.data.bookings) {
+          this.setState({
+            tbhdata: res.data.bookings.map((book, i) => ({
+              Id: i,
+              Subject: 'hhhhh',
+              StartTime: new Date(
+                book.year,
+                this.convertMonthNameToNumber(book.month),
+                book.day,
+                String(book.slot).includes('PM')
+                  ? Number(String(book.slot.substring(0, 1))) + 12
+                  : Number(String(book.slot.substring(0, 1)))
+              ),
+              EndTime: new Date(
+                book.year,
+                this.convertMonthNameToNumber(book.month),
+                book.day,
+                String(book.slot).includes('PM')
+                  ? Number(String(book.slot.substring(0, 1))) + 13
+                  : Number(String(book.slot.substring(0, 1))) + 1
+              ),
+              ResourceId: 3
+              // status: book.status,
+              // color: cellcolor
+            }))
+          });
+
+          console.log(this.state.tbhdata);
         }
-        let startDate = new Date(start.getFullYear(), start.getMonth(), random);
-        startDate = new Date(
-          startDate.getTime() + (random % 10) * 10 * (1000 * 60)
-        );
-        let endDate = new Date(startDate.getTime() + (1440 + 30) * (1000 * 60));
-        data.push({
-          Id: id,
-          Subject: 'Event #' + id,
-          StartTime: startDate,
-          EndTime: endDate,
-          IsAllDay: id % 10 ? false : true,
-          RoomId: i + 1
-        });
-        id++;
-      }
-    }
-    return data;
+      })
+      .catch(err => console.log(err));
   }
+
   generateResourceData(startId, endId, text) {
     let data = [];
-    let colors = [
-      '#ff8787',
-      '#9775fa',
-      '#748ffc',
-      '#3bc9db',
-      '#69db7c',
-      '#fdd835',
-      '#748ffc',
-      '#9775fa',
-      '#df5286',
-      '#7fa900',
-      '#fec200',
-      '#5978ee',
-      '#00bdae',
-      '#ea80fc'
-    ];
     for (let a = startId; a <= endId; a++) {
-      let n = Math.floor(Math.random() * colors.length);
       data.push({
         Id: a,
-        Text: text + '' + a,
-        // color: '#ed1c24'
-        Color: colors[n]
+        Text: text + ' ' + a,
+        // Color: cellcolor
+        Color: 'red'
       });
     }
     return data;
   }
-
+  closebookModal = e => {
+    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
+  };
   OpenDetails = e => {
     e.cancel = true;
-    console.log(e);
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
     startdate = document.getElementsByClassName(
       'e-toolbar-item e-date-range'
     )[0].innerText;
-    console.log(startdate);
+
     if (e.data) {
       this.setState({
         startTime: e.data.startTime,
-        roomId: e.data.RoomId,
+        roomId: e.data.ResourceId,
         endDate: e.data.endTime
       });
-      console.log(e.target);
-      //       if(e.target.className='e-work-cells e-work-hours e-selected-cell'){
-      //       }
     }
   };
 
-  closebookModal = e => {
-    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
-  };
- 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
   render() {
-    console.log(this);
+    // finaltbhdata = this.state.tbhdata;
+    // finaltbhdata.map((status, i) => {
+    //   if (
+    //     finaltbhdata[i].status.includes('Pending') &&
+    //     finaltbhdata[i].Id === i
+    //   ) {
+    //     finaltbhdata[i].color = '#D2D0D0';
+    //     cellcolor = finaltbhdata[i].color;
+    //     console.log('hahahahah');
+    //   }
+
+    //   if (finaltbhdata[i].status.includes('Busy') && finaltbhdata[i].Id === i) {
+    //     finaltbhdata[i].color = '#ed1c24';
+    //     cellcolor = finaltbhdata[i].color;
+    //   }
+    // });
+
+    // console.log(finaltbhdata);
+
+    // for (var i = 0, len = tbhdata.length; i < len; i++) {
+    //   console.log(tbhdata[0].status);
+    //   if (tbhdata[i].status === 'Pending') {
+    //     cellcolor = '#D2D0D0';
+    //   } else if (tbhdata[i].status === 'Busy') {
+    //     cellcolor = '#ed1c24';
+    //   } else {
+    //     cellcolor = '#fff';
+    //   }
+    // }
     return (
       <div>
-        {' '}
-        {/* <Button
-          id="btn1"
-          title="Click to open Editor"
-          onClick={this.onClickButton1.bind(this)}
-        >
-          Click to open Editor
-        </Button> */}
         <ScheduleComponent
-          // cssClass="virtual-scrolling"
-          ref={t => (this.scheduleObj = t)}
           width="100%"
-          height="100%"
-          eventSettings={{
-            dataSource: this.generateStaticEvents(new Date(2018, 4, 1), 300, 12)
-          }}
-          group={{ resources: ['Rooms'] }}
-          popupOpen={this.OpenDetails}
+          height="auto"
+          eventSettings={{ dataSource: this.state.tbhdata }}
+          group={{ resources: ['Resources'] }}
           startHour="09:00"
           endHour="22:00"
-          locale="en-US"
-          enablePersistence={true}
-          // dateFormat='yyyy-MM-dd'
-          quickInfoOnSelectionEnd={true}
+          workHours={{
+            start: '09:00',
+            end: '21:00'
+          }}
+          popupOpen={this.OpenDetails}
+          // quickInfoOnSelectionEnd={true}
           timeScale={{
             interval: 120,
             slotCount: 2
           }}
-          eventSettingsTemplate={{ color: '#eee' }}
           minDate={new Date()}
-          eventRendered="OnEventRendered"
         >
           <ResourcesDirective>
             <ResourceDirective
-              field="RoomId"
-              title="Room"
-              name="Rooms"
+              field="ResourceId"
+              title="Resource"
+              name="Resources"
               allowMultiple={true}
               dataSource={this.generateResourceData(1, 4, 'Room')}
               textField="Text"
@@ -177,13 +247,21 @@ export default class DayTimeScale extends Component {
               option="TimelineDay"
             />
           </ViewsDirective>
-          <Inject
-            services={[Agenda, Day, TimelineViews, Resize, DragAndDrop]}
-          />
+          <Inject services={[Day, TimelineViews, Resize, DragAndDrop]} />
         </ScheduleComponent>
-        <div className="booknowbtn">
-          <button onClick={this.OpenDetails}>BOOK NOW</button>
-        </div>
+        <Row>
+          <Col md={4} className="mt-4">
+            <div className="redColor"></div>
+            <div className="grayColor"></div>
+          </Col>
+          <Col md='4'></Col>
+          <Col md={4}>
+            <div className="booknowbtn text-right">
+              <button onClick={this.OpenDetails}>BOOK NOW</button>
+            </div>
+          </Col>
+        </Row>
+
         <Bookingmodal
           show={this.state.bookingmodalShow}
           onHide={this.bookingmodalShow}
@@ -197,3 +275,4 @@ export default class DayTimeScale extends Component {
     );
   }
 }
+// ReactDOM.render(<DayTimeScale />, document.getElementById('schedule'));

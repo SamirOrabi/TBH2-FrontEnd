@@ -31,7 +31,6 @@ class VerifyBy extends Component {
         }
       })
       .then(res => {
-        // console.log(res);
         if (res.data.code === 0) {
           this.setState({
             isButtonDisabled: true
@@ -117,9 +116,7 @@ class VerifyBy extends Component {
       })
 
       .then(res => {
-        console.log('res');
-
-        console.log(res);
+       
 
         this.setState({ mystate: res.data.state });
       })

@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, SET_CURRENT_USER, GET_ERRORS } from './actionTypes';
+import { LOGOUT, SET_CURRENT_USER } from './actionTypes';
 import axios from 'axios';
 import setAuthToken from '../../helpers/setAuthToken';
 import jwt_decode from 'jwt-decode';
@@ -8,21 +8,17 @@ export const userRegister = (
   userDatalogin,
   history
 ) => async dispatch => {
-  console.log(userData);
-
   const call = await new Promise((resolve, reject) => {
     axios
       .post('https://cubexs.net/tbhapp/accounts/register', userData)
 
       .then(res => {
         resolve(res.data);
-        console.log(res);
       })
       .catch(err => {
         reject(err);
       });
   });
-  console.log(call);
   let login;
 
   if (call.code === 0) {
@@ -48,20 +44,15 @@ export const userRegister = (
                 verifyBy: 'sms'
               }
             })
-            .then(myres => {
-              console.log(myres);
-            })
+            .then(myres => {})
             .catch(err => console.log(err));
         })
         .catch(err => {
-          console.log(err);
           reject(err);
         });
     });
   }
-  console.log(login);
 
-  // console.log(call);
   return call;
 };
 
@@ -71,7 +62,6 @@ export const Login = (userdata, history) => async dispatch => {
       .post('https://cubexs.net/tbhapp/accounts/login', userdata)
       .then(res => {
         resolve(res.data);
-        console.log(res.data);
         if (res.data.token) {
           const userToken = res.data.token;
           localStorage.setItem('userToken', userToken);

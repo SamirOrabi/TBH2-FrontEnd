@@ -12,7 +12,7 @@ import store from '../../globalState/store';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from '../../helpers/setAuthToken';
 import { setCurrentUser } from '../../globalState/actions/authActions';
-let currentTime = Date.now() / 1000;
+// let currentTime = Date.now() / 1000;
 let decodedToken;
 if (localStorage.userToken) {
   setAuthToken(localStorage.userToken);
@@ -37,7 +37,6 @@ class Navb extends Component {
         }
       })
       .then(res => {
-        console.log('getprofile from nav', res);
         this.setState({ profleDate: res.data.profile });
       })
       .catch(err => console.log(err));
