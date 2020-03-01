@@ -3,14 +3,14 @@ import { Container, Col, Row, Table, Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import '../../stylesheets/ReceiptCSS.css';
+import PrintComponents from 'react-print-components';
 // import Printcomponent from '../booking/Printcomponent';
 class Receipt extends Component {
   constructor(props) {
     super(props);
     this.state = {
       profile: [],
-      modalnote: '',
-      show: false
+      modalnote: ''
     };
   }
   componentDidMount() {
@@ -27,37 +27,41 @@ class Receipt extends Component {
       });
   }
 
-  sendbookingdetails = () => {
-    axios.defaults.headers.common['authorization'] = localStorage.userToken;
-    axios
-      .post('https://cubexs.net/tbhapp/bookings/addbooking', {
-        Account: {
-          id: this.props.user.id
-        },
-        Booking: {
-          date: this.props.startdate,
-          slot: this.props.slots[0],
-          roomType: this.props.roomtype,
-          roomNumber: this.props.roomId,
-          amountOfPeople: this.props.amountofpeople,
-          paymentMethod: this.props.payment,
-          packageCode: ''
-        }
-      })
-      .then(res => {
-        console.log(res.data.code);
-        this.setState({
-          modalnote: 'Your Booking Added Successfully',
-          show1: false
-        });
-        this.setState({ show: true });
-        setTimeout(() => {
-          this.setState({ show: false });
-        }, 1600);
-        this.props.closebookModal();
-      })
-      .catch(err => console.log(err));
-  };
+  // sendbookingdetails=()=>{
+  //   axios.defaults.headers.common['authorization'] =localStorage.userToken;
+  //   axios.post('https://cubexs.net/tbhapp/bookings/addbooking' ,
+  //   {
+  //     Account:{
+  //       id:this.props.user.id,
+  //             },
+  //             Booking:{
+  //               date:this.props.startdate,
+  //               slot:this.props.slots,
+  //               roomType:this.props.roomtype,
+  //               roomNumber:this.props.roomId,
+  //               amountOfPeople:this.props.amountofpeople,
+  //               paymentMethod:this.props.payment,
+  //               packageCode:''
+
+  //             }
+  //   }
+  //   )
+  //   .then(res => {
+  //     console.log('addbooking', res.data);
+  //     this.setState({
+  //       modalnote: 'Your Booking Added Successfully',
+  //       show1: false
+  //     });
+  //     this.setState({ show: true });
+  //     setTimeout(() => {
+  //       this.setState({ show: false });
+  //     }, 1600);
+  //     console.log(res.data);
+  //     this.props.closebookModal()
+  //   })
+  //   .catch(err => console.log(err));
+
+  // }
 
   render() {
     return (
@@ -97,7 +101,7 @@ class Receipt extends Component {
                       <td>{this.props.slots}</td>
                       <td>{this.props.amountofpeople}</td>
                       <td>-</td>
-                      <td>{this.props.bookprice}</td>
+                      <td>{this.props.bookprice} LE</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -139,9 +143,10 @@ class Receipt extends Component {
             </Col>
           </Row>
 
+          {/* 
           <Row>
             <Col sm={12} className="text-right">
-              {/* < Printcomponent  /> */}
+          
               <Button
                 type="submit"
                 className="my-4 nextBtn mr-5"
@@ -150,11 +155,8 @@ class Receipt extends Component {
                 DONE
               </Button>
             </Col>
-          </Row>
+          </Row> */}
         </Container>
-        <Modal className="mt-2 firstnameupdatesnackbar" show={this.state.show}>
-          <div id="snackbar">{this.state.modalnote}</div>
-        </Modal>
       </div>
     );
   }

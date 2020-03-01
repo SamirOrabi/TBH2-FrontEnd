@@ -127,7 +127,7 @@ class BookDetails extends Component {
     }
 
     let bookrequest = {};
-    bookrequest.slot = this.state.slots;
+    bookrequest.slot = [this.state.slots[0]];
     bookrequest.date = formatDate(this.props.startdate);
     bookrequest.roomType = this.state.roomtype;
     bookrequest.roomNumber = this.state.roomId;
@@ -143,16 +143,19 @@ class BookDetails extends Component {
         Booking: bookrequest
       })
       .then(res => {
+        console.log(res);
         if (res.data.code === 0) {
           this.setState({ bookprice: res.data.price });
+          console.log('price');
+          console.log(this.state.slots);
         }
 
         this.props.detailsfun(this.state.bookprice);
         this.props.testtoreceipt(
           this.state.roomtype,
           this.state.amountofpeople,
-          this.state.slots,
-          this.state.startdate,
+          [this.state.slots[0]],
+          formatDate(this.props.startdate),
           this.state.payment,
           this.state.roomId
         );
@@ -161,6 +164,8 @@ class BookDetails extends Component {
       .catch(err => console.log(err));
   };
   render() {
+    console.log('startdate ');
+    console.log(this.props.startdate);
     const settings = {
       customPaging: function(i) {
         return (
