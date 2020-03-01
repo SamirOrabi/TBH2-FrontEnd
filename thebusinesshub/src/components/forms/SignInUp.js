@@ -20,6 +20,7 @@ export default class SignInUp extends Component {
     }
   };
 
+ 
   render() {
     return (
       <div className="signupinbackground">
