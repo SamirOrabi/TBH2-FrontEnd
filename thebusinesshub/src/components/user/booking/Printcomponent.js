@@ -13,6 +13,8 @@ constructor(props){
   this.state={
     show: false,
     modalnote: '',
+    modalerroe:''
+
 
   }
 }
@@ -48,10 +50,11 @@ sendbookingdetails=()=>{
     this.setState({
       modalnote: 'Your Booking Added Successfully',
       show: true
-
     })
     setTimeout(() => {
+
       this.setState({ show: false });
+      this.props.closebookModal()
     }, 2000);
   
   
@@ -59,23 +62,25 @@ sendbookingdetails=()=>{
 
   else {
     this.setState({
-      modalnote: 'something wrong',
-      show: true
-
+      modalerroe: 'Please Select Slot Of Booking To Show Price',
     })
-    setTimeout(() => {
-      this.setState({ show: false });
-    }, 2500);
+    // setTimeout(() => {
+    //   this.setState({ show: false });
+    // }, 2500);
   
   }
 
 
+
+
     // this.setState({ show: true });
     // setTimeout(() => {
-    //   this.setState({ show: false });
+    //   this.props.closebookModal()
     // }, 1600);
     console.log(res.data);
-    this.props.closebookModal()
+    // setTimeout(() => {
+    //   this.props.closebookModal()
+    // }, 1600);
   })
   .catch(err => console.log(err));
 
@@ -91,12 +96,12 @@ sendbookingdetails=()=>{
    <Receipt  
     roomtype={this.props.roomtype} roomId={this.props.roomId} amountofpeople={this.props.amountofpeople}
    bookprice={this.props.bookprice}  payment={this.props.payment} slots={this.props.slots} 
-    startdate={this.props.startdate} />
+    startdate={this.props.startdate} modalerroe={this.state.modalerroe} />
 
 
 <NoPrint>
 <Row>
-  <Col sm={9}></Col>
+        <Col sm={9}></Col>
   <Col sm={3} className="text-left">
     
 

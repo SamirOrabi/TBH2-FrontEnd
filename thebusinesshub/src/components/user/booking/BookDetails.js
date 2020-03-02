@@ -35,7 +35,8 @@ class BookDetails extends Component {
       amountofpeople: '1',
       slots: [],
       bookprice: '',
-      startdate: formatDate(this.props.startdate)
+      startdate: formatDate(this.props.startdate),
+      timeErrorMessage:'',
     };
   }
   componentDidMount() {
@@ -143,6 +144,9 @@ class BookDetails extends Component {
         Booking: bookrequest
       })
       .then(res => {
+        if (res.data.code === 101) {
+          this.setState({ timeErrorMessage: res.data.error });
+        }
         console.log(res);
         if (res.data.code === 0) {
           this.setState({ bookprice: res.data.price });
@@ -166,6 +170,8 @@ class BookDetails extends Component {
   render() {
     console.log('startdate ');
     console.log(this.props.startdate);
+    console.log('timeErrorMessage')
+    console.log(this.state.timeErrorMessage)
     const settings = {
       customPaging: function(i) {
         return (
@@ -291,6 +297,7 @@ class BookDetails extends Component {
                           onChange={this.onChangeStartTime}
                           value={starttime}
                         />
+                        {this.state.timeErrorMessage}
                       </div>
                     </Col>
 
@@ -370,6 +377,9 @@ class BookDetails extends Component {
                       NEXT
                     </Button>
                   </Col>
+                  {this.state.timeErrorMessage ?(<p>{this.state.timeErrorMessage}</p>):null}
+                
+
                 </Form>
               </Container>
             </Col>

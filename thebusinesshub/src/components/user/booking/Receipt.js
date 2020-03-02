@@ -79,8 +79,8 @@ class Receipt extends Component {
             <Col sm={12}>
               <div className="receipt">
                 <h2 className="ml-5 mb-5">
-                  Receipt For {this.state.profile.firstName}
-                  {this.state.profile.lastName}
+    Receipt For  {this.state.profile.firstName}   {this.state.profile.lastName}
+                 
                 </h2>
               </div>
             </Col>
@@ -146,8 +146,18 @@ class Receipt extends Component {
                     for the loss and/or damage of any personal belongings.
                   </p>
                 </div>
-              </div>
-        
+
+{this.props.modalerroe ? (
+  <div style={{ display: 'flex' }} className="mt-3">
+  <p style={{fontWeight:'bolder' , fontSize:'25px'}}>
+  <i className="fas fa-exclamation-triangle px-2" style={{fontSize:'20px'}}></i> <span style={{color:'#ed1c24'}}> {this.props.modalerroe}</span>
+  </p>
+</div>
+
+):null}
+              
+              </div> 
+  
             </Col>
             
           </Row>
