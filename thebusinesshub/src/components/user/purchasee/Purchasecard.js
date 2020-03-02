@@ -8,13 +8,18 @@ constructor(props){
     hrsNumber:'',
     cards:[{img:'../../../Images/img.png' , HRS:'+10'},
     {img:'../../../Images/bg.png', HRS:'+50'},
-    {img:'../../../Images/img.png' ,HRS:'+100'} ]
+    {img:'../../../Images/img.png' ,HRS:'+100'} ],
+    showPurchasepopup:false
   }
 }
 
   sethoursNumber = e => {
     this.setState({ hrsNumber: e.target.value });
   };
+
+  showPurchasepopup(){
+    this.setState({showPurchasepopup:true})
+  }
   render() {
     
     return (
@@ -53,7 +58,7 @@ constructor(props){
  
   <Card.Footer>
     <div className="cardbtn"> 
-    <Button className="Purchasecard">Purchase</Button></div>
+    <Button className="Purchasecard" onClick={this.showPurchasepopup}>Purchase</Button></div>
     
   </Card.Footer>
 </Card>     
