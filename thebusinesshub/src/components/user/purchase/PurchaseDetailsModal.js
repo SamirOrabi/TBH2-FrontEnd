@@ -39,7 +39,7 @@ class PurchaseDetailsModal extends Component {
   handleChangenumber = e => {
     this.setState({ numOfpeapole: e.target.value });
     // alert('hey');
-    // console.log(this.state.numOfpeapole);
+    console.log(this.state.numOfpeapole);
   };
   componentDidMount() {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
@@ -68,10 +68,14 @@ class PurchaseDetailsModal extends Component {
   componentWillReceiveProps(nextProps) {
     // console.log(this.props);
     this.setState({ hour: this.props.hours });
+    if (this.props.type === 'big') {
+      this.setState({ numOfpeapole: 6 });
+    }
   }
   openReciept = () => {
     this.setState({ showmodal: true });
   };
+
   componentDidUpdate(prevProps, prevState) {
     if (!isEqual(prevState, this.state)) {
       axios.defaults.headers.common['authorization'] = localStorage.userToken;
@@ -100,6 +104,7 @@ class PurchaseDetailsModal extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <Modal show={this.props.show}>
@@ -142,16 +147,29 @@ class PurchaseDetailsModal extends Component {
                 </Row>
                 <Row>
                   <Col sm={6}>
-                    <select
-                      value={this.state.numOfpeapole}
-                      onChange={this.handleChangenumber}
-                    >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
+                    {this.props.type === 'small' ? (
+                      <select
+                        value={this.state.numOfpeapole}
+                        onChange={this.handleChangenumber}
+                      >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                    ) : (
+                      <select
+                        value={this.state.numOfpeapole}
+                        onChange={this.handleChangenumber}
+                      >
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                    )}
                   </Col>
                   <Col sm={6}>{this.state.price}</Col>
                 </Row>
@@ -172,6 +190,7 @@ class PurchaseDetailsModal extends Component {
           people={this.state.numOfpeapole}
           hours={this.state.hour}
           price={this.state.price}
+          type={this.props.type}
         />
       </div>
     );

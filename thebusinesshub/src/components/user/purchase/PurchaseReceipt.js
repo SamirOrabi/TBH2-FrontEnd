@@ -58,7 +58,7 @@ class PurchaseReceipt extends Component {
 
                     <tbody>
                       <tr className="text-center bookingstr  mb-5">
-                        <td>{this.props.roomtype}</td>
+                        <td>{this.props.type}</td>
                         <td>{this.props.people}</td>
                         <td>{this.props.hours}</td>
                         <td>{this.props.price}</td>

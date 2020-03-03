@@ -75,6 +75,7 @@ export default class Purchasecard extends Component {
                         <PurchaseDetailsModal
                           hours={this.state.hrsNumber}
                           show={this.state.show}
+                          type={this.props.type}
                         />
                       </Button>
                     </div>

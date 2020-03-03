@@ -7,16 +7,28 @@ export default class PurchaseTabs extends Component {
     this.state = {
       showSmall: true,
       showBig: false,
-      type: 'small'
+      type: 'small',
+      codeone: 'MRSG10',
+      codetwo: 'MRSG30',
+      codethree: 'MRSG50'
     };
   }
 
   onchangeType = e => {
     if (e.target.id === 'uncontrolled-tab-example-tab-big') {
-      this.setState({ type: 'big' });
-      alert('hey');
+      this.setState({
+        type: 'big',
+        codeone: 'MRLG10',
+        codetwo: 'MRLG30',
+        codethree: 'MRLG50'
+      });
     } else {
-      this.setState({ type: 'small' });
+      this.setState({
+        type: 'small',
+        codeone: 'MRSG10',
+        codetwo: 'MRSG30',
+        codethree: 'MRSG50'
+      });
     }
     console.log(e.target);
   };
@@ -29,10 +41,20 @@ export default class PurchaseTabs extends Component {
           id="uncontrolled-tab-example"
         >
           <Tab eventKey="small" title="SMALL GROUP">
-            <Purchasecard type={this.state.type} />
+            <Purchasecard
+              type={this.state.type}
+              codeone={this.state.codeone}
+              codetwo={this.state.codetwo}
+              codethree={this.state.codethree}
+            />
           </Tab>
           <Tab eventKey="big" id="big" title="BIG GROUP">
-            <Purchasecard type={this.state.type} />
+            <Purchasecard
+              type={this.state.type}
+              codeone={this.state.codeone}
+              codetwo={this.state.codetwo}
+              codethree={this.state.codethree}
+            />
           </Tab>
         </Tabs>
       </div>
