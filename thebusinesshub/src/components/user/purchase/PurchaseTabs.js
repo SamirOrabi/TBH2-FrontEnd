@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import Purchasecard from './Purchasecard';
+import Purchasecard2 from './Purchasecard2';
 export default class PurchaseTabs extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showSmall: true,
       showBig: false,
+      meeting: 'meeting',
+      training: 'training',
       type: 'small',
       codeone: 'MRSG10',
       codetwo: 'MRSG30',
@@ -30,30 +32,51 @@ export default class PurchaseTabs extends Component {
         codethree: 'MRSG50'
       });
     }
-    console.log(e.target);
   };
+
   render() {
     return (
       <div>
+        <h1>Meeting Room</h1>
         <Tabs
           onClick={this.onchangeType}
           defaultActiveKey="small"
           id="uncontrolled-tab-example"
         >
           <Tab eventKey="small" title="SMALL GROUP">
-            <Purchasecard
+            <Purchasecard2
+              meeting={this.state.meeting}
               type={this.state.type}
-              codeone={this.state.codeone}
-              codetwo={this.state.codetwo}
-              codethree={this.state.codethree}
+              room="meeting room"
             />
           </Tab>
           <Tab eventKey="big" id="big" title="BIG GROUP">
-            <Purchasecard
+            <Purchasecard2
+              meeting={this.state.meeting}
               type={this.state.type}
-              codeone={this.state.codeone}
-              codetwo={this.state.codetwo}
-              codethree={this.state.codethree}
+              room="meeting room"
+            />
+          </Tab>
+        </Tabs>
+        <div className="mt-5"></div>
+        <h1>Training Room</h1>
+        <Tabs
+          onClick={this.onchangeType}
+          defaultActiveKey="small"
+          id="uncontrolled-tab-example"
+        >
+          <Tab eventKey="small" title="SMALL GROUP">
+            <Purchasecard2
+              training={this.state.training}
+              type={this.state.type}
+              room="training room"
+            />
+          </Tab>
+          <Tab eventKey="big" id="big" title="BIG GROUP">
+            <Purchasecard2
+              training={this.state.training}
+              type={this.state.type}
+              room="training room"
             />
           </Tab>
         </Tabs>

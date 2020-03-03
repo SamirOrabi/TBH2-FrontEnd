@@ -42,13 +42,15 @@ class PurchaseDetailsModal extends Component {
     console.log(this.state.numOfpeapole);
   };
   componentDidMount() {
+    // console.log('this.props.code');
+    // console.log(this.props.code);
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/packages/calculatepackageprice', {
         Package: {
           numberOfHours: this.state.hour,
-          package: 'MRFRSG',
-          roomType: this.state.selectRoom
+          package: this.props.code,
+          roomType: this.props.room
         },
         Account: {
           id: this.props.user.id
@@ -66,7 +68,7 @@ class PurchaseDetailsModal extends Component {
       .catch(err => console.log(err));
   }
   componentWillReceiveProps(nextProps) {
-    // console.log(this.props);
+    console.log(this.props);
     this.setState({ hour: this.props.hours });
     if (this.props.type === 'big') {
       this.setState({ numOfpeapole: 6 });
@@ -83,8 +85,8 @@ class PurchaseDetailsModal extends Component {
         .post('https://cubexs.net/tbhapp/packages/calculatepackageprice', {
           Package: {
             numberOfHours: this.state.hour,
-            package: 'MRFRSG',
-            roomType: this.state.selectRoom
+            package: this.props.code,
+            roomType: this.props.room
           },
           Account: {
             id: this.props.user.id
@@ -104,7 +106,6 @@ class PurchaseDetailsModal extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <Modal show={this.props.show}>
