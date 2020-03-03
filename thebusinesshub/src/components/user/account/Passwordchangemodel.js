@@ -125,7 +125,7 @@ class Passwordchangemodel extends Component {
               <div className="modalforgetdev text-right">
                 {' '}
                 <Button onClick={this.handleShow}>
-                  Forget Password?
+                  Forget Your Password?
                   <ForgetPassword
                     show={this.state.show}
                     hideModal={this.hideModal}
