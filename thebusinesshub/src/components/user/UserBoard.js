@@ -5,7 +5,7 @@ import UserBoardSideNav from './UserBoardSideNav';
 import AccountSettingsPage from './AccountSettingsPage';
 import '../stylesheets/userCss.css';
 import UserBookingPage from './booking/UserBookingPage';
-
+import Userpurchase from './purchasee/Userpurchase';
 export default class UserBoard extends Component {
   render() {
     return (
@@ -29,6 +29,10 @@ export default class UserBoard extends Component {
               'Account-Settings' && <AccountSettingsPage />}
             {this.props.location.pathname.substring(11) === 'Booking' && (
               <UserBookingPage />
+            )}
+
+            {this.props.location.pathname.substring(11) === 'purchase' && (
+              <Userpurchase />
             )}
           </Col>
         </Row>

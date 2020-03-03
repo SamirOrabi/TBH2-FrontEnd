@@ -60,6 +60,14 @@ sendbookingdetails=()=>{
   
   }
 
+  else if (res.data.code === 116) {
+  console.log(res.data.error)
+  this.setState({
+    modalerroe: ' These slots are not free Please Select another slot',
+  })
+  }
+
+
   else {
     this.setState({
       modalerroe: 'Please Select Slot Of Booking To Show Price',

@@ -15,14 +15,17 @@ constructor(props){
 
   settenhours = e => {
      this.setState({tenhoursvalue:e.target.value})
+     console.log(e.target.value)
   };
 
   setthirtyhours = e => {
     this.setState({thirtyvalue:e.target.value})
+    console.log(this.state.thirtyvalue)
  };
 
  setfiftyhours = e => {
   this.setState({fiftyvalue:e.target.value})
+  console.log(this.state.fiftyvalue)
 };
 
 
@@ -33,21 +36,17 @@ constructor(props){
   }
 
   render() {
-    
+    console.log(this.state.tenhoursvalue)
+    console.log(this.state.thirtyvalue)
 
     return (
       
       <div>
       <Container>
       <Row>
-
-         
              <Col sm={12} md={4}>
           <Card style={{ width: '18rem' }}>
-      
       <div className="cardimg">
-     
-
          <Card.Img  src={require('../../../Images/img.png')} />
      
          </div>
@@ -70,7 +69,6 @@ constructor(props){
                       </div>
     </Card.Text>
   </Card.Body>
- 
   <Card.Footer>
     <div className="cardbtn"> 
     <Button className="Purchasecard"
@@ -84,12 +82,8 @@ constructor(props){
 
 <Col sm={12} md={4}>
           <Card style={{ width: '18rem' }}>
-      
       <div className="cardimg">
-     
-
          <Card.Img  src={require('../../../Images/img.png')} />
-     
          </div>
   <Card.Body>
     <Card.Text>
@@ -110,7 +104,6 @@ constructor(props){
                       </div>
     </Card.Text>
   </Card.Body>
- 
   <Card.Footer>
     <div className="cardbtn"> 
     <Button className="Purchasecard"
@@ -124,7 +117,6 @@ constructor(props){
 
 <Col sm={12} md={4}>
           <Card style={{ width: '18rem' }}>
-      
       <div className="cardimg">
      
 
