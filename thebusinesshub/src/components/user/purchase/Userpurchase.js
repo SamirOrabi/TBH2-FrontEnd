@@ -51,6 +51,7 @@ import { Table, Container } from 'react-bootstrap';
                       <th>status</th>
                       <th>price</th>
                       <th>room type</th> 
+                      <th>Hours</th>
                     </tr>
 
                   </thead>
@@ -62,6 +63,7 @@ import { Table, Container } from 'react-bootstrap';
                       <td>{purchase.status}</td>
                       <td>{purchase.price}</td>
                       <td>{purchase.roomType}</td>
+                      <td>{purchase.remaining}</td>
                       </tr>
                     )}
                 </tbody>
