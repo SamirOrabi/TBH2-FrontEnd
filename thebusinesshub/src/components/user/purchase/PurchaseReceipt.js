@@ -12,7 +12,8 @@ class PurchaseReceipt extends Component {
     this.state = {
       profile: [],
       modalnote: '',
-      showfeedBack: false
+      showfeedBack: false,
+      myerror: ''
     };
   }
   componentDidMount() {
@@ -53,6 +54,8 @@ class PurchaseReceipt extends Component {
 
             this.props.handleClose(false);
           }, 1900);
+        } else {
+          this.setState({ myerror: res.data.error });
         }
       });
   };
@@ -171,6 +174,13 @@ class PurchaseReceipt extends Component {
                     </Col>
                   </Row>
                 </NoPrint>
+                {this.state.myerror.length !== 0 ? (
+                  <p style={{color:'#ed1c24'}}>
+                    {' '}
+                    <i className="fas fa-exclamation-triangle"></i>
+                    {this.state.myerror}
+                  </p>
+                ) : null}
               </Modal.Body>
             </Print>
           </PrintProvider>

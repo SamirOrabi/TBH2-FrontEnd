@@ -241,7 +241,7 @@ class PurchaseDetailsModal extends Component {
                 </Col>
               </Row>
               {this.state.myerror.length !== 0 ? (
-                <p>
+                <p style={{ color: '#ed1c24' }}>
                   {' '}
                   <i className="fas fa-exclamation-triangle"></i>
                   {this.state.myerror}
