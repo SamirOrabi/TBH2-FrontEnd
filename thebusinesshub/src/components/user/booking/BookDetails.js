@@ -201,7 +201,7 @@ class BookDetails extends Component {
     console.log(this.props.endTime);
     return (
       <div>
-        <Container>
+        <Container className='roomsdetails'>
           <Row className="m-auto">
             <Col className="m-auto pl-4" md={5} sm={12}>
               <Slider {...settings}>
@@ -296,6 +296,9 @@ class BookDetails extends Component {
                         <TimePicker
                           onChange={this.onChangeStartTime}
                           value={starttime}
+                          clockIcon={null}
+                          disableClock={true}
+                          maxDetail="hour"
                         />
                         {this.state.timeErrorMessage}
                       </div>
@@ -307,6 +310,9 @@ class BookDetails extends Component {
                         <TimePicker
                           onChange={this.onChangeEndTime}
                           value={endtime}
+                          disableClock={true}
+                          clockIcon={null}
+                          maxDetail="hour"
                         />
                       </div>
                     </Col>

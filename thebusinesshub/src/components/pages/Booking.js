@@ -78,7 +78,7 @@ export default class Booking extends Component {
                   >
                     DAY
                   </Button>
-                  <Button
+                  {/* <Button
                     onClick={this.WeekComponent}
                     style={{
                       color: this.state.weekcolor,
@@ -88,7 +88,7 @@ export default class Booking extends Component {
                   >
                     {' '}
                     WEEK
-                  </Button>
+                  </Button> */}
                 </Col>
               </Row>
             </Col>

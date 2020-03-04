@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { formatDate } from 'react-day-picker/moment';
+import isEqual from 'lodash/isEqual';
 
 import { withRouter } from 'react-router-dom';
 class EditSlot extends Component {
@@ -9,63 +11,149 @@ class EditSlot extends Component {
     super(props);
     this.state = {
       slot: '',
-      show2: false
+      show2: false,
+      tbhdata: [],
+      allslots: [
+        '09AM',
+        '10AM',
+        '11AM',
+        '12PM',
+        '01PM',
+        '02PM',
+        '03PM',
+        '04PM',
+        '05PM',
+        '06PM',
+        '07PM',
+        '08PM'
+      ],
+      selectedslot: '',
+      busyslots: [],
+      myerror: ''
     };
   }
 
   handleClose = e => {
-    this.props.hideModal2(false);
+    this.props.hideModal(false);
   };
 
+  componentDidMount() {
+    console.log(this.props.id);
+    axios.defaults.headers.common['authorization'] = localStorage.userToken;
+    axios
+      .post('https://cubexs.net/tbhapp/bookings/showcalendar', {
+        BookingDate: {
+          from: this.props.slotdate,
+          to: this.props.slotdate
+        }
+      })
+      .then(res => {
+        this.setState({ tbhdata: res.data.bookings });
+      });
+  }
+  OnChangeSlot = e => {
+    this.setState({
+      selectedslot: e.target.value
+    });
+    console.log([this.state.selectedslot]);
+  };
   editTimeSlot = id => {
+    console.log(this.state.selectedslot);
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/bookings/editbookingtiming', {
         Account: {
-          id: this.props.user.id,
-          slot: ['10AM']
+          id: this.props.user.id
         },
         Booking: {
-          id: id.target.id
+          id: this.props.id,
+          slot: [this.state.selectedslot],
+          date: formatDate(this.props.slotdate)
         }
       })
 
       .then(res => {
         if (res.data.code === 0) {
-          this.setState({ show: false });
-          this.props.hideModal(false);
+          this.props.hideModal();
           this.setState({ show2: true });
           setTimeout(() => {
             this.setState({ show2: false });
           }, 1600);
         } else {
-          this.setState({ myerror: res.data.error });
+          this.setState({ myerror: 'Slot is not allowed to be empty' });
         }
       })
       .catch(err => console.log(err));
   };
 
-  enter = e => {
-    if (e.keyCode === 13) {
-      e.preventDefault();
-      this.edittimeslot();
+  componentDidUpdate(prevProps, prevState) {
+    if (!isEqual(prevState, this.state)) {
+      axios.defaults.headers.common['authorization'] = localStorage.userToken;
+      axios
+        .post('https://cubexs.net/tbhapp/bookings/showcalendar', {
+          BookingDate: {
+            from: this.props.slotdate,
+            to: this.props.slotdate
+          }
+        })
+        .then(res => {
+          this.setState({ tbhdata: res.data.bookings });
+        });
     }
-  };
+  }
 
   render() {
+    this.state.tbhdata.map((slot, i) => {
+      this.state.busyslots.push(slot.slot);
+    });
+    console.log(this.state.busyslots);
+    this.diff = (arr1, arr2) => {
+      var newArray = arr2.concat(arr1);
+      var newestArray = [];
+      for (var i = 0; i < newArray.length; i++) {
+        if (arr1.indexOf(newArray[i]) === -1) {
+          newestArray.push(newArray[i]);
+        }
+        if (arr2.indexOf(newArray[i]) === -1) {
+          newestArray.push(newArray[i]);
+        }
+      }
+
+      return newestArray;
+    };
     return (
       <Container className="w-50">
         <div>
-          {' '}
-          <Modal show={this.props.show} onHide={this.handleClose}>
-            <Modal.Body className="verifyby">
-              <h4>Change slot time</h4>
-            </Modal.Body>
-            <Modal className="mt-2 feedBack" show={this.state.show2}>
-              <div id="snackbar">Slot time edited Successfully!</div>
+          <h4>Change slot time</h4>
+          <div>
+            <div className="slotdrop">
+              <select
+                className="browser-default"
+                name="selectedslot"
+                value={this.state.selectedslot}
+                onChange={this.OnChangeSlot}
+              >
+                <option selected>Choose Slot</option>
+                {this.diff(this.state.allslots, this.state.busyslots).map(
+                  slot => (
+                    <option value={slot} name={slot}>
+                      {slot}
+                    </option>
+                  )
+                )}
+              </select>
+            </div>
+            <Button onClick={this.editTimeSlot} className="mt-3 cancelbtn">
+              Confirm
+            </Button>
+            <Modal className=" feedBack" show={this.state.show2}>
+              <div id="snackbar">Slot Edited Successfully!</div>
             </Modal>
-          </Modal>
+          </div>
         </div>
+        <p style={{ fontWeight: 'bold' }} className="mt-4">
+          {this.state.myerror}
+        </p>
       </Container>
     );
   }

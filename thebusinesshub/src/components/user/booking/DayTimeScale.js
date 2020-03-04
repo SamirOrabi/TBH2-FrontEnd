@@ -1,60 +1,3 @@
-// //         // elements[i].style ...
-// //         // allcell[i].classList.add('bgcolooor');
-// //         // allcell[i].style.background = 'red';
-
-// //         // allcell[i].style['background-color'] = '#000';
-
-// //         for (var c = 0, len = this.state.tbhCalendar.length; c < len; c++) {
-// //           this.setState({ tbhdays: this.state.tbhCalendar[c].day });
-// //           this.setState({ tbhmonths: this.state.tbhCalendar[c].month });
-// //           this.setState({ tbhyears: this.state.tbhCalendar[c].year });
-// //         }
-
-// //         const allcell = document.getElementsByClassName('e-work-cells');
-// //         for (var i = 0, len = allcell.length; i < len; i++) {
-// //           this.setState({
-// //             eachcelldate: moment(Number(allcell[i].getAttribute('data-date')))
-// //               ._d
-// //           });
-// //           this.setState({
-// //             eachcellslot: String(this.state.eachcelldate).substring(16, 18)
-// //           });
-// //           this.setState({
-// //             eachcellday: String(this.state.eachcelldate).substring(8, 10)
-// //           });
-
-// //           this.setState({
-// //             eachcellyear: String(this.state.eachcelldate).substring(11, 15)
-// //           });
-
-// //           this.setState({
-// //             eachcellmonth: String(this.state.eachcelldate).substring(4)
-// //   OpenDetails = e => {
-// //       const test = Number(e.target.getAttribute('data-date'));
-// //       // const test2 =;
-// //       const test2 = moment(test);
-// //       const allcell = document.getElementsByClassName('e-work-cells');
-
-// //       // var elements = document.getElementsByClassName("class-1");
-// //       for (var i = 0, len = allcell.length; i < len; i++) {
-// //         // elements[i].style ...
-// //         allcell[i].classList.add('bgcolooor');
-// //         // allcell[i].style.background = 'red';
-
-// //         allcell[i].style['background-color'] = '#000';
-// //         // if (allcell[i].getAttribute('data-date') === '1590822000000') {
-// //         //   allcell[i].classList.add('bgcolooor');
-
-// //         //             allcell[i].classList.add('bgcolooor');
-
-// //         // }
-// //       }
-
-// //       this.setState({ allcells: allcell });
-
-// //       // if (formatDate(test2._d) === '05/30/2020') {
-// //       //   allcell[5].style.backgroundColor = 'red';
-
 import * as ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import Bookingmodal from '../booking/Bookingmodal';
@@ -79,7 +22,7 @@ import isEqual from 'lodash/isEqual';
 let startdate;
 let finaltbhdata;
 let cellcolor = '#fff';
-
+let color;
 export default class DayTimeScale extends Component {
   _isMounted = false;
 
@@ -118,7 +61,7 @@ export default class DayTimeScale extends Component {
           this.setState({
             tbhdata: res.data.bookings.map((book, i) => ({
               Id: i,
-              Subject: 'BOOKED',
+              Subject: '-',
               StartTime: new Date(
                 book.year,
                 this.convertMonthNameToNumber(book.month),
@@ -137,12 +80,13 @@ export default class DayTimeScale extends Component {
                   ? Number(String(book.slot.substring(0, 2))) + 13
                   : Number(String(book.slot.substring(0, 2))) + 1
               ),
-              ResourceId: Number(book.roomNumber)
-              // status: book.status,
-              // color: cellcolor
+              ResourceId: Number(book.roomNumber),
+              // RecurrenceRule: 'FREQ=DAILY;INTERVAL=1;COUNT=7',
+
+              status: book.status,
+              color: cellcolor
             }))
           });
-
           console.log(this.state.tbhdata);
         }
       })
@@ -169,26 +113,29 @@ export default class DayTimeScale extends Component {
             this.setState({
               tbhdata: res.data.bookings.map((book, i) => ({
                 Id: i,
-                Subject: 'BOOKED',
+                Subject: '-',
                 StartTime: new Date(
                   book.year,
                   this.convertMonthNameToNumber(book.month),
                   book.day,
-                  (String(book.slot).includes('PM')&& String(book.slot.substring(0, 2))!=='12')
-                  ? Number(String(book.slot.substring(0, 2))) + 12
+                  String(book.slot).includes('PM') &&
+                  String(book.slot.substring(0, 2)) !== '12'
+                    ? Number(String(book.slot.substring(0, 2))) + 12
                     : Number(String(book.slot.substring(0, 2)))
                 ),
                 EndTime: new Date(
                   book.year,
                   this.convertMonthNameToNumber(book.month),
                   book.day,
-                  (String(book.slot).includes('PM')&& String(book.slot.substring(0, 2))!=='12')
-                  ? Number(String(book.slot.substring(0, 2))) + 13
+                  String(book.slot).includes('PM') &&
+                  String(book.slot.substring(0, 2)) !== '12'
+                    ? Number(String(book.slot.substring(0, 2))) + 13
                     : Number(String(book.slot.substring(0, 2))) + 1
                 ),
-                ResourceId: Number(book.roomNumber)
-                // status: book.status,
-                // color: cellcolor
+                ResourceId: Number(book.roomNumber),
+
+                status: book.status,
+                color: cellcolor
               }))
             });
           }
@@ -199,6 +146,7 @@ export default class DayTimeScale extends Component {
 
   generateResourceData(startId, endId, text) {
     let data = [];
+
     for (let a = startId; a <= endId; a++) {
       data.push({
         Id: a,
@@ -209,6 +157,7 @@ export default class DayTimeScale extends Component {
     }
     return data;
   }
+
   closebookModal = e => {
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
   };
@@ -218,7 +167,7 @@ export default class DayTimeScale extends Component {
     startdate = document.getElementsByClassName(
       'e-toolbar-item e-date-range'
     )[0].innerText;
-
+    console.log(startdate);
     if (e.data) {
       this.setState({
         startTime: e.data.startTime,
@@ -232,35 +181,24 @@ export default class DayTimeScale extends Component {
     this._isMounted = false;
   }
   render() {
-    // finaltbhdata = this.state.tbhdata;
-    // finaltbhdata.map((status, i) => {
-    //   if (
-    //     finaltbhdata[i].status.includes('Pending') &&
-    //     finaltbhdata[i].Id === i
-    //   ) {
-    //     finaltbhdata[i].color = '#D2D0D0';
-    //     cellcolor = finaltbhdata[i].color;
-    //     console.log('hahahahah');
-    //   }
+    this.state.tbhdata.map((status, i) => {
+      if ((this.state.tbhdata[i].status = 'Busy')) {
+        this.state.tbhdata[i].color = '#ed1c24';
+        cellcolor = '#ed1c24';
+      }
+      if ((this.state.tbhdata[i].status = 'Pending')) {
+        this.state.tbhdata[i].color = '#D2D0D0';
+        cellcolor = '#D2D0D0';
+      }
+    });
 
-    //   if (finaltbhdata[i].status.includes('Busy') && finaltbhdata[i].Id === i) {
-    //     finaltbhdata[i].color = '#ed1c24';
-    //     cellcolor = finaltbhdata[i].color;
-    //   }
-    // });
+    // this.state.tbhdata.map((status, i) => (
+    //   this.state.tbhdata[i].status === 'Busy' || this.state.tbhdata[i].status === 'Pending'  ?
+    //    cellcolor= this.state.tbhdata[i].color
+    //   :null
 
-    // console.log(finaltbhdata);
+    // ));
 
-    // for (var i = 0, len = tbhdata.length; i < len; i++) {
-    //   console.log(tbhdata[0].status);
-    //   if (tbhdata[i].status === 'Pending') {
-    //     cellcolor = '#D2D0D0';
-    //   } else if (tbhdata[i].status === 'Busy') {
-    //     cellcolor = '#ed1c24';
-    //   } else {
-    //     cellcolor = '#fff';
-    //   }
-    // }
     return (
       <div>
         <ScheduleComponent
@@ -275,7 +213,7 @@ export default class DayTimeScale extends Component {
             end: '21:00'
           }}
           popupOpen={this.OpenDetails}
-          // quickInfoOnSelectionEnd={true}
+          quickInfoOnSelectionEnd={true}
           timeScale={{
             interval: 120,
             slotCount: 2
@@ -304,8 +242,32 @@ export default class DayTimeScale extends Component {
         </ScheduleComponent>
         <Row>
           <Col md={4} className="mt-4">
-            <div className="redColor"></div>
-            <div className="grayColor"></div>
+            <Row>
+              <Col md={2}>
+                {' '}
+                <div className="redColor"></div>
+              </Col>
+              <Col
+                md={2}
+                className="mt-3 ml-2"
+                style={{ color: '#ed1c24', fontWeight: 'bold' }}
+              >
+                Confirmed
+              </Col>
+            </Row>
+            <Row>
+              <Col md={2}>
+                {' '}
+                <div className="grayColor"></div>
+              </Col>
+              <Col
+                md={2}
+                className="mt-3 ml-2"
+                style={{ color: '#D2D0D0', fontWeight: 'bold' }}
+              >
+                Pending
+              </Col>
+            </Row>
           </Col>
           <Col md="4"></Col>
           <Col md={4}>

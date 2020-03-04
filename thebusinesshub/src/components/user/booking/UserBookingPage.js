@@ -6,6 +6,7 @@ import '../../stylesheets/bookingsCss.css';
 import { Table, Container, Button, Modal } from 'react-bootstrap';
 import isEqual from 'lodash/isEqual';
 import EditSlot from './EditSlot';
+import { Transition, animated } from 'react-spring/renderprops';
 
 class UserBookingPage extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class UserBookingPage extends Component {
     this.state = {
       userbook: [],
       show: false,
-      showedit: false
+      showedit: null
     };
   }
 
@@ -27,10 +28,14 @@ class UserBookingPage extends Component {
       })
       .then(res => {
         this.setState({ userbook: res.data.bookings });
+        // this.state.userbook.map(info => {
+        //   this.setState({ [info.id]: false });
+        // });
       });
   }
 
   CancelPendingBook = id => {
+    console.log(id.target.id);
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/bookings/cancelpending', {
@@ -52,22 +57,12 @@ class UserBookingPage extends Component {
       });
   };
 
-  openeditTimeSlotModal = () => {
-    this.setState({ showedit: !this.state.showedit });
+  openeditTimeSlotModal = id => {
+    this.setState({ showedit: id });
   };
 
-  hideModal = e => {
-    setTimeout(() => {
-      this.setState({ show: e });
-    }, 1600);
-  };
-
-  hideModal2 = e => {
-    // this.setState({ show: false });
-
-    setTimeout(() => {
-      this.setState({ show: e });
-    }, 0);
+  hideModal = () => {
+    this.setState({ showedit: null });
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -213,7 +208,7 @@ class UserBookingPage extends Component {
                             ) : (
                               <td>{book.packageCode}</td>
                             )}
-                            {book.status === 'canceled' ? (
+                            {book.status === 'canceled' || book.status==='expired' ||book.status==='confirmed' ? (
                               <td
                                 style={{
                                   textTransform: 'uppercase',
@@ -233,24 +228,36 @@ class UserBookingPage extends Component {
                                     onClick={this.CancelPendingBook}
                                     className="cancelbtn"
                                   >
-                                    <i class="far fa-window-close"></i>
+                                    {/* <i class="far fa-window-close"></i> */}
+                                    Cancel
                                   </Button>
                                 </td>
-                                {/* <td>
+                                <td>
                                   <Button
                                     id={book.id}
-                                    onClick={this.openeditTimeSlotModal}
+                                    onClick={() =>
+                                      this.openeditTimeSlotModal(book.id)
+                                    }
                                     className="cancelbtn"
                                   >
-                                    <i class="fas fa-edit"></i>
-                                    <EditSlot
-                                    slotdate={book.date}
-                                      show={this.state.showedit}
-                                      hideModal={this.hideModal}
-                                      hideModal2={this.hideModal2}
-                                    />
+                                    {/* <i class="fas fa-edit"></i> */}
+                                    Edit
                                   </Button>
-                                </td> */}
+
+                                  <Modal
+                                    show={this.state.showedit === book.id}
+                                    onHide={this.hideModal}
+                                  >
+                                    <Modal.Body className="verifyby">
+                                      <EditSlot
+                                        slotdate={book.date.substring(0, 10)}
+                                        id={book.id}
+                                        book={book}
+                                        hideModal={this.hideModal}
+                                      />
+                                    </Modal.Body>
+                                  </Modal>
+                                </td>
                               </React.Fragment>
                             )}{' '}
                           </tr>

@@ -162,7 +162,17 @@ class PurchaseDetailsModal extends Component {
                           />
                         </Form.Group>
                       ) : (
-                        <h6>Training room</h6>
+                        <Form.Group className="formgroupfloat">
+                          <Form.Control
+                            noValidate
+                            required
+                            type="text"
+                            value="Training Room"
+                            name="hour"
+                            className="floatcontrol"
+                            placeholder="Hours"
+                          />
+                        </Form.Group>
                       )}
                     </Col>
                   </Row>
@@ -197,8 +207,8 @@ class PurchaseDetailsModal extends Component {
                       )}
                     </Col>
                     <Col sm={6}>
-                      {this.state.price}
-                      {/* <Form.Group className="formgroupfloat">
+                      {/* {this.state.price} */}
+                      <Form.Group className="formgroupfloat">
                         <Form.Control
                           noValidate
                           required
@@ -207,7 +217,7 @@ class PurchaseDetailsModal extends Component {
                           name={this.state.price}
                           className="floatcontrol"
                         />
-                      </Form.Group> */}
+                      </Form.Group>
                     </Col>
                   </Row>
                 </Form>
@@ -241,7 +251,7 @@ class PurchaseDetailsModal extends Component {
                 </Col>
               </Row>
               {this.state.myerror.length !== 0 ? (
-                <p>
+                <p style={{ color: '#ed1c24' }}>
                   {' '}
                   <i className="fas fa-exclamation-triangle"></i>
                   {this.state.myerror}

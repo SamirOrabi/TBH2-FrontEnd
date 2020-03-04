@@ -43,24 +43,6 @@ class Receipt extends Component {
   //               paymentMethod:this.props.payment,
   //               packageCode:''
 
-  //             }
-  //   }
-  //   )
-  //   .then(res => {
-  //     console.log('addbooking', res.data);
-  //     this.setState({
-  //       modalnote: 'Your Booking Added Successfully',
-  //       show1: false
-  //     });
-  //     this.setState({ show: true });
-  //     setTimeout(() => {
-  //       this.setState({ show: false });
-  //     }, 1600);
-  //     console.log(res.data);
-  //     this.props.closebookModal()
-  //   })
-  //   .catch(err => console.log(err));
-
   // }
 
   render() {
