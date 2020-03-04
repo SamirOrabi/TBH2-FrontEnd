@@ -1,50 +1,52 @@
-
-.accountsettings{
-    padding: 10% 
+.accountsettings {
+  padding: 10%;
 }
 
 .accountsettings h3 {
-    color: #ed1c24;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 40px;
-  }
+  color: #ed1c24;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+}
 .label {
-    color:#ED1C24;
-  
+  color: #ed1c24;
 }
 
 p {
-    margin-top: 0;
-    margin-bottom: 0rem !important;
-    
+  margin-top: 0;
+  margin-bottom: 0rem !important;
 }
-.emailValue p{
-    border: 1px solid #ED1C24 ;
-    width:400px;
-    height:35px;
-    padding: 3px;
-}
-
-.changedValue{
-    padding-left:30px
-}
-.emailValue{
-    margin-bottom: 10px !important;
-padding-left: 10px;
-    display:flex;
-    border-left: 5px solid  #ED1C24;
-    ;
-}
-.emailValue .changeemailbtn{
-    background: none;
-    border: none;
-    color: #ED1C24;;
-    text-decoration: underline
+.emailValue p {
+  border: 1px solid #ed1c24;
+  width: 400px;
+  height: 35px;
+  padding: 3px;
 }
 
-.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
-    color: white;;
-    background-color: #ED1C24;
-    border-color: #ED1C24
+.changedValue {
+  padding-left: 30px;
+}
+.emailValue {
+  margin-bottom: 10px !important;
+  padding-left: 10px;
+  display: flex;
+  border-left: 5px solid #ed1c24;
+}
+.emailValue .changeemailbtn {
+  background: none;
+  border: none;
+  color: #ed1c24;
+  text-decoration: underline;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle {
+  color: white;
+  background-color: #ed1c24;
+  border-color: #ed1c24;
+}
+
+.profilePage .rdatez-picker {
+  top: -300px !important;
 }
