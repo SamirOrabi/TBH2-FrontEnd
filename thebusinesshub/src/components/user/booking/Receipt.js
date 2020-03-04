@@ -43,24 +43,6 @@ class Receipt extends Component {
   //               paymentMethod:this.props.payment,
   //               packageCode:''
 
-  //             }
-  //   }
-  //   )
-  //   .then(res => {
-  //     console.log('addbooking', res.data);
-  //     this.setState({
-  //       modalnote: 'Your Booking Added Successfully',
-  //       show1: false
-  //     });
-  //     this.setState({ show: true });
-  //     setTimeout(() => {
-  //       this.setState({ show: false });
-  //     }, 1600);
-  //     console.log(res.data);
-  //     this.props.closebookModal()
-  //   })
-  //   .catch(err => console.log(err));
-
   // }
 
   render() {
@@ -72,7 +54,7 @@ class Receipt extends Component {
             <Col sm={12}>
               <div className="receipt">
                 <h2 className="ml-5 mb-5">
-                  Receipt For {this.state.profile.firstName}
+                  Receipt For {this.state.profile.firstName}{' '}
                   {this.state.profile.lastName}
                 </h2>
               </div>
@@ -139,6 +121,21 @@ class Receipt extends Component {
                     for the loss and/or damage of any personal belongings.
                   </p>
                 </div>
+
+                {this.props.modalerroe ? (
+                  <div style={{ display: 'flex' }} className="mt-3">
+                    <p style={{ fontWeight: 'bolder', fontSize: '25px' }}>
+                      <i
+                        className="fas fa-exclamation-triangle px-2"
+                        style={{ fontSize: '20px' }}
+                      ></i>{' '}
+                      <span style={{ color: '#ed1c24' }}>
+                        {' '}
+                        {this.props.modalerroe}
+                      </span>
+                    </p>
+                  </div>
+                ) : null}
               </div>
             </Col>
           </Row>

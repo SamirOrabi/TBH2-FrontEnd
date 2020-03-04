@@ -11,7 +11,8 @@ class Printcomponent extends Component {
     super(props);
     this.state = {
       show: false,
-      modalnote: ''
+      modalnote: '',
+      modalerroe: ''
     };
   }
   // componentDidMount(){
@@ -45,23 +46,30 @@ class Printcomponent extends Component {
           });
           setTimeout(() => {
             this.setState({ show: false });
+            this.props.closebookModal();
           }, 2000);
+        } else if (res.data.code === 116) {
+          console.log(res.data.error);
+          this.setState({
+            modalerroe: ' These slots are not free Please Select another slot'
+          });
         } else {
           this.setState({
-            modalnote: 'something wrong',
-            show: true
+            modalerroe: 'Please Select Slot Of Booking To Show Price'
           });
-          setTimeout(() => {
-            this.setState({ show: false });
-          }, 2500);
+          // setTimeout(() => {
+          //   this.setState({ show: false });
+          // }, 2500);
         }
 
         // this.setState({ show: true });
         // setTimeout(() => {
-        //   this.setState({ show: false });
+        //   this.props.closebookModal()
         // }, 1600);
         console.log(res.data);
-        this.props.closebookModal();
+        // setTimeout(() => {
+        //   this.props.closebookModal()
+        // }, 1600);
       })
       .catch(err => console.log(err));
   };
@@ -79,6 +87,7 @@ class Printcomponent extends Component {
               payment={this.props.payment}
               slots={this.props.slots}
               startdate={this.props.startdate}
+              modalerroe={this.state.modalerroe}
             />
 
             <NoPrint>

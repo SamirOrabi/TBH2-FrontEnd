@@ -35,7 +35,8 @@ class BookDetails extends Component {
       amountofpeople: '1',
       slots: [],
       bookprice: '',
-      startdate: formatDate(this.props.startdate)
+      startdate: formatDate(this.props.startdate),
+      timeErrorMessage:'',
     };
   }
   componentDidMount() {
@@ -143,6 +144,9 @@ class BookDetails extends Component {
         Booking: bookrequest
       })
       .then(res => {
+        if (res.data.code === 101) {
+          this.setState({ timeErrorMessage: res.data.error });
+        }
         console.log(res);
         if (res.data.code === 0) {
           this.setState({ bookprice: res.data.price });
@@ -166,6 +170,8 @@ class BookDetails extends Component {
   render() {
     console.log('startdate ');
     console.log(this.props.startdate);
+    console.log('timeErrorMessage')
+    console.log(this.state.timeErrorMessage)
     const settings = {
       customPaging: function(i) {
         return (
@@ -195,7 +201,7 @@ class BookDetails extends Component {
     console.log(this.props.endTime);
     return (
       <div>
-        <Container>
+        <Container className='roomsdetails'>
           <Row className="m-auto">
             <Col className="m-auto pl-4" md={5} sm={12}>
               <Slider {...settings}>
@@ -290,7 +296,11 @@ class BookDetails extends Component {
                         <TimePicker
                           onChange={this.onChangeStartTime}
                           value={starttime}
+                          clockIcon={null}
+                          disableClock={true}
+                          maxDetail="hour"
                         />
+                        {this.state.timeErrorMessage}
                       </div>
                     </Col>
 
@@ -300,6 +310,9 @@ class BookDetails extends Component {
                         <TimePicker
                           onChange={this.onChangeEndTime}
                           value={endtime}
+                          disableClock={true}
+                          clockIcon={null}
+                          maxDetail="hour"
                         />
                       </div>
                     </Col>
@@ -370,6 +383,9 @@ class BookDetails extends Component {
                       NEXT
                     </Button>
                   </Col>
+                  {this.state.timeErrorMessage ?(<p>{this.state.timeErrorMessage}</p>):null}
+                
+
                 </Form>
               </Container>
             </Col>
