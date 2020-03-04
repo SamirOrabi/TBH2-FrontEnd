@@ -33,6 +33,22 @@ export default class Purchasecard2 extends Component {
     this.setState({ show1: true, code: 'x' });
     // alert('hello');
   };
+  closemodal = e => {
+    setTimeout(() => {
+      this.setState({ show1: e });
+    }, 0);
+  };
+  closemodal2 = e => {
+    setTimeout(() => {
+      this.setState({ show2: e });
+    }, 0);
+  };
+  closemodal3 = e => {
+    setTimeout(() => {
+      this.setState({ show3: e });
+    }, 0);
+  };
+
   showPurchasepopup2 = () => {
     this.setState({ show2: true, code: 'y' });
 
@@ -44,7 +60,7 @@ export default class Purchasecard2 extends Component {
     // alert('hello');
   };
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div>
         {this.props.meeting ? (
@@ -88,6 +104,7 @@ export default class Purchasecard2 extends Component {
                             type={this.props.type}
                             code={'MRSG10'}
                             room={this.props.room}
+                            closemodal={this.closemodal}
                           />
                         ) : (
                           <PurchaseDetailsModal
@@ -96,6 +113,7 @@ export default class Purchasecard2 extends Component {
                             type={this.props.type}
                             code={'MRLG10'}
                             room={this.props.room}
+                            closemodal={this.closemodal}
                           />
                         )}
                       </Button>
@@ -142,6 +160,7 @@ export default class Purchasecard2 extends Component {
                             type={this.props.type}
                             code={'MRSG30'}
                             room={this.props.room}
+                            closemodal={this.closemodal2}
                           />
                         ) : (
                           <PurchaseDetailsModal
@@ -150,6 +169,7 @@ export default class Purchasecard2 extends Component {
                             type={this.props.type}
                             code={'MRLG30'}
                             room={this.props.room}
+                            closemodal={this.closemodal2}
                           />
                         )}
                       </Button>
@@ -196,6 +216,7 @@ export default class Purchasecard2 extends Component {
                             type={this.props.type}
                             code={'MRSG50'}
                             room={this.props.room}
+                            closemodal={this.closemodal3}
                           />
                         ) : (
                           <PurchaseDetailsModal
@@ -204,6 +225,7 @@ export default class Purchasecard2 extends Component {
                             type={this.props.type}
                             code={'MRLG50'}
                             room={this.props.room}
+                            closemodal={this.closemodal3}
                           />
                         )}
                       </Button>
@@ -255,6 +277,7 @@ export default class Purchasecard2 extends Component {
                             type={this.props.type}
                             code={'TRSG10'}
                             room={this.props.room}
+                            closemodal={this.closemodal}
                           />
                         ) : (
                           <PurchaseDetailsModal
@@ -263,6 +286,7 @@ export default class Purchasecard2 extends Component {
                             type={this.props.type}
                             code={'TRLG10'}
                             room={this.props.room}
+                            closemodal={this.closemodal}
                           />
                         )}
                       </Button>
@@ -309,6 +333,7 @@ export default class Purchasecard2 extends Component {
                             type={this.props.type}
                             code={'TRSG30'}
                             room={this.props.room}
+                            closemodal={this.closemodal2}
                           />
                         ) : (
                           <PurchaseDetailsModal
@@ -317,6 +342,7 @@ export default class Purchasecard2 extends Component {
                             type={this.props.type}
                             code={'TRLG30'}
                             room={this.props.room}
+                            closemodal={this.closemodal2}
                           />
                         )}
                       </Button>
@@ -363,6 +389,7 @@ export default class Purchasecard2 extends Component {
                             type={this.props.type}
                             code={'TRSG50'}
                             room={this.props.room}
+                            closemodal={this.closemodal3}
                           />
                         ) : (
                           <PurchaseDetailsModal
@@ -371,6 +398,7 @@ export default class Purchasecard2 extends Component {
                             type={this.props.type}
                             code={'TRLG50'}
                             room={this.props.room}
+                            closemodal={this.closemodal3}
                           />
                         )}
                       </Button>
