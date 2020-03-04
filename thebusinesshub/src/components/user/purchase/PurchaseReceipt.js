@@ -175,7 +175,7 @@ class PurchaseReceipt extends Component {
                   </Row>
                 </NoPrint>
                 {this.state.myerror.length !== 0 ? (
-                  <p style={{color:'#ed1c24'}}>
+                  <p style={{ color: '#ed1c24' }}>
                     {' '}
                     <i className="fas fa-exclamation-triangle"></i>
                     {this.state.myerror}
