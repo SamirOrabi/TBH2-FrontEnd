@@ -41,3 +41,9 @@
     right: 20px;
     color: white !important;
 }
+
+.cardbtn .paymentanddetailsbtn .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: white;
+    background-color: #ed1c24;
+    border-color: #ed1c24 !important;
+}
