@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Purchasecard from '../user/purchasee/Purchasecard';
+import PurchaseTabs from '../user/purchase/PurchaseTabs';
 
 export default class Space extends Component {
   render() {
     return (
       <div>
-        <Purchasecard />
+        <PurchaseTabs />
       </div>
     );
   }

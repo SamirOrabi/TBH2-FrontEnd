@@ -3,17 +3,15 @@ import { Container, Col, Row, Table, Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import '../../stylesheets/ReceiptCSS.css';
-import PrintComponents from "react-print-components";
+import PrintComponents from 'react-print-components';
 // import Printcomponent from '../booking/Printcomponent';
 class Receipt extends Component {
   constructor(props) {
     super(props);
     this.state = {
       profile: [],
-      modalnote: '',
- 
-
-    }
+      modalnote: ''
+    };
   }
   componentDidMount() {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
@@ -27,60 +25,55 @@ class Receipt extends Component {
       .then(res => {
         this.setState({ profile: res.data.profile });
       });
-   
   }
 
-// sendbookingdetails=()=>{
-//   axios.defaults.headers.common['authorization'] =localStorage.userToken;
-//   axios.post('https://cubexs.net/tbhapp/bookings/addbooking' , 
-//   {
-//     Account:{
-//       id:this.props.user.id,
-//             },
-//             Booking:{
-//               date:this.props.startdate,
-//               slot:this.props.slots,
-//               roomType:this.props.roomtype,
-//               roomNumber:this.props.roomId,
-//               amountOfPeople:this.props.amountofpeople,
-//               paymentMethod:this.props.payment,
-//               packageCode:''
+  // sendbookingdetails=()=>{
+  //   axios.defaults.headers.common['authorization'] =localStorage.userToken;
+  //   axios.post('https://cubexs.net/tbhapp/bookings/addbooking' ,
+  //   {
+  //     Account:{
+  //       id:this.props.user.id,
+  //             },
+  //             Booking:{
+  //               date:this.props.startdate,
+  //               slot:this.props.slots,
+  //               roomType:this.props.roomtype,
+  //               roomNumber:this.props.roomId,
+  //               amountOfPeople:this.props.amountofpeople,
+  //               paymentMethod:this.props.payment,
+  //               packageCode:''
 
-//             }
-//   }
-//   )
-//   .then(res => {
-//     console.log('addbooking', res.data);
-//     this.setState({
-//       modalnote: 'Your Booking Added Successfully',
-//       show1: false
-//     });
-//     this.setState({ show: true });
-//     setTimeout(() => {
-//       this.setState({ show: false });
-//     }, 1600);
-//     console.log(res.data);
-//     this.props.closebookModal()
-//   })
-//   .catch(err => console.log(err));
+  //             }
+  //   }
+  //   )
+  //   .then(res => {
+  //     console.log('addbooking', res.data);
+  //     this.setState({
+  //       modalnote: 'Your Booking Added Successfully',
+  //       show1: false
+  //     });
+  //     this.setState({ show: true });
+  //     setTimeout(() => {
+  //       this.setState({ show: false });
+  //     }, 1600);
+  //     console.log(res.data);
+  //     this.props.closebookModal()
+  //   })
+  //   .catch(err => console.log(err));
 
-// }
+  // }
 
   render() {
     return (
-      <div >
-        
-     
-
+      <div>
         <Container>
-     
           <Row>
             {/* <Col sm={1}></Col> */}
             <Col sm={12}>
               <div className="receipt">
                 <h2 className="ml-5 mb-5">
-    Receipt For  {this.state.profile.firstName}   {this.state.profile.lastName}
-                 
+                  Receipt For {this.state.profile.firstName}{' '}
+                  {this.state.profile.lastName}
                 </h2>
               </div>
             </Col>
@@ -147,22 +140,25 @@ class Receipt extends Component {
                   </p>
                 </div>
 
-{this.props.modalerroe ? (
-  <div style={{ display: 'flex' }} className="mt-3">
-  <p style={{fontWeight:'bolder' , fontSize:'25px'}}>
-  <i className="fas fa-exclamation-triangle px-2" style={{fontSize:'20px'}}></i> <span style={{color:'#ed1c24'}}> {this.props.modalerroe}</span>
-  </p>
-</div>
-
-):null}
-              
-              </div> 
-  
+                {this.props.modalerroe ? (
+                  <div style={{ display: 'flex' }} className="mt-3">
+                    <p style={{ fontWeight: 'bolder', fontSize: '25px' }}>
+                      <i
+                        className="fas fa-exclamation-triangle px-2"
+                        style={{ fontSize: '20px' }}
+                      ></i>{' '}
+                      <span style={{ color: '#ed1c24' }}>
+                        {' '}
+                        {this.props.modalerroe}
+                      </span>
+                    </p>
+                  </div>
+                ) : null}
+              </div>
             </Col>
-            
           </Row>
 
-{/* 
+          {/* 
           <Row>
             <Col sm={12} className="text-right">
           
@@ -175,10 +171,7 @@ class Receipt extends Component {
               </Button>
             </Col>
           </Row> */}
-   
         </Container>
-       
-      
       </div>
     );
   }

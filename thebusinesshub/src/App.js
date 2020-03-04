@@ -9,10 +9,10 @@ import jwt_decode from 'jwt-decode';
 import Home from './components/pages/Home';
 import UserBoard from './components/user/UserBoard';
 import Booking from './components/pages/Booking';
+import Space from './components/pages/Space';
 import Contact from './components/pages/Contact';
 import BookDetails from './components/user/booking/BookDetails';
 import SignUpGoogleInfo from './components/forms/SignUpGoogleInfo';
-import Space from './components/pages/Space';
 // import Payment from './components/user/booking/Payment';
 
 // Styling
@@ -53,6 +53,7 @@ class App extends Component {
           <Route exact path="/login" component={MyLogin} />
           <Route exact path="/booking" component={Booking} />
           <Route exact path="/space" component={Space} />
+
           <Route
             exact
             path="/UserBoard/Account-Settings"

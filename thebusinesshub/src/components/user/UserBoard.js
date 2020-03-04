@@ -5,7 +5,7 @@ import UserBoardSideNav from './UserBoardSideNav';
 import AccountSettingsPage from './AccountSettingsPage';
 import '../stylesheets/userCss.css';
 import UserBookingPage from './booking/UserBookingPage';
-import Userpurchase from './purchasee/Userpurchase';
+import Userpurchase from './purchase/Userpurchase'
 export default class UserBoard extends Component {
   render() {
     return (
