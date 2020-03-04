@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  Modal,
-  Dropdown
-} from 'react-bootstrap';
+import { Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
@@ -77,6 +69,13 @@ class PurchaseDetailsModal extends Component {
   }
   openReciept = () => {
     this.setState({ showmodal: true });
+    // this.handleClose();
+  };
+
+  closeReciept = e => {
+    setTimeout(() => {
+      this.setState({ showmodal: e });
+    }, 0);
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -241,7 +240,7 @@ class PurchaseDetailsModal extends Component {
                   </Button>
                 </Col>
               </Row>
-              {(this.state.myerror).length !== 0 ? (
+              {this.state.myerror.length !== 0 ? (
                 <p>
                   {' '}
                   <i className="fas fa-exclamation-triangle"></i>
@@ -259,6 +258,8 @@ class PurchaseDetailsModal extends Component {
           type={this.props.type}
           code={this.props.code}
           room={this.props.room}
+          closeReciept={this.closeReciept}
+          handleClose={this.handleClose}
         />
       </div>
     );

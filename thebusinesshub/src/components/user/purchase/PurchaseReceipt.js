@@ -9,7 +9,8 @@ class PurchaseReceipt extends Component {
     super(props);
     this.state = {
       profile: [],
-      modalnote: ''
+      modalnote: '',
+      showfeedBack: false
     };
   }
   componentDidMount() {
@@ -42,15 +43,36 @@ class PurchaseReceipt extends Component {
       })
       .then(res => {
         console.log(res);
+        if (res.data.code === 0) {
+          this.setState({ showfeedBack: true });
+          setTimeout(() => {
+            this.setState({ showfeedBack: false });
+            this.props.closeReciept(false);
+
+            this.props.handleClose(false);
+          }, 1900);
+        }
       });
+  };
+
+  close = e => {
+    this.props.closeReciept(false);
   };
 
   render() {
     // console.log(this.props);
     return (
       <div>
-        <Modal size="xl" show={this.props.showmodal}>
+        <Modal size="xl" show={this.props.showmodal} onHide={this.close}>
           <Modal.Body>
+            <Row>
+              <Col className="closebtn" sm={12}>
+                <Button style={{ float: 'right' }} onClick={this.close}>
+                  {' '}
+                  <i className="fas fa-times" style={{ color: '#ed1c24' }}></i>
+                </Button>
+              </Col>
+            </Row>
             <Row>
               <Col sm={12}>
                 <div className="receipt">
@@ -118,26 +140,18 @@ class PurchaseReceipt extends Component {
                       for the loss and/or damage of any personal belongings.
                     </p>
                   </div>
-                  {/* 
-                  {this.props.modalerroe ? (
-                    <div style={{ display: 'flex' }} className="mt-3">
-                      <p style={{ fontWeight: 'bolder', fontSize: '25px' }}>
-                        <i
-                          className="fas fa-exclamation-triangle px-2"
-                          style={{ fontSize: '20px' }}
-                        ></i>{' '}
-                        <span style={{ color: '#ed1c24' }}>
-                          {' '}
-                          {this.props.modalerroe}
-                        </span>
-                      </p>
-                    </div>
-                  ) : null} */}
                 </div>
               </Col>
             </Row>
-            <Button onClick={this.confirmPackage}>Done</Button>
+
+            <Col style={{ float: 'right' }} className="verifyBtn pt-2" sm={3}>
+              <Button onClick={this.confirmPackage}>Done</Button>
+            </Col>
           </Modal.Body>
+
+          <Modal className="mt-2 feedBack" show={this.state.showfeedBack}>
+            <div id="snackbar">Package Booked Successfully</div>
+          </Modal>
         </Modal>
       </div>
     );
