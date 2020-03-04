@@ -10,10 +10,8 @@ class Receipt extends Component {
     super(props);
     this.state = {
       profile: [],
-      modalnote: '',
- 
-
-    }
+      modalnote: ''
+    };
   }
   componentDidMount() {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
@@ -27,7 +25,6 @@ class Receipt extends Component {
       .then(res => {
         this.setState({ profile: res.data.profile });
       });
-   
   }
 
   // sendbookingdetails=()=>{
@@ -46,14 +43,11 @@ class Receipt extends Component {
   //               paymentMethod:this.props.payment,
   //               packageCode:''
 
-// }
+  // }
 
   render() {
     return (
-      <div >
-        
-     
-
+      <div>
         <Container>
           <Row>
             {/* <Col sm={1}></Col> */}

@@ -18,6 +18,7 @@ import SignUpGoogleInfo from './components/forms/SignUpGoogleInfo';
 import './App.css';
 import setAuthToken from './helpers/setAuthToken';
 import { setCurrentUser, LogOut } from './globalState/actions/authActions';
+import EditSlot from './components/user/booking/EditSlot';
 // import {
 //   clearCurrentProfile,
 //   getProfile
