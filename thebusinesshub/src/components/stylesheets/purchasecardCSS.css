@@ -1,28 +1,43 @@
-.Purchasecard{
-    background-color: #ED1C24;
-    color:white;
-    width: 100%;
+.Purchasecard {
+  background-color: #ed1c24;
+  color: white;
+  width: 100%;
 }
 
 .card-footer {
-    padding: .75rem 1.25rem;
-    background-color: #ED1C24;
-    border-top: 1px solid #ED1C24;
+  padding: 0.75rem 1.25rem;
+  background-color: #ed1c24;
+  border-top: 1px solid #ed1c24;
 }
 .cardbtn .btn-primary {
-    color: #fff;
-    background-color: #ED1C24;
-    border-color: #ED1C24 ;
+  color: #fff;
+  background-color: #ed1c24;
+  border-color: #ed1c24;
 }
 
-
-.Purchasecard .btn-primary.focus, .btn-primary:focus {
-    box-shadow: 0 0 0 0.2rem #ED1C24;
+.Purchasecard .btn-primary.focus,
+.btn-primary:focus {
+  box-shadow: 0 0 0 0.2rem #ed1c24;
 }
 
 .cardbtn .btn-primary:hover {
-    color: #fff;
-    background-color: #ED1C24 !important;
-    border-color: #ED1C24 !important;
+  color: #fff;
+  background-color: #ed1c24 !important;
+  border-color: #ed1c24 !important;
 }
 
+.purchasedrop select {
+  padding: 15px 10px;
+  margin: 8px 0;
+  border-radius: 0 !important;
+  width: 100%;
+  border-color: #ed1c24 !important;
+  /* border-left: 5px solid #ed1c24; */
+}
+
+.cardimg h3{
+    position: absolute;
+    top:170px;
+    right: 20px;
+    color: white !important;
+}
