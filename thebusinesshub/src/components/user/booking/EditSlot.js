@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap';
+import { Container, Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { formatDate } from 'react-day-picker/moment';
@@ -38,7 +38,6 @@ class EditSlot extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.id);
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/bookings/showcalendar', {
@@ -55,10 +54,8 @@ class EditSlot extends Component {
     this.setState({
       selectedslot: e.target.value
     });
-    console.log([this.state.selectedslot]);
   };
   editTimeSlot = id => {
-    console.log(this.state.selectedslot);
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/bookings/editbookingtiming', {
@@ -78,12 +75,13 @@ class EditSlot extends Component {
           this.setState({ show2: true });
           setTimeout(() => {
             this.setState({ show2: false });
-          }, 1600);
+
+          }, 1900);
         } else {
           this.setState({ myerror: 'Slot is not allowed to be empty' });
         }
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -106,7 +104,6 @@ class EditSlot extends Component {
     this.state.tbhdata.map((slot, i) => {
       this.state.busyslots.push(slot.slot);
     });
-    console.log(this.state.busyslots);
     this.diff = (arr1, arr2) => {
       var newArray = arr2.concat(arr1);
       var newestArray = [];

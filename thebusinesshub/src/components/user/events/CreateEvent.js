@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Container, Col } from 'react-bootstrap';
+import { Button, Form, Container, Col, Modal } from 'react-bootstrap';
 import 'react-datez/dist/css/react-datez.css';
 import { ReactDatez } from 'react-datez';
 import { withRouter } from 'react-router-dom';
@@ -16,7 +16,8 @@ class CreateEvent extends Component {
       type: '',
       price: '',
       file: '',
-      myerror: ''
+      myerror: '',
+      show2: false
     };
   }
 
@@ -66,12 +67,10 @@ class CreateEvent extends Component {
       }
     }).then(res => {
       if (res.data.code === 0) {
-        this.setState({ show: false });
-        this.props.hideModal(false);
         this.setState({ show2: true });
         setTimeout(() => {
           this.setState({ show2: false });
-        }, 1600);
+        }, 1900);
       } else {
         this.setState({ myerror: res.data.error });
       }
@@ -159,8 +158,14 @@ class CreateEvent extends Component {
               >
                 Create
               </Button>
+              <Modal className=" feedBack" show={this.state.show2}>
+                <div id="snackbar">Event Created Successfully!</div>
+              </Modal>
             </Col>
           </Form>
+          <p style={{ fontWeight: 'bold', color: '#ed1c24' }} className="mt-4">
+            {this.state.myerror}
+          </p>
         </Container>
       </div>
     );

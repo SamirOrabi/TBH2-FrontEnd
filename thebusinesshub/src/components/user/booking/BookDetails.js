@@ -147,11 +147,9 @@ class BookDetails extends Component {
         if (res.data.code === 101) {
           this.setState({ timeErrorMessage: res.data.error });
         }
-        console.log(res);
         if (res.data.code === 0) {
           this.setState({ bookprice: res.data.price });
-          console.log('price');
-          console.log(this.state.slots);
+         
         }
 
         this.props.detailsfun(this.state.bookprice);
@@ -165,13 +163,10 @@ class BookDetails extends Component {
         );
         this.props.showPayment();
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
   render() {
-    console.log('startdate ');
-    console.log(this.props.startdate);
-    console.log('timeErrorMessage')
-    console.log(this.state.timeErrorMessage)
+   
     const settings = {
       customPaging: function(i) {
         return (
@@ -198,7 +193,6 @@ class BookDetails extends Component {
       slidesToShow: 1,
       slidesToScroll: 1
     };
-    console.log(this.props.endTime);
     return (
       <div>
         <Container className='roomsdetails'>

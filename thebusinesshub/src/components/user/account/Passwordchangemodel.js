@@ -73,7 +73,7 @@ class Passwordchangemodel extends Component {
             this.setState({ConfirmPassword:''})
           }
         })
-        .catch(err => console.log(err));
+        // .catch(err => console.log(err));
     } else {
       this.setState({ passerror: 'Please Confirm your password', error: '' });
     }

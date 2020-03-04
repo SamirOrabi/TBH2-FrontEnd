@@ -39,7 +39,7 @@ class VerifyBarAlert extends Component {
       .then(res => {
         this.setState({ mystate: res.data.state });
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
 
   componentDidUpdate(prevProps, prevState) {

@@ -39,7 +39,7 @@ class Navb extends Component {
       .then(res => {
         this.setState({ profleDate: res.data.profile });
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   }
   SignOut = e => {
     e.preventDefault();

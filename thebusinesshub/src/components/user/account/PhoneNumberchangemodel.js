@@ -40,7 +40,7 @@ class PhoneNumberchangemodel extends Component {
           this.setState({NewPhoneNumber:''})
         }
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
 
   enter = e => {

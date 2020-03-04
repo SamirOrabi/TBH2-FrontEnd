@@ -35,7 +35,6 @@ class UserBookingPage extends Component {
   }
 
   CancelPendingBook = id => {
-    console.log(id.target.id);
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/bookings/cancelpending', {

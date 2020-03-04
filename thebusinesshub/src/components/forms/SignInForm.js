@@ -147,12 +147,9 @@ class SignInForm extends Component {
         state: 'signIn'
       })
       .then(res => {
-        console.log(res.data.url);
         this.setState({ myLink: res.data.url });
       });
-    console.log('this.props');
 
-    console.log(this.props);
   }
   render() {
     return (

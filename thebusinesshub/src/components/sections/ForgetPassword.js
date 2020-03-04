@@ -41,7 +41,7 @@ class ForgetPassword extends Component {
           this.setState({ myerror: res.data.error });
         }
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
 
   enter = e => {

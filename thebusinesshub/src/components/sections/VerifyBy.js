@@ -51,7 +51,7 @@ class VerifyBy extends Component {
         }
         // this.setState({ show: false });
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
 
   confirmVerify = e => {
@@ -77,7 +77,7 @@ class VerifyBy extends Component {
           this.setState({ myerror: res.data.error });
         }
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
 
   handleClose = () => {
@@ -120,7 +120,7 @@ class VerifyBy extends Component {
 
         this.setState({ mystate: res.data.state });
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
 
   render() {

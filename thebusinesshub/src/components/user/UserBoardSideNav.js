@@ -57,7 +57,7 @@ class UserBoardSideNav extends Component {
       
         this.setState({ mystate: res.data.state });
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -74,7 +74,7 @@ class UserBoardSideNav extends Component {
           this.setState({ mystate: res.data.state });
 
         })
-        .catch(err => console.log(err));
+        // .catch(err => console.log(err));
     }
   }
 

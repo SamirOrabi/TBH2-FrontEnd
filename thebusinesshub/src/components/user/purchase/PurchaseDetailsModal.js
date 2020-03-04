@@ -21,21 +21,16 @@ class PurchaseDetailsModal extends Component {
 
   handleChangehour = e => {
     this.setState({ hour: e.target.value });
-    // console.log(this.state.hour);
   };
 
   handleChangeroom = e => {
     this.setState({ selectRoom: e.target.value });
-    // console.log(this.state.selectRoom);
   };
   handleChangenumber = e => {
     this.setState({ numOfpeapole: e.target.value });
-    // alert('hey');
-    console.log(this.state.numOfpeapole);
   };
   componentDidMount() {
-    // console.log('this.props.code');
-    // console.log(this.props.code);
+  
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/packages/calculatepackageprice', {
@@ -49,19 +44,16 @@ class PurchaseDetailsModal extends Component {
         }
       })
       .then(res => {
-        console.log(res);
         if (res.data.code === 0) {
-          // console.log(res);
           this.setState({ price: res.data.price });
           this.setState({ myerror: '' });
         } else {
           this.setState({ myerror: res.data.error });
         }
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   }
   componentWillReceiveProps(nextProps) {
-    // console.log(this.props);
     this.setState({ hour: this.props.hours });
     if (this.props.type === 'big') {
       this.setState({ numOfpeapole: 6 });
@@ -93,16 +85,14 @@ class PurchaseDetailsModal extends Component {
           }
         })
         .then(res => {
-          console.log(res);
           if (res.data.code === 0) {
-            // console.log(res);
             this.setState({ price: res.data.price });
             this.setState({ myerror: '' });
           } else {
             this.setState({ myerror: res.data.error });
           }
         })
-        .catch(err => console.log(err));
+        // .catch(err => console.log(err));
     }
   }
   handleClose = e => {

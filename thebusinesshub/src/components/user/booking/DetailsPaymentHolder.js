@@ -93,8 +93,7 @@ export default class DetailsPaymentHolder extends Component {
     });
   };
   render() {
-    console.log(' here startdate')
-    console.log(this.state.startdate)
+ 
     return (
       <div>
         {(this.state.showdetailscomponent ||

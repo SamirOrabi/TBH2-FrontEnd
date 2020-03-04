@@ -17,7 +17,6 @@ class MyLogin extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.location.search);
     if (this.props.location.search !== '') {
       axios
         .post(
@@ -28,7 +27,6 @@ class MyLogin extends Component {
           }
         )
         .then(res => {
-          console.log(res.data.info.userData);
           this.setState({
             id: res.data.info.userData.id
           });

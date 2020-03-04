@@ -134,7 +134,7 @@ class Rooms extends Component {
 
         this.props.showPayment();
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
   render() {
     return (

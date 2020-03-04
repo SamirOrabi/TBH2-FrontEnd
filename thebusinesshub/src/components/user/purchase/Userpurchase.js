@@ -22,7 +22,6 @@ import { Table, Container } from 'react-bootstrap';
               })
               .then(res => {
                 this.setState({ userpurchase: res.data.packages});
-                console.log(this.state.userpurchase)
               });
           }
   render() {

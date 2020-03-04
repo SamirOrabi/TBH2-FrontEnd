@@ -147,7 +147,7 @@ class ProfilePage extends Component {
           }, 1600);
         }
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
 
   verifyhere = e => {

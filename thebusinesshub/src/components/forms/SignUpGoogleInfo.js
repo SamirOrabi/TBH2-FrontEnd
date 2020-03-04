@@ -25,12 +25,10 @@ class SignUpGoogleInfo extends Component {
   handleUserName = e => {
     this.setState({ [e.target.name]: e.target.value });
     this.setState({ name: e.target.value });
-    console.log(e.target.value);
   };
   handleUserNumber = e => {
     this.setState({ [e.target.name]: e.target.value });
     this.setState({ number: e.target.value });
-    console.log(e.target.value);
   };
 
   sendData = async e => {
@@ -54,8 +52,7 @@ class SignUpGoogleInfo extends Component {
       this.props.history,
       'googleSignup'
     );
-    console.log('this is user dataaaaaaaaaaaa');
-    console.log(userData);
+   
     this.setState({ BEerror: userData.error });
 
     // this.setState({ user: userData.error });
@@ -83,8 +80,7 @@ class SignUpGoogleInfo extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.location);
-    axios
+   axios
       .post(
         'https://cubexs.net/tbhapp/accounts/googlecallback' +
           this.props.location.search,
@@ -93,7 +89,6 @@ class SignUpGoogleInfo extends Component {
         }
       )
       .then(res => {
-        console.log(res.data.info.userData);
         if (res.data.info.userData) {
           this.setState({
             id: res.data.info.userData.id,

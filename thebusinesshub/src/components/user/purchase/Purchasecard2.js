@@ -52,15 +52,12 @@ export default class Purchasecard2 extends Component {
   showPurchasepopup2 = () => {
     this.setState({ show2: true, code: 'y' });
 
-    // alert('hello');
   };
   showPurchasepopup3 = () => {
     this.setState({ show3: true, code: 'z' });
 
-    // alert('hello');
   };
   render() {
-    // console.log(this.props);
     return (
       <div>
         {this.props.meeting ? (

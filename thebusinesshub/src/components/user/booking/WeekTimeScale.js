@@ -53,7 +53,6 @@ export default class DayTimeScale extends Component {
       })
       .then(res => {
         if (this._isMounted && res.data.bookings) {
-          console.log(res.data.bookings);
           this.setState({
             tbhdata: res.data.bookings.map((book, i) => ({
               Id: i,
@@ -84,10 +83,9 @@ export default class DayTimeScale extends Component {
             }))
           });
 
-          console.log(this.state.tbhdata);
         }
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   }
 
   componentDidUpdate(nextProps, prevState) {
@@ -138,7 +136,7 @@ export default class DayTimeScale extends Component {
             });
           }
         })
-        .catch(err => console.log(err));
+        // .catch(err => console.log(err));
     }
   }
 
@@ -163,12 +161,10 @@ export default class DayTimeScale extends Component {
   }
   OpenDetails = e => {
     e.cancel = true;
-    console.log(e);
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
     startdate = document.getElementsByClassName(
       'e-toolbar-item e-date-range'
     )[0];
-    console.log(startdate);
     startdate =
       String(
         document.getElementsByClassName('e-toolbar-item e-date-range')[0]

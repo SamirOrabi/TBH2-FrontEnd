@@ -45,7 +45,6 @@ class PurchaseReceipt extends Component {
         }
       })
       .then(res => {
-        console.log(res);
         if (res.data.code === 0) {
           this.setState({ showfeedBack: true });
           setTimeout(() => {
@@ -65,7 +64,6 @@ class PurchaseReceipt extends Component {
   };
 
   render() {
-    // console.log(this.props);
     return (
       <div>
         <Modal size="xl" show={this.props.showmodal} onHide={this.close}>

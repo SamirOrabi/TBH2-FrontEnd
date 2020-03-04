@@ -187,7 +187,6 @@ class SignUp extends Component {
     );
     if (userData.code !== 0) {
       this.setState({ BEerror: userData.error });
-      console.log(userData);
     }
     // this.setState({ code: userData.code });
     // if (userData.code === 0) {
@@ -218,7 +217,6 @@ class SignUp extends Component {
         state: 'signUp'
       })
       .then(res => {
-        // console.log(res.data.url);
         this.setState({ myLink: res.data.url });
       });
   }

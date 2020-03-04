@@ -15,11 +15,7 @@ class Printcomponent extends Component {
       modalerroe: ''
     };
   }
-  // componentDidMount(){
-  //   console.log("props of payment")
-  //   console.log(this.props.roomId)
-  // }
-
+ 
   sendbookingdetails = () => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
@@ -38,7 +34,6 @@ class Printcomponent extends Component {
         }
       })
       .then(res => {
-        console.log('addbooking', res.data);
         if (res.data.code === 0) {
           this.setState({
             modalnote: 'Your Booking Added Successfully',
@@ -49,7 +44,6 @@ class Printcomponent extends Component {
             this.props.closebookModal();
           }, 2000);
         } else if (res.data.code === 116) {
-          console.log(res.data.error);
           this.setState({
             modalerroe: ' These slots are not free Please Select another slot'
           });
@@ -66,12 +60,11 @@ class Printcomponent extends Component {
         // setTimeout(() => {
         //   this.props.closebookModal()
         // }, 1600);
-        console.log(res.data);
         // setTimeout(() => {
         //   this.props.closebookModal()
         // }, 1600);
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
 
   render() {

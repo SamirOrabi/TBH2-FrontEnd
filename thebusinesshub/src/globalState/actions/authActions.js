@@ -9,15 +9,13 @@ export const userRegister = (
   history,
   state
 ) => async dispatch => {
-  // console.log(userData, state);
   if (state === 'googleSignup') {
     const googlereg = await new Promise((resolve, reject) => {
       axios
         .post('https://cubexs.net/tbhapp/accounts/registergoogle', userData)
         .then(res => {
           resolve(res.data);
-          console.log('loggggggggggggg');
-          console.log(res.data);
+        
         })
         .catch(err => {
           reject(err);
@@ -27,8 +25,7 @@ export const userRegister = (
       axios
         .post('https://cubexs.net/tbhapp/accounts/logingoogle', userDatalogin)
         .then(res => {
-          console.log(res);
-          console.log(res.data);
+         
           if (res.data.token) {
             const userToken = res.data.token;
             localStorage.setItem('userToken', userToken);
@@ -47,9 +44,8 @@ export const userRegister = (
               }
             })
             .then(myres => {})
-            .catch(err => console.log(err));
         })
-        .catch(err => console.log(err));
+        // .catch(err => console.log(err));
     }
 
     return googlereg;
@@ -61,13 +57,11 @@ export const userRegister = (
 
         .then(res => {
           resolve(res.data);
-          console.log(res);
         })
         .catch(err => {
           reject(err);
         });
     });
-    console.log(call);
     let login;
 
     if (call.code === 0) {
@@ -94,31 +88,26 @@ export const userRegister = (
                 }
               })
               .then(myres => {
-                console.log(myres);
               })
-              .catch(err => console.log(err));
+              // .catch(err => console.log(err));
           })
           .catch(err => {
-            console.log(err);
             reject(err);
           });
       });
     }
-    console.log(login);
 
     return call;
   }
 };
 
 export const Login = (userdata, history, state) => async dispatch => {
-  // console.log(userdata, state);
   if (state === 'googleLogin') {
     const logindatagoogle = await new Promise((resolve, reject) => {
       axios
         .post('https://cubexs.net/tbhapp/accounts/logingoogle', userdata)
         .then(res => {
           resolve(res.data);
-          console.log(res.data);
           if (res.data.token) {
             const userToken = res.data.token;
             localStorage.setItem('userToken', userToken);
@@ -128,7 +117,7 @@ export const Login = (userdata, history, state) => async dispatch => {
             history.push('/UserBoard/Account-Settings');
           }
         })
-        .catch(err => console.log(err));
+        // .catch(err => console.log(err));
     });
     return logindatagoogle;
   }
@@ -138,7 +127,6 @@ export const Login = (userdata, history, state) => async dispatch => {
         .post('https://cubexs.net/tbhapp/accounts/login', userdata)
         .then(res => {
           resolve(res.data);
-          console.log(res.data);
           if (res.data.token) {
             const userToken = res.data.token;
             localStorage.setItem('userToken', userToken);

@@ -30,7 +30,7 @@ class AccountSettings extends Component {
       .then(res => {
         this.setState({ profileData: res.data.profile });
       })
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -45,7 +45,7 @@ class AccountSettings extends Component {
         .then(res => {
           this.setState({ profileData: res.data.profile });
         })
-        .catch(err => console.log(err));
+        // .catch(err => console.log(err));
     }
   }
 

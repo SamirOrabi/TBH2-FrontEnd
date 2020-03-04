@@ -75,7 +75,7 @@ class EmailChangesmodel extends Component {
         }
       })
 
-      .catch(err => console.log(err));
+      // .catch(err => console.log(err));
   };
 
   enter = e => {
