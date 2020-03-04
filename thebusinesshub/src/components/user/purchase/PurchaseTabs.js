@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Tab, Tabs ,Container,Row ,Col} from 'react-bootstrap';
 import Purchasecard2 from './Purchasecard2';
+import '../../stylesheets/PurchasetabsCSS.css';
 export default class PurchaseTabs extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +13,10 @@ export default class PurchaseTabs extends Component {
       type: 'small',
       codeone: 'MRSG10',
       codetwo: 'MRSG30',
-      codethree: 'MRSG50'
+      codethree: 'MRSG50',
+      smallColor:'#ed1c24',
+      smallborder:'1px solid #ed1c24'
+
     };
   }
 
@@ -37,8 +41,12 @@ export default class PurchaseTabs extends Component {
   render() {
     return (
       <div>
-        <h1>Meeting Room</h1>
-        <Tabs
+        <Container className="tabsheader">
+          <Row>
+            <Col sm={12}>
+            <h1>Meeting Room</h1>
+
+            <Tabs
           onClick={this.onchangeType}
           defaultActiveKey="small"
           id="uncontrolled-tab-example"
@@ -48,6 +56,11 @@ export default class PurchaseTabs extends Component {
               meeting={this.state.meeting}
               type={this.state.type}
               room="meeting room"
+              // style={{
+              //   color:this.state.smallColor,
+              //   borderLeft:this.state.smallborder
+              // }}
+              
             />
           </Tab>
           <Tab eventKey="big" id="big" title="BIG GROUP">
@@ -58,6 +71,12 @@ export default class PurchaseTabs extends Component {
             />
           </Tab>
         </Tabs>
+
+
+
+
+
+
         <div className="mt-5"></div>
         <h1>Training Room</h1>
         <Tabs
@@ -80,6 +99,12 @@ export default class PurchaseTabs extends Component {
             />
           </Tab>
         </Tabs>
+            </Col>
+          </Row>
+        </Container>
+       
+      
+       
       </div>
     );
   }

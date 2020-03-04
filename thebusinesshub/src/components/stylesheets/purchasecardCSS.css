@@ -34,3 +34,10 @@
   border-color: #ed1c24 !important;
   /* border-left: 5px solid #ed1c24; */
 }
+
+.cardimg h3{
+    position: absolute;
+    top:170px;
+    right: 20px;
+    color: white !important;
+}
