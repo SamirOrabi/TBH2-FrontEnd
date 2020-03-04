@@ -88,7 +88,7 @@ export default class Purchasecard2 extends Component {
                           onChange={this.settenhours}
                           name="tenhours"
                         />
-                        <p className="ml-5 mt-3" style={{color:'#ed1c24' }}>HR</p>
+                        <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
                       </div>
                     </Card.Text>
                   </Card.Body>
@@ -146,7 +146,7 @@ export default class Purchasecard2 extends Component {
                           onChange={this.setthirtyhours}
                           name="thirtyhours"
                         />
-                          <p className="ml-5 mt-3" style={{color:'#ed1c24' }}>HR</p>
+                          <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
                       </div>
                     </Card.Text>
                   </Card.Body>
@@ -204,7 +204,7 @@ export default class Purchasecard2 extends Component {
                           onChange={this.setfiftyhours}
                           name="fiftyhours"
                         />
-                          <p className="ml-5 mt-3" style={{color:'#ed1c24' }}>HR</p>
+                          <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
                       </div>
                     </Card.Text>
                   </Card.Body>
@@ -245,7 +245,7 @@ export default class Purchasecard2 extends Component {
         ) : (
           <Container>
            
-            <Row>
+            <Row className="mt-3">
               <Col sm={12} md={4}>
                 <Card style={{ width: '18rem' }}>
                   <div className="cardimg">
@@ -267,7 +267,7 @@ export default class Purchasecard2 extends Component {
                           onChange={this.settenhours}
                           name="tenhours"
                         />
-                          <p className="ml-5 mt-3" style={{color:'#ed1c24' }}>HR</p>
+                          <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
                       </div>
                     </Card.Text>
                   </Card.Body>
@@ -326,7 +326,7 @@ export default class Purchasecard2 extends Component {
                           name="thirtyhours"
                         />
 
-<p className="ml-5 mt-3" style={{color:'#ed1c24' }}>HR</p>
+<p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
                       </div>
                     </Card.Text>
                   </Card.Body>
@@ -384,7 +384,7 @@ export default class Purchasecard2 extends Component {
                           onChange={this.setfiftyhours}
                           name="fiftyhours"
                         />
-                          <p className="ml-5 mt-3" style={{color:'#ed1c24' }}>HR</p>
+                          <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
                       </div>
                     </Card.Text>
                   </Card.Body>
