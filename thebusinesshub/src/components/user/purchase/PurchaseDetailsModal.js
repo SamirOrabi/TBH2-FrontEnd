@@ -192,6 +192,8 @@ class PurchaseDetailsModal extends Component {
           hours={this.state.hour}
           price={this.state.price}
           type={this.props.type}
+          code={this.props.code}
+          room={this.props.room}
         />
       </div>
     );

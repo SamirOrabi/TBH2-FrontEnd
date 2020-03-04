@@ -26,6 +26,25 @@ class PurchaseReceipt extends Component {
       });
   }
 
+  confirmPackage = () => {
+    axios.defaults.headers.common['authorization'] = localStorage.userToken;
+
+    axios
+      .post('https://cubexs.net/tbhapp/packages/addpackage', {
+        Package: {
+          numberOfHours: this.props.hours,
+          package: this.props.code,
+          roomType: this.props.room
+        },
+        Account: {
+          id: this.props.user.id
+        }
+      })
+      .then(res => {
+        console.log(res);
+      });
+  };
+
   render() {
     // console.log(this.props);
     return (
@@ -99,7 +118,7 @@ class PurchaseReceipt extends Component {
                       for the loss and/or damage of any personal belongings.
                     </p>
                   </div>
-
+                  {/* 
                   {this.props.modalerroe ? (
                     <div style={{ display: 'flex' }} className="mt-3">
                       <p style={{ fontWeight: 'bolder', fontSize: '25px' }}>
@@ -113,10 +132,11 @@ class PurchaseReceipt extends Component {
                         </span>
                       </p>
                     </div>
-                  ) : null}
+                  ) : null} */}
                 </div>
               </Col>
             </Row>
+            <Button onClick={this.confirmPackage}>Done</Button>
           </Modal.Body>
         </Modal>
       </div>
