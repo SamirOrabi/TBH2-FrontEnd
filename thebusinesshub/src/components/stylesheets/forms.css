@@ -466,7 +466,7 @@
   padding: 15px;
   color: white;
   position: absolute;
-  bottom: -50% !important;
+  /* bottom: 10% !important; */
   z-index: 500;
   text-align: center;
 }

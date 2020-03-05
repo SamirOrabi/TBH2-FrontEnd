@@ -182,9 +182,9 @@ class PurchaseReceipt extends Component {
               </Modal.Body>
             </Print>
           </PrintProvider>
-          <Modal className="mt-2 feedBack" show={this.state.showfeedBack}>
-            <div id="snackbar">Package Booked Successfully</div>
-          </Modal>
+        </Modal>
+        <Modal className="mt-2" show={this.state.showfeedBack}>
+          <div id="snackbar">Package Booked Successfully</div>
         </Modal>
       </div>
     );
