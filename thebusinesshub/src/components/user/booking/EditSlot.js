@@ -74,10 +74,11 @@ class EditSlot extends Component {
 
       .then(res => {
         if (res.data.code === 0) {
-          this.props.hideModal();
           this.setState({ show2: true });
           setTimeout(() => {
             this.setState({ show2: false });
+
+            this.props.hideModal(false);
           }, 1900);
         } else {
           this.setState({ myerror: 'Slot is not allowed to be empty' });
@@ -148,7 +149,7 @@ class EditSlot extends Component {
             <Button onClick={this.editTimeSlot} className="mt-3 cancelbtn">
               Confirm
             </Button>
-            <Modal className=" feedBack" show={this.state.show2}>
+            <Modal className=" firstnameupdatesnackbar" show={this.state.show2}>
               <div id="snackbar">Slot Edited Successfully!</div>
             </Modal>
           </div>
