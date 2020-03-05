@@ -65,18 +65,18 @@ class Receipt extends Component {
               <React.Fragment>
                 <Table>
                   <thead>
-                    <tr>
-                      <th className=" pl-5">ROOM</th>
-                      <th className=" pl-5">Start Date</th>
-                      <th className=" pl-5">Slot</th>
-                      <th className=" pl-5">Number of people </th>
-                      <th className=" pl-5">Package code</th>
-                      <th className=" pl-5">Price</th>
+                    <tr className="">
+                      <th style={{width:'1px'}}>ROOM</th>
+                      <th style={{width:'1px'}}>Start Date</th>
+                      <th style={{width:'1px'}}>Slot</th>
+                      <th style={{width:'1px'}}>Number of people </th>
+                      <th style={{width:'1px'}}>Package code</th>
+                      <th style={{width:'1px'}}>Price</th>
                     </tr>
                   </thead>
 
                   <tbody>
-                    <tr className="text-center bookingstr  mb-5">
+                    <tr className="mb-5">
                       <td>{this.props.roomtype}</td>
                       <td>{this.props.startdate}</td>
                       <td>
