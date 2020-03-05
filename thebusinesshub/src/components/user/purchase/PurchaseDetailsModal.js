@@ -30,7 +30,6 @@ class PurchaseDetailsModal extends Component {
     this.setState({ numOfpeapole: e.target.value });
   };
   componentDidMount() {
-  
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/packages/calculatepackageprice', {
@@ -50,8 +49,7 @@ class PurchaseDetailsModal extends Component {
         } else {
           this.setState({ myerror: res.data.error });
         }
-      })
-      // .catch(err => console.log(err));
+      });
   }
   componentWillReceiveProps(nextProps) {
     this.setState({ hour: this.props.hours });
@@ -91,8 +89,8 @@ class PurchaseDetailsModal extends Component {
           } else {
             this.setState({ myerror: res.data.error });
           }
-        })
-        // .catch(err => console.log(err));
+        });
+      // .catch(err => console.log(err));
     }
   }
   handleClose = e => {
