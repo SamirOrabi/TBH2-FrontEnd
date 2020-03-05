@@ -27,7 +27,7 @@ export default class DetailsPaymentHolder extends Component {
       roomtype: '',
       amountofpeople: '',
       slots: [],
-      startdate:formatDate(this.props.startdate),
+      startdate: formatDate(this.props.startdate),
       payment: ''
     };
   }
@@ -36,7 +36,7 @@ export default class DetailsPaymentHolder extends Component {
     this.setState({
       showdetailscomponent: true,
       showpaymentcomponent: false,
-      detailsColor :'#ED1C24',
+      detailsColor: '#ED1C24',
       detailsborder: '5px solid #ED1C24',
       paymentborder: 'none',
       paymentColor: '#000'
@@ -93,7 +93,6 @@ export default class DetailsPaymentHolder extends Component {
     });
   };
   render() {
- 
     return (
       <div>
         {(this.state.showdetailscomponent ||

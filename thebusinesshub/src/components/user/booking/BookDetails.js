@@ -24,6 +24,7 @@ let starttime;
 let endtime;
 // let startdatteee;
 let finalstarttime;
+let requestslots = [];
 class BookDetails extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +37,7 @@ class BookDetails extends Component {
       slots: [],
       bookprice: '',
       startdate: formatDate(this.props.startdate),
-      timeErrorMessage:'',
+      timeErrorMessage: ''
     };
   }
   componentDidMount() {
@@ -82,53 +83,482 @@ class BookDetails extends Component {
     starttime = time;
   };
 
+  onChangeEndTime = time => {
+    endtime = time;
+  };
+
   CalculatePrice = e => {
     e.preventDefault();
-
+    console.log(endtime.substring(0, 2));
+    console.log(endtime.substring(0, 2) - starttime.substring(0, 2));
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
-    if (String(starttime).substring(0, 2) === '12') {
-      finalstarttime = '12PM';
-      this.state.slots.push(finalstarttime);
-    } else if (String(starttime).substring(0, 2) === '13') {
-      finalstarttime = '01PM';
-      this.state.slots.push(finalstarttime);
-    } else if (String(starttime).substring(0, 2) === '14') {
-      finalstarttime = '02PM';
-      this.state.slots.push(finalstarttime);
-    } else if (String(starttime).substring(0, 2) === '15') {
-      finalstarttime = '03PM';
-      this.state.slots.push(finalstarttime);
-    } else if (String(starttime).substring(0, 2) === '16') {
-      finalstarttime = '04PM';
-      this.state.slots.push(finalstarttime);
-    } else if (String(starttime).substring(0, 2) === '17') {
-      finalstarttime = '05PM';
-      this.state.slots.push(finalstarttime);
-    } else if (String(starttime).substring(0, 2) === '18') {
-      finalstarttime = '06PM';
-      this.state.slots.push(finalstarttime);
-    } else if (String(starttime).substring(0, 2) === '19') {
-      finalstarttime = '07PM';
-      this.state.slots.push(finalstarttime);
-    } else if (String(starttime).substring(0, 2) === '20') {
-      finalstarttime = '08PM';
-      this.state.slots.push(finalstarttime);
-    } else if (String(starttime).substring(0, 2) === '21') {
-      finalstarttime = '09PM';
-      this.state.slots.push(finalstarttime);
-    } else if (String(starttime).substring(0, 2) === '09') {
-      finalstarttime = '09AM';
-      this.state.slots.push(finalstarttime);
-    } else if (String(starttime).substring(0, 2) === '10') {
-      finalstarttime = '10AM';
-      this.state.slots.push(finalstarttime);
-    } else if (String(starttime).substring(0, 2) === '11') {
-      finalstarttime = '11AM';
-      this.state.slots.push(finalstarttime);
+    if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 1 &&
+      starttime.substring(0, 2) === '09'
+    ) {
+      this.state.slots.push('09AM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 1 &&
+      starttime.substring(0, 2) === '10'
+    ) {
+      this.state.slots.push('10AM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 1 &&
+      starttime.substring(0, 2) === '11'
+    ) {
+      this.state.slots.push('11AM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 1 &&
+      starttime.substring(0, 2) === '12'
+    ) {
+      this.state.slots.push('12PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 1 &&
+      starttime.substring(0, 2) === '13'
+    ) {
+      this.state.slots.push('01PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 1 &&
+      starttime.substring(0, 2) === '14'
+    ) {
+      this.state.slots.push('02PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 1 &&
+      starttime.substring(0, 2) === '15'
+    ) {
+      this.state.slots.push('03PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 1 &&
+      starttime.substring(0, 2) === '16'
+    ) {
+      this.state.slots.push('04PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 1 &&
+      starttime.substring(0, 2) === '17'
+    ) {
+      this.state.slots.push('05PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 1 &&
+      starttime.substring(0, 2) === '18'
+    ) {
+      this.state.slots.push('06PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 1 &&
+      starttime.substring(0, 2) === '19'
+    ) {
+      this.state.slots.push('07PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 1 &&
+      starttime.substring(0, 2) === '20'
+    ) {
+      this.state.slots.push('08PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 2 &&
+      starttime.substring(0, 2) === '09'
+    ) {
+      this.state.slots.push('09AM', '10AM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 2 &&
+      starttime.substring(0, 2) === '10'
+    ) {
+      this.state.slots.push('10AM', '11AM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 2 &&
+      starttime.substring(0, 2) === '11'
+    ) {
+      this.state.slots.push('11AM', '12PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 2 &&
+      starttime.substring(0, 2) === '12'
+    ) {
+      this.state.slots.push('12PM', '01PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 2 &&
+      starttime.substring(0, 2) === '13'
+    ) {
+      this.state.slots.push('01PM', '02PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 2 &&
+      starttime.substring(0, 2) === '14'
+    ) {
+      this.state.slots.push('02PM', '03PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 2 &&
+      starttime.substring(0, 2) === '15'
+    ) {
+      this.state.slots.push('03PM', '04PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 2 &&
+      starttime.substring(0, 2) === '16'
+    ) {
+      this.state.slots.push('04PM', '05PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 2 &&
+      starttime.substring(0, 2) === '17'
+    ) {
+      this.state.slots.push('05PM', '06PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 2 &&
+      starttime.substring(0, 2) === '18'
+    ) {
+      this.state.slots.push('06PM', '07PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 2 &&
+      starttime.substring(0, 2) === '19'
+    ) {
+      this.state.slots.push('07PM', '08PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 3 &&
+      starttime.substring(0, 2) === '09'
+    ) {
+      this.state.slots.push('09AM', '10AM', '11AM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 3 &&
+      starttime.substring(0, 2) === '10'
+    ) {
+      this.state.slots.push('10AM', '11AM', '12PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 3 &&
+      starttime.substring(0, 2) === '11'
+    ) {
+      this.state.slots.push('11AM', '12PM', '01PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 3 &&
+      starttime.substring(0, 2) === '12'
+    ) {
+      this.state.slots.push('12PM', '01PM', '02PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 3 &&
+      starttime.substring(0, 2) === '13'
+    ) {
+      this.state.slots.push('01PM', '02PM', '03PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 3 &&
+      starttime.substring(0, 2) === '14'
+    ) {
+      this.state.slots.push('02PM', '03PM', '04PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 3 &&
+      starttime.substring(0, 2) === '15'
+    ) {
+      this.state.slots.push('03PM', '04PM', '05PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 3 &&
+      starttime.substring(0, 2) === '16'
+    ) {
+      this.state.slots.push('04PM', '05PM', '06PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 3 &&
+      starttime.substring(0, 2) === '17'
+    ) {
+      this.state.slots.push('05PM', '06PM', '07PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 3 &&
+      starttime.substring(0, 2) === '18'
+    ) {
+      this.state.slots.push('06PM', '07PM', '08PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 4 &&
+      starttime.substring(0, 2) === '09'
+    ) {
+      this.state.slots.push('09AM', '10AM', '11AM', '12PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 4 &&
+      starttime.substring(0, 2) === '10'
+    ) {
+      this.state.slots.push('10AM', '11AM', '12PM', '01PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 4 &&
+      starttime.substring(0, 2) === '11'
+    ) {
+      this.state.slots.push('11AM', '12PM', '01PM', '02PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 4 &&
+      starttime.substring(0, 2) === '12'
+    ) {
+      this.state.slots.push('12PM', '01PM', '02PM', '03PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 4 &&
+      starttime.substring(0, 2) === '13'
+    ) {
+      this.state.slots.push('01PM', '02PM', '03PM', '04PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 4 &&
+      starttime.substring(0, 2) === '14'
+    ) {
+      this.state.slots.push('02PM', '03PM', '04PM', '05PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 4 &&
+      starttime.substring(0, 2) === '15'
+    ) {
+      this.state.slots.push('03PM', '04PM', '05PM', '06PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 4 &&
+      starttime.substring(0, 2) === '16'
+    ) {
+      this.state.slots.push('04PM', '05PM', '06PM', '07PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 4 &&
+      starttime.substring(0, 2) === '17'
+    ) {
+      this.state.slots.push('05PM', '06PM', '07PM', '08PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 5 &&
+      starttime.substring(0, 2) === '09'
+    ) {
+      this.state.slots.push('09AM', '10AM', '11AM', '12PM', '01PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 5 &&
+      starttime.substring(0, 2) === '10'
+    ) {
+      this.state.slots.push('10AM', '11AM', '12PM', '01PM', '02PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 5 &&
+      starttime.substring(0, 2) === '11'
+    ) {
+      this.state.slots.push('11AM', '12PM', '01PM', '02PM', '03PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 5 &&
+      starttime.substring(0, 2) === '12'
+    ) {
+      this.state.slots.push('12PM', '01PM', '02PM', '03PM', '04PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 5 &&
+      starttime.substring(0, 2) === '13'
+    ) {
+      this.state.slots.push('01PM', '02PM', '03PM', '04PM', '05PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 5 &&
+      starttime.substring(0, 2) === '14'
+    ) {
+      this.state.slots.push('02PM', '03PM', '04PM', '05PM', '06PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 5 &&
+      starttime.substring(0, 2) === '15'
+    ) {
+      this.state.slots.push('03PM', '04PM', '05PM', '06PM', '07PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 5 &&
+      starttime.substring(0, 2) === '16'
+    ) {
+      this.state.slots.push('04PM', '05PM', '06PM', '07PM', '08PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 6 &&
+      starttime.substring(0, 2) === '09'
+    ) {
+      this.state.slots.push('09AM', '10AM', '11AM', '12PM', '01PM', '02PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 6 &&
+      starttime.substring(0, 2) === '10'
+    ) {
+      this.state.slots.push('10AM', '11AM', '12PM', '01PM', '02PM', '03PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 6 &&
+      starttime.substring(0, 2) === '11'
+    ) {
+      this.state.slots.push('11AM', '12PM', '01PM', '02PM', '03PM', '04PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 6 &&
+      starttime.substring(0, 2) === '12'
+    ) {
+      this.state.slots.push('12PM', '01PM', '02PM', '03PM', '04PM', '05PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 6 &&
+      starttime.substring(0, 2) === '13'
+    ) {
+      this.state.slots.push('01PM', '02PM', '03PM', '04PM', '05PM', '06PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 6 &&
+      starttime.substring(0, 2) === '14'
+    ) {
+      this.state.slots.push('02PM', '03PM', '04PM', '05PM', '06PM', '07PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 6 &&
+      starttime.substring(0, 2) === '15'
+    ) {
+      this.state.slots.push('03PM', '04PM', '05PM', '06PM', '07PM', '08PM');
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 7 &&
+      starttime.substring(0, 2) === '09'
+    ) {
+      this.state.slots.push(
+        '09AM',
+        '10AM',
+        '11AM',
+        '12PM',
+        '01PM',
+        '02PM',
+        '03PM'
+      );
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 7 &&
+      starttime.substring(0, 2) === '10'
+    ) {
+      this.state.slots.push(
+        '10AM',
+        '11AM',
+        '12PM',
+        '01PM',
+        '02PM',
+        '03PM',
+        '04PM'
+      );
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 7 &&
+      starttime.substring(0, 2) === '11'
+    ) {
+      this.state.slots.push(
+        '11AM',
+        '12PM',
+        '01PM',
+        '02PM',
+        '03PM',
+        '04PM',
+        '05PM'
+      );
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 7 &&
+      starttime.substring(0, 2) === '12'
+    ) {
+      this.state.slots.push(
+        '12PM',
+        '01PM',
+        '02PM',
+        '03PM',
+        '04PM',
+        '05PM',
+        '06PM'
+      );
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 7 &&
+      starttime.substring(0, 2) === '13'
+    ) {
+      this.state.slots.push(
+        '01PM',
+        '02PM',
+        '03PM',
+        '04PM',
+        '05PM',
+        '06PM',
+        '07PM'
+      );
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 7 &&
+      starttime.substring(0, 2) === '14'
+    ) {
+      this.state.slots.push(
+        '02PM',
+        '03PM',
+        '04PM',
+        '05PM',
+        '06PM',
+        '07PM',
+        '08PM'
+      );
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 8 &&
+      starttime.substring(0, 2) === '09'
+    ) {
+      this.state.slots.push(
+        '09AM',
+        '10AM',
+        '11AM',
+        '12PM',
+        '01PM',
+        '02PM',
+        '03PM',
+        '04PM'
+      );
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 8 &&
+      starttime.substring(0, 2) === '10'
+    ) {
+      this.state.slots.push(
+        '10AM',
+        '11AM',
+        '12PM',
+        '01PM',
+        '02PM',
+        '03PM',
+        '04PM',
+        '05PM'
+      );
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 8 &&
+      starttime.substring(0, 2) === '11'
+    ) {
+      this.state.slots.push(
+        '11AM',
+        '12PM',
+        '01PM',
+        '02PM',
+        '03PM',
+        '04PM',
+        '05PM',
+        '06PM'
+      );
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 8 &&
+      starttime.substring(0, 2) === '12'
+    ) {
+      this.state.slots.push(
+        '12PM',
+        '01PM',
+        '02PM',
+        '03PM',
+        '04PM',
+        '05PM',
+        '06PM',
+        '07PM'
+      );
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 8 &&
+      starttime.substring(0, 2) === '13'
+    ) {
+      this.state.slots.push(
+        '01PM',
+        '02PM',
+        '03PM',
+        '04PM',
+        '05PM',
+        '06PM',
+        '07PM',
+        '08PM'
+      );
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 9 &&
+      starttime.substring(0, 2) === '11'
+    ) {
+      this.state.slots.push(
+        '11AM',
+        '12PM',
+        '01PM',
+        '02PM',
+        '03PM',
+        '04PM',
+        '05PM',
+        '06PM',
+        '07PM'
+      );
+    } else if (
+      endtime.substring(0, 2) - starttime.substring(0, 2) === 9 &&
+      starttime.substring(0, 2) === '12'
+    ) {
+      this.state.slots.push(
+        '12PM',
+        '01PM',
+        '02PM',
+        '03PM',
+        '04PM',
+        '05PM',
+        '06PM',
+        '07PM',
+        '08PM'
+      );
     }
 
     let bookrequest = {};
-    bookrequest.slot = [this.state.slots[0]];
+    bookrequest.slot = this.state.slots;
     bookrequest.date = formatDate(this.props.startdate);
     bookrequest.roomType = this.state.roomtype;
     bookrequest.roomNumber = this.state.roomId;
@@ -149,24 +579,22 @@ class BookDetails extends Component {
         }
         if (res.data.code === 0) {
           this.setState({ bookprice: res.data.price });
-         
         }
 
         this.props.detailsfun(this.state.bookprice);
         this.props.testtoreceipt(
           this.state.roomtype,
           this.state.amountofpeople,
-          [this.state.slots[0]],
+          this.state.slots,
           formatDate(this.props.startdate),
           this.state.payment,
           this.state.roomId
         );
         this.props.showPayment();
-      })
-      // .catch(err => console.log(err));
+      });
+    // .catch(err => console.log(err));
   };
   render() {
-   
     const settings = {
       customPaging: function(i) {
         return (
@@ -195,7 +623,7 @@ class BookDetails extends Component {
     };
     return (
       <div>
-        <Container className='roomsdetails'>
+        <Container className="roomsdetails">
           <Row className="m-auto">
             <Col className="m-auto pl-4" md={5} sm={12}>
               <Slider {...settings}>
@@ -377,9 +805,9 @@ class BookDetails extends Component {
                       NEXT
                     </Button>
                   </Col>
-                  {this.state.timeErrorMessage ?(<p>{this.state.timeErrorMessage}</p>):null}
-                
-
+                  {this.state.timeErrorMessage ? (
+                    <p>{this.state.timeErrorMessage}</p>
+                  ) : null}
                 </Form>
               </Container>
             </Col>

@@ -17,6 +17,7 @@ class Printcomponent extends Component {
   }
  
   sendbookingdetails = () => {
+    console.log(this.props.slots)
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/bookings/addbooking', {
@@ -47,10 +48,10 @@ class Printcomponent extends Component {
           this.setState({
             modalerroe: ' These slots are not free Please Select another slot'
           });
-        } else {
-          this.setState({
-            modalerroe: 'Please Select Slot Of Booking To Show Price'
-          });
+        // } else {
+        //   this.setState({
+        //     modalerroe: 'Please Select Slot Of Booking To Show Price'
+        //   });
           // setTimeout(() => {
           //   this.setState({ show: false });
           // }, 2500);

@@ -19,8 +19,6 @@ import {
 import { formatDate } from 'react-day-picker/moment';
 import axios from 'axios';
 let startdate;
-let tbhdata;
-let cellcolor;
 export default class DayTimeScale extends Component {
   _isMounted = false;
   constructor() {

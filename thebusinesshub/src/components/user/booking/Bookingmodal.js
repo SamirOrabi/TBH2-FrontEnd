@@ -6,12 +6,11 @@ export default class Bookingmodal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bookingmodalShow: false,
+      bookingmodalShow: false
     };
   }
 
   render() {
-
     return (
       <div className="bookmodal">
         <Modal

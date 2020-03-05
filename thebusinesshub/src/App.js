@@ -11,7 +11,6 @@ import UserBoard from './components/user/UserBoard';
 import Booking from './components/pages/Booking';
 import Space from './components/pages/Space';
 import Contact from './components/pages/Contact';
-import BookDetails from './components/user/booking/BookDetails';
 import SignUpGoogleInfo from './components/forms/SignUpGoogleInfo';
 // import Payment from './components/user/booking/Payment';
 
@@ -19,7 +18,6 @@ import SignUpGoogleInfo from './components/forms/SignUpGoogleInfo';
 import './App.css';
 import setAuthToken from './helpers/setAuthToken';
 import { setCurrentUser, LogOut } from './globalState/actions/authActions';
-import EditSlot from './components/user/booking/EditSlot';
 // import {
 //   clearCurrentProfile,
 //   getProfile
