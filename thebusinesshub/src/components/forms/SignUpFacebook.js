@@ -69,10 +69,10 @@ class SignUpFacebook extends Component {
       .then(res => {
         if (res.data) {
           this.setState({
-            id: res.data.facebookId,
-            email: res.data.email,
-            fname: res.data.firstName,
-            lname: res.data.lastName
+            id: res.data.data.facebookId,
+            email: res.data.data.email,
+            fname: res.data.data.firstName,
+            lname: res.data.data.lastName
           });
         }
       });
