@@ -85,7 +85,7 @@ class Receipt extends Component {
                         ))}
                       </td>
                       <td>{this.props.amountofpeople}</td>
-                      <td>-</td>
+                      <td>{this.props.packageCode}</td>
                       <td>{this.props.bookprice} LE</td>
                     </tr>
                   </tbody>

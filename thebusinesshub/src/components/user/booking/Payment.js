@@ -6,7 +6,8 @@ export default class Payment extends Component {
     super(props);
     this.state = {
       showreceiptcomponent: false,
-      showpaymentcomponent: true
+      showpaymentcomponent: true,
+      packageCode: ''
     };
   }
 
@@ -16,6 +17,13 @@ export default class Payment extends Component {
   showPayment = e => {
     this.setState({ showreceiptcomponent: false, showpaymentcomponent: true });
   };
+  onAddPackageCode = e => {
+    const value = e.target.value;
+    this.setState({ packageCode: value });
+    this.props.paymentfun(e.target.value);
+    this.props.testpaymenttoreceipt(e.target.value)
+  };
+ 
   render() {
     return (
       <div>
@@ -90,7 +98,12 @@ export default class Payment extends Component {
                   <Col sm={12} md={8}>
                     <h2>Package Code</h2>
                     <Form.Group>
-                      <Form.Control type="text" name="Package Code" />
+                      <Form.Control
+                        type="text"
+                        value={this.state.packageCode}
+                        onChange={this.onAddPackageCode}
+                        name="PackageCode"
+                      />
                     </Form.Group>
                   </Col>
                 </Row>

@@ -23,8 +23,7 @@ import { formatDate } from 'react-day-picker/moment';
 let starttime;
 let endtime;
 // let startdatteee;
-let finalstarttime;
-let requestslots = [];
+
 class BookDetails extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +36,8 @@ class BookDetails extends Component {
       slots: [],
       bookprice: '',
       startdate: formatDate(this.props.startdate),
-      timeErrorMessage: ''
+      timeErrorMessage: '',
+      packageCode: ''
     };
   }
   componentDidMount() {
@@ -57,6 +57,8 @@ class BookDetails extends Component {
       roomtype: e.target.value
     });
   };
+
+  
 
   setPeopleNumber = e => {
     this.setState({ amountofpeople: e.target.value });
@@ -581,14 +583,17 @@ class BookDetails extends Component {
           this.setState({ bookprice: res.data.price });
         }
 
-        this.props.detailsfun(this.state.bookprice);
+        this.props.detailsfun(
+          this.state.bookprice,
+        );
         this.props.testtoreceipt(
           this.state.roomtype,
           this.state.amountofpeople,
           this.state.slots,
           formatDate(this.props.startdate),
           this.state.payment,
-          this.state.roomId
+          this.state.roomId,
+          this.state.packageCode
         );
         this.props.showPayment();
       });
@@ -760,19 +765,6 @@ class BookDetails extends Component {
                           <option name="training room" value="training room">
                             {' '}
                             Training Room{' '}
-                          </option>
-
-                          <option name="private room" value="private room">
-                            {' '}
-                            Private Room
-                          </option>
-
-                          <option
-                            name=" virtual office"
-                            value=" virtual office"
-                          >
-                            {' '}
-                            virtual Office{' '}
                           </option>
                         </select>
                       </div>

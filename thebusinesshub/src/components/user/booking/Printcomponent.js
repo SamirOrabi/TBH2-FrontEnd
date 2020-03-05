@@ -15,9 +15,9 @@ class Printcomponent extends Component {
       modalerroe: ''
     };
   }
- 
+
   sendbookingdetails = () => {
-    console.log(this.props.slots)
+    console.log(this.props.slots);
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/bookings/addbooking', {
@@ -31,7 +31,7 @@ class Printcomponent extends Component {
           roomNumber: this.props.roomId,
           amountOfPeople: this.props.amountofpeople,
           paymentMethod: this.props.payment,
-          packageCode: ''
+          packageCode: this.props.packageCode
         }
       })
       .then(res => {
@@ -48,10 +48,10 @@ class Printcomponent extends Component {
           this.setState({
             modalerroe: ' These slots are not free Please Select another slot'
           });
-        // } else {
-        //   this.setState({
-        //     modalerroe: 'Please Select Slot Of Booking To Show Price'
-        //   });
+          // } else {
+          //   this.setState({
+          //     modalerroe: 'Please Select Slot Of Booking To Show Price'
+          //   });
           // setTimeout(() => {
           //   this.setState({ show: false });
           // }, 2500);
@@ -64,8 +64,8 @@ class Printcomponent extends Component {
         // setTimeout(() => {
         //   this.props.closebookModal()
         // }, 1600);
-      })
-      // .catch(err => console.log(err));
+      });
+    // .catch(err => console.log(err));
   };
 
   render() {
@@ -82,6 +82,7 @@ class Printcomponent extends Component {
               slots={this.props.slots}
               startdate={this.props.startdate}
               modalerroe={this.state.modalerroe}
+              packageCode={this.props.packageCode}
             />
 
             <NoPrint>

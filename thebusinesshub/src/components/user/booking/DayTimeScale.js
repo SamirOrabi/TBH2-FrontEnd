@@ -35,7 +35,8 @@ export default class DayTimeScale extends Component {
       startTime: '',
       roomId: '',
       tbhdata: [],
-      tbhstatus: []
+      tbhstatus: [],
+      pleaseverify: ''
     };
   }
 
@@ -161,16 +162,25 @@ export default class DayTimeScale extends Component {
   };
   OpenDetails = e => {
     e.cancel = true;
-    console.log(this.state.endDate);
-    this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
-    startdate = document.getElementsByClassName(
-      'e-toolbar-item e-date-range'
-    )[0].innerText;
-    if (e.data) {
+    if (this.props.userstatus === 'verified') {
+      console.log(this.state.endDate);
+      this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
+      startdate = document.getElementsByClassName(
+        'e-toolbar-item e-date-range'
+      )[0].innerText;
+      if (e.data) {
+        this.setState({
+          startTime: e.data.startTime,
+          roomId: e.data.ResourceId,
+          endDate: e.data.endTime
+        });
+      }
       this.setState({
-        startTime: e.data.startTime,
-        roomId: e.data.ResourceId,
-        endDate: e.data.endTime
+        pleaseverify: ''
+      });
+    } else {
+      this.setState({
+        pleaseverify: 'Please verify your account before booking.'
       });
     }
   };
@@ -213,6 +223,9 @@ export default class DayTimeScale extends Component {
 
     return (
       <div>
+        <p style={{ fontWeight: 'bold', color: '#ed1c24' }}>
+          {this.state.pleaseverify}
+        </p>
         <ScheduleComponent
           width="100%"
           height="auto"
@@ -265,10 +278,10 @@ export default class DayTimeScale extends Component {
                 className="mt-3 ml-2"
                 style={{ color: '#ed1c24', fontWeight: 'bold' }}
               >
-                Confirmed
+                BUSY
               </Col>
             </Row>
-            <Row>
+            {/* <Row>
               <Col md={2}>
                 {' '}
                 <div className="grayColor"></div>
@@ -280,7 +293,7 @@ export default class DayTimeScale extends Component {
               >
                 Pending
               </Col>
-            </Row>
+            </Row> */}
           </Col>
           <Col md="4"></Col>
           <Col md={4}>
