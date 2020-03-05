@@ -6,7 +6,6 @@ import '../../stylesheets/bookingsCss.css';
 import { Table, Container, Button, Modal } from 'react-bootstrap';
 import isEqual from 'lodash/isEqual';
 import EditSlot from './EditSlot';
-import { Transition, animated } from 'react-spring/renderprops';
 
 class UserBookingPage extends Component {
   constructor(props) {

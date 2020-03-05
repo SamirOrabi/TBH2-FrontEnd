@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Col, Row, Table, Button, Modal } from 'react-bootstrap';
+import { Container, Col, Row, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import '../../stylesheets/ReceiptCSS.css';
-import PrintComponents from 'react-print-components';
 // import Printcomponent from '../booking/Printcomponent';
 class Receipt extends Component {
   constructor(props) {
@@ -80,8 +79,12 @@ class Receipt extends Component {
                     <tr className="mb-5">
                       <td>{this.props.roomtype}</td>
                       <td>{this.props.startdate}</td>
-                      <td>{this.props.slots}</td>
-                      <td  >{this.props.amountofpeople}</td>
+                      <td>
+                        {this.props.slots.map(slot => (
+                          <p>{slot}</p>
+                        ))}
+                      </td>
+                      <td>{this.props.amountofpeople}</td>
                       <td>-</td>
                       <td>{this.props.bookprice} LE</td>
                     </tr>

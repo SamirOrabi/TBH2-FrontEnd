@@ -1,4 +1,3 @@
-import * as ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import Bookingmodal from '../booking/Bookingmodal';
 import '../../stylesheets/bookingsCss.css';
@@ -21,8 +20,9 @@ import isEqual from 'lodash/isEqual';
 
 let startdate;
 let finaltbhdata;
-let cellcolor = '#fff';
-let color;
+let cellcolor = ['#fff', '#ed1c24', '#D2D0D0'];
+let pendingcolor = '#ed1c24';
+let busycolor = '#D2D0D0';
 export default class DayTimeScale extends Component {
   _isMounted = false;
 
@@ -83,12 +83,12 @@ export default class DayTimeScale extends Component {
               // RecurrenceRule: 'FREQ=DAILY;INTERVAL=1;COUNT=7',
 
               status: book.status,
-              color: cellcolor
+              color: cellcolor[i]
             }))
           });
         }
-      })
-      // .catch(err => console.log(err));
+      });
+    // .catch(err => console.log(err));
   }
 
   componentDidUpdate(nextProps, prevState) {
@@ -133,12 +133,12 @@ export default class DayTimeScale extends Component {
                 ResourceId: Number(book.roomNumber),
 
                 status: book.status,
-                color: cellcolor
+                color: cellcolor[i]
               }))
             });
           }
-        })
-        // .catch(err => console.log(err));
+        });
+      // .catch(err => console.log(err));
     }
   }
 
@@ -149,7 +149,7 @@ export default class DayTimeScale extends Component {
       data.push({
         Id: a,
         Text: text + ' ' + a,
-        // Color: cellcolor
+        // Color: busycolor && pendingcolor
         Color: '#ed1c24'
       });
     }
@@ -161,6 +161,7 @@ export default class DayTimeScale extends Component {
   };
   OpenDetails = e => {
     e.cancel = true;
+    console.log(this.state.endDate);
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
     startdate = document.getElementsByClassName(
       'e-toolbar-item e-date-range'
@@ -177,15 +178,29 @@ export default class DayTimeScale extends Component {
   componentWillUnmount() {
     this._isMounted = false;
   }
+
+  onRenderCell(args) {
+    // console.log(args.date);
+    // if (args.elementType == 'workCells' || args.elementType == 'monthCells') {
+    //     let weekEnds = [0, 6];
+    //     if (weekEnds.indexOf((args.date).getDay()) >= 0) {
+    //         let ele = createElement('div', {
+    //             innerHTML: "<img src='https://ej2.syncfusion.com/demos/src/schedule/images/newyear.svg' />",
+    //             className: 'templatewrap'
+    //         });
+    //         (args.element).appendChild(ele);
+    //     }
+    // }
+  }
   render() {
     this.state.tbhdata.map((status, i) => {
-      if ((this.state.tbhdata[i].status = 'Busy')) {
-        this.state.tbhdata[i].color = '#ed1c24';
-        cellcolor = '#ed1c24';
+      if (this.state.tbhdata[i].status === 'Busy') {
+        this.state.tbhdata[i].color = cellcolor[1];
+        busycolor = cellcolor[1];
       }
-      if ((this.state.tbhdata[i].status = 'Pending')) {
-        this.state.tbhdata[i].color = '#D2D0D0';
-        cellcolor = '#D2D0D0';
+      if (this.state.tbhdata[i].status === 'Pending') {
+        this.state.tbhdata[i].color = cellcolor[2];
+        pendingcolor = cellcolor[2];
       }
     });
 
@@ -215,7 +230,8 @@ export default class DayTimeScale extends Component {
             interval: 120,
             slotCount: 2
           }}
-          minDate={new Date()}
+          // minDate={new Date(Date.now())}
+          renderCell={this.onRenderCell.bind(this)}
         >
           <ResourcesDirective>
             <ResourceDirective
@@ -287,4 +303,3 @@ export default class DayTimeScale extends Component {
     );
   }
 }
-// ReactDOM.render(<DayTimeScale />, document.getElementById('schedule'));
