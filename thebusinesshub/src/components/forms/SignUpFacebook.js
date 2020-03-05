@@ -56,9 +56,9 @@ class SignUpFacebook extends Component {
     this.setState({ BEerror: userData.error });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     console.log(this.props.location.search);
-    axios
+    const regFB = await axios
       .post(
         'https://cubexs.net/tbhapp/accounts/facebookcallback' +
           this.props.location.search,
@@ -69,14 +69,13 @@ class SignUpFacebook extends Component {
       .then(res => {
         if (res.data) {
           this.setState({
-            id: res.data.data.facebookId,
-            email: res.data.data.email,
-            fname: res.data.data.firstName,
-            lname: res.data.data.lastName
+            id: res.data.facebookId,
+            email: res.data.email,
+            fname: res.data.firstName,
+            lname: res.data.lastName
           });
           console.log('de resssss');
-
-          console.log(res.data.data.facebookId);
+          console.log(res.data.facebookId);
         }
       });
   }
