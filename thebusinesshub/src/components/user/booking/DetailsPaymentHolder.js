@@ -98,6 +98,7 @@ export default class DetailsPaymentHolder extends Component {
     this.setState({
       showdetailscomponent: false,
       showpaymentcomponent: true,
+      showreceiptcomponent: false,
       detailsColor: '#000',
       detailsborder: 'none',
       paymentborder: '5px solid #ED1C24',
@@ -183,6 +184,7 @@ export default class DetailsPaymentHolder extends Component {
             startdate={this.state.startdate}
             payment={this.state.payment}
             roomId={this.state.roomId}
+            showPayment={this.showPayment}
           />
         )}
       </div>

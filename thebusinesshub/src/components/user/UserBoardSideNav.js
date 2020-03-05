@@ -161,7 +161,7 @@ class UserBoardSideNav extends Component {
                 backgroundColor: '#ed1c24'
               }}
             >
-              PURCHASE
+              PACKAGES
             </NavLink>
           </Col>
         </div>

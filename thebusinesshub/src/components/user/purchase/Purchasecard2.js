@@ -77,13 +77,14 @@ export default class Purchasecard2 extends Component {
                           style={{
                             height: '20px',
                             margin: '0px',
-                            width: '50%'
+                            width: '65%'
                           }}
                           className="startTime"
                           type="text"
                           value={this.state.tenhoursvalue}
                           onChange={this.settenhours}
                           name="tenhours"
+                          placeholder="ENTER HOURS"
                         />
                         <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
                       </div>
@@ -135,13 +136,14 @@ export default class Purchasecard2 extends Component {
                           style={{
                             height: '20px',
                             margin: '0px',
-                            width: '50%'
+                            width: '65%'
                           }}
                           className="startTime"
                           type="text"
                           value={this.state.thirtyvalue}
                           onChange={this.setthirtyhours}
                           name="thirtyhours"
+                          placeholder="ENTER HOURS"
                         />
                           <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
                       </div>
@@ -193,13 +195,14 @@ export default class Purchasecard2 extends Component {
                           style={{
                             height: '20px',
                             margin: '0px',
-                            width: '50%'
+                            width: '65%'
                           }}
                           className="startTime"
                           type="text"
                           value={this.state.fiftyvalue}
                           onChange={this.setfiftyhours}
                           name="fiftyhours"
+                          placeholder="ENTER HOURS"
                         />
                           <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
                       </div>
@@ -256,13 +259,14 @@ export default class Purchasecard2 extends Component {
                           style={{
                             height: '20px',
                             margin: '0px',
-                            width: '50%'
+                            width: '65%'
                           }}
                           className="startTime"
                           type="text"
                           value={this.state.tenhoursvalue}
                           onChange={this.settenhours}
                           name="tenhours"
+                          placeholder="ENTER HOURS"
                         />
                           <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
                       </div>
@@ -314,13 +318,14 @@ export default class Purchasecard2 extends Component {
                           style={{
                             height: '20px',
                             margin: '0px',
-                            width: '50%'
+                            width: '65%'
                           }}
                           className="startTime"
                           type="text"
                           value={this.state.thirtyvalue}
                           onChange={this.setthirtyhours}
                           name="thirtyhours"
+                          placeholder="ENTER HOURS"
                         />
 
 <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
@@ -373,13 +378,14 @@ export default class Purchasecard2 extends Component {
                           style={{
                             height: '20px',
                             margin: '0px',
-                            width: '50%'
+                            width: '65%'
                           }}
                           className="startTime"
                           type="text"
                           value={this.state.fiftyvalue}
                           onChange={this.setfiftyhours}
                           name="fiftyhours"
+                          placeholder="ENTER HOURS"
                         />
                           <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
                       </div>

@@ -576,6 +576,7 @@ class BookDetails extends Component {
         Booking: bookrequest
       })
       .then(res => {
+        console.log(res.data)
         if (res.data.code === 101) {
           this.setState({ timeErrorMessage: res.data.error });
         }
@@ -782,9 +783,13 @@ class BookDetails extends Component {
                           onChange={this.setPeopleNumber}
                           // step="1"
                           min="1"
-                          max="5"
+                          max="10"
                         />
+                       
+          
                       </div>
+
+                      <p style={{fontSize:'10px' , color:'gray'}}>number of people must be in range from 1 to 10</p>
                     </Col>
                   </Row>
 

@@ -52,6 +52,17 @@ class Printcomponent extends Component {
           //   this.setState({
           //     modalerroe: 'Please Select Slot Of Booking To Show Price'
           //   });
+        }
+        else if (res.data.code === 119) {
+          this.setState({
+            modalerroe: 'People overload in a room '
+          });
+        }
+        
+        else {
+          this.setState({
+            modalerroe: 'Please Select Slot Of Booking To Show Price'
+          });
           // setTimeout(() => {
           //   this.setState({ show: false });
           // }, 2500);
@@ -83,11 +94,20 @@ class Printcomponent extends Component {
               startdate={this.props.startdate}
               modalerroe={this.state.modalerroe}
               packageCode={this.props.packageCode}
+              showPayment={this.props.showPayment}
             />
 
             <NoPrint>
               <Row>
-                <Col sm={9}></Col>
+                <Col sm={9}>/
+                <Button
+                  type="submit"
+                  className="my-4 nextBtn ml-4"
+                  onClick={this.props.showPayment}
+                >
+                  BACK
+                </Button>
+                </Col>
                 <Col sm={3} className="text-left">
                   <PrintComponents
                     trigger={
