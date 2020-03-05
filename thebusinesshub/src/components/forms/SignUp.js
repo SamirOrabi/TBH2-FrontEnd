@@ -227,7 +227,7 @@ class SignUp extends Component {
       })
       .then(res => {
         console.log(res);
-        this.setState({ fbLink: res.data.url });
+        this.setState({ fbLink: res.data });
       });
   }
 

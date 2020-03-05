@@ -54,32 +54,10 @@ class SignUpFacebook extends Component {
     );
 
     this.setState({ BEerror: userData.error });
-
-    // this.setState({ user: userData.error });
-
-    //send here
-    // axios({
-    //   method: 'post',
-    //   url: 'https://cubexs.net/tbhapp/accounts/registergoogle',
-    //   data: {
-    //     Account: {
-    //       id: this.state.id,
-    //       firstName: this.state.fname,
-    //       lastName: this.state.lname,
-    //       email: this.state.email,
-    //       phoneNumber: this.state.number,
-    //       username: this.state.name
-    //     }
-    //   }
-    // }).then(res => {
-    //   this.setState({ BEerror: res.data.error });
-    //   // if (res.data.code === 0) {
-    //   //   this.Signin();
-    //   // }
-    // });
   };
 
   componentDidMount() {
+    console.log(this.props.location.search);
     axios
       .post(
         'https://cubexs.net/tbhapp/accounts/facebookcallback' +
@@ -89,12 +67,12 @@ class SignUpFacebook extends Component {
         }
       )
       .then(res => {
-        if (res.data.info.userData) {
+        if (res.data) {
           this.setState({
-            id: res.data.info.userData.id,
-            email: res.data.info.userData.email,
-            fname: res.data.info.userData.given_name,
-            lname: res.data.info.userData.family_name
+            id: res.data.facebookId,
+            email: res.data.email,
+            fname: res.data.firstName,
+            lname: res.data.lastName
           });
         }
       });
@@ -127,7 +105,7 @@ class SignUpFacebook extends Component {
               <Row>
                 <Col sm={12}>
                   {' '}
-                  <p>Complete your info please</p>
+                  <p>Complete your info pleaseeeeee</p>
                 </Col>
                 <Col sm={12}>
                   <Form className="" onSubmit={this.handleSubmit}>

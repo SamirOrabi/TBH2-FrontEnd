@@ -52,7 +52,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/googlesignup" component={SignUpGoogleInfo} />
-          <Route exact path="/facebboksignup" component={SignUpFacebook} />
+          <Route exact path="/facebooksignup" component={SignUpFacebook} />
           <Route exact path="/login" component={LoginGoogle} />
           <Route exact path="/booking" component={Booking} />
           <Route exact path="/space" component={Space} />

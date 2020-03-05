@@ -52,7 +52,7 @@ export const userRegister = (
   if (state === 'facebookSignup') {
     const facebookreg = await new Promise((resolve, reject) => {
       axios
-        .post('https://cubexs.net/tbhapp/accounts/facebookgoogle', userData)
+        .post('https://cubexs.net/tbhapp/accounts/registerfacebook', userData)
         .then(res => {
           resolve(res.data);
         })
