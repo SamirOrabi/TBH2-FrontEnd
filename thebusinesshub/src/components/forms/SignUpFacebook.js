@@ -74,6 +74,9 @@ class SignUpFacebook extends Component {
             fname: res.data.data.firstName,
             lname: res.data.data.lastName
           });
+          console.log('de resssss');
+
+          console.log(res.data.data.facebookId);
         }
       });
   }
@@ -95,6 +98,9 @@ class SignUpFacebook extends Component {
   };
 
   render() {
+    console.log('de id ly riha le request');
+
+    console.log(this.state.id);
     return (
       <Container className="w-50">
         <div>
