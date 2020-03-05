@@ -42,7 +42,7 @@
         border: 1px solid #ed1c24;
         outline: none !important}
 
-        .btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {
+        .savebtn .btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus {
             box-shadow: 0 0 0 0.2rem #ed1c24;
             border-color: #ed1c24;
         }

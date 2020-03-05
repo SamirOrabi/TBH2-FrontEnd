@@ -30,6 +30,7 @@ class ForgetPassword extends Component {
         }
       })
       .then(res => {
+        console.log(res);
         if (res.data.code === 0) {
           this.setState({ show: false });
           this.props.hideModal(false);
@@ -37,7 +38,12 @@ class ForgetPassword extends Component {
           setTimeout(() => {
             this.setState({ show2: false });
           }, 1600);
-        } else {
+        } 
+         else if (res.data.code === 104){
+          this.setState({ myerror: res.data.error });
+        }
+        
+        else {
           this.setState({ myerror: res.data.error });
         }
       })
@@ -70,7 +76,7 @@ class ForgetPassword extends Component {
                   </Button>
                 </Col>
               </Row>
-              <h3 className="mt-1 text-center">FORGET PASSWORD</h3>
+              <h3 className="mt-1 text-center">FORGET YOUR PASSWORD</h3>
               <Row>
                 <Col sm={12}>
                   <p style={{ color: 'grey', fontSize: '12px' }}>

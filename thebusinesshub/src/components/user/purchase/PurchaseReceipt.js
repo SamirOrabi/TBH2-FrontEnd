@@ -97,7 +97,7 @@ class PurchaseReceipt extends Component {
                     <React.Fragment>
                       <Table>
                         <thead>
-                          <tr>
+                          <tr className="text-center">
                             <th className="">GROUP</th>
                             <th className="">NUMBER OF PEOPLE</th>
                             <th className="">NUMBER OF HOURS</th>
@@ -106,7 +106,7 @@ class PurchaseReceipt extends Component {
                         </thead>
 
                         <tbody>
-                          <tr className="text-center bookingstr  mb-5">
+                          <tr className="bookingstr tdstle  mb-5">
                             <td>{this.props.type}</td>
                             <td>{this.props.people}</td>
                             <td>{this.props.hours}</td>
@@ -154,7 +154,7 @@ class PurchaseReceipt extends Component {
                 </Row>
                 <NoPrint>
                   <Row>
-                    <Col sm={10}></Col>
+                    <Col sm={8}></Col>
                     <Col
                       style={{ float: 'right' }}
                       className="verifyBtn pt-2"
@@ -182,9 +182,12 @@ class PurchaseReceipt extends Component {
               </Modal.Body>
             </Print>
           </PrintProvider>
-        </Modal>
-        <Modal className="mt-2" show={this.state.showfeedBack}>
-          <div id="snackbar">Package Booked Successfully</div>
+          <Modal
+            className=" firstnameupdatesnackbar"
+            show={this.state.showfeedBack}
+          >
+            <div id="snackbar">Package Booked Successfully</div>
+          </Modal>
         </Modal>
       </div>
     );

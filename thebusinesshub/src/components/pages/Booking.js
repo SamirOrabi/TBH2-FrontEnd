@@ -3,11 +3,14 @@ import VerifyBarAlert from '../sections/VerifyBarAlert';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import DayTimeScale from '../user/booking/DayTimeScale';
 import WeekTimeScale from '../user/booking/WeekTimeScale';
-
-export default class Booking extends Component {
+import axios from 'axios';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+class Booking extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userstatus: '',
       dateInput: '',
       showdaycomponent: true,
       showweekcomponent: false,
@@ -41,6 +44,18 @@ export default class Booking extends Component {
   handleChangedate = value => {
     this.setState({ dateInput: value });
   };
+  componentDidMount() {
+    axios.defaults.headers.common['authorization'] = localStorage.userToken;
+    axios
+      .post('https://cubexs.net/tbhapp/accounts/getprofile', {
+        Account: {
+          id: this.props.user.id
+        }
+      })
+      .then(res => {
+        this.setState({ userstatus: res.data.state });
+      });
+  }
 
   render() {
     return (
@@ -93,7 +108,9 @@ export default class Booking extends Component {
               </Row>
             </Col>
           </Row>
-          {this.state.showdaycomponent ? <DayTimeScale /> : null}
+          {this.state.showdaycomponent ? (
+            <DayTimeScale userstatus={this.state.userstatus} />
+          ) : null}
 
           {this.state.showweekcomponent ? <WeekTimeScale /> : null}
         </Container>
@@ -101,3 +118,8 @@ export default class Booking extends Component {
     );
   }
 }
+const mapStatetoProps = state => ({
+  isAuth: state.auth.isAuth,
+  user: state.auth.user
+});
+export default connect(mapStatetoProps)(withRouter(Booking));

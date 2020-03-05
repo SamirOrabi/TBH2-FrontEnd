@@ -11,6 +11,7 @@ export default class DetailsPaymentHolder extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      packageCode: '',
       showdetailscomponent: true,
       showpaymentcomponent: false,
       detailsColor: '#ED1C24',
@@ -27,7 +28,7 @@ export default class DetailsPaymentHolder extends Component {
       roomtype: '',
       amountofpeople: '',
       slots: [],
-      startdate:formatDate(this.props.startdate),
+      startdate: formatDate(this.props.startdate),
       payment: ''
     };
   }
@@ -36,7 +37,7 @@ export default class DetailsPaymentHolder extends Component {
     this.setState({
       showdetailscomponent: true,
       showpaymentcomponent: false,
-      detailsColor :'#ED1C24',
+      detailsColor: '#ED1C24',
       detailsborder: '5px solid #ED1C24',
       paymentborder: 'none',
       paymentColor: '#000'
@@ -52,6 +53,10 @@ export default class DetailsPaymentHolder extends Component {
       this.testtoreceipt();
     }
 
+    if (isEqual(prevState, this.state.packageCode)) {
+      this.testpaymenttoreceipt();
+      this.paymenttest();
+    }
     if (isEqual(prevState, this.state.roomtype)) {
       this.testtoreceipt();
     }
@@ -60,6 +65,12 @@ export default class DetailsPaymentHolder extends Component {
   test = e => {
     setTimeout(() => {
       this.setState({ bookprice: e });
+    }, 0);
+  };
+
+  paymenttest = e => {
+    setTimeout(() => {
+      this.setState({ packageCode: e });
     }, 0);
   };
 
@@ -75,10 +86,19 @@ export default class DetailsPaymentHolder extends Component {
       });
     }, 0);
   };
+
+  testpaymenttoreceipt = p => {
+    setTimeout(() => {
+      this.setState({
+        packageCode: p
+      });
+    }, 0);
+  };
   showPayment = e => {
     this.setState({
       showdetailscomponent: false,
       showpaymentcomponent: true,
+      showreceiptcomponent: false,
       detailsColor: '#000',
       detailsborder: 'none',
       paymentborder: '5px solid #ED1C24',
@@ -93,7 +113,6 @@ export default class DetailsPaymentHolder extends Component {
     });
   };
   render() {
- 
     return (
       <div>
         {(this.state.showdetailscomponent ||
@@ -141,6 +160,8 @@ export default class DetailsPaymentHolder extends Component {
         )}
         {this.state.showpaymentcomponent && (
           <Payment
+            testpaymenttoreceipt={this.testpaymenttoreceipt}
+            paymentfun={this.paymenttest}
             bookprice={this.state.bookprice}
             paymentstae={this.state.test}
             showDetails={this.showDetails}
@@ -154,6 +175,7 @@ export default class DetailsPaymentHolder extends Component {
 
         {this.state.showreceiptcomponent && (
           <Printcomponent
+            packageCode={this.state.packageCode}
             closebookModal={this.props.closebookModal}
             roomtype={this.state.roomtype}
             amountofpeople={this.state.amountofpeople}
@@ -162,6 +184,7 @@ export default class DetailsPaymentHolder extends Component {
             startdate={this.state.startdate}
             payment={this.state.payment}
             roomId={this.state.roomId}
+            showPayment={this.showPayment}
           />
         )}
       </div>

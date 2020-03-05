@@ -67,6 +67,8 @@ class SignUpFacebook extends Component {
         }
       )
       .then(res => {
+        console.log('de resssss abl el condition');
+        console.log(res);
         if (res.data) {
           this.setState({
             id: res.data.facebookId,

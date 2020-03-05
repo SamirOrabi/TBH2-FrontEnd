@@ -6,6 +6,7 @@ import { formatDate } from 'react-day-picker/moment';
 import isEqual from 'lodash/isEqual';
 
 import { withRouter } from 'react-router-dom';
+let roomID;
 class EditSlot extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +39,8 @@ class EditSlot extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props.roomNumber);
+
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
       .post('https://cubexs.net/tbhapp/bookings/showcalendar', {
@@ -71,17 +74,17 @@ class EditSlot extends Component {
 
       .then(res => {
         if (res.data.code === 0) {
-          this.props.hideModal();
           this.setState({ show2: true });
           setTimeout(() => {
             this.setState({ show2: false });
 
+            this.props.hideModal(false);
           }, 1900);
         } else {
           this.setState({ myerror: 'Slot is not allowed to be empty' });
         }
-      })
-      // .catch(err => console.log(err));
+      });
+    // .catch(err => console.log(err));
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -102,7 +105,10 @@ class EditSlot extends Component {
 
   render() {
     this.state.tbhdata.map((slot, i) => {
-      this.state.busyslots.push(slot.slot);
+      roomID = slot.roomNumber;
+      if (this.props.roomNumber === slot.roomNumber) {
+        this.state.busyslots.push(slot.slot);
+      }
     });
     this.diff = (arr1, arr2) => {
       var newArray = arr2.concat(arr1);
@@ -143,7 +149,7 @@ class EditSlot extends Component {
             <Button onClick={this.editTimeSlot} className="mt-3 cancelbtn">
               Confirm
             </Button>
-            <Modal className=" feedBack" show={this.state.show2}>
+            <Modal className=" firstnameupdatesnackbar" show={this.state.show2}>
               <div id="snackbar">Slot Edited Successfully!</div>
             </Modal>
           </div>
