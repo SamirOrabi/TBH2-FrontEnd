@@ -71,10 +71,10 @@ class SignUpFacebook extends Component {
         console.log(res);
         if (res.data) {
           this.setState({
-            id: res.data.facebookId,
-            email: res.data.email,
-            fname: res.data.firstName,
-            lname: res.data.lastName
+            id: res.data.data.facebookId,
+            email: res.data.data.email,
+            fname: res.data.data.firstName,
+            lname: res.data.data.lastName
           });
           console.log('de resssss');
           console.log(res);
