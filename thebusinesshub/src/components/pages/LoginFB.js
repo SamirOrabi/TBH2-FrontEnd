@@ -8,7 +8,7 @@ import { Login } from '../../globalState/actions/authActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-class MyLogin extends Component {
+class LoginFB extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +20,7 @@ class MyLogin extends Component {
     if (this.props.location.search !== '') {
       axios
         .post(
-          'https://cubexs.net/tbhapp/accounts/googlecallback' +
+          'https://cubexs.net/tbhapp/accounts/facebookcallback' +
             this.props.location.search,
           {
             state: 'signIn'
@@ -47,7 +47,7 @@ class MyLogin extends Component {
         Account: loginRequest
       },
       this.props.history,
-      'googleLogin'
+      'facebookLogin'
     );
     // if (userdata.error) {
     //   this.setState({ user: userdata.error });
@@ -107,7 +107,7 @@ class MyLogin extends Component {
   }
 }
 
-MyLogin.propTypes = {
+LoginFB.propTypes = {
   Login: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -117,4 +117,4 @@ const mapStatetoProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStatetoProps, { Login })(withRouter(MyLogin));
+export default connect(mapStatetoProps, { Login })(withRouter(LoginFB));

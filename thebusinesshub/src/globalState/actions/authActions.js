@@ -15,7 +15,6 @@ export const userRegister = (
         .post('https://cubexs.net/tbhapp/accounts/registergoogle', userData)
         .then(res => {
           resolve(res.data);
-        
         })
         .catch(err => {
           reject(err);
@@ -25,7 +24,6 @@ export const userRegister = (
       axios
         .post('https://cubexs.net/tbhapp/accounts/logingoogle', userDatalogin)
         .then(res => {
-         
           if (res.data.token) {
             const userToken = res.data.token;
             localStorage.setItem('userToken', userToken);
@@ -43,13 +41,54 @@ export const userRegister = (
                 verifyBy: 'sms'
               }
             })
-            .then(myres => {})
-        })
-        // .catch(err => console.log(err));
+            .then(myres => {});
+        });
+      // .catch(err => console.log(err));
     }
 
     return googlereg;
   }
+
+  if (state === 'facebookSignup') {
+    const facebookreg = await new Promise((resolve, reject) => {
+      axios
+        .post('https://cubexs.net/tbhapp/accounts/facebookgoogle', userData)
+        .then(res => {
+          resolve(res.data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+    if (facebookreg.code === 0) {
+      axios
+        .post('https://cubexs.net/tbhapp/accounts/loginfacebook', userDatalogin)
+        .then(res => {
+          if (res.data.token) {
+            const userToken = res.data.token;
+            localStorage.setItem('userToken', userToken);
+            setAuthToken(userToken);
+            const decodedToken = jwt_decode(userToken);
+            dispatch(setCurrentUser(decodedToken));
+            history.push('/UserBoard/Account-Settings');
+          }
+          axios.defaults.headers.common['authorization'] =
+            localStorage.userToken;
+          axios
+            .post('https://cubexs.net/tbhapp/accounts/verify', {
+              Account: {
+                id: res.data.id,
+                verifyBy: 'sms'
+              }
+            })
+            .then(myres => {});
+        });
+      // .catch(err => console.log(err));
+    }
+
+    return facebookreg;
+  }
+
   if (state === '') {
     const call = await new Promise((resolve, reject) => {
       axios
@@ -87,9 +126,8 @@ export const userRegister = (
                   verifyBy: 'sms'
                 }
               })
-              .then(myres => {
-              })
-              // .catch(err => console.log(err));
+              .then(myres => {});
+            // .catch(err => console.log(err));
           })
           .catch(err => {
             reject(err);
@@ -116,11 +154,32 @@ export const Login = (userdata, history, state) => async dispatch => {
             dispatch(setCurrentUser(decodedToken));
             history.push('/UserBoard/Account-Settings');
           }
-        })
-        // .catch(err => console.log(err));
+        });
+      // .catch(err => console.log(err));
     });
     return logindatagoogle;
   }
+
+  if (state === 'facebookLogin') {
+    const logindatafacebook = await new Promise((resolve, reject) => {
+      axios
+        .post('https://cubexs.net/tbhapp/accounts/loginfacebook', userdata)
+        .then(res => {
+          resolve(res.data);
+          if (res.data.token) {
+            const userToken = res.data.token;
+            localStorage.setItem('userToken', userToken);
+            setAuthToken(userToken);
+            const decodedToken = jwt_decode(userToken);
+            dispatch(setCurrentUser(decodedToken));
+            history.push('/UserBoard/Account-Settings');
+          }
+        });
+      // .catch(err => console.log(err));
+    });
+    return logindatafacebook;
+  }
+
   if (state === '') {
     const logindata = await new Promise((resolve, reject) => {
       axios
