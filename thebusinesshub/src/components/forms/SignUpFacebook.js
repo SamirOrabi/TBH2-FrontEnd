@@ -75,9 +75,10 @@ class SignUpFacebook extends Component {
             lname: res.data.lastName
           });
           console.log('de resssss');
-          console.log(res.data.facebookId);
+          console.log(res);
         }
-      });
+      })
+      .catch(err => console.log(err));
   }
 
   Signin = async e => {
