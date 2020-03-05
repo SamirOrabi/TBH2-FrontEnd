@@ -32,6 +32,10 @@
     padding: 30px  0px;
 }
 
+.tdstle td{
+    padding-left: 113px !important;
+}
+
 .receipt h6{
     color: black;
     font-family: Arial;

@@ -47,7 +47,14 @@ class Printcomponent extends Component {
           this.setState({
             modalerroe: ' These slots are not free Please Select another slot'
           });
-        } else {
+        }
+        else if (res.data.code === 119) {
+          this.setState({
+            modalerroe: 'People overload in a room '
+          });
+        }
+        
+        else {
           this.setState({
             modalerroe: 'Please Select Slot Of Booking To Show Price'
           });
@@ -81,11 +88,20 @@ class Printcomponent extends Component {
               slots={this.props.slots}
               startdate={this.props.startdate}
               modalerroe={this.state.modalerroe}
+              showPayment={this.props.showPayment}
             />
 
             <NoPrint>
               <Row>
-                <Col sm={9}></Col>
+                <Col sm={9}>
+                <Button
+                  type="submit"
+                  className="my-4 nextBtn ml-4"
+                  onClick={this.props.showPayment}
+                >
+                  BACK
+                </Button>
+                </Col>
                 <Col sm={3} className="text-left">
                   <PrintComponents
                     trigger={
