@@ -43,6 +43,7 @@ class SignUp extends Component {
       code: '',
       show: false,
       myLink: '',
+      fbLink: '',
       nameErrors: { name: '' },
       emailErrors: { email: '' },
       phonenumberErrors: { phonenumber: '' },
@@ -219,6 +220,15 @@ class SignUp extends Component {
       .then(res => {
         this.setState({ myLink: res.data.url });
       });
+
+    axios
+      .post('https://cubexs.net/tbhapp/accounts/getfacebookurl', {
+        state: 'signUp'
+      })
+      .then(res => {
+        console.log(res);
+        this.setState({ fbLink: res.data });
+      });
   }
 
   render() {
@@ -338,6 +348,17 @@ class SignUp extends Component {
             >
               <i
                 className="fab  fa-google xl"
+                style={{ padding: '4px 6px', fontSize: '15px' }}
+              ></i>
+            </a>
+            or
+            <a
+              href={this.state.fbLink}
+              // target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i
+                className="fab fa-facebook-f xl"
                 style={{ padding: '4px 6px', fontSize: '15px' }}
               ></i>
             </a>

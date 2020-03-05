@@ -85,7 +85,7 @@ class Receipt extends Component {
                         ))}
                       </td>
                       <td>{this.props.amountofpeople}</td>
-                      <td>-</td>
+                      <td>{this.props.packageCode}</td>
                       <td>{this.props.bookprice} LE</td>
                     </tr>
                   </tbody>
@@ -140,6 +140,16 @@ class Receipt extends Component {
                   </div>
                 ) : null}
               </div>
+
+              {/* <Col sm={12} className="text-left">
+                <Button
+                  type="submit"
+                  className="my-4 nextBtn mt-5"
+                  onClick={this.props.showPayment}
+                >
+                  BACK
+                </Button>
+              </Col> */}
             </Col>
           </Row>
 

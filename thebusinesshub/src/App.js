@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Navb from '../src/components/layout/Navb';
-import MyLogin from '../src/components/pages/MyLogin';
+import LoginGoogle from '../src/components/pages/LoginGoogle';
 import store from './globalState/store';
 import jwt_decode from 'jwt-decode';
 import Home from './components/pages/Home';
@@ -12,6 +12,8 @@ import Booking from './components/pages/Booking';
 import Space from './components/pages/Space';
 import Contact from './components/pages/Contact';
 import SignUpGoogleInfo from './components/forms/SignUpGoogleInfo';
+import SignUpFacebook from './components/forms/SignUpFacebook';
+
 // import Payment from './components/user/booking/Payment';
 
 // Styling
@@ -48,8 +50,8 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/googlesignup" component={SignUpGoogleInfo} />
-
-          <Route exact path="/login" component={MyLogin} />
+          <Route exact path="/facebooksignup" component={SignUpFacebook} />
+          <Route exact path="/login" component={LoginGoogle} />
           <Route exact path="/booking" component={Booking} />
           <Route exact path="/space" component={Space} />
 

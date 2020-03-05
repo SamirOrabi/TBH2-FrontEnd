@@ -78,6 +78,9 @@ class UserBookingPage extends Component {
     }
   }
   render() {
+    this.state.userbook.map(book=>(
+      console.log(book)
+    ))
     const today = new Date();
     var todaydate =
       today.getFullYear() +
@@ -116,7 +119,11 @@ class UserBookingPage extends Component {
                           <tr key={i} className="text-center bookingstr">
                             <td>{book.roomType}</td>
                             <td>{book.date.substring(0, 10)}</td>
-                            <td>{book.slot}</td>
+                            <td>
+                              {book.slot.map(slot => (
+                                <p>{slot}</p>
+                              ))}
+                            </td>
                             <td>{book.amountOfPeople}</td>
                             {book.paymentMethod === 'cash' ? (
                               <td>
@@ -183,7 +190,12 @@ class UserBookingPage extends Component {
                           <tr key={i} className="text-center bookingstr">
                             <td>{book.roomType}</td>
                             <td>{book.date.substring(0, 10)}</td>
-                            <td>{book.slot}</td>
+                            <td>
+                              {' '}
+                              {book.slot.map(slot => (
+                                <p>{slot}</p>
+                              ))}
+                            </td>
                             <td>{book.amountOfPeople}</td>
                             {book.paymentMethod === 'cash' ? (
                               <td>
@@ -206,7 +218,9 @@ class UserBookingPage extends Component {
                             ) : (
                               <td>{book.packageCode}</td>
                             )}
-                            {book.status === 'canceled' || book.status==='expired' ||book.status==='confirmed' ? (
+                            {book.status === 'canceled' ||
+                            book.status === 'expired' ||
+                            book.status === 'confirmed' ? (
                               <td
                                 style={{
                                   textTransform: 'uppercase',
@@ -250,7 +264,7 @@ class UserBookingPage extends Component {
                                       <EditSlot
                                         slotdate={book.date.substring(0, 10)}
                                         id={book.id}
-                                        book={book}
+                                        roomNumber={book.roomNumber}
                                         hideModal={this.hideModal}
                                       />
                                     </Modal.Body>

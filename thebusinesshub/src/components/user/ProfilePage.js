@@ -32,7 +32,6 @@ class ProfilePage extends Component {
       modalnote: '',
       dateInput: '',
       datevalidationerror: '',
-
       namewarn: ''
     };
   }
