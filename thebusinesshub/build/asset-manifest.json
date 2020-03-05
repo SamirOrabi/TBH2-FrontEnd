@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5893a478.chunk.css",
+    "main.js": "/static/js/main.78437856.chunk.js",
+    "main.js.map": "/static/js/main.78437856.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.70d4cb9c.js",
+    "runtime-main.js.map": "/static/js/runtime-main.70d4cb9c.js.map",
+    "static/css/2.5995d517.chunk.css": "/static/css/2.5995d517.chunk.css",
+    "static/js/2.599385de.chunk.js": "/static/js/2.599385de.chunk.js",
+    "static/js/2.599385de.chunk.js.map": "/static/js/2.599385de.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.d5e19cb72607dae2cfbe6b17776543c3.js": "/precache-manifest.d5e19cb72607dae2cfbe6b17776543c3.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.5995d517.chunk.css.map": "/static/css/2.5995d517.chunk.css.map",
+    "static/css/main.5893a478.chunk.css.map": "/static/css/main.5893a478.chunk.css.map",
+    "static/js/2.599385de.chunk.js.LICENSE.txt": "/static/js/2.599385de.chunk.js.LICENSE.txt",
+    "static/media/loginCSS.css": "/static/media/bg.6d55bf8a.png",
+    "static/media/img.png": "/static/media/img.ade80bae.png",
+    "static/media/img01.png": "/static/media/img01.ade80bae.png",
+    "static/media/img02.png": "/static/media/img02.ade80bae.png",
+    "static/media/img03.png": "/static/media/img03.ade80bae.png",
+    "static/media/img04.png": "/static/media/img04.ade80bae.png",
+    "static/media/slick-theme.css": "/static/media/slick.f97e3bbf.svg",
+    "static/media/vodafone.png": "/static/media/vodafone.f7592fb6.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.70d4cb9c.js",
+    "static/css/2.5995d517.chunk.css",
+    "static/js/2.599385de.chunk.js",
+    "static/css/main.5893a478.chunk.css",
+    "static/js/main.78437856.chunk.js"
+  ]
+}
