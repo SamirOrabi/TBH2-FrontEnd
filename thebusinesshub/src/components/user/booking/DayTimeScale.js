@@ -220,7 +220,7 @@ export default class DayTimeScale extends Component {
     //   :null
 
     // ));
-
+    var d = new Date();
     return (
       <div>
         <p style={{ fontWeight: 'bold', color: '#ed1c24' }}>
@@ -243,7 +243,7 @@ export default class DayTimeScale extends Component {
             interval: 120,
             slotCount: 2
           }}
-          // minDate={new Date(Date.now())}
+          minDate={new Date(d.setDate(d.getDate() - 1))}
           renderCell={this.onRenderCell.bind(this)}
         >
           <ResourcesDirective>
