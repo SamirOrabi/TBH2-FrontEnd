@@ -25,6 +25,7 @@ class SignInForm extends Component {
       password: '',
       passwordError: '',
       myLink: '',
+      fbLink: '',
       nameErrors: { name: '' },
       passwordErrors: { password: '' },
 
@@ -33,7 +34,7 @@ class SignInForm extends Component {
 
       formValid: false,
       show: false,
-      id:''
+      id: ''
     };
   }
 
@@ -48,7 +49,7 @@ class SignInForm extends Component {
 
   hideModal2 = e => {
     // this.setState({ show: false });
-  
+
     setTimeout(() => {
       this.setState({ show: e });
     }, 0);
@@ -150,6 +151,13 @@ class SignInForm extends Component {
         this.setState({ myLink: res.data.url });
       });
 
+    axios
+      .post('https://cubexs.net/tbhapp/accounts/getfacebookurl', {
+        state: 'signIn'
+      })
+      .then(res => {
+        this.setState({ fbLink: res.data.url });
+      });
   }
   render() {
     return (
@@ -213,13 +221,16 @@ class SignInForm extends Component {
           </Col>
           <p className="text-center pt-1">
             or you can sign in with{' '}
-            <a
-              href={this.state.myLink}
-            
-              rel="noopener noreferrer"
-            >
+            <a href={this.state.myLink} rel="noopener noreferrer">
               <i
                 className="fab  fa-google xl"
+                style={{ padding: '4px 6px', fontSize: '15px' }}
+              ></i>
+            </a>
+            or
+            <a href={this.state.fbLink} rel="noopener noreferrer">
+              <i
+                className="fab fa-facebook-f xl"
                 style={{ padding: '4px 6px', fontSize: '15px' }}
               ></i>
             </a>

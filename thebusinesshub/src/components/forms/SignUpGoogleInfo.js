@@ -52,35 +52,12 @@ class SignUpGoogleInfo extends Component {
       this.props.history,
       'googleSignup'
     );
-   
+
     this.setState({ BEerror: userData.error });
-
-    // this.setState({ user: userData.error });
-
-    //send here
-    // axios({
-    //   method: 'post',
-    //   url: 'https://cubexs.net/tbhapp/accounts/registergoogle',
-    //   data: {
-    //     Account: {
-    //       id: this.state.id,
-    //       firstName: this.state.fname,
-    //       lastName: this.state.lname,
-    //       email: this.state.email,
-    //       phoneNumber: this.state.number,
-    //       username: this.state.name
-    //     }
-    //   }
-    // }).then(res => {
-    //   this.setState({ BEerror: res.data.error });
-    //   // if (res.data.code === 0) {
-    //   //   this.Signin();
-    //   // }
-    // });
   };
 
   componentDidMount() {
-   axios
+    axios
       .post(
         'https://cubexs.net/tbhapp/accounts/googlecallback' +
           this.props.location.search,
