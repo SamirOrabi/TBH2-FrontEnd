@@ -226,7 +226,7 @@ class SignUp extends Component {
         state: 'signUp'
       })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({ fbLink: res.data });
       });
   }
@@ -351,7 +351,7 @@ class SignUp extends Component {
                 style={{ padding: '4px 6px', fontSize: '15px' }}
               ></i>
             </a>
-            or
+            orrr
             <a
               href={this.state.fbLink}
               // target="_blank"
