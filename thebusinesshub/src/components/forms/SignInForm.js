@@ -34,7 +34,8 @@ class SignInForm extends Component {
 
       formValid: false,
       show: false,
-      id: ''
+      id: '',
+      fbID: ''
     };
   }
 
@@ -156,10 +157,52 @@ class SignInForm extends Component {
         state: 'signIn'
       })
       .then(res => {
-        this.setState({ fbLink: res.data.url });
+        this.setState({ fbLink: res.data });
       });
+
+    if (this.props.location.search !== '') {
+      console.log('hna login fb');
+      console.log(this.props.location.search);
+      axios
+        .post(
+          'https://cubexs.net/tbhapp/accounts/facebookcallback' +
+            this.props.location.search,
+          {
+            state: 'signIn'
+          }
+        )
+        .then(res => {
+          this.setState({
+            fbID: res.data.data.facebookId
+          });
+          this.SigninFB();
+        });
+    }
   }
+
+  SigninFB = async e => {
+    if (e) {
+      e.preventDefault();
+    }
+    let loginRequest = {};
+    loginRequest.id = this.state.fbID;
+
+    const userdata = await this.props.Login(
+      {
+        Account: loginRequest
+      },
+      this.props.history,
+      'facebookLogin'
+    );
+    // if (userdata.error) {
+    //   this.setState({ user: userdata.error });
+    // } else {
+    //   this.setState({ user: '' });
+    // }
+  };
   render() {
+    //call login here so it can see code in url and call new function for login fb and try
+    console.log(this.props.location.search);
     return (
       <Container className="signIn" onSubmit={this.Signin}>
         <Form className="SignInForm">

@@ -16,9 +16,11 @@ class LoginFB extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     if (this.props.location.search !== '') {
-      axios
+      console.log('hna login fb');
+      console.log(this.props.location.search);
+      const loginFB = await axios
         .post(
           'https://cubexs.net/tbhapp/accounts/facebookcallback' +
             this.props.location.search,
@@ -28,7 +30,7 @@ class LoginFB extends Component {
         )
         .then(res => {
           this.setState({
-            id: res.data.info.userData.id
+            id: res.data.data.facebookId
           });
           this.Signin();
         });
@@ -57,11 +59,7 @@ class LoginFB extends Component {
   };
 
   render() {
-    return (
-      <div>
-       
-      </div>
-    );
+    return <div></div>;
   }
 }
 

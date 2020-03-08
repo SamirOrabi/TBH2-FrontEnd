@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Navb from '../src/components/layout/Navb';
-import LoginGoogle from '../src/components/pages/LoginGoogle';
+import LoginGoogle from './components/pages/LoginPage';
 import store from './globalState/store';
 import jwt_decode from 'jwt-decode';
 import Home from './components/pages/Home';
