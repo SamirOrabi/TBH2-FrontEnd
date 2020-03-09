@@ -84,10 +84,12 @@ class PurchaseReceipt extends Component {
                 <Row>
                   <Col sm={12}>
                     <div className="receipt">
-                      <h2 className="ml-5 mb-5">
-                        Receipt For {this.state.profile.firstName}{' '}
-                        {this.state.profile.lastName}
-                      </h2>
+                      {this.state.profile ? (
+                        <h2 className="ml-5 mb-5">
+                          Receipt For {this.state.profile.firstName}{' '}
+                          {this.state.profile.lastName}
+                        </h2>
+                      ) : null}
                     </div>
                   </Col>
                 </Row>
@@ -182,12 +184,9 @@ class PurchaseReceipt extends Component {
               </Modal.Body>
             </Print>
           </PrintProvider>
-          <Modal
-            className=" firstnameupdatesnackbar"
-            show={this.state.showfeedBack}
-          >
-            <div id="snackbar">Package Booked Successfully</div>
-          </Modal>
+        </Modal>
+        <Modal className="purchasfeedback" show={this.state.showfeedBack}>
+          <div id="snackbar">Package Booked Successfully</div>
         </Modal>
       </div>
     );

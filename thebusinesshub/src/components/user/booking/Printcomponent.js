@@ -35,6 +35,7 @@ class Printcomponent extends Component {
         }
       })
       .then(res => {
+        console.log(res);
         if (res.data.code === 0) {
           this.setState({
             modalnote: 'Your Booking Added Successfully',
@@ -52,14 +53,15 @@ class Printcomponent extends Component {
           //   this.setState({
           //     modalerroe: 'Please Select Slot Of Booking To Show Price'
           //   });
-        }
-        else if (res.data.code === 119) {
+        } else if (res.data.code === 119) {
           this.setState({
             modalerroe: 'People overload in a room '
           });
-        }
-        
-        else {
+        } else if (res.data.code === 114) {
+          this.setState({
+            modalerroe: 'Wrong package code'
+          });
+        } else {
           this.setState({
             modalerroe: 'Please Select Slot Of Booking To Show Price'
           });
@@ -99,14 +101,14 @@ class Printcomponent extends Component {
 
             <NoPrint>
               <Row>
-                <Col sm={9}>/
-                <Button
-                  type="submit"
-                  className="my-4 nextBtn ml-4"
-                  onClick={this.props.showPayment}
-                >
-                  BACK
-                </Button>
+                <Col sm={9}>
+                  <Button
+                    type="submit"
+                    className="my-4 nextBtn ml-4"
+                    onClick={this.props.showPayment}
+                  >
+                    BACK
+                  </Button>
                 </Col>
                 <Col sm={3} className="text-left">
                   <PrintComponents

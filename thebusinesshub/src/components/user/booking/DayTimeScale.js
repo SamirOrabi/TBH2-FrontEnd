@@ -180,7 +180,7 @@ export default class DayTimeScale extends Component {
       });
     } else {
       this.setState({
-        pleaseverify: 'Please verify your account before booking.'
+        pleaseverify: 'Please sign in / verify your account before booking.'
       });
     }
   };
@@ -189,37 +189,19 @@ export default class DayTimeScale extends Component {
     this._isMounted = false;
   }
 
-  onRenderCell(args) {
-    // console.log(args.date);
-    // if (args.elementType == 'workCells' || args.elementType == 'monthCells') {
-    //     let weekEnds = [0, 6];
-    //     if (weekEnds.indexOf((args.date).getDay()) >= 0) {
-    //         let ele = createElement('div', {
-    //             innerHTML: "<img src='https://ej2.syncfusion.com/demos/src/schedule/images/newyear.svg' />",
-    //             className: 'templatewrap'
-    //         });
-    //         (args.element).appendChild(ele);
-    //     }
-    // }
-  }
   render() {
-    this.state.tbhdata.map((status, i) => {
-      if (this.state.tbhdata[i].status === 'Busy') {
-        this.state.tbhdata[i].color = cellcolor[1];
-        busycolor = cellcolor[1];
-      }
-      if (this.state.tbhdata[i].status === 'Pending') {
-        this.state.tbhdata[i].color = cellcolor[2];
-        pendingcolor = cellcolor[2];
-      }
-    });
+    // this.state.tbhdata.map((status, i) => {
+    //   if (this.state.tbhdata[i].status === 'Busy') {
+    //     this.state.tbhdata[i].color = cellcolor[1];
+    //     busycolor = cellcolor[1];
+    //   }
+    //   if (this.state.tbhdata[i].status === 'Pending') {
+    //     this.state.tbhdata[i].color = cellcolor[2];
+    //     pendingcolor = cellcolor[2];
+    //   }
+    // });
 
-    // this.state.tbhdata.map((status, i) => (
-    //   this.state.tbhdata[i].status === 'Busy' || this.state.tbhdata[i].status === 'Pending'  ?
-    //    cellcolor= this.state.tbhdata[i].color
-    //   :null
-
-    // ));
+   
     var d = new Date();
     return (
       <div>
@@ -244,7 +226,6 @@ export default class DayTimeScale extends Component {
             slotCount: 2
           }}
           minDate={new Date(d.setDate(d.getDate() - 1))}
-          renderCell={this.onRenderCell.bind(this)}
         >
           <ResourcesDirective>
             <ResourceDirective

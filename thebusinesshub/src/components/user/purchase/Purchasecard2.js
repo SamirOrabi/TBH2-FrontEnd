@@ -13,7 +13,8 @@ export default class Purchasecard2 extends Component {
       show1: false,
       show2: false,
       show3: false,
-      code: 'test'
+      code: 'test',
+      pleaseverify: ''
     };
   }
 
@@ -30,7 +31,14 @@ export default class Purchasecard2 extends Component {
   };
 
   showPurchasepopup1 = () => {
-    this.setState({ show1: true, code: 'x' });
+    if (this.props.userStatus === 'verified') {
+      this.setState({ show1: true, code: 'x' });
+      this.setState({ pleaseverify: '' });
+    } else {
+      this.setState({
+        pleaseverify: 'Please sign in / verify your account before purchase.'
+      });
+    }
     // alert('hello');
   };
   closemodal = e => {
@@ -50,29 +58,51 @@ export default class Purchasecard2 extends Component {
   };
 
   showPurchasepopup2 = () => {
-    this.setState({ show2: true, code: 'y' });
-
+    console.log(this.props.userStatus);
+    if (this.props.userStatus === 'verified') {
+      this.setState({ show2: true, code: 'y' });
+      this.setState({ pleaseverify: '' });
+    } else {
+      this.setState({
+        pleaseverify: 'Please sign in / verify your account before purchase.'
+      });
+    }
   };
   showPurchasepopup3 = () => {
-    this.setState({ show3: true, code: 'z' });
-
+    if (this.props.userStatus === 'verified') {
+      this.setState({ show3: true, code: 'z' });
+      this.setState({ pleaseverify: '' });
+    } else {
+      this.setState({
+        pleaseverify: 'Please sign in / verify your account before purchase.'
+      });
+    }
   };
   render() {
     return (
       <div>
         {this.props.meeting ? (
           <Container>
+            <p
+              style={{
+                fontWeight: 'bolder',
+                color: '#ed1c24',
+                textAlign: 'center'
+              }}
+            >
+              {this.state.pleaseverify}
+            </p>
             <Row className="mt-3">
               <Col sm={12} md={4}>
                 <Card style={{ width: '18rem' }}>
                   <div className="cardimg">
                     <Card.Img src={require('../../../Images/img.png')} />
 
-                  <h3>10+</h3>
+                    <h3>10+</h3>
                   </div>
                   <Card.Body>
                     <Card.Text>
-                      <div className="monthdrop" style={{display:'flex'}}>
+                      <div className="monthdrop" style={{ display: 'flex' }}>
                         <Form.Control
                           style={{
                             height: '20px',
@@ -86,7 +116,9 @@ export default class Purchasecard2 extends Component {
                           name="tenhours"
                           placeholder="ENTER HOURS"
                         />
-                        <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
+                        <p className="ml-3 mt-3" style={{ color: '#ed1c24' }}>
+                          HR
+                        </p>
                       </div>
                     </Card.Text>
                   </Card.Body>
@@ -131,7 +163,7 @@ export default class Purchasecard2 extends Component {
                   </div>
                   <Card.Body>
                     <Card.Text>
-                    <div className="monthdrop" style={{display:'flex'}}>
+                      <div className="monthdrop" style={{ display: 'flex' }}>
                         <Form.Control
                           style={{
                             height: '20px',
@@ -145,7 +177,9 @@ export default class Purchasecard2 extends Component {
                           name="thirtyhours"
                           placeholder="ENTER HOURS"
                         />
-                          <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
+                        <p className="ml-3 mt-3" style={{ color: '#ed1c24' }}>
+                          HR
+                        </p>
                       </div>
                     </Card.Text>
                   </Card.Body>
@@ -190,7 +224,7 @@ export default class Purchasecard2 extends Component {
                   </div>
                   <Card.Body>
                     <Card.Text>
-                    <div className="monthdrop" style={{display:'flex'}}>
+                      <div className="monthdrop" style={{ display: 'flex' }}>
                         <Form.Control
                           style={{
                             height: '20px',
@@ -204,7 +238,9 @@ export default class Purchasecard2 extends Component {
                           name="fiftyhours"
                           placeholder="ENTER HOURS"
                         />
-                          <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
+                        <p className="ml-3 mt-3" style={{ color: '#ed1c24' }}>
+                          HR
+                        </p>
                       </div>
                     </Card.Text>
                   </Card.Body>
@@ -244,7 +280,6 @@ export default class Purchasecard2 extends Component {
           </Container>
         ) : (
           <Container>
-           
             <Row className="mt-3">
               <Col sm={12} md={4}>
                 <Card style={{ width: '18rem' }}>
@@ -254,7 +289,7 @@ export default class Purchasecard2 extends Component {
                   </div>
                   <Card.Body>
                     <Card.Text>
-                    <div className="monthdrop" style={{display:'flex'}}>
+                      <div className="monthdrop" style={{ display: 'flex' }}>
                         <Form.Control
                           style={{
                             height: '20px',
@@ -268,7 +303,9 @@ export default class Purchasecard2 extends Component {
                           name="tenhours"
                           placeholder="ENTER HOURS"
                         />
-                          <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
+                        <p className="ml-3 mt-3" style={{ color: '#ed1c24' }}>
+                          HR
+                        </p>
                       </div>
                     </Card.Text>
                   </Card.Body>
@@ -313,7 +350,7 @@ export default class Purchasecard2 extends Component {
                   </div>
                   <Card.Body>
                     <Card.Text>
-                    <div className="monthdrop" style={{display:'flex'}}>
+                      <div className="monthdrop" style={{ display: 'flex' }}>
                         <Form.Control
                           style={{
                             height: '20px',
@@ -328,7 +365,9 @@ export default class Purchasecard2 extends Component {
                           placeholder="ENTER HOURS"
                         />
 
-<p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
+                        <p className="ml-3 mt-3" style={{ color: '#ed1c24' }}>
+                          HR
+                        </p>
                       </div>
                     </Card.Text>
                   </Card.Body>
@@ -373,7 +412,7 @@ export default class Purchasecard2 extends Component {
                   </div>
                   <Card.Body>
                     <Card.Text>
-                    <div className="monthdrop" style={{display:'flex'}}>
+                      <div className="monthdrop" style={{ display: 'flex' }}>
                         <Form.Control
                           style={{
                             height: '20px',
@@ -387,7 +426,9 @@ export default class Purchasecard2 extends Component {
                           name="fiftyhours"
                           placeholder="ENTER HOURS"
                         />
-                          <p className="ml-3 mt-3" style={{color:'#ed1c24' }}>HR</p>
+                        <p className="ml-3 mt-3" style={{ color: '#ed1c24' }}>
+                          HR
+                        </p>
                       </div>
                     </Card.Text>
                   </Card.Body>
