@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Navb from '../src/components/layout/Navb';
-import LoginGoogle from './components/pages/LoginPage';
+import LoginPage from './components/pages/LoginPage';
 import store from './globalState/store';
 import jwt_decode from 'jwt-decode';
 import Home from './components/pages/Home';
@@ -51,7 +51,7 @@ class App extends Component {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/googlesignup" component={SignUpGoogleInfo} />
           <Route exact path="/facebooksignup" component={SignUpFacebook} />
-          <Route exact path="/login" component={LoginGoogle} />
+          <Route exact path="/login" component={LoginPage} />
           <Route exact path="/booking" component={Booking} />
           <Route exact path="/space" component={Space} />
 
