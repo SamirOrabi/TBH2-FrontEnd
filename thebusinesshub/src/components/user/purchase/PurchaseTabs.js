@@ -9,7 +9,7 @@ class PurchaseTabs extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userstatus: '',
+      userStatus: '',
       showSmall: true,
       showBig: false,
       meeting: 'meeting',
@@ -40,16 +40,17 @@ class PurchaseTabs extends Component {
       });
     }
   };
-  componentDidMount() {
+  async componentDidMount() {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
-    axios
+    const getprof = await axios
       .post('https://cubexs.net/tbhapp/accounts/getprofile', {
         Account: {
           id: this.props.user.id
         }
       })
       .then(res => {
-        this.setState({ userstatus: res.data.state });
+        console.log(res.data.state);
+        this.setState({ userStatus: res.data.state });
       });
   }
   render() {

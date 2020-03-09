@@ -31,8 +31,9 @@ export default class Purchasecard2 extends Component {
   };
 
   showPurchasepopup1 = () => {
-    if (this.props.userstatus === 'verified') {
+    if (this.props.userStatus === 'verified') {
       this.setState({ show1: true, code: 'x' });
+      this.setState({ pleaseverify: '' });
     } else {
       this.setState({
         pleaseverify: 'Please sign in / verify your account before purchase.'
@@ -57,8 +58,10 @@ export default class Purchasecard2 extends Component {
   };
 
   showPurchasepopup2 = () => {
-    if (this.props.userstatus === 'verified') {
+    console.log(this.props.userStatus);
+    if (this.props.userStatus === 'verified') {
       this.setState({ show2: true, code: 'y' });
+      this.setState({ pleaseverify: '' });
     } else {
       this.setState({
         pleaseverify: 'Please sign in / verify your account before purchase.'
@@ -66,8 +69,9 @@ export default class Purchasecard2 extends Component {
     }
   };
   showPurchasepopup3 = () => {
-    if (this.props.userstatus === 'verified') {
+    if (this.props.userStatus === 'verified') {
       this.setState({ show3: true, code: 'z' });
+      this.setState({ pleaseverify: '' });
     } else {
       this.setState({
         pleaseverify: 'Please sign in / verify your account before purchase.'
