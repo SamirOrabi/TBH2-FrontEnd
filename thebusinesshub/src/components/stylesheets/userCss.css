@@ -175,3 +175,10 @@
   left: 40%;
   font-weight: bold !important;
 }
+
+.purchasfeedback {
+  position: absolute !important;
+  top: 107% !important;
+  right: 30%;
+  font-weight: bold !important;
+}
