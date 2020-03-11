@@ -83,9 +83,12 @@ class PurchaseDetailsModal extends Component {
           }
         })
         .then(res => {
+          console.log(res);
           if (res.data.code === 0) {
             this.setState({ price: res.data.price });
             this.setState({ myerror: '' });
+          } else if (res.data.code === 101) {
+            this.setState({ myerror: 'Please Enter Number of Hours' });
           } else {
             this.setState({ myerror: res.data.error });
           }

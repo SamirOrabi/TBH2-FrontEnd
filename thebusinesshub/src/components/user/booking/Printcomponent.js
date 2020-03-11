@@ -45,25 +45,31 @@ class Printcomponent extends Component {
             this.setState({ show: false });
             this.props.closebookModal();
           }, 2000);
-        } else if (res.data.code === 116) {
+        }
+        // else if (res.data.code === 116) {
+        //   this.setState({
+        //     modalerroe: ' These slots are not free Please Select another slot'
+        //   });
+        //   // } else {
+        //   //   this.setState({
+        //   //     modalerroe: 'Please Select Slot Of Booking To Show Price'
+        //   //   });
+        // } else if (res.data.code === 119) {
+        //   this.setState({
+        //     modalerroe: 'People overload in a room '
+        //   });
+        // } else if (res.data.code === 114) {
+        //   this.setState({
+        //     modalerroe: 'Wrong package code'
+        //   });
+        // }else if (res.data.code === 120) {
+        //   this.setState({
+        //     modalerroe: 'Invalid room type for '
+        //   });
+        // }
+        else {
           this.setState({
-            modalerroe: ' These slots are not free Please Select another slot'
-          });
-          // } else {
-          //   this.setState({
-          //     modalerroe: 'Please Select Slot Of Booking To Show Price'
-          //   });
-        } else if (res.data.code === 119) {
-          this.setState({
-            modalerroe: 'People overload in a room '
-          });
-        } else if (res.data.code === 114) {
-          this.setState({
-            modalerroe: 'Wrong package code'
-          });
-        } else {
-          this.setState({
-            modalerroe: 'Please Select Slot Of Booking To Show Price'
+            modalerroe: res.data.error
           });
           // setTimeout(() => {
           //   this.setState({ show: false });

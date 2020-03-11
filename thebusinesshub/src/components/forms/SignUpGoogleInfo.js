@@ -140,6 +140,9 @@ class SignUpGoogleInfo extends Component {
                     </Form.Group>
                   </Form>
                 </Col>
+                <p> {this.state.fname}</p>
+                <p>{this.state.lname}</p>
+                <p>{this.state.email}</p>
                 <Col className="m-auto text-center verifyBtn pt-2" sm={4}>
                   <Button onClick={this.sendData}>submit</Button>
                 </Col>
