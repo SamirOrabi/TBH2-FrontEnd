@@ -40,15 +40,18 @@ class PurchaseTabs extends Component {
       });
     }
   };
-  async componentDidMount() {
+  componentDidMount() {
+    console.log('hnaaaaaa get profile');
+
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
-    const getprof = await axios
+    axios
       .post('https://cubexs.net/tbhapp/accounts/getprofile', {
         Account: {
           id: this.props.user.id
         }
       })
       .then(res => {
+        console.log('hnaaaaaa get profile');
         console.log(res.data.state);
         this.setState({ userStatus: res.data.state });
       });

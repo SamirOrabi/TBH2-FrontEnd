@@ -104,7 +104,7 @@ class SignUpGoogleInfo extends Component {
               <Row>
                 <Col sm={12}>
                   {' '}
-                  <p>Complete your info please</p>
+                  <p>Complete your missing info please</p>
                 </Col>
                 <Col sm={12}>
                   <Form className="" onSubmit={this.handleSubmit}>
@@ -140,9 +140,46 @@ class SignUpGoogleInfo extends Component {
                     </Form.Group>
                   </Form>
                 </Col>
-                <p> {this.state.fname}</p>
-                <p>{this.state.lname}</p>
-                <p>{this.state.email}</p>
+                <Col sm={12}>
+                  <Form className="" onSubmit={this.handleSubmit}>
+                    <Form.Group className="formgroupfloat">
+                      <Form.Control
+                        type="text"
+                        // onChange={this.handleUserNumber}
+                        value={this.state.fname}
+                        name={this.state.fname}
+                        className="floatcontrol"
+                        placeholder="First Name"
+                      />
+                    </Form.Group>
+                  </Form>
+                </Col>
+                <Col sm={12}>
+                  <Form className="" onSubmit={this.handleSubmit}>
+                    <Form.Group className="formgroupfloat">
+                      <Form.Control
+                        type="text"
+                        value={this.state.lname}
+                        name={this.state.lname}
+                        className="floatcontrol"
+                        placeholder="LAST NAME"
+                      />
+                    </Form.Group>
+                  </Form>
+                </Col>
+                <Col sm={12}>
+                  <Form className="" onSubmit={this.handleSubmit}>
+                    <Form.Group className="formgroupfloat">
+                      <Form.Control
+                        type="text"
+                        value={this.state.email}
+                        name={this.state.email}
+                        className="floatcontrol"
+                        placeholder="EMAIL"
+                      />
+                    </Form.Group>
+                  </Form>
+                </Col>
                 <Col className="m-auto text-center verifyBtn pt-2" sm={4}>
                   <Button onClick={this.sendData}>submit</Button>
                 </Col>

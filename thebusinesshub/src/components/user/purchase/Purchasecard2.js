@@ -280,6 +280,15 @@ export default class Purchasecard2 extends Component {
           </Container>
         ) : (
           <Container>
+            <p
+              style={{
+                fontWeight: 'bolder',
+                color: '#ed1c24',
+                textAlign: 'center'
+              }}
+            >
+              {this.state.pleaseverify}
+            </p>
             <Row className="mt-3">
               <Col sm={12} md={4}>
                 <Card style={{ width: '18rem' }}>

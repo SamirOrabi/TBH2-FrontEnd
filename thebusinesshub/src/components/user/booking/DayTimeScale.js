@@ -161,12 +161,19 @@ export default class DayTimeScale extends Component {
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
   };
   OpenDetails = e => {
-    console.log(new Date());
+    console.log(new Date().getMonth());
+    console.log(e.data.startTime.getMonth());
+
     e.cancel = true;
     if (
       this.props.userstatus === 'verified' &&
+      e.data.startTime > new Date() &&
+      // new Date(e.data.startTime.getMonth()) > new Date().getMonth() &&
+      // e.data.startTime.getMonth() !== new Date().getMonth() &&
+      // e.data.startTime.getDay() !== new Date().getDay() &&
       e.data.startTime.getHours() > new Date().getHours()
     ) {
+      console.log('yfth');
       this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
       startdate = document.getElementsByClassName(
         'e-toolbar-item e-date-range'
@@ -183,14 +190,35 @@ export default class DayTimeScale extends Component {
       });
     } else if (
       this.props.userstatus === 'verified' &&
+      // e.data.startTime.getMonth() === new Date().getMonth() &&
+      e.data.startTime.getDay() === new Date().getDay() &&
       e.data.startTime.getHours() < new Date().getHours()
     ) {
+      console.log('mayfthch');
+
       this.setState({
         pleaseverify: 'You cannot select slots from the past'
       });
-    } else {
+    } else if (this.props.userstatus === 'pending') {
       this.setState({
         pleaseverify: 'Please sign in / verify your account before booking.'
+      });
+    } else {
+      console.log('heeeh');
+      console.log('yfth');
+      this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
+      startdate = document.getElementsByClassName(
+        'e-toolbar-item e-date-range'
+      )[0].innerText;
+      if (e.data) {
+        this.setState({
+          startTime: e.data.startTime,
+          roomId: e.data.ResourceId,
+          endDate: e.data.endTime
+        });
+      }
+      this.setState({
+        pleaseverify: ''
       });
     }
   };
