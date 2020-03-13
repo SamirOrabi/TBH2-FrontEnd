@@ -9,7 +9,8 @@ class PhoneNumberchangemodel extends Component {
 
     this.state = {
       NewPhoneNumber: '',
-      phoneerror: ''
+      phoneerror: '',
+      mystate: ''
     };
   }
 
@@ -28,6 +29,20 @@ class PhoneNumberchangemodel extends Component {
       })
       .then(res => {
         this.props.user.phone = this.state.NewPhoneNumber;
+        // if (res.code === 0) {
+        //   axios.defaults.headers.common['authorization'] =
+        //     localStorage.userToken;
+        //   axios
+        //     .post('https://cubexs.net/tbhapp/accounts/getprofile', {
+        //       Account: {
+        //         id: this.props.user.id
+        //       }
+        //     })
+        //     .then(res => {
+        //       console.log(res);
+        //       this.setState({ mystate: res.data.state });
+        //     });
+        // }
         if (res.data.code === 101) {
           this.setState({
             phoneerror: 'Phone number must contain 11 numbers only'
@@ -37,10 +52,10 @@ class PhoneNumberchangemodel extends Component {
         } else {
           this.setState({ phoneerror: '' });
           this.props.onHide();
-          this.setState({NewPhoneNumber:''})
+          this.setState({ NewPhoneNumber: '' });
         }
-      })
-      // .catch(err => console.log(err));
+      });
+    // .catch(err => console.log(err));
   };
 
   enter = e => {

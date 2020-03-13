@@ -95,6 +95,7 @@ export const userRegister = (
         .post('https://cubexs.net/tbhapp/accounts/register', userData)
 
         .then(res => {
+          console.log(res);
           resolve(res.data);
         })
         .catch(err => {
@@ -117,16 +118,16 @@ export const userRegister = (
             dispatch(setCurrentUser(decodedToken));
             history.push('/UserBoard/Account-Settings');
 
-            axios.defaults.headers.common['authorization'] =
-              localStorage.userToken;
-            axios
-              .post('https://cubexs.net/tbhapp/accounts/verify', {
-                Account: {
-                  id: res.data.id,
-                  verifyBy: 'sms'
-                }
-              })
-              .then(myres => {});
+            // axios.defaults.headers.common['authorization'] =
+            //   localStorage.userToken;
+            // axios
+            //   .post('https://cubexs.net/tbhapp/accounts/verify', {
+            //     Account: {
+            //       id: res.data.id,
+            //       verifyBy: 'sms'
+            //     }
+            //   })
+            //   .then(myres => {console.log(myres)});
             // .catch(err => console.log(err));
           })
           .catch(err => {

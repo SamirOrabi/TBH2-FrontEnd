@@ -34,6 +34,16 @@ class LoginPage extends Component {
           });
           this.Signin();
         });
+
+      axios
+        .get(
+          'https://cubexs.net/tbhapp/accounts/confirmverifyemail' +
+            this.props.location.search
+        )
+        .then(res => {
+          console.log('ress verify');
+          console.log(res);
+        });
     }
   }
 

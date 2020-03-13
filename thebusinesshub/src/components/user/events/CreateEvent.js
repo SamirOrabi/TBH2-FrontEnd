@@ -66,6 +66,7 @@ class CreateEvent extends Component {
         authorization: localStorage.userToken
       }
     }).then(res => {
+      console.log(res);
       if (res.data.code === 0) {
         this.setState({ show2: true });
         setTimeout(() => {

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
+import isEqual from 'lodash/isEqual';
+
 import {
   NameErrors,
   EmailErrors,
@@ -43,6 +45,7 @@ class SignUp extends Component {
       code: '',
       show: false,
       myLink: '',
+      FEError: '',
       fbLink: '',
       nameErrors: { name: '' },
       emailErrors: { email: '' },
@@ -100,10 +103,12 @@ class SignUp extends Component {
         break;
 
       case 'password':
-        passwordValid = value.length > 2;
+        passwordValid = value.match(
+          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
+        );
         passwordValidationErrors.password = passwordValid
           ? ''
-          : ' is too short';
+          : 'password shoul contain lower case , upper case and number';
         break;
       case 'fname':
         fnameValid = value.length > 2;
@@ -162,6 +167,19 @@ class SignUp extends Component {
   }
 
   onRegist = async e => {
+    if (
+      this.state.fname === '' ||
+      this.state.lname === '' ||
+      this.state.email === '' ||
+      this.state.password === '' ||
+      this.state.phonenumber === '' ||
+      this.state.name === ''
+    ) {
+      console.log('hereee err');
+      this.setState({ FEError: 'please fill out all fields' });
+    } else {
+      this.setState({ FEError: '' });
+    }
     if (e) {
       e.preventDefault();
     }
@@ -186,8 +204,10 @@ class SignUp extends Component {
       this.props.history,
       ''
     );
-    if (userData.code !== 0) {
+    if (userData.code !== 0 && userData.code !== 101) {
       this.setState({ BEerror: userData.error });
+    } else {
+      this.setState({ BEerror: '' });
     }
     // this.setState({ code: userData.code });
     // if (userData.code === 0) {
@@ -198,6 +218,22 @@ class SignUp extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!isEqual(prevState, this.state)) {
+      if (
+        this.state.fname !== '' &&
+        this.state.lname !== '' &&
+        this.state.email !== '' &&
+        this.state.password !== '' &&
+        this.state.phonenumber !== '' &&
+        this.state.name !== ''
+      ) {
+        console.log('hereee err');
+        this.setState({ FEError: '' });
+      }
     }
   }
 
@@ -339,6 +375,13 @@ class SignUp extends Component {
           <div className="signupButton">
             <button onClick={this.onRegist}>Sign Up</button>
           </div>
+          {this.state.FEError ? (
+            <span className="BbachError">
+              {' '}
+              <i className="fas fa-exclamation-triangle px-2"></i>
+              {this.state.FEError}
+            </span>
+          ) : null}
           <p className="text-center pt-1">
             or you can sign up with{' '}
             <a

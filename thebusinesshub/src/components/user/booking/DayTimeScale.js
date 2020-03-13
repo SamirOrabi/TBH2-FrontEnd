@@ -161,9 +161,71 @@ export default class DayTimeScale extends Component {
     this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
   };
   OpenDetails = e => {
+    console.log(new Date().getMonth());
+    console.log(e.data.startTime.getMonth());
+
+    e.cancel = true;
+    if (
+      this.props.userstatus === 'verified' &&
+      e.data.startTime > new Date() &&
+      // new Date(e.data.startTime.getMonth()) > new Date().getMonth() &&
+      // e.data.startTime.getMonth() !== new Date().getMonth() &&
+      // e.data.startTime.getDay() !== new Date().getDay() &&
+      e.data.startTime.getHours() > new Date().getHours()
+    ) {
+      console.log('yfth');
+      this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
+      startdate = document.getElementsByClassName(
+        'e-toolbar-item e-date-range'
+      )[0].innerText;
+      if (e.data) {
+        this.setState({
+          startTime: e.data.startTime,
+          roomId: e.data.ResourceId,
+          endDate: e.data.endTime
+        });
+      }
+      this.setState({
+        pleaseverify: ''
+      });
+    } else if (
+      this.props.userstatus === 'verified' &&
+      // e.data.startTime.getMonth() === new Date().getMonth() &&
+      e.data.startTime.getDay() === new Date().getDay() &&
+      e.data.startTime.getHours() < new Date().getHours()
+    ) {
+      console.log('mayfthch');
+
+      this.setState({
+        pleaseverify: 'You cannot select slots from the past'
+      });
+    } else if (this.props.userstatus === 'pending') {
+      this.setState({
+        pleaseverify: 'Please sign in / verify your account before booking.'
+      });
+    } else {
+      console.log('heeeh');
+      console.log('yfth');
+      this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
+      startdate = document.getElementsByClassName(
+        'e-toolbar-item e-date-range'
+      )[0].innerText;
+      if (e.data) {
+        this.setState({
+          startTime: e.data.startTime,
+          roomId: e.data.ResourceId,
+          endDate: e.data.endTime
+        });
+      }
+      this.setState({
+        pleaseverify: ''
+      });
+    }
+  };
+
+  OpenDetailsButton = e => {
     e.cancel = true;
     if (this.props.userstatus === 'verified') {
-      console.log(this.state.endDate);
       this.setState({ bookingmodalShow: !this.state.bookingmodalShow });
       startdate = document.getElementsByClassName(
         'e-toolbar-item e-date-range'
@@ -184,7 +246,6 @@ export default class DayTimeScale extends Component {
       });
     }
   };
-
   componentWillUnmount() {
     this._isMounted = false;
   }
@@ -201,7 +262,6 @@ export default class DayTimeScale extends Component {
     //   }
     // });
 
-   
     var d = new Date();
     return (
       <div>
@@ -279,7 +339,7 @@ export default class DayTimeScale extends Component {
           <Col md="4"></Col>
           <Col md={4}>
             <div className="booknowbtn text-right">
-              <button onClick={this.OpenDetails}>BOOK NOW</button>
+              <button onClick={this.OpenDetailsButton}>BOOK NOW</button>
             </div>
           </Col>
         </Row>
