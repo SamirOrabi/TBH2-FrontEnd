@@ -72,6 +72,8 @@ class CreateEvent extends Component {
         setTimeout(() => {
           this.setState({ show2: false });
         }, 1900);
+      } else if (res.data.code === 109) {
+        this.setState({ myerror: 'you need to sign up /in first' });
       } else {
         this.setState({ myerror: res.data.error });
       }
