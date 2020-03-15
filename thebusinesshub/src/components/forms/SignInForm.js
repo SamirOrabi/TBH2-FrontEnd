@@ -172,6 +172,10 @@ class SignInForm extends Component {
           }
         )
         .then(res => {
+          // if(res.data.code===0)
+          // {
+
+          // }
           this.setState({
             fbID: res.data.data.facebookId
           });

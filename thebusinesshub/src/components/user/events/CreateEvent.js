@@ -59,7 +59,7 @@ class CreateEvent extends Component {
 
     axios({
       method: 'post',
-      url: 'https://cubexs.net/tbhapp/events/createevent',
+      url: 'https://cubexs.net/tbhapp/events/createeventform',
       data: eventdata,
       headers: {
         'Content-Type': 'multipart/form-data',

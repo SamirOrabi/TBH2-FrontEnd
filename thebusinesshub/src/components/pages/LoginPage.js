@@ -38,7 +38,7 @@ class LoginPage extends Component {
       axios
         .get(
           'https://cubexs.net/tbhapp/accounts/confirmverifyemail' +
-            this.props.location.search
+            this.props.location.search.code
         )
         .then(res => {
           console.log('ress verify');
