@@ -146,6 +146,8 @@ export const Login = (userdata, history, state) => async dispatch => {
       axios
         .post('https://cubexs.net/tbhapp/accounts/logingoogle', userdata)
         .then(res => {
+          console.log('resGoogle');
+          console.log(res);
           resolve(res.data);
           if (res.data.token) {
             const userToken = res.data.token;
@@ -168,6 +170,8 @@ export const Login = (userdata, history, state) => async dispatch => {
         .then(res => {
           resolve(res.data);
           if (res.data.token) {
+            console.log('resFB');
+            console.log(res);
             const userToken = res.data.token;
             localStorage.setItem('userToken', userToken);
             setAuthToken(userToken);
