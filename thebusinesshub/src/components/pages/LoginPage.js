@@ -8,13 +8,15 @@ import { Login } from '../../globalState/actions/authActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import LoginFB from './LoginFB';
+import RegisterFirst from '../sections/RegisterFirst';
 
 class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: '',
-      fbId: ''
+      fbId: '',
+      showbar: false
     };
   }
 
@@ -68,6 +70,7 @@ class LoginPage extends Component {
     if (userdata.error) {
       // this.setState({ err: userdata.error });
       alert('user not found');
+      this.setState({ showbar: true });
     } else {
       // this.setState({ err: '' });
     }
@@ -77,6 +80,9 @@ class LoginPage extends Component {
     //hna login with google logic
     return (
       <div className="bg">
+        <Row>
+          <RegisterFirst showbar={this.state.showbar} />
+        </Row>
         <Container>
           <SignInUp />
         </Container>
