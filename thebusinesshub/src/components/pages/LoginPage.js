@@ -43,8 +43,8 @@ class LoginPage extends Component {
             this.props.location.search
         )
         .then(res => {
-          console.log('ress verify');
-          console.log(res);
+          // console.log('ress verify');
+          // console.log(res);
         });
     }
   }
@@ -65,6 +65,12 @@ class LoginPage extends Component {
       this.props.history,
       'googleLogin'
     );
+    if (userdata.error) {
+      // this.setState({ err: userdata.error });
+      alert('user not found');
+    } else {
+      // this.setState({ err: '' });
+    }
   };
 
   render() {

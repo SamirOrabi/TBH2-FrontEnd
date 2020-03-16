@@ -148,6 +148,9 @@ export const Login = (userdata, history, state) => async dispatch => {
         .then(res => {
           console.log('resGoogle');
           console.log(res);
+          if (res.data.code === 102) {
+            history.push('/googlesignup');
+          }
           resolve(res.data);
           if (res.data.token) {
             const userToken = res.data.token;
