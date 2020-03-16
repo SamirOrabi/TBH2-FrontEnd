@@ -54,6 +54,8 @@ class PhoneNumberchangemodel extends Component {
           this.props.onHide();
           this.setState({ NewPhoneNumber: '' });
         }
+
+        window.location.reload(false);
       });
     // .catch(err => console.log(err));
   };

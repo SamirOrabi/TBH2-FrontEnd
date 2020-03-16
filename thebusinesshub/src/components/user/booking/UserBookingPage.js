@@ -78,9 +78,9 @@ class UserBookingPage extends Component {
     }
   }
   render() {
-    this.state.userbook.map(book=>(
-      console.log(book)
-    ))
+    // this.state.userbook.map(book=>(
+    //   console.log(book)
+    // ))
     const today = new Date();
     var todaydate =
       today.getFullYear() +

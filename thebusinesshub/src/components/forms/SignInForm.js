@@ -176,6 +176,8 @@ class SignInForm extends Component {
           // {
 
           // }
+          console.log('res bt3t call back fb');
+          console.log(res);
           this.setState({
             fbID: res.data.data.facebookId
           });

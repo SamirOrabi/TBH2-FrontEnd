@@ -29,6 +29,8 @@ class LoginPage extends Component {
           }
         )
         .then(res => {
+          console.log('res callback google');
+          console.log(res);
           this.setState({
             id: res.data.info.userData.id
           });

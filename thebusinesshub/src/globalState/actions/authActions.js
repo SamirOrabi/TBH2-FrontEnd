@@ -95,7 +95,7 @@ export const userRegister = (
         .post('https://cubexs.net/tbhapp/accounts/register', userData)
 
         .then(res => {
-          console.log(res);
+          // console.log(res);
           resolve(res.data);
         })
         .catch(err => {

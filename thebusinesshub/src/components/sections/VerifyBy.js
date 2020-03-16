@@ -31,6 +31,7 @@ class VerifyBy extends Component {
         }
       })
       .then(res => {
+        console.log(res);
         if (res.data.code === 0) {
           this.setState({
             isButtonDisabled: true
@@ -50,8 +51,8 @@ class VerifyBy extends Component {
           }, 1000);
         }
         // this.setState({ show: false });
-      })
-      // .catch(err => console.log(err));
+      });
+    // .catch(err => console.log(err));
   };
 
   confirmVerify = e => {
@@ -76,8 +77,8 @@ class VerifyBy extends Component {
         } else {
           this.setState({ myerror: res.data.error });
         }
-      })
-      // .catch(err => console.log(err));
+      });
+    // .catch(err => console.log(err));
   };
 
   handleClose = () => {
@@ -116,11 +117,9 @@ class VerifyBy extends Component {
       })
 
       .then(res => {
-       
-
         this.setState({ mystate: res.data.state });
-      })
-      // .catch(err => console.log(err));
+      });
+    // .catch(err => console.log(err));
   };
 
   render() {
