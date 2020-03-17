@@ -15,7 +15,7 @@ class LoginPage extends Component {
     super(props);
     this.state = {
       id: '',
-      fbId: '',
+      fbID: '',
       showbar: false
     };
   }
@@ -48,6 +48,27 @@ class LoginPage extends Component {
           // console.log('ress verify');
           // console.log(res);
         });
+
+      axios
+        .post(
+          'https://cubexs.net/tbhapp/accounts/facebookcallback' +
+            this.props.location.search,
+          {
+            state: 'signIn'
+          }
+        )
+        .then(res => {
+          // if(res.data.code===0)
+          // {
+
+          // }
+          console.log('res bt3t call back fb');
+          console.log(res);
+          this.setState({
+            fbID: res.data.data.facebookId
+          });
+          this.SigninFB();
+        });
     }
   }
 
@@ -58,14 +79,35 @@ class LoginPage extends Component {
     let loginRequest = {};
     loginRequest.id = this.state.id;
 
-    let loginRequest2 = {};
-    loginRequest2.id = this.state.fbId;
     const userdata = await this.props.Login(
       {
         Account: loginRequest
       },
       this.props.history,
       'googleLogin'
+    );
+    if (userdata.error) {
+      // this.setState({ err: userdata.error });
+      alert('user not found');
+      this.setState({ showbar: true });
+    } else {
+      // this.setState({ err: '' });
+    }
+  };
+
+  SigninFB = async e => {
+    if (e) {
+      e.preventDefault();
+    }
+    let loginRequest = {};
+    loginRequest.id = this.state.fbID;
+
+    const userdata = await this.props.Login(
+      {
+        Account: loginRequest
+      },
+      this.props.history,
+      'facebookLogin'
     );
     if (userdata.error) {
       // this.setState({ err: userdata.error });

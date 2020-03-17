@@ -111,7 +111,7 @@ class SignUp extends Component {
         );
         passwordValidationErrors.password = passwordValid
           ? ''
-          : 'password shoul contain lower case , upper case and number';
+          : 'password should contain lower case , upper case and number';
         break;
       case 'fname':
         fnameValid = value.length > 2;

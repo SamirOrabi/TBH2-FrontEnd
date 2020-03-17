@@ -161,56 +161,55 @@ class SignInForm extends Component {
         this.setState({ fbLink: res.data });
       });
 
-    if (this.props.location.search !== '') {
-      // console.log('hna login fb');
-      // console.log(this.props.location.search);
-      axios
-        .post(
-          'https://cubexs.net/tbhapp/accounts/facebookcallback' +
-            this.props.location.search,
-          {
-            state: 'signIn'
-          }
-        )
-        .then(res => {
-          // if(res.data.code===0)
-          // {
+    // if (this.props.location.search !== '') {
+    //   // console.log('hna login fb');
+    //   // console.log(this.props.location.search);
+    //   axios
+    //     .post(
+    //       'https://cubexs.net/tbhapp/accounts/facebookcallback' +
+    //         this.props.location.search,
+    //       {
+    //         state: 'signIn'
+    //       }
+    //     )
+    //     .then(res => {
+    //       // if(res.data.code===0)
+    //       // {
 
-          // }
-          console.log('res bt3t call back fb');
-          console.log(res);
-          this.setState({
-            fbID: res.data.data.facebookId
-          });
-          this.SigninFB();
-        });
-    }
+    //       // }
+    //       console.log('res bt3t call back fb');
+    //       console.log(res);
+    //       this.setState({
+    //         fbID: res.data.data.facebookId
+    //       });
+    //       this.SigninFB();
+    //     });
+    // }
   }
 
-  SigninFB = async e => {
-    if (e) {
-      e.preventDefault();
-    }
-    let loginRequest = {};
-    loginRequest.id = this.state.fbID;
+  // SigninFB = async e => {
+  //   if (e) {
+  //     e.preventDefault();
+  //   }
+  //   let loginRequest = {};
+  //   loginRequest.id = this.state.fbID;
 
-    const userdata = await this.props.Login(
-      {
-        Account: loginRequest
-      },
-      this.props.history,
-      'facebookLogin'
-    );
-    if (userdata.error) {
-      // this.setState({ err: userdata.error });
-      alert('user not found');
-    } else {
-      // this.setState({ err: '' });
-    }
-  };
+  //   const userdata = await this.props.Login(
+  //     {
+  //       Account: loginRequest
+  //     },
+  //     this.props.history,
+  //     'facebookLogin'
+  //   );
+  //   if (userdata.error) {
+  //     // this.setState({ err: userdata.error });
+  //     alert('user not found');
+  //   } else {
+  //     // this.setState({ err: '' });
+  //   }
+  // };
   render() {
-    //call login here so it can see code in url and call new function for login fb and try
-    // console.log(this.props.location.search);
+  
     return (
       <Container className="signIn" onSubmit={this.Signin}>
         <Form className="SignInForm">
