@@ -117,17 +117,25 @@ class LoginPage extends Component {
       // this.setState({ err: '' });
     }
   };
+  // clickme = e => {
+  //   this.setState({ showbar: true });
+  //   alert('hey');
+  // };
 
   render() {
     //hna login with google logic
+
     return (
       <div className="bg">
         <Row>
           <RegisterFirst showbar={this.state.showbar} />
         </Row>
+        {/* <button onClick={this.clickme}>clickkkkk</button> */}
+
         <Container>
           <SignInUp />
         </Container>
+
         <Row className="justify-content-end m-0">
           <div className="featuerslisticon">
             <p

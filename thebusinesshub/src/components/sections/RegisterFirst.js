@@ -8,7 +8,7 @@ class RegisterFirst extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showme: this.props.showbar
+      // showme: this.props.showbar
     };
   }
   componentDidMount() {}
@@ -16,7 +16,7 @@ class RegisterFirst extends Component {
   render() {
     return (
       <div>
-        {this.state.showme !== false ? (
+        {this.props.showbar !== false ? (
           <Container className="alertVerify m-auto">
             <Row className="text-center m-auto">
               <Col sm={12}>
