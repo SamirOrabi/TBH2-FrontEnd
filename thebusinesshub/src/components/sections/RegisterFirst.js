@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Col, Row, Button } from 'react-bootstrap';
-
-import axios from 'axios';
-import isEqual from 'lodash/isEqual';
-
 class RegisterFirst extends Component {
   constructor(props) {
     super(props);
@@ -24,8 +20,8 @@ class RegisterFirst extends Component {
                   <i className="fas fa-exclamation-triangle px-2"></i>
                   <span>
                     {' '}
-                    USER NOT FOUND , You need to Register BY GOOGLE/FACEBOOK
-                    FIRST{' '}
+                    User Not Found , You need to Register by Google/Facebook
+                    first{' '}
                   </span>
                 </Button>
               </Col>

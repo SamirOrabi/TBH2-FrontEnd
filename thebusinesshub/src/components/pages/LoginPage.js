@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { Login } from '../../globalState/actions/authActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import LoginFB from './LoginFB';
 import RegisterFirst from '../sections/RegisterFirst';
 
 class LoginPage extends Component {
@@ -31,8 +30,8 @@ class LoginPage extends Component {
           }
         )
         .then(res => {
-          console.log('res callback google');
-          console.log(res);
+          // console.log('res callback google');
+          // console.log(res);
           this.setState({
             id: res.data.info.userData.id
           });
@@ -58,12 +57,8 @@ class LoginPage extends Component {
           }
         )
         .then(res => {
-          // if(res.data.code===0)
-          // {
-
-          // }
-          console.log('res bt3t call back fb');
-          console.log(res);
+          // console.log('res bt3t call back fb');
+          // console.log(res);
           this.setState({
             fbID: res.data.data.facebookId
           });
@@ -87,11 +82,10 @@ class LoginPage extends Component {
       'googleLogin'
     );
     if (userdata.error) {
-      // this.setState({ err: userdata.error });
-      alert('user not found');
+      // alert('user not found');
       this.setState({ showbar: true });
     } else {
-      // this.setState({ err: '' });
+      this.setState({ showbar: false });
     }
   };
 
@@ -110,27 +104,19 @@ class LoginPage extends Component {
       'facebookLogin'
     );
     if (userdata.error) {
-      // this.setState({ err: userdata.error });
-      alert('user not found');
       this.setState({ showbar: true });
     } else {
-      // this.setState({ err: '' });
+      this.setState({ showbar: false });
     }
   };
-  // clickme = e => {
-  //   this.setState({ showbar: true });
-  //   alert('hey');
-  // };
 
   render() {
     //hna login with google logic
-
     return (
       <div className="bg">
         <Row>
           <RegisterFirst showbar={this.state.showbar} />
         </Row>
-        {/* <button onClick={this.clickme}>clickkkkk</button> */}
 
         <Container>
           <SignInUp />
@@ -176,7 +162,6 @@ class LoginPage extends Component {
             </a>
           </div>
         </Row>
-        {/* <LoginFB /> */}
       </div>
     );
   }

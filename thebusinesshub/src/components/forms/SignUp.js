@@ -234,7 +234,6 @@ class SignUp extends Component {
         this.state.phonenumber !== '' &&
         this.state.name !== ''
       ) {
-        console.log('hereee err');
         this.setState({ FEError: '' });
       }
     }
@@ -265,7 +264,6 @@ class SignUp extends Component {
         state: 'signUp'
       })
       .then(res => {
-        // console.log(res);
         this.setState({ fbLink: res.data });
       });
   }

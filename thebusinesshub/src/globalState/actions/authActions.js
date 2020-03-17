@@ -32,16 +32,16 @@ export const userRegister = (
             dispatch(setCurrentUser(decodedToken));
             history.push('/UserBoard/Account-Settings');
           }
-          axios.defaults.headers.common['authorization'] =
-            localStorage.userToken;
-          axios
-            .post('https://cubexs.net/tbhapp/accounts/verify', {
-              Account: {
-                id: res.data.id,
-                verifyBy: 'sms'
-              }
-            })
-            .then(myres => {});
+          // axios.defaults.headers.common['authorization'] =
+          //   localStorage.userToken;
+          // axios
+          //   .post('https://cubexs.net/tbhapp/accounts/verify', {
+          //     Account: {
+          //       id: res.data.id,
+          //       verifyBy: 'sms'
+          //     }
+          //   })
+          //   .then(myres => {});
         });
       // .catch(err => console.log(err));
     }
@@ -72,16 +72,16 @@ export const userRegister = (
             dispatch(setCurrentUser(decodedToken));
             history.push('/UserBoard/Account-Settings');
           }
-          axios.defaults.headers.common['authorization'] =
-            localStorage.userToken;
-          axios
-            .post('https://cubexs.net/tbhapp/accounts/verify', {
-              Account: {
-                id: res.data.id,
-                verifyBy: 'sms'
-              }
-            })
-            .then(myres => {});
+          // axios.defaults.headers.common['authorization'] =
+          //   localStorage.userToken;
+          // axios
+          //   .post('https://cubexs.net/tbhapp/accounts/verify', {
+          //     Account: {
+          //       id: res.data.id,
+          //       verifyBy: 'sms'
+          //     }
+          //   })
+          //   .then(myres => {});
         });
       // .catch(err => console.log(err));
     }
@@ -146,11 +146,6 @@ export const Login = (userdata, history, state) => async dispatch => {
       axios
         .post('https://cubexs.net/tbhapp/accounts/logingoogle', userdata)
         .then(res => {
-          console.log('resGoogle');
-          console.log(res);
-          // if (res.data.code === 102) {
-          //   history.push('/googlesignup');
-          // }
           resolve(res.data);
           if (res.data.token) {
             const userToken = res.data.token;
@@ -173,8 +168,6 @@ export const Login = (userdata, history, state) => async dispatch => {
         .then(res => {
           resolve(res.data);
           if (res.data.token) {
-            console.log('resFB');
-            console.log(res);
             const userToken = res.data.token;
             localStorage.setItem('userToken', userToken);
             setAuthToken(userToken);

@@ -57,7 +57,7 @@ class SignUpFacebook extends Component {
   };
 
   async componentDidMount() {
-    console.log(this.props.location.search);
+    // console.log(this.props.location.search);
     const regFB = await axios
       .post(
         'https://cubexs.net/tbhapp/accounts/facebookcallback' +
@@ -67,8 +67,8 @@ class SignUpFacebook extends Component {
         }
       )
       .then(res => {
-        console.log('de resssss abl el condition');
-        console.log(res);
+        // console.log('de resssss abl el condition');
+        // console.log(res);
         if (res.data) {
           this.setState({
             id: res.data.data.facebookId,
@@ -76,11 +76,11 @@ class SignUpFacebook extends Component {
             fname: res.data.data.firstName,
             lname: res.data.data.lastName
           });
-          console.log('de resssss');
-          console.log(res);
+          // console.log('de resssss');
+          // console.log(res);
         }
-      })
-      .catch(err => console.log(err));
+      });
+    // .catch(err => console.log(err));
   }
 
   Signin = async e => {
@@ -100,9 +100,9 @@ class SignUpFacebook extends Component {
   };
 
   render() {
-    console.log('de id ly riha le request');
+    // console.log('de id ly riha le request');
 
-    console.log(this.state.id);
+    // console.log(this.state.id);
     return (
       <Container className="w-50">
         <div>
@@ -113,7 +113,7 @@ class SignUpFacebook extends Component {
               <Row>
                 <Col sm={12}>
                   {' '}
-                  <p>Complete your info pleaseeeeee</p>
+                  <p>Complete your missing info please</p>
                 </Col>
                 <Col sm={12}>
                   <Form className="" onSubmit={this.handleSubmit}>

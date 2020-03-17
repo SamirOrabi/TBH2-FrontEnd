@@ -187,29 +187,7 @@ class SignInForm extends Component {
     // }
   }
 
-  // SigninFB = async e => {
-  //   if (e) {
-  //     e.preventDefault();
-  //   }
-  //   let loginRequest = {};
-  //   loginRequest.id = this.state.fbID;
-
-  //   const userdata = await this.props.Login(
-  //     {
-  //       Account: loginRequest
-  //     },
-  //     this.props.history,
-  //     'facebookLogin'
-  //   );
-  //   if (userdata.error) {
-  //     // this.setState({ err: userdata.error });
-  //     alert('user not found');
-  //   } else {
-  //     // this.setState({ err: '' });
-  //   }
-  // };
   render() {
-  
     return (
       <Container className="signIn" onSubmit={this.Signin}>
         <Form className="SignInForm">
