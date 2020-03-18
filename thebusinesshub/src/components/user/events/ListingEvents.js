@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import { Container, Button, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
- class ListingEvents extends Component {
+import { Link } from 'react-router-dom';
+import { formatDate } from 'react-day-picker/moment';
+import InviteToEvent from '../../sections/InviteToEvent';
+
+class ListingEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
       events: [],
-    
+      show: false,
+      myerror: ''
     };
   }
   componentDidMount() {
@@ -17,29 +22,38 @@ import axios from 'axios';
       console.log(res);
     });
     // .catch(err => console.log(err));
-
-
+  }
+  handleShow = () => {
+    this.setState({ show: true });
+  };
+  onReg = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios
-      .post('https://cubexs.net/tbhapp/accounts/getprofile', {
+      .post('https://cubexs.net/tbhapp/events/registerevent', {
         Account: {
           id: this.props.user.id
+        },
+        Event: {
+          id: e.target.id
         }
       })
       .then(res => {
-        this.setState({ profileData: res.data.profile });
-      })
-  }
-
-  onReg = e => {
-    axios.defaults.headers.common['authorization'] = localStorage.userToken;
-    axios.post('https://cubexs.net/tbhapp/events/showallevents').then(res => {
-      this.setState({ events: res.data.events });
-      console.log(res);
-    });
+        console.log(res);
+        if (res.data.code === 130) {
+          this.setState({
+            myerror:
+              'There is no remaining places left but you are now on queue list'
+          });
+        }
+      });
     // .catch(err => console.log(err));
   };
 
+  hideModal = e => {
+    setTimeout(() => {
+      this.setState({ show: e });
+    }, 300);
+  };
   render() {
     return (
       <div>
@@ -48,14 +62,48 @@ import axios from 'axios';
           return (
             <Container className="pb-4">
               <h5> Event Name : {event.name}</h5>
-              <p>Date From:{event.dateFrom}</p>
-              <p>Date To:{event.dateTo}</p>
+              <p>Date From:{formatDate(event.dateFrom)}</p>
+              <p>Date To: {formatDate(event.dateTo)}</p>
               <p>Collaborators: {event.collaborators}</p>
               <p>Type: {event.type}</p>
               <p>State: {event.state}</p>
-              <Button className="mx-1 my-2">Register</Button>
-              <Button className="mx-1">Invite</Button>
-              <Button className="mx-1">Details</Button>
+              {event.amountOfPeople === event.maxNoOfPeople ? (
+                <Button
+                  id={event.id}
+                  onClick={this.onReg}
+                  className="mx-1 my-2"
+                >
+                  Put in Queue
+                </Button>
+              ) : (
+                <Button
+                  id={event.id}
+                  onClick={this.onReg}
+                  className="mx-1 my-2"
+                >
+                  Register
+                </Button>
+              )}
+
+              <Button className="mx-1" onClick={this.handleShow}>
+                Invite
+                <InviteToEvent
+                  show={this.state.show}
+                  hideModal={this.hideModal}
+                  eventId={event.id}
+                />
+              </Button>
+              <Link to={`/eventDetails/${event.id}`}>
+                {' '}
+                <Button className="mx-1"> Details</Button>
+              </Link>
+              {this.state.myerror ? (
+                <p style={{ color: 'red' }}>
+                  {' '}
+                  <i className="fas fa-exclamation-triangle px-2"></i>
+                  {this.state.myerror}
+                </p>
+              ) : null}
             </Container>
           );
         })}
@@ -64,9 +112,8 @@ import axios from 'axios';
   }
 }
 
-
 const mapStateToProps = state => ({
-    user: state.auth.user
-  });
-  
-  export default connect(mapStateToProps)(ListingEvents);
+  user: state.auth.user
+});
+
+export default connect(mapStateToProps)(ListingEvents);
