@@ -10,6 +10,8 @@ import Home from './components/pages/Home';
 import UserBoard from './components/user/UserBoard';
 import Booking from './components/pages/Booking';
 import Space from './components/pages/Space';
+import Events from './components/pages/Events';
+
 import Contact from './components/pages/Contact';
 import SignUpGoogleInfo from './components/forms/SignUpGoogleInfo';
 import SignUpFacebook from './components/forms/SignUpFacebook';
@@ -54,6 +56,7 @@ class App extends Component {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/booking" component={Booking} />
           <Route exact path="/space" component={Space} />
+          <Route exact path="/events" component={Events} />
 
           <Route
             exact
