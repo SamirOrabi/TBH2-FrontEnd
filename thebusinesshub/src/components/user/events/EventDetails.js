@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { Container, Button } from 'react-bootstrap';
 import InviteToEvent from '../../sections/InviteToEvent';
+import { formatDate } from 'react-day-picker/moment';
 
 class EventDetails extends Component {
   constructor(props) {
@@ -86,8 +87,8 @@ class EventDetails extends Component {
 
         <Container className="pb-4">
           <h5> Event Name : {this.state.eventDetails.name}</h5>
-          <p>Date From:{this.state.eventDetails.dateFrom}</p>
-          <p>Date To:{this.state.eventDetails.dateTo}</p>
+          <p>Date From:{formatDate(this.state.eventDetails.dateFrom)}</p>
+          <p>Date To:{formatDate(this.state.eventDetails.dateTo)}</p>
           <p>Collaborators: {this.state.eventDetails.collaborators}</p>
           <p>Type: {this.state.eventDetails.type}</p>
           <p>State: {this.state.eventDetails.state}</p>
