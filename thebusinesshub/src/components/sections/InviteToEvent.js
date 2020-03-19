@@ -42,10 +42,11 @@ class InviteToEvent extends Component {
           setTimeout(() => {
             this.setState({ show2: false });
           }, 1600);
-        } else if (res.data.code === 128) {
+          this.setState({ email: '' });
+        } else if (res.data.code === 128 || res.data.code === 101) {
           this.setState({ myerror: res.data.error });
         } else {
-          this.setState({ myerror: res.data.error });
+          this.setState({ myerror: '' });
         }
       });
     // .catch(err => console.log(err));
