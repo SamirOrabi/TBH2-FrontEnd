@@ -44,6 +44,10 @@ class ListingEvents extends Component {
             myerror:
               'There is no remaining places left but you are now on queue list'
           });
+        } else if (res.data.code === 109) {
+          this.setState({
+            myerror: 'please register and verify your account first'
+          });
         } else {
           this.setState({
             myerror: res.data.error

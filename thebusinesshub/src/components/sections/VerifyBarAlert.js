@@ -53,7 +53,7 @@ class VerifyBarAlert extends Component {
 
     return (
       <div>
-        {this.state.mystate !== 'verified' && this.props.isAuth !== false ? (
+        {this.state.mystate !== 'verified' ? (
           <Container className="alertVerify m-auto">
             <Row className="text-center m-auto">
               <Col sm={12}>
