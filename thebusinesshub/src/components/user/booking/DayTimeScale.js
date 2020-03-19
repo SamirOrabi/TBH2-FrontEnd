@@ -15,15 +15,16 @@ import {
 } from '@syncfusion/ej2-react-schedule';
 import { formatDate } from 'react-day-picker/moment';
 import { Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
+import { withRouter } from 'react-router-dom';
 
 let startdate;
-let finaltbhdata;
 let cellcolor = ['#fff', '#ed1c24', '#D2D0D0'];
-let pendingcolor = '#ed1c24';
-let busycolor = '#D2D0D0';
-export default class DayTimeScale extends Component {
+
+class DayTimeScale extends Component {
   _isMounted = false;
 
   constructor(props) {
@@ -201,7 +202,11 @@ export default class DayTimeScale extends Component {
       });
     } else if (this.props.userstatus === 'pending') {
       this.setState({
-        pleaseverify: 'Please sign in / verify your account before booking.'
+        pleaseverify: 'Please  verify your account before booking.'
+      });
+    } else if (this.props.isAuth === false) {
+      this.setState({
+        pleaseverify: 'you must have a verified account before booking'
       });
     } else {
       console.log('heeeh');
@@ -357,3 +362,12 @@ export default class DayTimeScale extends Component {
     );
   }
 }
+
+DayTimeScale.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+const mapStatetoProps = state => ({
+  isAuth: state.auth.isAuth
+});
+
+export default connect(mapStatetoProps)(withRouter(DayTimeScale));

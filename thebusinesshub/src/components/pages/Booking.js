@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import VerifyBarAlert from '../sections/VerifyBarAlert';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import DayTimeScale from '../user/booking/DayTimeScale';
 import WeekTimeScale from '../user/booking/WeekTimeScale';
@@ -61,7 +60,6 @@ class Booking extends Component {
     return (
       <div className="bookingpage">
         {' '}
-        <VerifyBarAlert />
         <Container>
           <Row className="mb-4">
             <Col sm={12} md={6}>

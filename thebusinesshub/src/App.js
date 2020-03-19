@@ -11,7 +11,7 @@ import UserBoard from './components/user/UserBoard';
 import Booking from './components/pages/Booking';
 import Space from './components/pages/Space';
 import Events from './components/pages/Events';
-
+import EventDetails from './components/user/events/EventDetails';
 import Contact from './components/pages/Contact';
 import SignUpGoogleInfo from './components/forms/SignUpGoogleInfo';
 import SignUpFacebook from './components/forms/SignUpFacebook';
@@ -22,6 +22,7 @@ import SignUpFacebook from './components/forms/SignUpFacebook';
 import './App.css';
 import setAuthToken from './helpers/setAuthToken';
 import { setCurrentUser, LogOut } from './globalState/actions/authActions';
+import VerifyBarAlert from './components/sections/VerifyBarAlert';
 // import {
 //   clearCurrentProfile,
 //   getProfile
@@ -49,6 +50,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navb />
+          {this.props.isAuth !== false ? <VerifyBarAlert /> : null}
           <Route exact path="/" component={Home} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/googlesignup" component={SignUpGoogleInfo} />
@@ -57,7 +59,7 @@ class App extends Component {
           <Route exact path="/booking" component={Booking} />
           <Route exact path="/space" component={Space} />
           <Route exact path="/events" component={Events} />
-
+          <Route exact path="/eventDetails/:id" component={EventDetails} />
           <Route
             exact
             path="/UserBoard/Account-Settings"

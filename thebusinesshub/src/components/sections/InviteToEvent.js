@@ -45,6 +45,10 @@ class InviteToEvent extends Component {
           this.setState({ email: '' });
         } else if (res.data.code === 128 || res.data.code === 101) {
           this.setState({ myerror: res.data.error });
+        } else if (res.data.code === 109) {
+          this.setState({
+            myerror: 'please register and verify your account first'
+          });
         } else {
           this.setState({ myerror: '' });
         }
