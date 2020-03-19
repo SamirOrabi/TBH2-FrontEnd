@@ -44,6 +44,10 @@ class ListingEvents extends Component {
             myerror:
               'There is no remaining places left but you are now on queue list'
           });
+        } else {
+          this.setState({
+            myerror: res.data.error
+          });
         }
       });
     // .catch(err => console.log(err));
@@ -60,7 +64,10 @@ class ListingEvents extends Component {
         <h1 className="text-center pb-3">All Events</h1>
         {this.state.events.map(event => {
           return (
-            <Container className="pb-4">
+            <Container
+              style={{ boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)' }}
+              className="pb-4 eventsCard w-50"
+            >
               <h5> Event Name : {event.name}</h5>
               <p>Date From:{formatDate(event.dateFrom)}</p>
               <p>Date To: {formatDate(event.dateTo)}</p>
