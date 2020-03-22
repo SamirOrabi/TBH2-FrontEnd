@@ -23,6 +23,7 @@ import './App.css';
 import setAuthToken from './helpers/setAuthToken';
 import { setCurrentUser, LogOut } from './globalState/actions/authActions';
 import VerifyBarAlert from './components/sections/VerifyBarAlert';
+import Test1 from './components/user/events/Test1';
 // import {
 //   clearCurrentProfile,
 //   getProfile
@@ -59,6 +60,8 @@ class App extends Component {
           <Route exact path="/booking" component={Booking} />
           <Route exact path="/space" component={Space} />
           <Route exact path="/events" component={Events} />
+          <Route exact path="/test" component={Test1} />
+
           <Route exact path="/eventDetails/:id" component={EventDetails} />
           <Route
             exact
