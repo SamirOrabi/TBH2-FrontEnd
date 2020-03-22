@@ -57,7 +57,7 @@ class EventDetails extends Component {
           id: this.props.user.id
         },
         Event: {
-          id: e.target.id
+          id: this.props.match.params.id
         }
       })
       .then(res => {
@@ -99,27 +99,31 @@ class EventDetails extends Component {
           <p>max Number Of People: {this.state.eventDetails.maxNoOfPeople}</p>
           <p>facebook Page: {this.state.eventDetails.facebookPage}</p>
           <p>instagram Page: {this.state.eventDetails.instagramPage}</p>
-          <Button className="mx-1" onClick={this.handleShow}>
-            Invite
-            <InviteToEvent
-              show={this.state.show}
-              hideModal={this.hideModal}
-              eventId={this.props.match.params.id}
-            />
-          </Button>
 
           {this.state.eventDetails.amountOfPeople ===
           this.state.eventDetails.maxNoOfPeople ? (
-            <Button
-              id={this.state.eventDetails.id}
-              onClick={this.onReg}
-              className="mx-1 my-2"
-            >
-              Put in Queue
-            </Button>
+            <div>
+              <Button
+                id={this.state.eventDetails.id}
+                onClick={this.onReg}
+                className="mx-1 my-2"
+              >
+                Put in Queue
+              </Button>
+              <Button className="mx-1" onClick={this.handleShow}>
+                Invite
+                <InviteToEvent
+                  show={this.state.show}
+                  hideModal={this.hideModal}
+                  eventId={this.props.match.params.id}
+                />
+              </Button>
+            </div>
           ) : (
             <div>
-              <Button className="mx-1 my-2">Register</Button>
+              <Button onClick={this.onReg} className="mx-1 my-2">
+                Register
+              </Button>
               <Button className="mx-1" onClick={this.handleShow}>
                 Invite
                 <InviteToEvent
