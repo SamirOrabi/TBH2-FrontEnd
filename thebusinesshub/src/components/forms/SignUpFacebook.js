@@ -18,19 +18,71 @@ class SignUpFacebook extends Component {
       fname: '',
       email: '',
       lname: '',
-      BEerror: ''
+      BEerror: '',
+      password: '',
+      errName: '',
+      errPass: '',
+      errnumber: ''
     };
   }
 
+  // handleUserName = e => {
+  //   this.setState({ [e.target.name]: e.target.value });
+  //   this.setState({ name: e.target.value });
+  // };
+  // handleUserNumber = e => {
+  //   this.setState({ [e.target.name]: e.target.value });
+  //   this.setState({ number: e.target.value });
+  // };
+
+  // handleUserPassword = e => {
+  //   this.setState({ [e.target.name]: e.target.value });
+  //   this.setState({ password: e.target.value });
+  // };
   handleUserName = e => {
     this.setState({ [e.target.name]: e.target.value });
-    this.setState({ name: e.target.value });
+    if (
+      e.target.value.match(/^([a-zA-Z0-9!#_$%&*]){3,25}$/i) ||
+      e.target.value.match(/^\s*$/)
+    ) {
+      this.setState({ name: e.target.value });
+      this.setState({ errName: '' });
+    }
+    // this.setState({ name: e.target.value });
+    else {
+      this.setState({ errName: 'name must be min 3 char and no whitespace' });
+    }
   };
   handleUserNumber = e => {
     this.setState({ [e.target.name]: e.target.value });
-    this.setState({ number: e.target.value });
+
+    // this.setState({ number: e.target.value });
+    if (e.target.value.match(/^[0][1-9]\d{9}$|^[1-9]\d{9}$/)) {
+      this.setState({ number: e.target.value });
+      this.setState({ errnumber: '' });
+    } else {
+      this.setState({
+        errnumber: 'Phone number has to be  11 numbers only'
+      });
+    }
   };
 
+  handleUserPassword = e => {
+    this.setState({ [e.target.name]: e.target.value });
+    if (
+      e.target.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)
+    ) {
+      this.setState({ password: e.target.value });
+      this.setState({ errPass: '' });
+    }
+    // this.setState({ name: e.target.value });
+    else {
+      this.setState({
+        errPass: 'password should contain lower case , upper case and number'
+      });
+    }
+    // this.setState({ password: e.target.value });
+  };
   sendData = async e => {
     let regestrequest = {};
 
@@ -40,6 +92,7 @@ class SignUpFacebook extends Component {
     regestrequest.email = this.state.email;
     regestrequest.username = this.state.name;
     regestrequest.phoneNumber = this.state.number;
+    regestrequest.password = this.state.password;
     const userData = await this.props.userRegister(
       {
         Account: regestrequest
@@ -131,6 +184,37 @@ class SignUpFacebook extends Component {
                       />
                     </Form.Group>
                   </Form>
+                  {this.state.errName ? (
+                    <span style={{ fontSize: '13px' }} className="BbachError">
+                      {' '}
+                      <i className="fas fa-exclamation-triangle px-2"></i>
+                      {this.state.errName}
+                    </span>
+                  ) : null}
+                </Col>
+                <Col sm={12}>
+                  <Form className="" onSubmit={this.handleSubmit}>
+                    <Form.Group className="formgroupfloat">
+                      <Form.Control
+                        noValidate
+                        required
+                        onKeyDown={this.enter}
+                        type="password"
+                        onChange={this.handleUserPassword}
+                        value={this.state.password}
+                        name="password"
+                        className="floatcontrol"
+                        placeholder="PASSWORD"
+                      />
+                    </Form.Group>
+                  </Form>
+                  {this.state.errPass ? (
+                    <span style={{ fontSize: '13px' }} className="BbachError">
+                      {' '}
+                      <i className="fas fa-exclamation-triangle px-2"></i>
+                      {this.state.errPass}
+                    </span>
+                  ) : null}
                 </Col>
                 <Col sm={12}>
                   <Form className="" onSubmit={this.handleSubmit}>
@@ -148,6 +232,13 @@ class SignUpFacebook extends Component {
                       />
                     </Form.Group>
                   </Form>
+                  {this.state.errnumber ? (
+                    <span style={{ fontSize: '13px' }} className="BbachError">
+                      {' '}
+                      <i className="fas fa-exclamation-triangle px-2"></i>
+                      {this.state.errnumber}
+                    </span>
+                  ) : null}
                 </Col>
                 <Col sm={12}>
                   <Form className="" onSubmit={this.handleSubmit}>
