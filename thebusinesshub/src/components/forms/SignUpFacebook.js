@@ -75,7 +75,6 @@ class SignUpFacebook extends Component {
       this.setState({ password: e.target.value });
       this.setState({ errPass: '' });
     }
-    // this.setState({ name: e.target.value });
     else {
       this.setState({
         errPass: 'password should contain lower case , upper case and number'

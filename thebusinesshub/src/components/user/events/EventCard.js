@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Container, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import { formatDate } from 'react-day-picker/moment';
 import InviteToEvent from '../../sections/InviteToEvent';
@@ -10,7 +10,9 @@ class EventCard extends Component {
     super(props);
     this.state = {
       myerror: '',
-      show: false
+      show: false,
+      cancleMe: false,
+      show2: false
     };
   }
   onReg = e => {
@@ -27,6 +29,13 @@ class EventCard extends Component {
       })
       .then(res => {
         console.log(res);
+        if (res.data.code === 0) {
+          this.setState({ cancleMe: true });
+          this.setState({ show2: true });
+          setTimeout(() => {
+            this.setState({ show2: false });
+          }, 1600);
+        }
         if (res.data.code === 130) {
           this.setState({
             myerror:
@@ -52,6 +61,31 @@ class EventCard extends Component {
       this.setState({ show: e });
     }, 300);
   };
+
+  onCancel = e => {
+    // console.log('hey');
+    axios.defaults.headers.common['authorization'] = localStorage.userToken;
+    axios
+      .post('https://cubexs.net/tbhapp/events/cancelregisterationbyeventid', {
+        Account: {
+          id: this.props.user.id
+        },
+        Event: {
+          id: e.target.id
+        }
+      })
+      .then(res => {
+        console.log(res);
+        if (res.data.code === 0) {
+          this.setState({ cancleMe: false });
+        }
+        if (res.data.error) {
+          this.setState({
+            myerror: res.data.error
+          });
+        }
+      });
+  };
   render() {
     return (
       <div>
@@ -60,28 +94,40 @@ class EventCard extends Component {
           className="pb-4 my-4 eventsCard w-50"
         >
           <h5> Event Name : {this.props.name}</h5>
-          <h5> Event id : {this.props.id}</h5>
+          {/* <h5> Event id : {this.props.id}</h5> */}
           <p>Date From:{formatDate(this.props.dateFrom)}</p>
           <p>Date To: {formatDate(this.props.dateTo)}</p>
           <p>Collaborators: {this.props.collaborators}</p>
           <p>Type: {this.props.type}</p>
           <p>State: {this.props.state}</p>
-          {this.props.amountOfPeople === this.props.maxNoOfPeople ? (
-            <Button
-              id={this.props.id}
-              onClick={this.onReg}
-              className="mx-1 my-2"
-            >
-              Put in Queue
-            </Button>
+          {this.state.cancleMe === false ? (
+            this.props.amountOfPeople === this.props.maxNoOfPeople ? (
+              // console.log('heyy')
+              <Button
+                id={this.props.id}
+                onClick={this.onReg}
+                className="mx-1 my-2"
+              >
+                Put in Queue
+              </Button>
+            ) : (
+              <Button
+                id={this.props.id}
+                onClick={this.onReg}
+                className="mx-1 my-2"
+              >
+                Register
+              </Button>
+            )
           ) : (
             <Button
               id={this.props.id}
-              onClick={this.onReg}
+              onClick={this.onCancel}
               className="mx-1 my-2"
             >
-              Register
+              Cancle
             </Button>
+            // console.log('heyy')
           )}
           <Button className="mx-1" onClick={this.handleShow}>
             Invite
@@ -103,6 +149,9 @@ class EventCard extends Component {
             </p>
           ) : null}
         </Container>
+        <Modal className="mt-2 feedBack" show={this.state.show2}>
+          <div id="snackbar">Registered Successfully!</div>
+        </Modal>
       </div>
     );
   }

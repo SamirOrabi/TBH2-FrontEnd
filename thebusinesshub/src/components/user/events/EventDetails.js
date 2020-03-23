@@ -11,7 +11,8 @@ class EventDetails extends Component {
     this.state = {
       eventDetails: '',
       show: false,
-      myerror: ''
+      myerror: '',
+      cancleMe: false
     };
   }
 
@@ -37,17 +38,6 @@ class EventDetails extends Component {
         console.log(res);
       });
     // .catch(err => console.log(err));
-
-    axios.defaults.headers.common['authorization'] = localStorage.userToken;
-    axios
-      .post('https://cubexs.net/tbhapp/accounts/getprofile', {
-        Account: {
-          id: this.props.user.id
-        }
-      })
-      .then(res => {
-        this.setState({ profileData: res.data.profile });
-      });
   }
   onReg = e => {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
@@ -62,6 +52,9 @@ class EventDetails extends Component {
       })
       .then(res => {
         console.log(res);
+        if (res.data.code === 0) {
+          this.setState({ cancleMe: true });
+        }
         if (res.data.code === 130) {
           this.setState({
             myerror:
@@ -79,8 +72,33 @@ class EventDetails extends Component {
       });
     // .catch(err => console.log(err));
   };
+
+  onCancel = e => {
+    // console.log('hey');
+    axios.defaults.headers.common['authorization'] = localStorage.userToken;
+    axios
+      .post('https://cubexs.net/tbhapp/events/cancelregisterationbyeventid', {
+        Account: {
+          id: this.props.user.id
+        },
+        Event: {
+          id: e.target.id
+        }
+      })
+      .then(res => {
+        console.log(res);
+        if (res.data.code === 0) {
+          this.setState({ cancleMe: false });
+        }
+        if (res.data.error) {
+          this.setState({
+            myerror: res.data.error
+          });
+        }
+      });
+  };
+
   render() {
-    console.log(this.props.match.params.id);
     return (
       <div>
         <h1 className="text-center pb-3"> Event Details</h1>
@@ -100,40 +118,45 @@ class EventDetails extends Component {
           <p>facebook Page: {this.state.eventDetails.facebookPage}</p>
           <p>instagram Page: {this.state.eventDetails.instagramPage}</p>
 
-          {this.state.eventDetails.amountOfPeople ===
-          this.state.eventDetails.maxNoOfPeople ? (
-            <div>
+          {this.state.cancleMe === false ? (
+            this.state.eventDetails.amountOfPeople ===
+            this.state.eventDetails.maxNoOfPeople ? (
               <Button
                 id={this.state.eventDetails.id}
                 onClick={this.onReg}
                 className="mx-1 my-2"
               >
+                {' '}
                 Put in Queue
               </Button>
-              <Button className="mx-1" onClick={this.handleShow}>
-                Invite
-                <InviteToEvent
-                  show={this.state.show}
-                  hideModal={this.hideModal}
-                  eventId={this.props.match.params.id}
-                />
-              </Button>
-            </div>
-          ) : (
-            <div>
-              <Button onClick={this.onReg} className="mx-1 my-2">
+            ) : (
+              <Button
+                id={this.state.eventDetails.id}
+                onClick={this.onReg}
+                className="mx-1 my-2"
+              >
                 Register
               </Button>
-              <Button className="mx-1" onClick={this.handleShow}>
-                Invite
-                <InviteToEvent
-                  show={this.state.show}
-                  hideModal={this.hideModal}
-                  eventId={this.props.match.params.id}
-                />
-              </Button>
-            </div>
+            )
+          ) : (
+            <Button
+              id={this.state.eventDetails.id}
+              onClick={this.onCancel}
+              className="mx-1 my-2"
+            >
+              Cancel
+            </Button>
+            // console.log('heyy')
           )}
+          <Button className="mx-1" onClick={this.handleShow}>
+            Invite
+            <InviteToEvent
+              show={this.state.show}
+              hideModal={this.hideModal}
+              eventId={this.props.match.params.id}
+            />
+          </Button>
+
           {this.state.myerror ? (
             <p style={{ color: 'red' }}>
               {' '}
