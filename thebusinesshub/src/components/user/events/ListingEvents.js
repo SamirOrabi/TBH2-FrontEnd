@@ -14,7 +14,7 @@ class ListingEvents extends Component {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios.post('https://cubexs.net/tbhapp/events/showallevents').then(res => {
       this.setState({ events: res.data.events });
-      console.log(res);
+      // console.log(res)
     });
   }
   render() {
@@ -30,6 +30,7 @@ class ListingEvents extends Component {
           state={event.state}
           amountOfPeople={event.amountOfPeople}
           maxNoOfPeople={event.maxNoOfPeople}
+          key={event.id}
         />
       );
     }, this);
@@ -37,7 +38,6 @@ class ListingEvents extends Component {
 }
 
 export default ListingEvents;
-
 
 // import React, { Component } from 'react';
 // import { Container, Button, Col, Row, Modal } from 'react-bootstrap';
