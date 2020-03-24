@@ -3,7 +3,6 @@ import SignUp from './SignUp';
 import '../stylesheets/forms.css';
 import { Container } from 'react-bootstrap';
 import SignInForm from './SignInForm';
-import axios from 'axios';
 export default class SignInUp extends Component {
   handleSignUp = e => {
     const container = document.getElementById('FormsContainer');
@@ -20,21 +19,6 @@ export default class SignInUp extends Component {
       this.handleSignUp();
     }
   };
-
-  componentDidMount() {
-    if (this.props.location.search !== '') {
-      axios
-        .get(
-          'https://cubexs.net/tbhapp/accounts/confirmverifyemail' +
-            this.props.location.search
-        )
-        .then(res => {
-          // console.log('ress verify');
-          // this.setState({ showbar: false });
-          console.log(res);
-        });
-    }
-  }
 
   render() {
     return (
