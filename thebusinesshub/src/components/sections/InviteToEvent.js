@@ -34,7 +34,7 @@ class InviteToEvent extends Component {
         }
       })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.data.code === 0) {
           this.setState({ show: false });
           this.props.hideModal(false);

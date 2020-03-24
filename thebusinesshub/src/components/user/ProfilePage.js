@@ -145,8 +145,8 @@ class ProfilePage extends Component {
             this.setState({ show: false });
           }, 1600);
         }
-      })
-      // .catch(err => console.log(err));
+      });
+    // .catch(err => console.log(err));
   };
 
   verifyhere = e => {

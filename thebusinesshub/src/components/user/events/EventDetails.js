@@ -51,7 +51,7 @@ class EventDetails extends Component {
         }
       })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.data.code === 0) {
           this.setState({ cancleMe: true });
         }
@@ -86,7 +86,7 @@ class EventDetails extends Component {
         }
       })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.data.code === 0) {
           this.setState({ cancleMe: false });
         }

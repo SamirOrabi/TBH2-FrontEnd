@@ -45,6 +45,7 @@ class LoginPage extends Component {
         )
         .then(res => {
           // console.log('ress verify');
+          this.setState({ showbar: false });
           // console.log(res);
         });
 

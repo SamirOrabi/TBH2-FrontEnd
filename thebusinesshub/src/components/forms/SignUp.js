@@ -178,7 +178,6 @@ class SignUp extends Component {
       this.state.phonenumber === '' ||
       this.state.name === ''
     ) {
-      console.log('hereee err');
       this.setState({ FEError: 'please fill out all fields' });
     } else {
       this.setState({ FEError: '' });

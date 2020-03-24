@@ -7,7 +7,6 @@ import {
   Button,
   FormControl
 } from 'react-bootstrap';
-import img from '../../../Images/img.png';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -617,7 +616,7 @@ class BookDetails extends Component {
           <Container className="bookdetails ">
             <Row>
               <Col sm={6}>
-                <a>
+                <a href="/">
                   <img
                     alt="img1"
                     src={require(`./img0${i + 1}.png`)}
