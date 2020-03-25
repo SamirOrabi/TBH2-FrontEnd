@@ -51,11 +51,11 @@ class EventDetails extends Component {
         }
       })
       .then(res => {
-        // console.log(res);
+        console.log(res);
         if (res.data.code === 0) {
           this.setState({ cancleMe: true });
         }
-        if (res.data.code === 130) {
+        if (res.data.code === 132) {
           this.setState({
             myerror:
               'There is no remaining places left but you are now on queue list'
