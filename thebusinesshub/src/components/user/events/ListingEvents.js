@@ -14,7 +14,7 @@ class ListingEvents extends Component {
     axios.defaults.headers.common['authorization'] = localStorage.userToken;
     axios.post('https://cubexs.net/tbhapp/events/showallevents').then(res => {
       this.setState({ events: res.data.events });
-      // console.log(res)
+      console.log(res);
     });
   }
   render() {

@@ -12,7 +12,8 @@ class EventCard extends Component {
       myerror: '',
       show: false,
       cancleMe: false,
-      show2: false
+      show2: false,
+      myevents: []
     };
   }
   onReg = e => {
@@ -36,7 +37,7 @@ class EventCard extends Component {
             this.setState({ show2: false });
           }, 1600);
         }
-        if (res.data.code === 130) {
+        if (res.data.code === 132) {
           this.setState({
             myerror:
               'There is no remaining places left but you are now on queue list'
@@ -86,6 +87,21 @@ class EventCard extends Component {
         }
       });
   };
+
+  // componentDidMount() {
+  //   axios.defaults.headers.common['authorization'] = localStorage.userToken;
+  //   axios
+  //     .post('https://cubexs.net/tbhapp/events/showmyregisterations', {
+  //       Account: {
+  //         id: this.props.user.id
+  //       }
+  //     })
+  //     .then(res => {
+  //       this.setState({ myevents: res.data.registerations });
+  //       console.log(res);
+  //     });
+  // }
+
   render() {
     return (
       <div>
